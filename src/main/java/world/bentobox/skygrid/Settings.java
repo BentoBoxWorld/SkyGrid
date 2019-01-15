@@ -99,12 +99,6 @@ public class Settings implements DataObject, WorldSettings {
     @ConfigEntry(path = "world.spawn-height")
     private int spawnHeight = 128;
 
-    private boolean useOwnGenerator;
-
-    private int seaHeight = 0;
-
-    private int maxIslands = -1;
-
     @ConfigComment("The default game mode for this world. Players will be set to this mode when they create")
     @ConfigComment("a new island for example. Options are SURVIVAL, CREATIVE, ADVENTURE, SPECTATOR")
     @ConfigEntry(path = "world.default-game-mode")
@@ -112,29 +106,10 @@ public class Settings implements DataObject, WorldSettings {
 
     private int banLimit = -1;
 
-    // Nether
-    @ConfigComment("Generate Nether - if this is false, the nether world will not be made and access to")
-    @ConfigComment("the nether will not occur. Other plugins may still enable portal usage.")
-    @ConfigEntry(path = "world.nether.generate")
-    private boolean netherGenerate = true;
-
-    private boolean netherIslands = true;
-
     @ConfigComment("Nether trees are made if a player grows a tree in the nether (gravel and glowstone)")
     @ConfigComment("Applies to both vanilla and islands Nether")
     @ConfigEntry(path = "world.nether.trees")
     private boolean netherTrees = true;
-
-    private int netherSpawnRadius = 32;
-
-    // End
-    @ConfigEntry(path = "world.end.generate")
-    private boolean endGenerate = true;
-
-    private boolean endIslands = true;
-
-    @ConfigEntry(path = "world.end.dragon-spawn", experimental = true)
-    private boolean dragonSpawn = false;
 
     private Set<EntityType> removeMobsWhitelist = new HashSet<>();
 
@@ -142,15 +117,15 @@ public class Settings implements DataObject, WorldSettings {
     @ConfigEntry(path = "world.flags")
     private Map<String, Boolean> worldFlags = new HashMap<>();
 
-    @ConfigComment("These are the default protection settings for new islands.")
-    @ConfigComment("The value is the minimum island rank required allowed to do the action")
+    @ConfigComment("These are the default protection settings protected areas.")
+    @ConfigComment("The value is the minimum island rank required to do the action")
     @ConfigComment("Ranks are: Visitor = 0, Member = 900, Owner = 1000")
-    @ConfigEntry(path = "world.default-island-flags")
+    @ConfigEntry(path = "world.default-protection-flags")
     @Adapter(FlagSerializer.class)
     private Map<Flag, Integer> defaultIslandFlags = new HashMap<>();
 
-    @ConfigComment("These are the default settings for new islands")
-    @ConfigEntry(path = "world.default-island-settings")
+    @ConfigComment("These are the default settings for new protected areas")
+    @ConfigEntry(path = "world.default-settings")
     @Adapter(FlagSerializer2.class)
     private Map<Flag, Integer> defaultIslandSettings = new HashMap<>();
 
@@ -237,7 +212,7 @@ public class Settings implements DataObject, WorldSettings {
      */
     @Override
     public int getIslandDistance() {
-        return 0;
+        return 1000;
     }
 
     /**
@@ -293,7 +268,7 @@ public class Settings implements DataObject, WorldSettings {
      */
     @Override
     public boolean isUseOwnGenerator() {
-        return useOwnGenerator;
+        return true;
     }
 
     /**
@@ -301,7 +276,7 @@ public class Settings implements DataObject, WorldSettings {
      */
     @Override
     public int getSeaHeight() {
-        return seaHeight;
+        return 0;
     }
 
     /**
@@ -309,7 +284,7 @@ public class Settings implements DataObject, WorldSettings {
      */
     @Override
     public int getMaxIslands() {
-        return maxIslands;
+        return -1;
     }
 
     /**
@@ -325,7 +300,7 @@ public class Settings implements DataObject, WorldSettings {
      */
     @Override
     public boolean isNetherGenerate() {
-        return netherGenerate;
+        return true;
     }
 
     /**
@@ -333,7 +308,7 @@ public class Settings implements DataObject, WorldSettings {
      */
     @Override
     public boolean isNetherIslands() {
-        return netherIslands;
+        return true;
     }
 
     /**
@@ -349,7 +324,7 @@ public class Settings implements DataObject, WorldSettings {
      */
     @Override
     public int getNetherSpawnRadius() {
-        return netherSpawnRadius;
+        return 0;
     }
 
     /**
@@ -357,7 +332,7 @@ public class Settings implements DataObject, WorldSettings {
      */
     @Override
     public boolean isEndGenerate() {
-        return endGenerate;
+        return true;
     }
 
     /**
@@ -365,7 +340,7 @@ public class Settings implements DataObject, WorldSettings {
      */
     @Override
     public boolean isEndIslands() {
-        return endIslands;
+        return true;
     }
 
     /**
@@ -373,7 +348,7 @@ public class Settings implements DataObject, WorldSettings {
      */
     @Override
     public boolean isDragonSpawn() {
-        return dragonSpawn;
+        return false;
     }
 
     /**
@@ -635,27 +610,6 @@ public class Settings implements DataObject, WorldSettings {
     }
 
     /**
-     * @param useOwnGenerator the useOwnGenerator to set
-     */
-    public void setUseOwnGenerator(boolean useOwnGenerator) {
-        this.useOwnGenerator = useOwnGenerator;
-    }
-
-    /**
-     * @param seaHeight the seaHeight to set
-     */
-    public void setSeaHeight(int seaHeight) {
-        this.seaHeight = seaHeight;
-    }
-
-    /**
-     * @param maxIslands the maxIslands to set
-     */
-    public void setMaxIslands(int maxIslands) {
-        this.maxIslands = maxIslands;
-    }
-
-    /**
      * @param defaultGameMode the defaultGameMode to set
      */
     public void setDefaultGameMode(GameMode defaultGameMode) {
@@ -663,52 +617,10 @@ public class Settings implements DataObject, WorldSettings {
     }
 
     /**
-     * @param netherGenerate the netherGenerate to set
-     */
-    public void setNetherGenerate(boolean netherGenerate) {
-        this.netherGenerate = netherGenerate;
-    }
-
-    /**
-     * @param netherIslands the netherIslands to set
-     */
-    public void setNetherIslands(boolean netherIslands) {
-        this.netherIslands = netherIslands;
-    }
-
-    /**
      * @param netherTrees the netherTrees to set
      */
     public void setNetherTrees(boolean netherTrees) {
         this.netherTrees = netherTrees;
-    }
-
-    /**
-     * @param netherSpawnRadius the netherSpawnRadius to set
-     */
-    public void setNetherSpawnRadius(int netherSpawnRadius) {
-        this.netherSpawnRadius = netherSpawnRadius;
-    }
-
-    /**
-     * @param endGenerate the endGenerate to set
-     */
-    public void setEndGenerate(boolean endGenerate) {
-        this.endGenerate = endGenerate;
-    }
-
-    /**
-     * @param endIslands the endIslands to set
-     */
-    public void setEndIslands(boolean endIslands) {
-        this.endIslands = endIslands;
-    }
-
-    /**
-     * @param dragonSpawn the dragonSpawn to set
-     */
-    public void setDragonSpawn(boolean dragonSpawn) {
-        this.dragonSpawn = dragonSpawn;
     }
 
     /**

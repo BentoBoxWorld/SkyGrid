@@ -57,9 +57,6 @@ public class SkyGridPop extends BlockPopulator {
         END_ITEMS.put(Material.SHULKER_BOX, 1.2);
     }
 
-    /**
-     * @param size
-     */
     public SkyGridPop(SkyGrid addon) {
         this.addon = addon;
         this.size = addon.getSettings().getIslandHeight();

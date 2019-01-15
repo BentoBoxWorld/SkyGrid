@@ -7,6 +7,8 @@ import org.bukkit.WorldType;
 import world.bentobox.bentobox.api.addons.GameModeAddon;
 import world.bentobox.bentobox.api.configuration.Config;
 import world.bentobox.bentobox.api.configuration.WorldSettings;
+import world.bentobox.bentobox.api.flags.Flag.Type;
+import world.bentobox.bentobox.lists.Flags;
 import world.bentobox.skygrid.commands.AdminCommand;
 import world.bentobox.skygrid.commands.SkyGridCommand;
 import world.bentobox.skygrid.generators.SkyGridGen;
@@ -49,6 +51,8 @@ public class SkyGrid extends GameModeAddon {
         // Register commands
         new SkyGridCommand(this);
         new AdminCommand(this);
+        // Set default protection flags for world
+        Flags.values().stream().filter(f -> f.getType().equals(Type.PROTECTION)).forEach(f -> f.setDefaultSetting(getOverWorld(), true));
     }
 
     @Override

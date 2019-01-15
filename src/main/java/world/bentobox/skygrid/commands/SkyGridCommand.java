@@ -1,12 +1,14 @@
 package world.bentobox.skygrid.commands;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.commands.island.IslandLanguageCommand;
-import world.bentobox.bentobox.api.commands.island.IslandSettingsCommand;
-import world.bentobox.bentobox.api.localization.TextVariables;
+import world.bentobox.bentobox.api.events.island.IslandEvent.Reason;
 import world.bentobox.bentobox.api.user.User;
+import world.bentobox.bentobox.managers.island.NewIsland;
 import world.bentobox.skygrid.SkyGrid;
 
 public class SkyGridCommand extends CompositeCommand {
@@ -25,8 +27,9 @@ public class SkyGridCommand extends CompositeCommand {
         // Permission
         setPermission("skygrid");
         // Set up subcommands
-        new IslandSettingsCommand(this);
         new IslandLanguageCommand(this);
+        // SkyGrid sub commands
+        new GoCommand(this);
     }
 
     /* (non-Javadoc)
@@ -38,11 +41,26 @@ public class SkyGridCommand extends CompositeCommand {
             return false;
         }
         if (args.isEmpty()) {
-            // Send player to their home or a start point
-            // TODO send player to a starting position
-            return true;
+            // Known player, go
+            if (getIslands().getIsland(getWorld(), user.getUniqueId()) != null) {
+                return getSubCommand("go").map(goCmd -> goCmd.execute(user, goCmd.getLabel(), new ArrayList<>())).orElse(false);
+            }
+            try {
+                NewIsland.builder()
+                .player(user)
+                .world(getWorld())
+                .reason(Reason.CREATE)
+                .noPaste()
+                .build();
+                return true;
+            } catch (IOException e) {
+                getPlugin().logError("Could not create island for player. " + e.getMessage());
+                user.sendMessage("skygrid.errors.unable-to-start");
+                return false;
+            }
+        } else {
+            this.showHelp(this, user);
         }
-        user.sendMessage("general.errors.unknown-command", TextVariables.LABEL, getTopLabel());
         return false;
 
     }
