@@ -10,11 +10,11 @@ public class BlockProbability {
     /**
      * Tree map of all materials and their probabilities as a ratio to the sum of all probabilities
      */
-    TreeMap<Integer, Material> probMap = new TreeMap<Integer, Material>();
+    private TreeMap<Integer, Material> probMap = new TreeMap<Integer, Material>();
     /**
      * Sum of all probabilities
      */
-    int total = 0;
+    private int total = 0;
 
 
     /**
@@ -54,4 +54,11 @@ public class BlockProbability {
         return temp;
     }
 
+    public int getSize() {
+        return probMap.size();
+    }
+
+    public boolean isEmpty() {
+        return probMap.isEmpty();
+    }
 }

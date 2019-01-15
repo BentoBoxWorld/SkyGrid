@@ -1,239 +1,267 @@
-#############################################################################
-# Config for SkyGrid ${version}
-##############################################################################
-
-general:   
-   # Grid height - max is 256
-   gridheight: 128
-   
-   # Spawn height - height where players will spawn. Can be less than the grid height
-   spawnheight: 128
-
-   # Name of the world - if it does not exist then it will be generated.
-   worldName: ASkyGrid
-   # Create a Grid Nether - if this is true, the nether grid world will be made.
-   createnether: true
-   # Create a Grid End - if this is true, the end grid world will be made.
-   # If true, end portal frames will be generated at the bottom of the overworld grid.
-   createend: true
-   # The probability of a frame being created in a chunk. Frames are always at y=0.
-   endframeprobability: 0.05
-
-   # Overworld has biomes - this will affect some block types and tree types.
-   biomes: true
-   # Allow saplings to grow into trees sometimes.
-   growtrees: true
-
-   # The center point around which players will randomly spawn. Format: x,z
-   spawncenter: 10000,10000
-   # Distance around spawn center point where players will randomly spawn
-   # Example, 1000 will randomly spawn players between -1000,-1000 to 1000, 1000
-   # around the spawncenter point.
-   # If you are using world guard claims, make sure this is a large figure to minimize
-   # the chances of a player landing in a claimed spot. The plugin will try to avoid that
-   # but it may be impossible.
-   distance: 10000
-
-   # Respawn at home after death.
-   # If false, players will respawn at the server default location or world.
-   # This may get overriden by other plugins.
-   respawnathome: true
-
-   # Protection radius given when planting a Welcome Sign - requires WorldGuard.
-   # This is optional. You can use other plugins to provide protection areas, like
-   # stones, or grief prevention plugins.
-   # If a player removes their sign, the WG region protection is removed.
-   # Set the entry and exit text in locale.yml or set to "" to have no text.
-   #
-   # Setting to 0 will disable protection and remove any protection regions.
-   # Setting this to a larger number will not change any current warp signs and protection
-   # will only start when a new warp sign is made.
-   #
-   # Players can be given larger spaces with the askygrid.protectionradius.# permission
-   # where # is a number greater than the default. It will only be used with the next
-   # warp sign (it does not increase current protection ranges).
-   protectionRange: 0
-    
-   # Warp sound - for 1.8 servers, use BAT_TAKEOFF. 
-   # Latest sound options can be found at:
-   # https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html
-   warpsound: ENTITY_BAT_TAKEOFF
-      
-   # Banned commands - these commands cannot be run by players in the world
-   # Bypass by Op or with the askygrid.mod.bannedcommands permission
-   # The spawner command should be banned otherwise chaos will ensue!
-   bannedcommands:
-   - spawner
-   
-   # Remove mobs - this kills all monsters in the vicinity when the player logs in. 
-   loginremovemobs: false
-
-   # Remove mobs when /asg.
-   gridremovemobs: false
-   
-   # Mob white list - these mobs will NOT be removed when logging in or doing /asg
-   # Options are: Blaze, Cave_Spider, Creeper, Enderman, Endermite, Giant, Guardian,
-   # Pig_Zombie, Silverfish, Skeleton, Spider, Witch, Wither, Zombie
-   mobwhitelist:
-   - Wither
-   - Enderman
-   - Pig_Zombie
-
-   # Sets the limit for number of monsters that can spawn in a chunk in this world. 
-   # Note: this does not limit the number of monsters, just how many spawn naturally.
-   # Note: If set to a negative number the world will use the server-wide spawn limit instead.
-   # Max is 100
-   monsterspawnlimit: 70
-   
-   # Sets the limit for number of animals that can spawn in a chunk in this world. 
-   # Note: If set to a negative number the world will use the server-wide spawn limit instead.
-   # Max is 100
-   animalspawnlimit: 15
-   
-   # Sets the limit for number of water animals [squid] that can spawn in a chunk in this world. 
-   # Note: If set to a negative number the world will use the server-wide spawn limit instead.
-   # Max is 100
-   wateranimalspawnlimit: 15
-
-   ##### Economy ######
-   # Use economy or not. If true, an economy plugin is required. If false,
-   # no money is used or given by challenges.
-   # If there is no economy plugin present anyway, money will be automatically
-   # disabled.
-   useeconomy: true
-
-   # Reset Money - if this is true, will reset the player's money to
-   # the starting money (see below) when they start.
-   # Recommendation is that this is set to true, but if you run multi-worlds
-   # make sure your economy handles multi-worlds too.
-   resetmoney: false
-
-   # Starting money - this is how much money new players will have as their
-   # balance at the start. 
-   startingmoney: 0
-
-   # Reset Ender Chest - if true, the player's Ender Chest will be cleared when they
-   # start ASkyGrid. Default is false.
-   # NOTE: Ender Chests span worlds, so it will clear ALL chests. In general,
-   # Enderchests should not be allowed in ASkyGrid unless you only run the ASkyGrid
-   # world.
-   resetenderchest: false
-
-   # Broadcast 1st time challenge completion messages to all players.
-   # Change to false if the spam becomes too much.
-   broadcastmessages: true
-
-   # Allow /island teleport when falling. If set to false, all teleporting is
-   # disabled until death from the void or until you hit something.
-   # See commands that this will block too.
-   allowfallingteleport: true
-   blockingcommands:
-   - home
-   #- anotherCommand
-   #- andAnotherOne
-
-   # Remove non-repeatable challenges from the challenge GUI when complete
-   removecompleteonetimechallenges: false
-
-   # Add enchanted glow to completed challenges (does not work with all clients)
-   # Also currently adds an "enchanted" line of text...
-   addcompletedglow: true
-
-   # Default maximum number of homes a player can have. Min = 1
-   # Accessed via sethome <number> or go <number>
-   # Use this permission to set for specific user groups: askyblock.island.maxhomes.<number>  
-   maxhomes: 1
-
-   # Warp panel - GUI for welcome warp signs. If set to false, old-style
-   # text will be used
-   usewarppanel: true
-   
-   # Mute death messages
-   mutedeathmessages: false
-   
-   # Config.yml version. DO NOT EDIT. This number only changes if the latest
-   # plugin config has been updated. If a new config is detected, it will be
-   # auto-saved to config.new.yml.
-   version: ${version}
-
-# World block types. If the material cannot be placed, bedrock will be used.
-# Format: Material : Probability
-# Block types must be Bukkit Material types.
-# Chests have different items in them in different world types.
+# SkyGrid Configuration 0.0.1-SNAPSHOT
+# This config file is dynamic and saved when the server is shutdown.
+# You cannot edit it while the server is running because changes will
+# be lost! Use in-game settings GUI or edit when server is offline.
+# 
 world:
-   # Over world blocks. Beware of making too many chests, they can lag a lot.
-   blocks:
-     BOOKSHELF: 3
-     BROWN_MUSHROOM: 2
-     CACTUS: 10
-     CHEST: 1
-     CLAY: 2
-     COAL_ORE: 20
-     DEAD_BUSH: 3
-     DIAMOND_ORE: 1
-     DIRT: 10
-     DOUBLE_PLANT: 10
-     GLASS: 1
-     GOLD_ORE: 10
-     GRASS: 60
-     GRAVEL: 10
-     IRON_ORE: 20
-     LAPIS_ORE: 5
-     LEAVES: 30
-     LOG: 40
-     LONG_GRASS: 10
-     MELON: 5
-     MOB_SPAWNER: 2
-     MOSSY_COBBLESTONE: 5
-     MYCEL: 15
-     OBSIDIAN: 5
-     PISTON_BASE: 1
-     PISTON_STICKY_BASE: 1
-     PUMPKIN: 5
-     PRISMARINE: 1
-     RED_ROSE: 10
-     RED_MUSHROOM: 2
-     REDSTONE_ORE: 8
-     SAND: 20
-     SANDSTONE: 10
-     SAPLING: 10
-     SEA_LANTERN: 1
-     SNOW_BLOCK: 8
-     STATIONARY_LAVA: 1
-     STATIONARY_WATER: 10
-     STONE: 120
-     SUGAR_CANE_BLOCK: 2
-     TNT: 2
-     WEB: 10
-     WOOL: 25
-     YELLOW_FLOWER: 2
-   # Nether block types
-   netherblocks:
-   # Beware with glowstone and lava - the lighting calcs will lag the
-   # server badly if there are too many blocks.
-     STATIONARY_LAVA: 5
-     GRAVEL: 30
-     MOB_SPAWNER: 2
-     CHEST: 2
-     NETHERRACK: 300
-     SOUL_SAND: 100
-     GLOWSTONE: 2
-     NETHER_BRICK: 30
-     NETHER_FENCE: 10
-     NETHER_BRICK_STAIRS: 15
-     NETHER_WARTS: 30
-     QUARTZ_ORE: 10
-   # The End blocks. END_CRYSTAL is blocked because it causes serious performance issues.
-   endblocks:
-     OBSIDIAN: 10
-     ENDER_STONE: 500
-     MOB_SPAWNER: 1
-     CHEST: 1
-     END_BRICKS: 100
-     CHORUS_PLANT: 3
-     STAINED_GLASS: 1
-     END_ROD: 5
-     PURPUR_BLOCK: 10
-     PURPUR_PILLAR: 10
-     PURPUR_STAIRS: 8
-     PURPUR_SLAB: 10
+  # World block types. If the material cannot be placed, bedrock will be used.
+  # Format: Material : Probability
+  # Block types must be Bukkit Material types.
+  # Chests have different items in them in different world types.
+  # Over world blocks. Beware of making too many chests, they can lag a lot.
+  blocks:
+    BROWN_MUSHROOM: 8
+    STRIPPED_SPRUCE_LOG: 8
+    SANDSTONE: 120
+    RED_SAND: 20
+    ACACIA_LOG: 20
+    FERN: 4
+    TNT: 1
+    BOOKSHELF: 10
+    PINK_TULIP: 8
+    STRIPPED_ACACIA_LOG: 1
+    JUNGLE_SAPLING: 19
+    OAK_WOOD: 19
+    WHITE_TULIP: 2
+    CACTUS: 6
+    SPRUCE_WOOD: 9
+    BLUE_ORCHID: 1
+    STRIPPED_ACACIA_WOOD: 1
+    PUMPKIN: 9
+    STRIPPED_BIRCH_LOG: 1
+    WHEAT: 4
+    STRIPPED_OAK_LOG: 1
+    CHEST: 5
+    GRASS_PATH: 7
+    STRIPPED_BIRCH_WOOD: 1
+    SPRUCE_LOG: 3
+    RED_MUSHROOM: 8
+    STRIPPED_DARK_OAK_WOOD: 1
+    SPRUCE_SAPLING: 2
+    REDSTONE_ORE: 2
+    TALL_GRASS: 13
+    DEAD_BUSH: 1
+    DARK_OAK_SAPLING: 3
+    GRASS_BLOCK: 200
+    EMERALD_ORE: 5
+    COAL_ORE: 70
+    PETRIFIED_OAK_SLAB: 1
+    SUNFLOWER: 3
+    INFESTED_COBBLESTONE: 1
+    DIORITE: 2
+    STRIPPED_OAK_WOOD: 1
+    FARMLAND: 7
+    POPPY: 5
+    DARK_OAK_WOOD: 18
+    GOLD_ORE: 3
+    DARK_OAK_LOG: 10
+    CLAY: 5
+    LILAC: 7
+    DARK_PRISMARINE: 3
+    STRIPPED_JUNGLE_LOG: 1
+    PODZOL: 4
+    ACACIA_LEAVES: 8
+    GRASS: 100
+    LARGE_FERN: 8
+    STRIPPED_SPRUCE_WOOD: 1
+    GRANITE: 50
+    FIRE_CORAL_BLOCK: 1
+    SAND: 50
+    SUGAR_CANE: 4
+    JUNGLE_LEAVES: 10
+    JUNGLE_WOOD: 20
+    BONE_BLOCK: 1
+    RED_TULIP: 3
+    SPAWNER: 5
+    JUNGLE_LOG: 17
+    MOSSY_COBBLESTONE: 1
+    PRISMARINE: 3
+    DANDELION: 16
+    ALLIUM: 12
+    ACACIA_WOOD: 16
+    PEONY: 7
+    OAK_SAPLING: 11
+    STRIPPED_DARK_OAK_LOG: 1
+    LAVA: 5
+    OBSIDIAN: 1
+    AZURE_BLUET: 1
+    OXEYE_DAISY: 6
+    DARK_OAK_LEAVES: 9
+    GRAVEL: 20
+    SEA_LANTERN: 1
+    MELON: 15
+    COBWEB: 7
+    COARSE_DIRT: 17
+    LAPIS_ORE: 6
+    ACACIA_SAPLING: 17
+    BIRCH_SAPLING: 8
+    OAK_LOG: 10
+    BEETROOTS: 9
+    STRIPPED_JUNGLE_WOOD: 1
+    BIRCH_LOG: 2
+    BIRCH_WOOD: 16
+    MYCELIUM: 2
+    DIAMOND_ORE: 1
+    RED_SANDSTONE: 19
+    OAK_LEAVES: 4
+    IRON_ORE: 10
+    SPRUCE_LEAVES: 9
+    SPONGE: 1
+    SNOW_BLOCK: 1
+    BIRCH_LEAVES: 9
+    ORANGE_TULIP: 10
+    ANDESITE: 90
+    STONE: 180
+    ROSE_BUSH: 8
+  # Nether block types
+  # Beware with glowstone and lava - the lighting calcs will lag the
+  # server badly if there are too many blocks.
+  netherblocks:
+    SOUL_SAND: 90
+    LAVA: 1
+    NETHER_QUARTZ_ORE: 15
+    MAGMA_BLOCK: 1
+    NETHER_WART_BLOCK: 12
+    GRAVEL: 10
+    SPAWNER: 2
+    CHEST: 15
+    NETHERRACK: 200
+    NETHER_WART: 19
+    COBWEB: 7
+    GLOWSTONE: 1
+    RED_NETHER_BRICKS: 12
+  # The End blocks. END_CRYSTAL is blocked because it causes serious performance issues.
+  endblocks:
+    CHEST: 5
+    END_ROD: 1
+    OBSIDIAN: 1
+    CHORUS_PLANT: 2
+    END_STONE: 200
+    GRAVEL: 10
+    SPAWNER: 5
+    PURPUR_BLOCK: 10
+  # Overworld has biomes - this will affect some block types and tree types.
+  create-biomes: true
+  # The probability of a frame being created in a chunk. Frames are always at y=0.
+  end-frame-probability: 0.05
+  # Allow saplings to grow into trees sometimes.
+  grow-trees: true
+  # Friendly name for this world. Used in admin commands. Must be a single word
+  friendly-name: SkyGrid
+  # Name of the world - if it does not exist then it will be generated.
+  # It acts like a prefix for nether and end
+  world-name: SkyGrid-world
+  # World difficulty setting - PEACEFUL, EASY, NORMAL, HARD
+  # Other plugins may override this setting
+  difficulty: NORMAL
+  # Start at these coordinates.
+  start-x: 0
+  start-z: 0
+  # SkyGrid height
+  # This is the height of the top sky grid layer
+  skygrid-height: 128
+  # Spawn height
+  # Height where players will spawn. Can be less than the grid height
+  spawn-height: 128
+  # The default game mode for this world. Players will be set to this mode when they create
+  # a new island for example. Options are SURVIVAL, CREATIVE, ADVENTURE, SPECTATOR
+  default-game-mode: SURVIVAL
+  nether:
+    # Generate Nether - if this is false, the nether world will not be made and access to
+    # the nether will not occur. Other plugins may still enable portal usage.
+    generate: true
+    # Nether trees are made if a player grows a tree in the nether (gravel and glowstone)
+    # Applies to both vanilla and islands Nether
+    trees: true
+  end:
+    generate: true
+    # /!\ This feature is experimental and might not work as expected or might not work at all.
+    dragon-spawn: false
+  # World flags. These are boolean settings for various flags for this world
+  flags:
+    OBSIDIAN_SCOOPING: true
+    ENTER_EXIT_MESSAGES: true
+    REMOVE_MOBS: true
+  # These are the default protection settings for new islands.
+  # The value is the minimum island rank required allowed to do the action
+  # Ranks are: Visitor = 0, Member = 900, Owner = 1000
+  default-island-flags:
+    HURT_ANIMALS: 500
+    REDSTONE: 500
+    BUCKET: 500
+    LOCK: 0
+    ENDER_PEARL: 500
+    DOOR: 500
+    FURNACE: 500
+    ANVIL: 500
+    FIRE: 500
+    FISH_SCOOPING: 500
+    END_PORTAL: 500
+    BREEDING: 500
+    TNT: 500
+    HURT_VILLAGERS: 500
+    TURTLE_EGGS: 500
+    FROST_WALKER: 500
+    COLLECT_LAVA: 500
+    LEVER: 500
+    HURT_MONSTERS: 500
+    RIDING: 500
+    NAME_TAG: 500
+    ARMOR_STAND: 500
+    TRADING: 500
+    EGGS: 500
+    ITEM_DROP: 500
+    NOTE_BLOCK: 500
+    NETHER_PORTAL: 500
+    CROP_TRAMPLE: 500
+    ITEM_PICKUP: 500
+    BREWING: 500
+    DROPPER: 500
+    COLLECT_WATER: 500
+    BUTTON: 500
+    FIRE_EXTINGUISH: 500
+    BEACON: 500
+    TRAPDOOR: 500
+    PRESSURE_PLATE: 500
+    ITEM_FRAME: 500
+    PLACE_BLOCKS: 500
+    CRAFTING: 500
+    ENCHANTING: 500
+    SHEARING: 500
+    BED: 500
+    SPAWN_EGGS: 500
+    MILKING: 500
+    DISPENSER: 500
+    GATE: 500
+    EXPERIENCE_PICKUP: 500
+    HOPPER: 500
+    LEASH: 500
+    BREAK_BLOCKS: 500
+    MOUNT_INVENTORY: 500
+    CHORUS_FRUIT: 500
+    CONTAINER: 500
+    JUKEBOX: 500
+  # These are the default settings for new islands
+  default-island-settings:
+    PVP_END: false
+    PVP_NETHER: false
+    ANIMAL_SPAWN: true
+    MONSTER_SPAWN: true
+    FIRE_SPREAD: true
+    PVP_OVERWORLD: false
+  # These are the settings visible to users. (Not implemented yet)
+  # /!\ This feature is experimental and might not work as expected or might not work at all.
+  visible-settings: []
+useOwnGenerator: false
+seaHeight: 0
+maxIslands: -1
+banLimit: -1
+netherIslands: true
+netherSpawnRadius: 32
+endIslands: true
+removeMobsWhitelist: []
+visitorBannedCommands: []
+do-not-edit-these-settings:
+  # These settings should not be edited
+  reset-epoch: 0
+uniqueId: config

@@ -10,6 +10,7 @@ import java.util.Set;
 
 import org.bukkit.Difficulty;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 
 import world.bentobox.bentobox.api.configuration.ConfigComment;
@@ -18,6 +19,9 @@ import world.bentobox.bentobox.api.configuration.StoreAt;
 import world.bentobox.bentobox.api.configuration.WorldSettings;
 import world.bentobox.bentobox.api.flags.Flag;
 import world.bentobox.bentobox.database.objects.DataObject;
+import world.bentobox.bentobox.database.objects.adapters.Adapter;
+import world.bentobox.bentobox.database.objects.adapters.FlagSerializer;
+import world.bentobox.bentobox.database.objects.adapters.FlagSerializer2;
 
 /**
  * All the plugin settings are here
@@ -31,10 +35,29 @@ import world.bentobox.bentobox.database.objects.DataObject;
 @ConfigComment("")
 public class Settings implements DataObject, WorldSettings {
 
+    /* Blocks */
+    @ConfigComment("World block types. If the material cannot be placed, bedrock will be used.")
+    @ConfigComment("Format: Material : Probability")
+    @ConfigComment("Block types must be Bukkit Material types.")
+    @ConfigComment("Chests have different items in them in different world types.")
+    @ConfigComment("Over world blocks. Beware of making too many chests, they can lag a lot.")
+    @ConfigEntry(path = "world.blocks")
+    private Map<Material, Integer> blocks = new HashMap<>();
+
+    @ConfigComment("Nether block types")
+    @ConfigComment("Beware with glowstone and lava - the lighting calcs will lag the")
+    @ConfigComment("server badly if there are too many blocks.")
+    @ConfigEntry(path = "world.netherblocks")
+    private Map<Material, Integer> netherBlocks = new HashMap<>();
+
+    @ConfigComment("The End blocks. END_CRYSTAL is blocked because it causes serious performance issues.")
+    @ConfigEntry(path = "world.endblocks")
+    private Map<Material, Integer> endBlocks = new HashMap<>();
+
     /* SkyGrid */
     @ConfigComment("Overworld has biomes - this will affect some block types and tree types.")
     @ConfigEntry(path = "world.create-biomes")
-    private boolean createBiomes;
+    private boolean createBiomes = true;
 
     @ConfigComment("The probability of a frame being created in a chunk. Frames are always at y=0.")
     @ConfigEntry(path = "world.end-frame-probability")
@@ -119,18 +142,24 @@ public class Settings implements DataObject, WorldSettings {
     @ConfigEntry(path = "world.flags")
     private Map<String, Boolean> worldFlags = new HashMap<>();
 
+    @ConfigComment("These are the default protection settings for new islands.")
+    @ConfigComment("The value is the minimum island rank required allowed to do the action")
+    @ConfigComment("Ranks are: Visitor = 0, Member = 900, Owner = 1000")
+    @ConfigEntry(path = "world.default-island-flags")
+    @Adapter(FlagSerializer.class)
     private Map<Flag, Integer> defaultIslandFlags = new HashMap<>();
 
+    @ConfigComment("These are the default settings for new islands")
+    @ConfigEntry(path = "world.default-island-settings")
+    @Adapter(FlagSerializer2.class)
     private Map<Flag, Integer> defaultIslandSettings = new HashMap<>();
 
+    @ConfigComment("These are the settings visible to users. (Not implemented yet)")
+    @ConfigEntry(path = "world.visible-settings", experimental = true)
     private List<String> visibleSettings = new ArrayList<>();
 
     private List<String> visitorBannedCommands = new ArrayList<>();
 
-    // ---------------------------------------------
-
-    /*      ISLAND      */
-    //---------------------------------------------------------------------------------------/
     @ConfigComment("These settings should not be edited")
     @ConfigEntry(path = "do-not-edit-these-settings.reset-epoch")
     private long resetEpoch = 0;
@@ -143,6 +172,48 @@ public class Settings implements DataObject, WorldSettings {
     @Override
     public String getFriendlyName() {
         return friendlyName;
+    }
+
+    /**
+     * @return the blocks
+     */
+    public Map<Material, Integer> getBlocks() {
+        return blocks;
+    }
+
+    /**
+     * @return the netherBlocks
+     */
+    public Map<Material, Integer> getNetherBlocks() {
+        return netherBlocks;
+    }
+
+    /**
+     * @return the endBlocks
+     */
+    public Map<Material, Integer> getEndBlocks() {
+        return endBlocks;
+    }
+
+    /**
+     * @param blocks the blocks to set
+     */
+    public void setBlocks(Map<Material, Integer> blocks) {
+        this.blocks = blocks;
+    }
+
+    /**
+     * @param netherBlocks the netherBlocks to set
+     */
+    public void setNetherBlocks(Map<Material, Integer> netherBlocks) {
+        this.netherBlocks = netherBlocks;
+    }
+
+    /**
+     * @param endBlocks the endBlocks to set
+     */
+    public void setEndBlocks(Map<Material, Integer> endBlocks) {
+        this.endBlocks = endBlocks;
     }
 
     /**
@@ -779,9 +850,4 @@ public class Settings implements DataObject, WorldSettings {
         this.growTrees = growTrees;
     }
 
-    @Override
-    public boolean isAllowObsidianScooping() {
-        // TODO Auto-generated method stub
-        return false;
-    }
 }

@@ -9,10 +9,8 @@ import java.util.TreeMap;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.EntityType;
 
-import world.bentobox.bentobox.api.addons.Addon;
 import world.bentobox.skygrid.SkyGrid;
 
 
@@ -23,7 +21,7 @@ import world.bentobox.skygrid.SkyGrid;
 public class WorldStyles {
     private static final Map<World.Environment, WorldStyles> map = new HashMap<World.Environment, WorldStyles>();
 
-    private Addon addon;
+    private SkyGrid addon;
 
     private BlockProbability prob;
     private TreeMap<Integer,EntityType> spawns;
@@ -66,20 +64,9 @@ public class WorldStyles {
      */
     private BlockProbability normalWorldProbabilities() {
         BlockProbability blockProbability = new BlockProbability();
-        FileConfiguration config = addon.getConfig();
-        int count = 0;
-        for (String material: config.getConfigurationSection("world.blocks").getValues(false).keySet()) {
-            try {
-                Material blockMaterial = Material.valueOf(material.toUpperCase());
-                //Bukkit.getLogger().info("DEBUG: read in material " + blockMaterial + " value " + config.getInt("world.blocks." + material));
-                blockProbability.addBlock(blockMaterial, config.getInt("world.blocks." + material));
-                count++;
-            } catch (Exception e) {
-                Bukkit.getLogger().severe("Do not know what " + material + " is so skipping...");
-            }
-        }
-        Bukkit.getLogger().info("Loaded " + count + " block types for ASkyGrid over world");
-        if (count == 0) {
+        addon.getSettings().getBlocks().forEach((blockMaterial,prob) -> blockProbability.addBlock(blockMaterial, prob));
+        Bukkit.getLogger().info("Loaded " + blockProbability.getSize() + " block types for SkyGrid over world");
+        if (blockProbability.isEmpty()) {
             blockProbability.addBlock(Material.STONE, 100);
             Bukkit.getLogger().severe("Using default stone as only block (fix/update config.yml)");
         }
@@ -92,19 +79,9 @@ public class WorldStyles {
      */
     private BlockProbability netherWorldProbabilities() {
         BlockProbability blockProbability = new BlockProbability();
-        FileConfiguration config = addon.getConfig();
-        int count = 0;
-        for (String material: config.getConfigurationSection("world.netherblocks").getValues(false).keySet()) {
-            try {
-                Material blockMaterial = Material.valueOf(material.toUpperCase());
-                blockProbability.addBlock(blockMaterial, config.getInt("world.netherblocks." + material));
-                count++;
-            } catch (Exception e) {
-                Bukkit.getLogger().severe("Do not know what " + material + " is so skipping...");
-            }
-        }
-        addon.log("Loaded " + count + " block types for SkyGrid nether");
-        if (count == 0) {
+        addon.getSettings().getNetherBlocks().forEach((blockMaterial,prob) -> blockProbability.addBlock(blockMaterial, prob));
+        Bukkit.getLogger().info("Loaded " + blockProbability.getSize() + " block types for SkyGrid nether");
+        if (blockProbability.isEmpty()) {
             blockProbability.addBlock(Material.NETHERRACK, 100);
             blockProbability.addBlock(Material.LAVA, 300);
             blockProbability.addBlock(Material.GRAVEL, 30);
@@ -128,19 +105,9 @@ public class WorldStyles {
      */
     private BlockProbability endWorldProbabilities() {
         BlockProbability blockProbability = new BlockProbability();
-        FileConfiguration config = addon.getConfig();
-        int count = 0;
-        for (String material: config.getConfigurationSection("world.endblocks").getValues(false).keySet()) {
-            try {
-                Material blockMaterial = Material.valueOf(material.toUpperCase());
-                blockProbability.addBlock(blockMaterial, config.getInt("world.endblocks." + material));
-                count++;
-            } catch (Exception e) {
-                Bukkit.getLogger().severe("Do not know what " + material + " is so skipping...");
-            }
-        }
-        Bukkit.getLogger().info("Loaded " + count + " block types for ASkyGrid End");
-        if (count == 0) {
+        addon.getSettings().getEndBlocks().forEach((blockMaterial,prob) -> blockProbability.addBlock(blockMaterial, prob));
+        Bukkit.getLogger().info("Loaded " + blockProbability.getSize() + " block types for SkyGrid end world");
+        if (blockProbability.isEmpty()) {
             blockProbability.addBlock(Material.END_STONE, 300);
             blockProbability.addBlock(Material.OBSIDIAN, 10);
             blockProbability.addBlock(Material.SPAWNER, 2);

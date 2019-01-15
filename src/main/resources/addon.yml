@@ -5,12 +5,6 @@ version: ${version}
 authors: tastybento
 
 permissions:    
-  skygrid.island:
-   description: Allow island command usage
-   default: true
-  skygrid.island.create:
-    description: Allow island creation
-    default: true
   skygrid.island.home:
     description: Allow teleporting to player island
     default: true
@@ -20,26 +14,11 @@ permissions:
   skygrid.island.info:
     description: Let the player check their island level
     default: true
-  skygrid.island.sethome:
-    description: Let the player set their island teleport point
-    default: true
-  skygrid.island.lock:
-    description: Allows island locking
-    default: false
-  skygrid.island.expel:
-    description: Allows expelling of visitors
-    default: true
-  skygrid.island.ban:
-    description: Allows banning of visitors
-    default: true
   skygrid.island.settings:
     description: Player can see server settings
     default: true
   skygrid.island.language:
     description: Player can select a language
-    default: true
-  skygrid.island.name:
-    description: Player can set the name of their island
     default: true
   skygrid.island.spawn:
     description: Player can use the island spawn command if spawn exists
@@ -47,89 +26,17 @@ permissions:
   skygrid.island.reset:
     description: Player can use the island reset or restart command
     default: true  
-  skygrid.island.team:
-    description: Let a player use team commands
-    default: true
-  skygrid.island.team.trust:
-    description: Let a player use team trust commands
-    default: true
-  skygrid.island.team.coop:
-    description: Let a player use team coop commands
-    default: true
   skygrid.settings.*:
     description: Allow use of settings on island
     default: true
-  skygrid.mod.info:
-    description: Let a moderator see info on a player
-    default: op
-  skygrid.mod.resethome:
-    description: Allows setting or reseting of a player's home position
-    default: op
-  skygrid.mod.clearreset:
-    description: Allow clearing of island reset limit
-    default: false
-  skygrid.mod.tp:
-    description: Allows teleport to an island
-    default: op
-  skygrid.mod.bypasscooldowns:
-    description: Allow moderator to bypass cooldowns
-    default: op
-  skygrid.mod.bypassprotect:
-    description: Allow moderator to bypass island protection
-    default: op
-  skygrid.mod.bypassexpel:
-    description: Allow moderator to bypass island expulsion
-    default: op
-  skygrid.mod.lock:
-    description: Locks or unlocks an island
-    default: op
-  skygrid.mod.bypasslock:
-    description: Bypasses an island lock
-    default: op
-  skygrid.mod.team:
-    description: Enables modification of teams via kick and add commands
-    default: false
-  skygrid.mod.name:
-    description: Enables naming of player's islands
-    default: false
-  skygrid.mod.resetname:
-    description: Enables reset of player's island names
-    default: false
-  skygrid.admin.clearresetall:
-    description: Allow clearing of island reset limit of all players
-    default: op
   skygrid.admin.reload:
     description: Reload the config.yml
     default: op
   skygrid.admin.delete:
     description: Let a player completely remove a player (including island)
     default: op
-  skygrid.admin.deleteisland:
-    description: Let a player completely remove the island the player is on
-    default: op
-  skygrid.admin.register:
-    description: Let a player register the nearest island to another player.
-    default: op
-  skygrid.admin.unregister:
-    description: Removes a player from an island without deleting the island blocks.
-    default: op
-  skygrid.admin.purge:
-    description: Let a player purge old islands.
-    default: op
   skygrid.admin.setspawn:
     description: Allows use of spawn tools
-    default: op
-  skygrid.admin.setrange:
-    description: Allows setting of island protection range
-    default: op
-  skygrid.admin.reserve:
-    description: Reserves an empty spot for a player's next island
-    default: op
-  skygrid.admin.settingsreset:
-    description: Resets all the islands to default protection settings
-    default: op
-  skygrid.admin.noban:
-    description: Player cannot be banned from an island
     default: op
   skygrid.admin.setlanguage:
     description: Resets all player languages and sets the default language
