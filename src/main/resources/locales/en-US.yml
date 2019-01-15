@@ -3,10 +3,42 @@
 # the one at http://yaml-online-parser.appspot.com                                        #
 ###########################################################################################
 
-bskyblock:
-  sign:
-    line0: "&cBSkyBlock"
-    line1: "Welcome!"
-    line2: "[name]"
-    line3: "Do not fall! &c<3"
+skygrid:
+  commands:
+    skygrid:
+      help:
+        description: "Start a SkyGrid game or teleport to your SkyGrid home"
+      go:
+        description: "Go home"
+        tip: "&cYou cannot teleport when falling!"
+    island:
+      settings:
+        description: "Configure protected area settings"
+    admin:
+      info:
+        description: "get info on where you are or player's protected area"
+        no-island: "&cYou are not in a protected area right now..."
+        title: "========== Area Info ============"
+        island-location: "Area location: [xyz]"
+        island-coords: "Area coordinates: [xz1] to [xz2]"
+        is-spawn: "Area is a spawn area"
+      register:
+        description: "register player to unowned area at your location"
+        registered-island: "&aRegistered player to area at [xyz]."
+        already-owned: "&cArea is already owned by another player!"
+        no-island-here: "&cThere is no registered area here. Confirm to make one."
+      unregister:
+        description: "unregister owner from area"
+        unregistered-island: "&aUnregistered player from area at [xyz]."
+      tp:
+        description: "teleport to a player's area"
+
+  protection:
+    flags:
+      ENTER_EXIT_MESSAGES: 
+        description: "Display entry and exit messages"
+        island: "[name]'s protected area"
+        name: "Enter/Exit messages"
+        now-entering: "&bNow entering [name]"
+        now-leaving: "&bNow leaving [name]"
     

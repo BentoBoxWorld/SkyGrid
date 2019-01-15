@@ -4,7 +4,10 @@ version: ${version}
 
 authors: tastybento
 
-permissions:    
+permissions: 
+  skygrid.skygrid:
+    description: Use the skygrid command 
+    default: true  
   skygrid.island.home:
     description: Allow teleporting to player island
     default: true

@@ -99,6 +99,14 @@ public class Settings implements DataObject, WorldSettings {
     @ConfigEntry(path = "world.spawn-height")
     private int spawnHeight = 128;
 
+    @ConfigComment("Space around new players in blocks (will be rounded up to nearest 16 blocks)")
+    @ConfigEntry(path = "world.space-around-players")
+    private int islandDistance = 1000;
+
+    @ConfigComment("Default protection radius around player's home (so total size is 2x this)")
+    @ConfigEntry(path = "world.protection-range")
+    private int islandProtectionRange = 50;
+
     @ConfigComment("The default game mode for this world. Players will be set to this mode when they create")
     @ConfigComment("a new island for example. Options are SURVIVAL, CREATIVE, ADVENTURE, SPECTATOR")
     @ConfigEntry(path = "world.default-game-mode")
@@ -212,7 +220,7 @@ public class Settings implements DataObject, WorldSettings {
      */
     @Override
     public int getIslandDistance() {
-        return 1000;
+        return islandDistance;
     }
 
     /**
@@ -220,7 +228,7 @@ public class Settings implements DataObject, WorldSettings {
      */
     @Override
     public int getIslandProtectionRange() {
-        return 0;
+        return islandProtectionRange;
     }
 
     /**
@@ -760,6 +768,13 @@ public class Settings implements DataObject, WorldSettings {
      */
     public void setGrowTrees(boolean growTrees) {
         this.growTrees = growTrees;
+    }
+
+    /**
+     * @param islandProtectionRange the islandProtectionRange to set
+     */
+    public void setIslandProtectionRange(int islandProtectionRange) {
+        this.islandProtectionRange = islandProtectionRange;
     }
 
 }

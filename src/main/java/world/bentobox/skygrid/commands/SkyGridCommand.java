@@ -6,6 +6,7 @@ import java.util.List;
 
 import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.commands.island.IslandLanguageCommand;
+import world.bentobox.bentobox.api.commands.island.IslandSettingsCommand;
 import world.bentobox.bentobox.api.events.island.IslandEvent.Reason;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.bentobox.managers.island.NewIsland;
@@ -30,6 +31,7 @@ public class SkyGridCommand extends CompositeCommand {
         new IslandLanguageCommand(this);
         // SkyGrid sub commands
         new GoCommand(this);
+        new IslandSettingsCommand(this);
     }
 
     /* (non-Javadoc)

@@ -12,11 +12,13 @@ import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.TreeType;
 import org.bukkit.World;
+import org.bukkit.World.Environment;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
 import org.bukkit.block.CreatureSpawner;
+import org.bukkit.block.data.type.EndPortalFrame;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.generator.BlockPopulator;
@@ -70,7 +72,6 @@ public class SkyGridPop extends BlockPopulator {
                 for (int z = 0; z < 16; z +=4) {
                     Block b = chunk.getBlock(x, y, z);
                     // Do an end portal check
-                    /*
                     if (addon.getSettings().isEndGenerate() && world.getEnvironment().equals(Environment.NORMAL)
                             && x==0 && z==0 && y == 0 && !chunkHasPortal) {
                         if (random.nextDouble() < addon.getSettings().getEndFrameProb()) {
@@ -105,7 +106,7 @@ public class SkyGridPop extends BlockPopulator {
                                 }
                             }
                         }
-                    }*/
+                    }
                     if (b.getType().equals(Material.AIR))
                         continue;
                     // Alter blocks
@@ -305,9 +306,9 @@ public class SkyGridPop extends BlockPopulator {
             if (random.nextDouble() < 0.4)
                 set.add(itemInRange(256, 294, random)); //weapon/random
             for (Material mat : Material.values()) {
-                if (END_ITEMS.containsKey(mat.toString())) {
-                    int qty = (int)((double)END_ITEMS.get(mat.toString()));
-                    double probability = END_ITEMS.get(mat.toString()) - qty;
+                if (END_ITEMS.containsKey(mat)) {
+                    int qty = (int)((double)END_ITEMS.get(mat));
+                    double probability = END_ITEMS.get(mat) - qty;
                     if (random.nextDouble() < probability) {
                         set.add(new ItemStack(mat, qty));
                     }
@@ -334,17 +335,5 @@ public class SkyGridPop extends BlockPopulator {
     private ItemStack itemInRange(int min, int max, Random random) {
         return new ItemStack(Arrays.asList(Material.values()).get(random.nextInt(max - min + 1) + min), 1);
     }
-
-    private ItemStack damageInRange(int type, int min, int max, Random random) {
-        return new ItemStack(Material.IRON_BARS, 1);
-        //return new ItemStack(type, 1, (short) (random.nextInt(max - min + 1) + min));
-    }
-
-    private ItemStack itemMas(int min, int max, int sm, int lg, Random random) {
-        return new ItemStack(Material.IRON_INGOT, 1);
-        //return new ItemStack(random.nextInt(max - min + 1) + min,
-        //        random.nextInt(lg - sm + 1) + sm);
-    }
-
 
 }

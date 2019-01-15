@@ -8,7 +8,6 @@ import world.bentobox.bentobox.api.commands.admin.AdminReloadCommand;
 import world.bentobox.bentobox.api.commands.admin.AdminTeleportCommand;
 import world.bentobox.bentobox.api.commands.admin.AdminUnregisterCommand;
 import world.bentobox.bentobox.api.commands.admin.AdminVersionCommand;
-import world.bentobox.bentobox.api.commands.island.IslandSettingsCommand;
 import world.bentobox.bentobox.api.localization.TextVariables;
 import world.bentobox.bentobox.api.user.User;
 import world.bentobox.skygrid.SkyGrid;
@@ -29,7 +28,6 @@ public class AdminCommand extends CompositeCommand {
         // Reload
         new AdminReloadCommand(this);
         new AdminInfoCommand(this);
-        new IslandSettingsCommand(this);
         new AdminUnregisterCommand(this);
         new AdminTeleportCommand(this, "tp");
         new AdminTeleportCommand(this, "tpnether");
