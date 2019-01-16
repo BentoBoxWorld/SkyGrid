@@ -71,8 +71,7 @@ public class SkyGridGen extends ChunkGenerator {
     public ChunkData generateChunkData(World world, Random random, int chunkX, int chunkZ, ChunkGenerator.BiomeGrid biomeGrid) {
 
         BiomeGenerator biomeGenerator = new BiomeGenerator(world);
-        // Default block
-        Material blockMat = Material.AIR;
+
         // This gets all the blocks that can be picked and their probabilities
         BlockProbability prob = addon.getWorldStyles().get(world.getEnvironment()).getProb();
 
@@ -89,89 +88,95 @@ public class SkyGridGen extends ChunkGenerator {
                     //And tell bukkit (who tells the client) what the biggest biome here is
                     biomeGrid.setBiome(x, z, getDominantBiome(biomes));
                 }
-                if (x % 4 != 0 && z % 4 != 0) {
-                    break;
-                }
-                for (int y = 0; y < addon.getSettings().getIslandHeight(); y += 4) {
-                    // Get a random block and feed in the last block (true if cactus or cane)
-                    blockMat = prob.getBlock(random, y == 0, blockMat == Material.CACTUS || blockMat == Material.SUGAR_CANE);
-                    // If blockMat is not "a block" then cannot be generated
-                    if (!blockMat.isBlock()) {
-                        break;
-                    }
-                    // Check if the block needs dirt
-                    if (needDirt.contains(blockMat)) {
-                        // Check biome
-                        if (biomeGrid.getBiome(x, z).equals(Biome.DESERT)) {
-                            // No plants in desert except for cactus
-                            if (y == 0) {
-                                blockMat = Material.SAND;
-                            } else {
-                                blockMat = Material.CACTUS;
-                            }
-                        } else {
-                            // Add dirt
-                            result.setBlock( x, y, z, Material.DIRT);
-                            result.setBlock( x, y+1, z, blockMat);
-                            if (blockMat.equals(Material.SUGAR_CANE)) {
-                                result.setBlock( x+1, y, z, Material.WATER);
-                            }
-                        }
-                    } else {
-                        switch (blockMat) {
-                        case LAVA:
-                            // Don't allow lava in this biome because the swamp tree vines can cause it to drip and lag
-                            if (biomeGrid.getBiome(x, z).name().contains("SWAMP")) {
-                                result.setBlock( x, y, z, Material.GRASS);
-                            } else {
-                                result.setBlock( x, y, z, Material.LAVA);
-                            }
-                            break;
-                        case CACTUS:
-                            if (biomeGrid.getBiome(x, z).equals(Biome.DESERT)) {
-                                result.setBlock( x, y, z, Material.SAND);
-                                result.setBlock( x, y-1, z, Material.SANDSTONE);
-                                result.setBlock( x, y+1, z, blockMat);
-                            } else {
-                                // Cactus only in desert
-                                result.setBlock( x, y, z, Material.SAND);
-                            }
-                            break;
-                        case DIRT:
-                            if (biomeGrid.getBiome(x, z).equals(Biome.DESERT)) {
-                                // Desert
-                                result.setBlock( x, y, z, Material.SAND);
-                            } else {
-                                result.setBlock( x, y, z, Material.DIRT);
-                            }
-                        case WATER:
-                            if (biomeGrid.getBiome(x, z).name().contains("DESERT")) {
-                                // Desert
-                                result.setBlock( x, y, z, Material.SAND);
-                            } else {
-                                result.setBlock( x, y, z, Material.WATER);
-                            }
-                            break;
-                        case NETHER_WART:
-                            result.setBlock( x, y, z, Material.SOUL_SAND);
-                            result.setBlock( x, y+1, z, blockMat);
-                            break;
-                        default:
-                            if (blockMat.equals(Material.END_ROD)) {
-                                result.setBlock( x, y, z, Material.END_STONE);
-                                result.setBlock( x, y+1, z, blockMat);
-                            } else if (blockMat.equals(Material.CHORUS_PLANT)) {
-                                result.setBlock( x, y, z, Material.END_STONE);
-                                result.setBlock( x, y+1, z, blockMat);
-                            } else {
-                                result.setBlock( x, y, z, blockMat);
-                            }
-                        }
+                if (x % 4 == 0 && z % 4 == 0) {
+                    for (int y = 0; y <= addon.getSettings().getIslandHeight(); y += 4) {
+                        setBlock(prob, x, y, z, result, biomeGrid, random);
                     }
                 }
             }
         }
         return result;
+    }
+
+    private void setBlock(BlockProbability prob, int x, int y, int z, ChunkData result, BiomeGrid biomeGrid, Random random) {
+        // Default block
+        Material blockMat = Material.AIR;
+        // Get a random block and feed in the last block (true if cactus or cane)
+        blockMat = prob.getBlock(random, y == 0, blockMat == Material.CACTUS || blockMat == Material.SUGAR_CANE);
+        // If blockMat is not "a block" then cannot be generated
+        if (!blockMat.isBlock()) {
+            return;
+        }
+        // Check if the block needs dirt
+        if (needDirt.contains(blockMat)) {
+            // Check biome
+            if (biomeGrid.getBiome(x, z).equals(Biome.DESERT)) {
+                // No plants in desert except for cactus
+                if (y == 0) {
+                    blockMat = Material.SAND;
+                } else {
+                    blockMat = Material.CACTUS;
+                }
+            } else {
+                // Add dirt
+                result.setBlock( x, y, z, Material.DIRT);
+                result.setBlock( x, y+1, z, blockMat);
+                if (blockMat.equals(Material.SUGAR_CANE)) {
+                    result.setBlock( x+1, y, z, Material.WATER);
+                }
+            }
+        } else {
+            switch (blockMat) {
+            case LAVA:
+                // Don't allow lava in this biome because the swamp tree vines can cause it to drip and lag
+                if (biomeGrid.getBiome(x, z).name().contains("SWAMP")) {
+                    result.setBlock( x, y, z, Material.GRASS);
+                } else {
+                    result.setBlock( x, y, z, Material.LAVA);
+                }
+                break;
+            case CACTUS:
+                if (biomeGrid.getBiome(x, z).equals(Biome.DESERT)) {
+                    result.setBlock( x, y, z, Material.SAND);
+                    result.setBlock( x, y-1, z, Material.SANDSTONE);
+                    result.setBlock( x, y+1, z, blockMat);
+                } else {
+                    // Cactus only in desert
+                    result.setBlock( x, y, z, Material.SAND);
+                }
+                break;
+            case DIRT:
+                if (biomeGrid.getBiome(x, z).equals(Biome.DESERT)) {
+                    // Desert
+                    result.setBlock( x, y, z, Material.SAND);
+                } else {
+                    result.setBlock( x, y, z, Material.DIRT);
+                }
+            case WATER:
+                if (biomeGrid.getBiome(x, z).name().contains("DESERT")) {
+                    // Desert
+                    result.setBlock( x, y, z, Material.SAND);
+                } else {
+                    result.setBlock( x, y, z, Material.WATER);
+                }
+                break;
+            case NETHER_WART:
+                result.setBlock( x, y, z, Material.SOUL_SAND);
+                result.setBlock( x, y+1, z, blockMat);
+                break;
+            default:
+                if (blockMat.equals(Material.END_ROD)) {
+                    result.setBlock( x, y, z, Material.END_STONE);
+                    result.setBlock( x, y+1, z, blockMat);
+                } else if (blockMat.equals(Material.CHORUS_PLANT)) {
+                    result.setBlock( x, y, z, Material.END_STONE);
+                    result.setBlock( x, y+1, z, blockMat);
+                } else {
+                    result.setBlock( x, y, z, blockMat);
+                }
+            }
+        }
+
     }
 
     @Override

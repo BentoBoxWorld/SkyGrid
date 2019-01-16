@@ -732,14 +732,14 @@ public class Settings implements DataObject, WorldSettings {
      * @return the spawnHeight
      */
     public int getSpawnHeight() {
-        return spawnHeight;
+        return spawnHeight + 5;
     }
 
     /**
      * @param spawnHeight the spawnHeight to set
      */
     public void setSpawnHeight(int spawnHeight) {
-        this.spawnHeight = spawnHeight;
+        this.spawnHeight = spawnHeight - 5;
     }
 
     /**
@@ -775,6 +775,13 @@ public class Settings implements DataObject, WorldSettings {
      */
     public void setIslandProtectionRange(int islandProtectionRange) {
         this.islandProtectionRange = islandProtectionRange;
+    }
+
+    /**
+     * @param islandDistance the islandDistance to set
+     */
+    public void setIslandDistance(int islandDistance) {
+        this.islandDistance = islandDistance;
     }
 
 }
