@@ -49,9 +49,9 @@ public class SkyGrid extends GameModeAddon {
     @Override
     public void onEnable(){
         // Register commands
-        new SkyGridCommand(this);
-        new AdminCommand(this);
-        // Set default protection flags for world
+        playerCommand = new SkyGridCommand(this);
+        adminCommand = new AdminCommand(this);
+        // Set default protection flags for world to allow everything
         Flags.values().stream().filter(f -> f.getType().equals(Type.PROTECTION)).forEach(f -> f.setDefaultSetting(getOverWorld(), true));
     }
 
