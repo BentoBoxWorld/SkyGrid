@@ -89,7 +89,7 @@ public class SkyGridPop extends BlockPopulator {
                                     EndPortalFrame endFrame = (EndPortalFrame)frame.getBlockData();
 
                                     // Add the odd eye of ender
-                                    endFrame.setEye(random.nextDouble() < 0.1);
+                                    endFrame.setEye(random.nextDouble() < 0.8);
                                     if (zz == 0) {
                                         // Face South
                                         endFrame.setFacing(BlockFace.SOUTH);
@@ -103,6 +103,7 @@ public class SkyGridPop extends BlockPopulator {
                                         // Face West
                                         endFrame.setFacing(BlockFace.WEST);
                                     }
+                                    frame.setBlockData(endFrame);
                                 }
                             }
                         }

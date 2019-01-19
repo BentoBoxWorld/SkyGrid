@@ -61,7 +61,7 @@ public class Settings implements DataObject, WorldSettings {
 
     @ConfigComment("The probability of a frame being created in a chunk. Frames are always at y=0.")
     @ConfigEntry(path = "world.end-frame-probability")
-    private double endFrameProb = 0.05;
+    private double endFrameProb = 0.1;
 
     @ConfigComment("Allow saplings to grow into trees sometimes.")
     @ConfigEntry(path = "world.grow-trees")

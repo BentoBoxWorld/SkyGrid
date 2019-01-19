@@ -143,7 +143,7 @@ world:
   # Overworld has biomes - this will affect some block types and tree types.
   create-biomes: true
   # The probability of a frame being created in a chunk. Frames are always at y=0.
-  end-frame-probability: 0.05
+  end-frame-probability: 0.1
   # Allow saplings to grow into trees sometimes.
   grow-trees: true
   # Friendly name for this world. Used in admin commands. Must be a single word
