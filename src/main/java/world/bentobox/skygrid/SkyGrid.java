@@ -3,6 +3,8 @@ package world.bentobox.skygrid;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
+import org.bukkit.generator.ChunkGenerator;
+import org.eclipse.jdt.annotation.NonNull;
 
 import world.bentobox.bentobox.api.addons.GameModeAddon;
 import world.bentobox.bentobox.api.configuration.Config;
@@ -27,6 +29,7 @@ public class SkyGrid extends GameModeAddon {
     // Settings
     private Settings settings;
     private WorldStyles worldStyles;
+    private SkyGridGen gen;
 
     @Override
     public void onLoad() {
@@ -82,7 +85,8 @@ public class SkyGrid extends GameModeAddon {
             getLogger().info("Creating SkyGrid world ...");
         }
         // Create the world if it does not exist
-        islandWorld = WorldCreator.name(worldName).type(WorldType.FLAT).environment(World.Environment.NORMAL).generator(new SkyGridGen(this))
+        gen = new SkyGridGen(this);
+        islandWorld = WorldCreator.name(worldName).type(WorldType.FLAT).environment(World.Environment.NORMAL).generator(gen)
                 .createWorld();
 
         // Make the nether if it does not exist
@@ -93,7 +97,7 @@ public class SkyGrid extends GameModeAddon {
             if (!settings.isNetherIslands()) {
                 netherWorld = WorldCreator.name(worldName + NETHER).type(WorldType.NORMAL).environment(World.Environment.NETHER).createWorld();
             } else {
-                netherWorld = WorldCreator.name(worldName + NETHER).type(WorldType.FLAT).generator(new SkyGridGen(this))
+                netherWorld = WorldCreator.name(worldName + NETHER).type(WorldType.FLAT).generator(gen)
                         .environment(World.Environment.NETHER).createWorld();
             }
         }
@@ -105,7 +109,7 @@ public class SkyGrid extends GameModeAddon {
             if (!settings.isEndIslands()) {
                 endWorld = WorldCreator.name(worldName + THE_END).type(WorldType.NORMAL).environment(World.Environment.THE_END).createWorld();
             } else {
-                endWorld = WorldCreator.name(worldName + THE_END).type(WorldType.FLAT).generator(new SkyGridGen(this))
+                endWorld = WorldCreator.name(worldName + THE_END).type(WorldType.FLAT).generator(gen)
                         .environment(World.Environment.THE_END).createWorld();
             }
         }
@@ -118,5 +122,10 @@ public class SkyGrid extends GameModeAddon {
 
     public WorldStyles getWorldStyles() {
         return worldStyles;
+    }
+
+    @Override
+    public @NonNull ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
+        return gen;
     }
 }
