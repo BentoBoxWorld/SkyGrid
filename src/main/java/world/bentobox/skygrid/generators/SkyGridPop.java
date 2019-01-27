@@ -282,6 +282,7 @@ public class SkyGridPop extends BlockPopulator {
                     set.add(new ItemStack(Material.GHAST_TEAR));
                 }
             }
+
             break;
         case NORMAL:
             if (random.nextDouble() < 0.7) {
@@ -293,11 +294,9 @@ public class SkyGridPop extends BlockPopulator {
             if (random.nextDouble() < 0.7) {
                 set.add(new ItemStack(BLOCKS.get(random.nextInt(BLOCKS.size())), random.nextInt(3)));
             }
-
             if (random.nextDouble() < 0.1) {
                 set.add(new ItemStack(BLOCKS.get(random.nextInt(ITEMS.size())), random.nextInt(3)));
             }
-
 
             break;
         case THE_END:
@@ -331,7 +330,11 @@ public class SkyGridPop extends BlockPopulator {
 
     private ItemStack pickEgg(Random random, EntityType... type) {
         EntityType choice = type[random.nextInt(type.length)];
-        return new ItemStack(Material.valueOf(choice.name() + "_SPAWN_EGG"));
+        if (choice == EntityType.PIG_ZOMBIE) {
+        	return new ItemStack(Material.ZOMBIE_PIGMAN_SPAWN_EGG);
+        } else {
+            return new ItemStack(Material.valueOf(choice.name() + "_SPAWN_EGG"));
+        }
     }
     private ItemStack itemInRange(int min, int max, Random random) {
         return new ItemStack(Arrays.asList(Material.values()).get(random.nextInt(max - min + 1) + min), 1);
