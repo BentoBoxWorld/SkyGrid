@@ -8,7 +8,7 @@ import java.util.Random;
  *
  */
 public class RandomSeries {
-	private int[] reset;
+	private final int[] reset;
 	private int[] series;
 	private int pos;
 	

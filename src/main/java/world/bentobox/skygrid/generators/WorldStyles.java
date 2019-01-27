@@ -19,7 +19,7 @@ import world.bentobox.skygrid.SkyGrid;
  *
  */
 public class WorldStyles {
-    private static final Map<World.Environment, WorldStyles> map = new HashMap<World.Environment, WorldStyles>();
+    private static final Map<World.Environment, WorldStyles> map = new HashMap<>();
 
     private SkyGrid addon;
 
@@ -64,7 +64,7 @@ public class WorldStyles {
      */
     private BlockProbability normalWorldProbabilities() {
         BlockProbability blockProbability = new BlockProbability();
-        addon.getSettings().getBlocks().forEach((blockMaterial,prob) -> blockProbability.addBlock(blockMaterial, prob));
+        addon.getSettings().getBlocks().forEach(blockProbability::addBlock);
         Bukkit.getLogger().info("Loaded " + blockProbability.getSize() + " block types for SkyGrid over world");
         if (blockProbability.isEmpty()) {
             blockProbability.addBlock(Material.STONE, 100);
@@ -75,11 +75,11 @@ public class WorldStyles {
 
     /**
      * Nether world probabilities
-     * @return
+     * @return Block probability
      */
     private BlockProbability netherWorldProbabilities() {
         BlockProbability blockProbability = new BlockProbability();
-        addon.getSettings().getNetherBlocks().forEach((blockMaterial,prob) -> blockProbability.addBlock(blockMaterial, prob));
+        addon.getSettings().getNetherBlocks().forEach(blockProbability::addBlock);
         Bukkit.getLogger().info("Loaded " + blockProbability.getSize() + " block types for SkyGrid nether");
         if (blockProbability.isEmpty()) {
             blockProbability.addBlock(Material.NETHERRACK, 100);
@@ -101,11 +101,11 @@ public class WorldStyles {
 
     /**
      * End world probabilities
-     * @return
+     * @return block probability
      */
     private BlockProbability endWorldProbabilities() {
         BlockProbability blockProbability = new BlockProbability();
-        addon.getSettings().getEndBlocks().forEach((blockMaterial,prob) -> blockProbability.addBlock(blockMaterial, prob));
+        addon.getSettings().getEndBlocks().forEach(blockProbability::addBlock);
         Bukkit.getLogger().info("Loaded " + blockProbability.getSize() + " block types for SkyGrid end world");
         if (blockProbability.isEmpty()) {
             blockProbability.addBlock(Material.END_STONE, 300);
@@ -123,8 +123,8 @@ public class WorldStyles {
      */
     private TreeMap<Integer,EntityType> normalSpawns() {
         // Use strings to enable backwards compatibility
-        TreeMap<Integer,EntityType> s = new TreeMap<Integer,EntityType>();
-        List<String> types = new ArrayList<String>();
+        TreeMap<Integer,EntityType> s = new TreeMap<>();
+        List<String> types = new ArrayList<>();
         types.add("CREEPER");
         types.add("SKELETON");
         types.add("SPIDER");
@@ -172,8 +172,8 @@ public class WorldStyles {
      * @return
      */
     private TreeMap<Integer,EntityType> netherSpawns() {
-        TreeMap<Integer,EntityType> s = new TreeMap<Integer,EntityType>();
-        HashMap<String, Integer> types = new HashMap<String,Integer>();
+        TreeMap<Integer,EntityType> s = new TreeMap<>();
+        HashMap<String, Integer> types = new HashMap<>();
         types.put("BLAZE", 25);
         types.put("MAGMA_CUBE", 50);
         types.put("SKELETON", 75);
@@ -194,8 +194,8 @@ public class WorldStyles {
      * @return
      */
     private TreeMap<Integer,EntityType> endSpawns() {
-        TreeMap<Integer,EntityType> s = new TreeMap<Integer,EntityType>();
-        HashMap<String, Integer> types = new HashMap<String,Integer>();
+        TreeMap<Integer,EntityType> s = new TreeMap<>();
+        HashMap<String, Integer> types = new HashMap<>();
         types.put("ENDERMAN", 50);
         types.put("ENDERMITE", 55);
         types.put("SHULKER", 60);

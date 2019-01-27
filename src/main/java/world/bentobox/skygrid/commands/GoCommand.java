@@ -1,6 +1,3 @@
-/**
- *
- */
 package world.bentobox.skygrid.commands;
 
 import java.util.List;

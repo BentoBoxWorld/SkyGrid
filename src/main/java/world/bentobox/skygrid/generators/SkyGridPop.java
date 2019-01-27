@@ -30,7 +30,7 @@ import world.bentobox.skygrid.SkyGrid;
 
 
 public class SkyGridPop extends BlockPopulator {
-    private static RandomSeries slt = new RandomSeries(27);
+    private static final RandomSeries slt = new RandomSeries(27);
     private final int size;
     private SkyGrid addon;
     private final static HashMap<Material, Double> END_ITEMS;
@@ -50,7 +50,7 @@ public class SkyGridPop extends BlockPopulator {
 
     static {
         // Hard code these probabilities. TODO: make these config.yml settings.
-        END_ITEMS = new HashMap<Material, Double>();
+        END_ITEMS = new HashMap<>();
         // double format - integer part is the quantity, decimal is the probability
         END_ITEMS.put(Material.FIREWORK_ROCKET, 20.2); // for elytra
         END_ITEMS.put(Material.EMERALD, 1.1);
@@ -99,7 +99,7 @@ public class SkyGridPop extends BlockPopulator {
                                     } else if (xx == 0) {
                                         // Face East
                                         endFrame.setFacing(BlockFace.EAST);
-                                    } else if (xx == 4) {
+                                    } else {
                                         // Face West
                                         endFrame.setFacing(BlockFace.WEST);
                                     }
@@ -240,7 +240,7 @@ public class SkyGridPop extends BlockPopulator {
     private void setChest(Block b, Random random) {
         Chest chest = (Chest) b.getState();
         Inventory inv = chest.getBlockInventory();
-        HashSet<ItemStack> set = new HashSet<ItemStack>();
+        HashSet<ItemStack> set = new HashSet<>();
         // Overworld
         switch (b.getWorld().getEnvironment()) {
         case NETHER:
@@ -265,7 +265,7 @@ public class SkyGridPop extends BlockPopulator {
             }
             if (random.nextDouble() < 0.3) {
 
-                Double rand1 = random.nextDouble();
+                double rand1 = random.nextDouble();
                 if (rand1 < 0.1)
                     set.add(new ItemStack(Material.CLOCK)); // clock
                 else if (rand1 < 0.5) {

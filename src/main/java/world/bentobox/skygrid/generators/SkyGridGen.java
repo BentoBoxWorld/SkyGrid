@@ -1,10 +1,6 @@
 package world.bentobox.skygrid.generators;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -18,7 +14,7 @@ import world.bentobox.skygrid.SkyGrid;
 
 public class SkyGridGen extends ChunkGenerator {
 
-    private SkyGrid addon;
+    private final SkyGrid addon;
 
     // Blocks that need to be placed on dirt
     private final static List<Material> needDirt = Arrays.asList(
@@ -61,7 +57,7 @@ public class SkyGridGen extends ChunkGenerator {
 
 
     /**
-     * @param addon
+     * @param addon - addon
      */
     public SkyGridGen(SkyGrid addon) {
         this.addon = addon;
@@ -99,10 +95,8 @@ public class SkyGridGen extends ChunkGenerator {
     }
 
     private void setBlock(BlockProbability prob, int x, int y, int z, ChunkData result, BiomeGrid biomeGrid, Random random) {
-        // Default block
-        Material blockMat = Material.AIR;
         // Get a random block and feed in the last block (true if cactus or cane)
-        blockMat = prob.getBlock(random, y == 0, blockMat == Material.CACTUS || blockMat == Material.SUGAR_CANE);
+        Material blockMat = prob.getBlock(random, y == 0, false);
         // If blockMat is not "a block" then cannot be generated
         if (!blockMat.isBlock()) {
             return;
@@ -117,6 +111,7 @@ public class SkyGridGen extends ChunkGenerator {
                 } else {
                     blockMat = Material.CACTUS;
                 }
+                result.setBlock( x, y, z, blockMat);
             } else {
                 // Add dirt
                 result.setBlock( x, y, z, Material.DIRT);
@@ -182,7 +177,7 @@ public class SkyGridGen extends ChunkGenerator {
     @Override
     public List<BlockPopulator> getDefaultPopulators(World world) {
         //return Arrays.asList(new BlockPopulator[0]);
-        List<BlockPopulator> list = new ArrayList<BlockPopulator>(1);
+        List<BlockPopulator> list = new ArrayList<>(1);
         list.add(new SkyGridPop(addon));
         return list;
     }
@@ -206,7 +201,7 @@ public class SkyGridGen extends ChunkGenerator {
                 maxBiome = biome;
             }
         }
-        return maxBiome.biome;
+        return Objects.requireNonNull(maxBiome).biome;
     }
 
 

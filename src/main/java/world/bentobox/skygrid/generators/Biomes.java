@@ -31,7 +31,7 @@ public enum Biomes {
     public final Biome biome;
     public final double optimumTemperature, optimumRainfall;
 
-    private Biomes(Biome biome, double temp, double rain) {
+    Biomes(Biome biome, double temp, double rain) {
         this.biome = biome;
         this.optimumTemperature = temp;
         this.optimumRainfall = rain;
@@ -44,7 +44,7 @@ public enum Biomes {
      */
     public static HashMap<Biomes, Double> getBiomes(double temp, double rain) {
         //We tell it the capacity we need to avoid expensive dynamic lengthening
-        HashMap<Biomes, Double> biomes = new HashMap<Biomes, Double>(3);
+        HashMap<Biomes, Double> biomes = new HashMap<>(3);
 
         Biomes closestBiome = null, secondClosestBiome = null, thirdClosestBiome = null;
         double closestDist = 10000000, secondClosestDist = 10000000, thirdClosestDist = 10000000;
