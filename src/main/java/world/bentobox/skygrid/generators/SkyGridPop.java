@@ -241,7 +241,6 @@ public class SkyGridPop extends BlockPopulator {
         Chest chest = (Chest) b.getState();
         Inventory inv = chest.getBlockInventory();
         HashSet<ItemStack> set = new HashSet<>();
-        // Overworld
         switch (b.getWorld().getEnvironment()) {
         case NETHER:
             if (random.nextDouble() < 0.7)
@@ -287,6 +286,8 @@ public class SkyGridPop extends BlockPopulator {
         case NORMAL:
             if (random.nextDouble() < 0.7) {
                 set.add(new ItemStack(FOOD.get(random.nextInt(FOOD.size())), random.nextInt(3))); //food/tools
+                set.add(new ItemStack(FOOD.get(random.nextInt(FOOD.size())), random.nextInt(3))); //food/tools
+                set.add(new ItemStack(FOOD.get(random.nextInt(FOOD.size())), random.nextInt(3))); //food/tools
             }
             if (random.nextDouble() < 0.3) {
                 set.add(new ItemStack(SPAWNEGGS.get(random.nextInt(SPAWNEGGS.size()))));
@@ -294,12 +295,17 @@ public class SkyGridPop extends BlockPopulator {
             if (random.nextDouble() < 0.7) {
                 set.add(new ItemStack(BLOCKS.get(random.nextInt(BLOCKS.size())), random.nextInt(3)));
             }
+            if (random.nextDouble() < 0.2) {
+                set.add(new ItemStack(ITEMS.get(random.nextInt(ITEMS.size())), random.nextInt(3)));
+            }
             if (random.nextDouble() < 0.1) {
-                set.add(new ItemStack(BLOCKS.get(random.nextInt(ITEMS.size())), random.nextInt(3)));
+                set.add(new ItemStack(Material.WATER_BUCKET));
             }
 
             break;
         case THE_END:
+            set.add(itemInRange(318, 350, random)); //food/tools
+            set.add(itemInRange(318, 350, random)); //food/tools
             set.add(itemInRange(318, 350, random)); //food/tools
             if (random.nextDouble() < 0.2)
                 set.add(new ItemStack(Material.ENDERMAN_SPAWN_EGG)); //enderman spawn egg
@@ -331,7 +337,7 @@ public class SkyGridPop extends BlockPopulator {
     private ItemStack pickEgg(Random random, EntityType... type) {
         EntityType choice = type[random.nextInt(type.length)];
         if (choice == EntityType.PIG_ZOMBIE) {
-        	return new ItemStack(Material.ZOMBIE_PIGMAN_SPAWN_EGG);
+            return new ItemStack(Material.ZOMBIE_PIGMAN_SPAWN_EGG);
         } else {
             return new ItemStack(Material.valueOf(choice.name() + "_SPAWN_EGG"));
         }

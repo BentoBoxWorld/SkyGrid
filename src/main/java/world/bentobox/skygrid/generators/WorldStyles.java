@@ -124,46 +124,43 @@ public class WorldStyles {
     private TreeMap<Integer,EntityType> normalSpawns() {
         // Use strings to enable backwards compatibility
         TreeMap<Integer,EntityType> s = new TreeMap<>();
-        List<String> types = new ArrayList<>();
-        types.add("CREEPER");
-        types.add("SKELETON");
-        types.add("SPIDER");
-        types.add("CAVE_SPIDER");
-        types.add("ZOMBIE");
-        types.add("SLIME");
-        types.add("PIG");
-        types.add("SHEEP");
-        types.add("COW");
-        types.add("CHICKEN");
-        types.add("SQUID");
-        types.add("WOLF");
-        types.add("ENDERMAN");
-        types.add("SILVERFISH");
-        types.add("VILLAGER");
-        types.add("RABBIT");
-        types.add("GUARDIAN");
-        types.add("HORSE");
-        types.add("WITCH");
-        types.add("LLAMA");
-        types.add("POLAR_BEAR");
-        types.add("BAT");
-        types.add("HUSK");
-        types.add("MULE");
-        types.add("MUSHROOM_COW");
-        types.add("OCELOT");
-        types.add("VINDICATOR");
-        types.add("ZOMBIE_HORSE");
-        types.add("ZOMBIE_VILLAGER");
+        List<EntityType> types = new ArrayList<>();
+        types.add(EntityType.CREEPER);
+        types.add(EntityType.SKELETON);
+        types.add(EntityType.SPIDER);
+        types.add(EntityType.CAVE_SPIDER);
+        types.add(EntityType.ZOMBIE);
+        types.add(EntityType.SLIME);
+        types.add(EntityType.PIG);
+        types.add(EntityType.SHEEP);
+        types.add(EntityType.COW);
+        types.add(EntityType.CHICKEN);
+        types.add(EntityType.SQUID);
+        types.add(EntityType.WOLF);
+        types.add(EntityType.ENDERMAN);
+        types.add(EntityType.SILVERFISH);
+        types.add(EntityType.VILLAGER);
+        types.add(EntityType.RABBIT);
+        types.add(EntityType.GUARDIAN);
+        types.add(EntityType.HORSE);
+        types.add(EntityType.WITCH);
+        types.add(EntityType.LLAMA);
+        types.add(EntityType.POLAR_BEAR);
+        types.add(EntityType.BAT);
+        types.add(EntityType.HUSK);
+        types.add(EntityType.MULE);
+        types.add(EntityType.MUSHROOM_COW);
+        types.add(EntityType.OCELOT);
+        types.add(EntityType.VINDICATOR);
+        types.add(EntityType.ZOMBIE_HORSE);
+        types.add(EntityType.ZOMBIE_VILLAGER);
 
         int step = 1000 / types.size();
         int i = step;
-        for (EntityType type: EntityType.values()) {
-            if (types.contains(type.toString())) {
-                s.put(i, type);
-                i += step;
-            }
+        for (EntityType type: types) {
+            s.put(i, type);
+            i += step;
         }
-        //Bukkit.getLogger().info("DEBUG: spawner list = " + s);
         return s;
     }
 
@@ -173,19 +170,12 @@ public class WorldStyles {
      */
     private TreeMap<Integer,EntityType> netherSpawns() {
         TreeMap<Integer,EntityType> s = new TreeMap<>();
-        HashMap<String, Integer> types = new HashMap<>();
-        types.put("BLAZE", 25);
-        types.put("MAGMA_CUBE", 50);
-        types.put("SKELETON", 75);
-        types.put("WITHER_SKELETON", 20);
-        types.put("PIG_ZOMBIE", 75);
-        types.put("SKELETON_HORSE", 15);
-
-        for (EntityType type: EntityType.values()) {
-            if (types.containsKey(type.toString())) {
-                s.put(types.get(type.toString()), type);
-            }
-        }
+        s.put(25,  EntityType.BLAZE);
+        s.put(50,  EntityType.MAGMA_CUBE);
+        s.put(75,  EntityType.SKELETON);
+        s.put(20,  EntityType.WITHER_SKELETON);
+        s.put(75,  EntityType.PIG_ZOMBIE);
+        s.put(15,  EntityType.SKELETON_HORSE);
         return s;
     }
 
@@ -195,16 +185,9 @@ public class WorldStyles {
      */
     private TreeMap<Integer,EntityType> endSpawns() {
         TreeMap<Integer,EntityType> s = new TreeMap<>();
-        HashMap<String, Integer> types = new HashMap<>();
-        types.put("ENDERMAN", 50);
-        types.put("ENDERMITE", 55);
-        types.put("SHULKER", 60);
-        for (EntityType type: EntityType.values()) {
-            if (types.containsKey(type.toString())) {
-                s.put(types.get(type.toString()), type);
-            }
-        }
-
+        s.put(50, EntityType.ENDERMAN);
+        s.put(55, EntityType.ENDERMITE);
+        s.put(10, EntityType.SHULKER);
         return s;
     }
 

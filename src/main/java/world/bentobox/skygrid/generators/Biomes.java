@@ -18,13 +18,18 @@ import org.bukkit.block.Biome;
 public enum Biomes {
 
     //We store the biome, the temperature and rainfall for each biome.
+    SNOWY_TUNDRA(Biome.SNOWY_TUNDRA, 0, 100),
+    SNOWY_TAIGA(Biome.SNOWY_TAIGA, 0, 100),
+    FROZEN_RIVER(Biome.FROZEN_RIVER, 0, 10),
+    SNOWY_BEACH(Biome.SNOWY_BEACH, 0, 100),
+    MOUNTAINS(Biome.MOUNTAINS, 20, 60),
+    WOODED_MOUNTAINS(Biome.WOODED_MOUNTAINS, 20, 60),
     DESERT(Biome.DESERT, 60, 4),
     FOREST(Biome.FOREST, 50, 60),
     PLAINS(Biome.PLAINS, 40, 30),
     SWAMP(Biome.SWAMP, 40, 70),
-    //EXTREME_HILLS(Biome, 30, 10),
     JUNGLE(Biome.JUNGLE, 60, 50),
-    SAVANNA(Biome.SAVANNA, 60, 10),
+    SAVANNA(Biome.SAVANNA, 40, 10),
     DESERT_HILLS(Biome.DESERT_HILLS, 60, 5),
     TAIGA(Biome.TAIGA, 30, 5);
 
