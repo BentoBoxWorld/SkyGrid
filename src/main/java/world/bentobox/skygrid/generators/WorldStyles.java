@@ -119,7 +119,7 @@ public class WorldStyles {
 
     /**
      * What will come out of spawners
-     * @return
+     * @return map of overworld spawners
      */
     private TreeMap<Integer,EntityType> normalSpawns() {
         // Use strings to enable backwards compatibility
@@ -166,22 +166,22 @@ public class WorldStyles {
 
     /**
      * What will come out of spawners in the nether
-     * @return
+     * @return map of nether spawners
      */
     private TreeMap<Integer,EntityType> netherSpawns() {
         TreeMap<Integer,EntityType> s = new TreeMap<>();
         s.put(25,  EntityType.BLAZE);
         s.put(50,  EntityType.MAGMA_CUBE);
         s.put(75,  EntityType.SKELETON);
-        s.put(20,  EntityType.WITHER_SKELETON);
-        s.put(75,  EntityType.PIG_ZOMBIE);
-        s.put(15,  EntityType.SKELETON_HORSE);
+        s.put(100,  EntityType.WITHER_SKELETON);
+        s.put(125,  EntityType.PIG_ZOMBIE);
+        s.put(150,  EntityType.SKELETON_HORSE);
         return s;
     }
 
     /**
      * What will come out of spawners in the end
-     * @return
+     * @return map of end spawners
      */
     private TreeMap<Integer,EntityType> endSpawns() {
         TreeMap<Integer,EntityType> s = new TreeMap<>();

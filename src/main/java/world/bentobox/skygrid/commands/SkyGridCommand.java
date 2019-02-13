@@ -9,11 +9,11 @@ import world.bentobox.bentobox.api.commands.island.IslandBanCommand;
 import world.bentobox.bentobox.api.commands.island.IslandBanlistCommand;
 import world.bentobox.bentobox.api.commands.island.IslandInfoCommand;
 import world.bentobox.bentobox.api.commands.island.IslandLanguageCommand;
-import world.bentobox.bentobox.api.commands.island.IslandResetCommand;
 import world.bentobox.bentobox.api.commands.island.IslandResetnameCommand;
 import world.bentobox.bentobox.api.commands.island.IslandSethomeCommand;
 import world.bentobox.bentobox.api.commands.island.IslandSetnameCommand;
 import world.bentobox.bentobox.api.commands.island.IslandSettingsCommand;
+import world.bentobox.bentobox.api.commands.island.IslandSpawnCommand;
 import world.bentobox.bentobox.api.commands.island.IslandUnbanCommand;
 import world.bentobox.bentobox.api.commands.island.team.IslandTeamCommand;
 import world.bentobox.bentobox.api.events.island.IslandEvent.Reason;
@@ -38,7 +38,7 @@ public class SkyGridCommand extends CompositeCommand {
         setPermission("skygrid");
         // Set up subcommands
         new IslandInfoCommand(this);
-        new IslandResetCommand(this);
+        new ResetCommand(this);
         new IslandSetnameCommand(this);
         new IslandResetnameCommand(this);
         new IslandSethomeCommand(this);
@@ -47,6 +47,7 @@ public class SkyGridCommand extends CompositeCommand {
         new IslandBanCommand(this);
         new IslandUnbanCommand(this);
         new IslandBanlistCommand(this);
+        new IslandSpawnCommand(this);
         // Team commands
         new IslandTeamCommand(this);
         // SkyGrid sub commands

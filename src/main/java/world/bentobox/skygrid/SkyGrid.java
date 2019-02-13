@@ -46,6 +46,8 @@ public class SkyGrid extends GameModeAddon {
             logError("SkyGrid settings could not load! Addon disabled.");
             setState(State.DISABLED);
         }
+        // Save settings
+        new Config<>(this, Settings.class).saveConfigObject(settings);
         worldStyles = new WorldStyles(this);
     }
 
@@ -60,10 +62,6 @@ public class SkyGrid extends GameModeAddon {
 
     @Override
     public void onDisable() {
-        // Save settings
-        if (settings != null) {
-            new Config<>(this, Settings.class).saveConfigObject(settings);
-        }
     }
 
     @Override

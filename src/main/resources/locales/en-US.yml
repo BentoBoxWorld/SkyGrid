@@ -28,7 +28,7 @@ skygrid:
       info:
         description: "display info about your area or the player's area"
       reset:
-        description: "restart in another area and regenerate the old one"
+        description: "restart in another area"
         parameters: ""
         must-remove-members: "&cYou must remove all team players before you can restart (/skygrid team kick <player>)."
       sethome:

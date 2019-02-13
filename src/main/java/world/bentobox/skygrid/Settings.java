@@ -1,7 +1,6 @@
 package world.bentobox.skygrid;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -24,14 +23,11 @@ import world.bentobox.bentobox.database.objects.adapters.FlagSerializer;
 import world.bentobox.bentobox.database.objects.adapters.FlagSerializer2;
 
 /**
- * All the plugin settings are here
- * @author Tastybento
+ * All the settings are here
+ * @author tastybento
  */
 @StoreAt(filename="config.yml", path="addons/SkyGrid") // Explicitly call out what name this should have.
 @ConfigComment("SkyGrid Configuration [version]")
-@ConfigComment("This config file is dynamic and saved when the server is shutdown.")
-@ConfigComment("You cannot edit it while the server is running because changes will")
-@ConfigComment("be lost! Use in-game settings GUI or edit when server is offline.")
 @ConfigComment("")
 public class Settings implements DataObject, WorldSettings {
 
@@ -44,14 +40,28 @@ public class Settings implements DataObject, WorldSettings {
     @ConfigEntry(path = "world.blocks")
     private Map<Material, Integer> blocks = new HashMap<>();
 
+    // Nether
+    @ConfigComment("Generate SkyGrid Nether - if this is false, the nether world will not be made")
+    @ConfigEntry(path = "world.nether.generate")
+    private boolean netherGenerate = true;
+
+    @ConfigComment("Nether trees are made if a player grows a tree in the nether (gravel and glowstone)")
+    @ConfigEntry(path = "world.nether.trees")
+    private boolean netherTrees = true;
+
     @ConfigComment("Nether block types")
     @ConfigComment("Beware with glowstone and lava - the lighting calcs will lag the")
     @ConfigComment("server badly if there are too many blocks.")
-    @ConfigEntry(path = "world.netherblocks")
+    @ConfigEntry(path = "world.nether.blocks")
     private Map<Material, Integer> netherBlocks = new HashMap<>();
 
+    // End
+    @ConfigComment("Generate SkyGrid End - if this is false, the end world will not be made")
+    @ConfigEntry(path = "world.end.generate")
+    private boolean endGenerate = true;
+
     @ConfigComment("The End blocks. END_CRYSTAL is blocked because it causes serious performance issues.")
-    @ConfigEntry(path = "world.endblocks")
+    @ConfigEntry(path = "world.end.blocks")
     private Map<Material, Integer> endBlocks = new HashMap<>();
 
     /* SkyGrid */
@@ -112,13 +122,14 @@ public class Settings implements DataObject, WorldSettings {
     @ConfigEntry(path = "world.default-game-mode")
     private GameMode defaultGameMode = GameMode.SURVIVAL;
 
+    @ConfigComment("The maximum number of players a player can ban at any one time in this game mode.")
+    @ConfigComment("The permission acidarea.ban.maxlimit.X where X is a number can also be used per player")
+    @ConfigComment("-1 = unlimited")
+    @ConfigEntry(path = "world.ban-limit")
     private int banLimit = -1;
 
-    @ConfigComment("Nether trees are made if a player grows a tree in the nether (gravel and glowstone)")
-    @ConfigComment("Applies to both vanilla and islands Nether")
-    @ConfigEntry(path = "world.nether.trees")
-    private boolean netherTrees = true;
-
+    @ConfigComment("Mob white list - these mobs will NOT be removed when logging in or doing /island")
+    @ConfigEntry(path = "world.remove-mobs-whitelist")
     private Set<EntityType> removeMobsWhitelist = new HashSet<>();
 
     @ConfigComment("World flags. These are boolean settings for various flags for this world")
@@ -141,7 +152,117 @@ public class Settings implements DataObject, WorldSettings {
     @ConfigEntry(path = "world.visible-settings", experimental = true)
     private List<String> visibleSettings = new ArrayList<>();
 
+    @ConfigComment("Visitor banned commands - Visitors to islands cannot use these commands in this world")
+    @ConfigEntry(path = "world.visitor-banned-commands")
     private List<String> visitorBannedCommands = new ArrayList<>();
+    // ---------------------------------------------
+
+    /*      PROTECTED AREA      */
+    @ConfigComment("Default max team size")
+    @ConfigComment("Permission size cannot be less than the default below. ")
+    @ConfigEntry(path = "area.max-team-size")
+    private int maxTeamSize = 4;
+
+    // Reset
+    @ConfigComment("How many resets a player is allowed (override with /sgadmin clearresets <player>)")
+    @ConfigComment("Value of -1 means unlimited, 0 means hardcore - no resets.")
+    @ConfigComment("Example, 2 resets means they get 2 resets or 3 islands lifetime")
+    @ConfigEntry(path = "area.reset.reset-limit")
+    private int resetLimit = -1;
+
+    @ConfigComment("Kicked or leaving players lose resets")
+    @ConfigComment("Players who leave a team will lose a reset chance")
+    @ConfigComment("If a player has zero resets left and leaves a team, they cannot make a new")
+    @ConfigComment("island by themselves and can only join a team.")
+    @ConfigComment("Leave this true to avoid players exploiting free islands")
+    @ConfigEntry(path = "area.reset.leavers-lose-reset")
+    private boolean leaversLoseReset = false;
+
+    @ConfigComment("Allow kicked players to keep their inventory.")
+    @ConfigComment("If false, kicked player's inventory will be thrown at the leader if the")
+    @ConfigComment("kicked player is online and in the world.")
+    @ConfigEntry(path = "area.reset.kicked-keep-inventory")
+    private boolean kickedKeepInventory = false;
+
+    @ConfigComment("What should reset when the player joins or starts new")
+    @ConfigComment("Reset Money - if this is true, will reset the player's money to the starting money")
+    @ConfigComment("Recommendation is that this is set to true, but if you run multi-worlds")
+    @ConfigComment("make sure your economy handles multi-worlds too.")
+    @ConfigEntry(path = "area.reset.on-join.money")
+    private boolean onJoinResetMoney = false;
+
+    @ConfigComment("Reset inventory - if true, the player's inventory will be cleared.")
+    @ConfigComment("Note: if you have MultiInv running or a similar inventory control plugin, that")
+    @ConfigComment("plugin may still reset the inventory when the world changes.")
+    @ConfigEntry(path = "area.reset.on-join.inventory")
+    private boolean onJoinResetInventory = false;
+
+    @ConfigComment("Reset Ender Chest - if true, the player's Ender Chest will be cleared.")
+    @ConfigEntry(path = "area.reset.on-join.ender-chest")
+    private boolean onJoinResetEnderChest = false;
+
+    @ConfigComment("What should reset when the player leaves or is kicked")
+    @ConfigComment("Reset Money - if this is true, will reset the player's money to the starting money")
+    @ConfigComment("Recommendation is that this is set to true, but if you run multi-worlds")
+    @ConfigComment("make sure your economy handles multi-worlds too.")
+    @ConfigEntry(path = "area.reset.on-leave.money")
+    private boolean onLeaveResetMoney = false;
+
+    @ConfigComment("Reset inventory - if true, the player's inventory will be cleared.")
+    @ConfigComment("Note: if you have MultiInv running or a similar inventory control plugin, that")
+    @ConfigComment("plugin may still reset the inventory when the world changes.")
+    @ConfigEntry(path = "area.reset.on-leave.inventory")
+    private boolean onLeaveResetInventory = false;
+
+    @ConfigComment("Reset Ender Chest - if true, the player's Ender Chest will be cleared.")
+    @ConfigEntry(path = "area.reset.on-leave.ender-chest")
+    private boolean onLeaveResetEnderChest = false;
+
+    // Sethome
+    @ConfigEntry(path = "area.sethome.nether.allow")
+    private boolean allowSetHomeInNether = true;
+
+    @ConfigEntry(path = "area.sethome.nether.require-confirmation")
+    private boolean requireConfirmationToSetHomeInNether = true;
+
+    @ConfigEntry(path = "area.sethome.the-end.allow")
+    private boolean allowSetHomeInTheEnd = true;
+
+    @ConfigEntry(path = "area.sethome.the-end.require-confirmation")
+    private boolean requireConfirmationToSetHomeInTheEnd = true;
+
+    // Deaths
+    @ConfigComment("Whether deaths are counted or not.")
+    @ConfigEntry(path = "area.deaths.counted")
+    private boolean deathsCounted = true;
+
+    @ConfigComment("Maximum number of deaths to count. The death count can be used by add-ons.")
+    @ConfigEntry(path = "area.deaths.max")
+    private int deathsMax = 10;
+
+    @ConfigEntry(path = "area.deaths.sum-team")
+    private boolean deathsSumTeam = false;
+
+    @ConfigComment("When a player joins a team, reset their death count")
+    @ConfigEntry(path = "area.deaths.team-join-reset")
+    private boolean teamJoinDeathReset = true;
+
+    // ---------------------------------------------
+    /*      PROTECTION      */
+
+    @ConfigComment("Geo restrict mobs.")
+    @ConfigComment("Mobs that exit the protected space where they were spawned will be removed.")
+    @ConfigEntry(path = "protection.geo-limit-settings")
+    private List<String> geoLimitSettings = new ArrayList<>();
+
+    // Invincible visitor settings
+    @ConfigComment("Invincible visitors. List of damages that will not affect visitors.")
+    @ConfigComment("Make list blank if visitors should receive all damages")
+    @ConfigEntry(path = "protection.invincible-visitors")
+    private List<String> ivSettings = new ArrayList<>();
+
+    //---------------------------------------------------------------------------------------/
+
 
     @ConfigComment("These settings should not be edited")
     @ConfigEntry(path = "do-not-edit-these-settings.reset-epoch")
@@ -150,32 +271,10 @@ public class Settings implements DataObject, WorldSettings {
     private String uniqueId = "config";
 
     /**
-     * @return the friendlyName
-     */
-    @Override
-    public String getFriendlyName() {
-        return friendlyName;
-    }
-
-    /**
      * @return the blocks
      */
     public Map<Material, Integer> getBlocks() {
         return blocks;
-    }
-
-    /**
-     * @return the netherBlocks
-     */
-    public Map<Material, Integer> getNetherBlocks() {
-        return netherBlocks;
-    }
-
-    /**
-     * @return the endBlocks
-     */
-    public Map<Material, Integer> getEndBlocks() {
-        return endBlocks;
     }
 
     /**
@@ -186,6 +285,13 @@ public class Settings implements DataObject, WorldSettings {
     }
 
     /**
+     * @return the netherBlocks
+     */
+    public Map<Material, Integer> getNetherBlocks() {
+        return netherBlocks;
+    }
+
+    /**
      * @param netherBlocks the netherBlocks to set
      */
     public void setNetherBlocks(Map<Material, Integer> netherBlocks) {
@@ -193,525 +299,17 @@ public class Settings implements DataObject, WorldSettings {
     }
 
     /**
+     * @return the endBlocks
+     */
+    public Map<Material, Integer> getEndBlocks() {
+        return endBlocks;
+    }
+
+    /**
      * @param endBlocks the endBlocks to set
      */
     public void setEndBlocks(Map<Material, Integer> endBlocks) {
         this.endBlocks = endBlocks;
-    }
-
-    /**
-     * @return the worldName
-     */
-    @Override
-    public String getWorldName() {
-        return worldName;
-    }
-
-    /**
-     * @return the difficulty
-     */
-    @Override
-    public Difficulty getDifficulty() {
-        return difficulty;
-    }
-
-    /**
-     * @return the islandDistance
-     */
-    @Override
-    public int getIslandDistance() {
-        return islandDistance;
-    }
-
-    /**
-     * @return the islandProtectionRange
-     */
-    @Override
-    public int getIslandProtectionRange() {
-        return islandProtectionRange;
-    }
-
-    /**
-     * @return the islandStartX
-     */
-    @Override
-    public int getIslandStartX() {
-        return islandStartX;
-    }
-
-    /**
-     * @return the islandStartZ
-     */
-    @Override
-    public int getIslandStartZ() {
-        return islandStartZ;
-    }
-
-    /**
-     * @return the islandXOffset
-     */
-    @Override
-    public int getIslandXOffset() {
-        return 0;
-    }
-
-    /**
-     * @return the islandZOffset
-     */
-    @Override
-    public int getIslandZOffset() {
-        return 0;
-    }
-
-    /**
-     * @return the islandHeight
-     */
-    @Override
-    public int getIslandHeight() {
-        return islandHeight;
-    }
-
-    /**
-     * @return the useOwnGenerator
-     */
-    @Override
-    public boolean isUseOwnGenerator() {
-        return true;
-    }
-
-    /**
-     * @return the seaHeight
-     */
-    @Override
-    public int getSeaHeight() {
-        return 0;
-    }
-
-    /**
-     * @return the maxIslands
-     */
-    @Override
-    public int getMaxIslands() {
-        return -1;
-    }
-
-    /**
-     * @return the defaultGameMode
-     */
-    @Override
-    public GameMode getDefaultGameMode() {
-        return defaultGameMode;
-    }
-
-    /**
-     * @return the netherGenerate
-     */
-    @Override
-    public boolean isNetherGenerate() {
-        return true;
-    }
-
-    /**
-     * @return the netherIslands
-     */
-    @Override
-    public boolean isNetherIslands() {
-        return true;
-    }
-
-    /**
-     * @return the netherTrees
-     */
-    @Override
-    public boolean isNetherTrees() {
-        return netherTrees;
-    }
-
-    /**
-     * @return the netherSpawnRadius
-     */
-    @Override
-    public int getNetherSpawnRadius() {
-        return 0;
-    }
-
-    /**
-     * @return the endGenerate
-     */
-    @Override
-    public boolean isEndGenerate() {
-        return true;
-    }
-
-    /**
-     * @return the endIslands
-     */
-    @Override
-    public boolean isEndIslands() {
-        return true;
-    }
-
-    /**
-     * @return the dragonSpawn
-     */
-    @Override
-    public boolean isDragonSpawn() {
-        return false;
-    }
-
-    /**
-     * @return the removeMobsWhitelist
-     */
-    @Override
-    public Set<EntityType> getRemoveMobsWhitelist() {
-        return removeMobsWhitelist;
-    }
-
-    /**
-     * @return the worldFlags
-     */
-    @Override
-    public Map<String, Boolean> getWorldFlags() {
-        return worldFlags;
-    }
-
-    /**
-     * @return the defaultIslandFlags
-     */
-    @Override
-    public Map<Flag, Integer> getDefaultIslandFlags() {
-        return defaultIslandFlags;
-    }
-
-    /**
-     * @return the defaultIslandSettings
-     */
-    @Override
-    public Map<Flag, Integer> getDefaultIslandSettings() {
-        return defaultIslandSettings;
-    }
-
-    /**
-     * @return the visibleSettings
-     */
-    @Override
-    public List<String> getVisibleSettings() {
-        return visibleSettings;
-    }
-
-    /**
-     * @return the visitorBannedCommands
-     */
-    @Override
-    public List<String> getVisitorBannedCommands() {
-        return visitorBannedCommands;
-    }
-
-    /**
-     * @return the maxTeamSize
-     */
-    @Override
-    public int getMaxTeamSize() {
-        return 0;
-    }
-
-    /**
-     * @return the maxHomes
-     */
-    @Override
-    public int getMaxHomes() {
-        return 1;
-    }
-
-    /**
-     * @return the resetLimit
-     */
-    @Override
-    public int getResetLimit() {
-        return 0;
-    }
-
-    /**
-     * @return the onJoinResetMoney
-     */
-    @Override
-    public boolean isOnJoinResetMoney() {
-        return false;
-    }
-
-    /**
-     * @return the onJoinResetInventory
-     */
-    @Override
-    public boolean isOnJoinResetInventory() {
-        return false;
-    }
-
-    /**
-     * @return the onJoinResetEnderChest
-     */
-    @Override
-    public boolean isOnJoinResetEnderChest() {
-        return false;
-    }
-
-    /**
-     * @return the onLeaveResetMoney
-     */
-    @Override
-    public boolean isOnLeaveResetMoney() {
-        return false;
-    }
-
-    /**
-     * @return the onLeaveResetInventory
-     */
-    @Override
-    public boolean isOnLeaveResetInventory() {
-        return false;
-    }
-
-    /**
-     * @return the onLeaveResetEnderChest
-     */
-    @Override
-    public boolean isOnLeaveResetEnderChest() {
-        return false;
-    }
-
-    /**
-     * @return the isDeathsCounted
-     */
-    @Override
-    public boolean isDeathsCounted() {
-        return false;
-    }
-
-    /**
-     * @return the allowSetHomeInNether
-     */
-    @Override
-    public boolean isAllowSetHomeInNether() {
-        return true;
-    }
-
-    /**
-     * @return the allowSetHomeInTheEnd
-     */
-    @Override
-    public boolean isAllowSetHomeInTheEnd() {
-        return true;
-    }
-
-    /**
-     * @return the requireConfirmationToSetHomeInNether
-     */
-    @Override
-    public boolean isRequireConfirmationToSetHomeInNether() {
-        return false;
-    }
-
-    /**
-     * @return the requireConfirmationToSetHomeInTheEnd
-     */
-    @Override
-    public boolean isRequireConfirmationToSetHomeInTheEnd() {
-        return false;
-    }
-
-    /**
-     * @return the deathsMax
-     */
-    @Override
-    public int getDeathsMax() {
-        return 0;
-    }
-
-    /**
-     * @return the teamJoinDeathReset
-     */
-    @Override
-    public boolean isTeamJoinDeathReset() {
-        return false;
-    }
-
-    /**
-     * @return the geoLimitSettings
-     */
-    @Override
-    public List<String> getGeoLimitSettings() {
-        return Collections.emptyList();
-    }
-
-    /**
-     * @return the ivSettings
-     */
-    @Override
-    public List<String> getIvSettings() {
-        return Collections.emptyList();
-    }
-
-    /**
-     * @return the closePanelOnClickOutside
-     */
-    public boolean isClosePanelOnClickOutside() {
-        return true;
-    }
-
-    /**
-     * @return the resetEpoch
-     */
-    @Override
-    public long getResetEpoch() {
-        return resetEpoch;
-    }
-
-    /**
-     * @return the uniqueId
-     */
-    @Override
-    public String getUniqueId() {
-        return uniqueId;
-    }
-
-    /**
-     * @param friendlyName the friendlyName to set
-     */
-    public void setFriendlyName(String friendlyName) {
-        this.friendlyName = friendlyName;
-    }
-
-    /**
-     * @param worldName the worldName to set
-     */
-    public void setWorldName(String worldName) {
-        this.worldName = worldName;
-    }
-
-    /**
-     * @param difficulty the difficulty to set
-     */
-    @Override
-    public void setDifficulty(Difficulty difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    /**
-     * @param islandStartX the islandStartX to set
-     */
-    public void setIslandStartX(int islandStartX) {
-        this.islandStartX = islandStartX;
-    }
-
-    /**
-     * @param islandStartZ the islandStartZ to set
-     */
-    public void setIslandStartZ(int islandStartZ) {
-        this.islandStartZ = islandStartZ;
-    }
-
-    /**
-     * @param islandHeight the islandHeight to set
-     */
-    public void setIslandHeight(int islandHeight) {
-        this.islandHeight = islandHeight;
-    }
-
-    /**
-     * @param defaultGameMode the defaultGameMode to set
-     */
-    public void setDefaultGameMode(GameMode defaultGameMode) {
-        this.defaultGameMode = defaultGameMode;
-    }
-
-    /**
-     * @param netherTrees the netherTrees to set
-     */
-    public void setNetherTrees(boolean netherTrees) {
-        this.netherTrees = netherTrees;
-    }
-
-    /**
-     * @param removeMobsWhitelist the removeMobsWhitelist to set
-     */
-    public void setRemoveMobsWhitelist(Set<EntityType> removeMobsWhitelist) {
-        this.removeMobsWhitelist = removeMobsWhitelist;
-    }
-
-    /**
-     * @param worldFlags the worldFlags to set
-     */
-    public void setWorldFlags(Map<String, Boolean> worldFlags) {
-        this.worldFlags = worldFlags;
-    }
-
-    /**
-     * @param defaultIslandFlags the defaultIslandFlags to set
-     */
-    public void setDefaultIslandFlags(Map<Flag, Integer> defaultIslandFlags) {
-        this.defaultIslandFlags = defaultIslandFlags;
-    }
-
-    /**
-     * @param defaultIslandSettings the defaultIslandSettings to set
-     */
-    public void setDefaultIslandSettings(Map<Flag, Integer> defaultIslandSettings) {
-        this.defaultIslandSettings = defaultIslandSettings;
-    }
-
-    /**
-     * @param visibleSettings the visibleSettings to set
-     */
-    public void setVisibleSettings(List<String> visibleSettings) {
-        this.visibleSettings = visibleSettings;
-    }
-
-    /**
-     * @param visitorBannedCommands the visitorBannedCommands to set
-     */
-    public void setVisitorBannedCommands(List<String> visitorBannedCommands) {
-        this.visitorBannedCommands = visitorBannedCommands;
-    }
-
-    /**
-     * @param resetEpoch the resetEpoch to set
-     */
-    @Override
-    public void setResetEpoch(long resetEpoch) {
-        this.resetEpoch = resetEpoch;
-    }
-
-    /**
-     * @param uniqueId the uniqueId to set
-     */
-    @Override
-    public void setUniqueId(String uniqueId) {
-        this.uniqueId = uniqueId;
-    }
-
-    @Override
-    public String getPermissionPrefix() {
-        return "bskyblock";
-    }
-
-    @Override
-    public boolean isWaterUnsafe() {
-        return false;
-    }
-
-    /**
-     * @return the banLimit
-     */
-    @Override
-    public int getBanLimit() {
-        return banLimit;
-    }
-
-    /**
-     * @param banLimit the banLimit to set
-     */
-    public void setBanLimit(int banLimit) {
-        this.banLimit = banLimit;
     }
 
     /**
@@ -726,20 +324,6 @@ public class Settings implements DataObject, WorldSettings {
      */
     public void setCreateBiomes(boolean createBiomes) {
         this.createBiomes = createBiomes;
-    }
-
-    /**
-     * @return the spawnHeight
-     */
-    public int getSpawnHeight() {
-        return spawnHeight + 5;
-    }
-
-    /**
-     * @param spawnHeight the spawnHeight to set
-     */
-    public void setSpawnHeight(int spawnHeight) {
-        this.spawnHeight = spawnHeight - 5;
     }
 
     /**
@@ -771,10 +355,116 @@ public class Settings implements DataObject, WorldSettings {
     }
 
     /**
-     * @param islandProtectionRange the islandProtectionRange to set
+     * @return the friendlyName
      */
-    public void setIslandProtectionRange(int islandProtectionRange) {
-        this.islandProtectionRange = islandProtectionRange;
+    @Override
+    public String getFriendlyName() {
+        return friendlyName;
+    }
+
+    /**
+     * @param friendlyName the friendlyName to set
+     */
+    public void setFriendlyName(String friendlyName) {
+        this.friendlyName = friendlyName;
+    }
+
+    /**
+     * @return the worldName
+     */
+    @Override
+    public String getWorldName() {
+        return worldName;
+    }
+
+    /**
+     * @param worldName the worldName to set
+     */
+    public void setWorldName(String worldName) {
+        this.worldName = worldName;
+    }
+
+    /**
+     * @return the difficulty
+     */
+    @Override
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    /**
+     * @param difficulty the difficulty to set
+     */
+    @Override
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    /**
+     * @return the islandStartX
+     */
+    @Override
+    public int getIslandStartX() {
+        return islandStartX;
+    }
+
+    /**
+     * @param islandStartX the islandStartX to set
+     */
+    public void setIslandStartX(int islandStartX) {
+        this.islandStartX = islandStartX;
+    }
+
+    /**
+     * @return the islandStartZ
+     */
+    @Override
+    public int getIslandStartZ() {
+        return islandStartZ;
+    }
+
+    /**
+     * @param islandStartZ the islandStartZ to set
+     */
+    public void setIslandStartZ(int islandStartZ) {
+        this.islandStartZ = islandStartZ;
+    }
+
+    /**
+     * @return the islandHeight
+     */
+    @Override
+    public int getIslandHeight() {
+        return islandHeight;
+    }
+
+    /**
+     * @param islandHeight the islandHeight to set
+     */
+    public void setIslandHeight(int islandHeight) {
+        this.islandHeight = islandHeight;
+    }
+
+    /**
+     * @return the spawnHeight
+     */
+    public int getSpawnHeight() {
+        return spawnHeight;
+    }
+
+    /**
+     * @param spawnHeight the spawnHeight to set
+     */
+    public void setSpawnHeight(int spawnHeight) {
+        this.spawnHeight = spawnHeight;
+    }
+
+    /**
+     * @return the islandDistance
+     */
+    @Override
+    public int getIslandDistance() {
+        return islandDistance;
     }
 
     /**
@@ -783,5 +473,575 @@ public class Settings implements DataObject, WorldSettings {
     public void setIslandDistance(int islandDistance) {
         this.islandDistance = islandDistance;
     }
+
+    /**
+     * @return the islandProtectionRange
+     */
+    @Override
+    public int getIslandProtectionRange() {
+        return islandProtectionRange;
+    }
+
+    /**
+     * @param islandProtectionRange the islandProtectionRange to set
+     */
+    public void setIslandProtectionRange(int islandProtectionRange) {
+        this.islandProtectionRange = islandProtectionRange;
+    }
+
+    /**
+     * @return the defaultGameMode
+     */
+    @Override
+    public GameMode getDefaultGameMode() {
+        return defaultGameMode;
+    }
+
+    /**
+     * @param defaultGameMode the defaultGameMode to set
+     */
+    public void setDefaultGameMode(GameMode defaultGameMode) {
+        this.defaultGameMode = defaultGameMode;
+    }
+
+    /**
+     * @return the banLimit
+     */
+    @Override
+    public int getBanLimit() {
+        return banLimit;
+    }
+
+    /**
+     * @param banLimit the banLimit to set
+     */
+    public void setBanLimit(int banLimit) {
+        this.banLimit = banLimit;
+    }
+
+    /**
+     * @return the netherGenerate
+     */
+    @Override
+    public boolean isNetherGenerate() {
+        return netherGenerate;
+    }
+
+    /**
+     * @param netherGenerate the netherGenerate to set
+     */
+    public void setNetherGenerate(boolean netherGenerate) {
+        this.netherGenerate = netherGenerate;
+    }
+
+    /**
+     * @return the netherTrees
+     */
+    @Override
+    public boolean isNetherTrees() {
+        return netherTrees;
+    }
+
+    /**
+     * @param netherTrees the netherTrees to set
+     */
+    public void setNetherTrees(boolean netherTrees) {
+        this.netherTrees = netherTrees;
+    }
+
+    /**
+     * @return the endGenerate
+     */
+    @Override
+    public boolean isEndGenerate() {
+        return endGenerate;
+    }
+
+    /**
+     * @param endGenerate the endGenerate to set
+     */
+    public void setEndGenerate(boolean endGenerate) {
+        this.endGenerate = endGenerate;
+    }
+
+    /**
+     * @return the removeMobsWhitelist
+     */
+    @Override
+    public Set<EntityType> getRemoveMobsWhitelist() {
+        return removeMobsWhitelist;
+    }
+
+    /**
+     * @param removeMobsWhitelist the removeMobsWhitelist to set
+     */
+    public void setRemoveMobsWhitelist(Set<EntityType> removeMobsWhitelist) {
+        this.removeMobsWhitelist = removeMobsWhitelist;
+    }
+
+    /**
+     * @return the worldFlags
+     */
+    @Override
+    public Map<String, Boolean> getWorldFlags() {
+        return worldFlags;
+    }
+
+    /**
+     * @param worldFlags the worldFlags to set
+     */
+    public void setWorldFlags(Map<String, Boolean> worldFlags) {
+        this.worldFlags = worldFlags;
+    }
+
+    /**
+     * @return the defaultIslandFlags
+     */
+    @Override
+    public Map<Flag, Integer> getDefaultIslandFlags() {
+        return defaultIslandFlags;
+    }
+
+    /**
+     * @param defaultIslandFlags the defaultIslandFlags to set
+     */
+    public void setDefaultIslandFlags(Map<Flag, Integer> defaultIslandFlags) {
+        this.defaultIslandFlags = defaultIslandFlags;
+    }
+
+    /**
+     * @return the defaultIslandSettings
+     */
+    @Override
+    public Map<Flag, Integer> getDefaultIslandSettings() {
+        return defaultIslandSettings;
+    }
+
+    /**
+     * @param defaultIslandSettings the defaultIslandSettings to set
+     */
+    public void setDefaultIslandSettings(Map<Flag, Integer> defaultIslandSettings) {
+        this.defaultIslandSettings = defaultIslandSettings;
+    }
+
+    /**
+     * @return the visibleSettings
+     */
+    @Override
+    public List<String> getVisibleSettings() {
+        return visibleSettings;
+    }
+
+    /**
+     * @param visibleSettings the visibleSettings to set
+     */
+    public void setVisibleSettings(List<String> visibleSettings) {
+        this.visibleSettings = visibleSettings;
+    }
+
+    /**
+     * @return the visitorBannedCommands
+     */
+    @Override
+    public List<String> getVisitorBannedCommands() {
+        return visitorBannedCommands;
+    }
+
+    /**
+     * @param visitorBannedCommands the visitorBannedCommands to set
+     */
+    public void setVisitorBannedCommands(List<String> visitorBannedCommands) {
+        this.visitorBannedCommands = visitorBannedCommands;
+    }
+
+    /**
+     * @return the maxTeamSize
+     */
+    @Override
+    public int getMaxTeamSize() {
+        return maxTeamSize;
+    }
+
+    /**
+     * @param maxTeamSize the maxTeamSize to set
+     */
+    public void setMaxTeamSize(int maxTeamSize) {
+        this.maxTeamSize = maxTeamSize;
+    }
+
+    /**
+     * @return the resetLimit
+     */
+    @Override
+    public int getResetLimit() {
+        return resetLimit;
+    }
+
+    /**
+     * @param resetLimit the resetLimit to set
+     */
+    public void setResetLimit(int resetLimit) {
+        this.resetLimit = resetLimit;
+    }
+
+    /**
+     * @return the leaversLoseReset
+     */
+    public boolean isLeaversLoseReset() {
+        return leaversLoseReset;
+    }
+
+    /**
+     * @param leaversLoseReset the leaversLoseReset to set
+     */
+    public void setLeaversLoseReset(boolean leaversLoseReset) {
+        this.leaversLoseReset = leaversLoseReset;
+    }
+
+    /**
+     * @return the kickedKeepInventory
+     */
+    public boolean isKickedKeepInventory() {
+        return kickedKeepInventory;
+    }
+
+    /**
+     * @param kickedKeepInventory the kickedKeepInventory to set
+     */
+    public void setKickedKeepInventory(boolean kickedKeepInventory) {
+        this.kickedKeepInventory = kickedKeepInventory;
+    }
+
+    /**
+     * @return the onJoinResetMoney
+     */
+    @Override
+    public boolean isOnJoinResetMoney() {
+        return onJoinResetMoney;
+    }
+
+    /**
+     * @param onJoinResetMoney the onJoinResetMoney to set
+     */
+    public void setOnJoinResetMoney(boolean onJoinResetMoney) {
+        this.onJoinResetMoney = onJoinResetMoney;
+    }
+
+    /**
+     * @return the onJoinResetInventory
+     */
+    @Override
+    public boolean isOnJoinResetInventory() {
+        return onJoinResetInventory;
+    }
+
+    /**
+     * @param onJoinResetInventory the onJoinResetInventory to set
+     */
+    public void setOnJoinResetInventory(boolean onJoinResetInventory) {
+        this.onJoinResetInventory = onJoinResetInventory;
+    }
+
+    /**
+     * @return the onJoinResetEnderChest
+     */
+    @Override
+    public boolean isOnJoinResetEnderChest() {
+        return onJoinResetEnderChest;
+    }
+
+    /**
+     * @param onJoinResetEnderChest the onJoinResetEnderChest to set
+     */
+    public void setOnJoinResetEnderChest(boolean onJoinResetEnderChest) {
+        this.onJoinResetEnderChest = onJoinResetEnderChest;
+    }
+
+    /**
+     * @return the onLeaveResetMoney
+     */
+    @Override
+    public boolean isOnLeaveResetMoney() {
+        return onLeaveResetMoney;
+    }
+
+    /**
+     * @param onLeaveResetMoney the onLeaveResetMoney to set
+     */
+    public void setOnLeaveResetMoney(boolean onLeaveResetMoney) {
+        this.onLeaveResetMoney = onLeaveResetMoney;
+    }
+
+    /**
+     * @return the onLeaveResetInventory
+     */
+    @Override
+    public boolean isOnLeaveResetInventory() {
+        return onLeaveResetInventory;
+    }
+
+    /**
+     * @param onLeaveResetInventory the onLeaveResetInventory to set
+     */
+    public void setOnLeaveResetInventory(boolean onLeaveResetInventory) {
+        this.onLeaveResetInventory = onLeaveResetInventory;
+    }
+
+    /**
+     * @return the onLeaveResetEnderChest
+     */
+    @Override
+    public boolean isOnLeaveResetEnderChest() {
+        return onLeaveResetEnderChest;
+    }
+
+    /**
+     * @param onLeaveResetEnderChest the onLeaveResetEnderChest to set
+     */
+    public void setOnLeaveResetEnderChest(boolean onLeaveResetEnderChest) {
+        this.onLeaveResetEnderChest = onLeaveResetEnderChest;
+    }
+
+    /**
+     * @return the allowSetHomeInNether
+     */
+    @Override
+    public boolean isAllowSetHomeInNether() {
+        return allowSetHomeInNether;
+    }
+
+    /**
+     * @param allowSetHomeInNether the allowSetHomeInNether to set
+     */
+    public void setAllowSetHomeInNether(boolean allowSetHomeInNether) {
+        this.allowSetHomeInNether = allowSetHomeInNether;
+    }
+
+    /**
+     * @return the requireConfirmationToSetHomeInNether
+     */
+    @Override
+    public boolean isRequireConfirmationToSetHomeInNether() {
+        return requireConfirmationToSetHomeInNether;
+    }
+
+    /**
+     * @param requireConfirmationToSetHomeInNether the requireConfirmationToSetHomeInNether to set
+     */
+    public void setRequireConfirmationToSetHomeInNether(boolean requireConfirmationToSetHomeInNether) {
+        this.requireConfirmationToSetHomeInNether = requireConfirmationToSetHomeInNether;
+    }
+
+    /**
+     * @return the allowSetHomeInTheEnd
+     */
+    @Override
+    public boolean isAllowSetHomeInTheEnd() {
+        return allowSetHomeInTheEnd;
+    }
+
+    /**
+     * @param allowSetHomeInTheEnd the allowSetHomeInTheEnd to set
+     */
+    public void setAllowSetHomeInTheEnd(boolean allowSetHomeInTheEnd) {
+        this.allowSetHomeInTheEnd = allowSetHomeInTheEnd;
+    }
+
+    /**
+     * @return the requireConfirmationToSetHomeInTheEnd
+     */
+    @Override
+    public boolean isRequireConfirmationToSetHomeInTheEnd() {
+        return requireConfirmationToSetHomeInTheEnd;
+    }
+
+    /**
+     * @param requireConfirmationToSetHomeInTheEnd the requireConfirmationToSetHomeInTheEnd to set
+     */
+    public void setRequireConfirmationToSetHomeInTheEnd(boolean requireConfirmationToSetHomeInTheEnd) {
+        this.requireConfirmationToSetHomeInTheEnd = requireConfirmationToSetHomeInTheEnd;
+    }
+
+    /**
+     * @return the deathsCounted
+     */
+    @Override
+    public boolean isDeathsCounted() {
+        return deathsCounted;
+    }
+
+    /**
+     * @param deathsCounted the deathsCounted to set
+     */
+    public void setDeathsCounted(boolean deathsCounted) {
+        this.deathsCounted = deathsCounted;
+    }
+
+    /**
+     * @return the deathsMax
+     */
+    @Override
+    public int getDeathsMax() {
+        return deathsMax;
+    }
+
+    /**
+     * @param deathsMax the deathsMax to set
+     */
+    public void setDeathsMax(int deathsMax) {
+        this.deathsMax = deathsMax;
+    }
+
+    /**
+     * @return the deathsSumTeam
+     */
+    public boolean isDeathsSumTeam() {
+        return deathsSumTeam;
+    }
+
+    /**
+     * @param deathsSumTeam the deathsSumTeam to set
+     */
+    public void setDeathsSumTeam(boolean deathsSumTeam) {
+        this.deathsSumTeam = deathsSumTeam;
+    }
+
+    /**
+     * @return the teamJoinDeathReset
+     */
+    @Override
+    public boolean isTeamJoinDeathReset() {
+        return teamJoinDeathReset;
+    }
+
+    /**
+     * @param teamJoinDeathReset the teamJoinDeathReset to set
+     */
+    public void setTeamJoinDeathReset(boolean teamJoinDeathReset) {
+        this.teamJoinDeathReset = teamJoinDeathReset;
+    }
+
+    /**
+     * @return the geoLimitSettings
+     */
+    @Override
+    public List<String> getGeoLimitSettings() {
+        return geoLimitSettings;
+    }
+
+    /**
+     * @param geoLimitSettings the geoLimitSettings to set
+     */
+    public void setGeoLimitSettings(List<String> geoLimitSettings) {
+        this.geoLimitSettings = geoLimitSettings;
+    }
+
+    /**
+     * @return the ivSettings
+     */
+    @Override
+    public List<String> getIvSettings() {
+        return ivSettings;
+    }
+
+    /**
+     * @param ivSettings the ivSettings to set
+     */
+    public void setIvSettings(List<String> ivSettings) {
+        this.ivSettings = ivSettings;
+    }
+
+    /**
+     * @return the resetEpoch
+     */
+    @Override
+    public long getResetEpoch() {
+        return resetEpoch;
+    }
+
+    /**
+     * @param resetEpoch the resetEpoch to set
+     */
+    @Override
+    public void setResetEpoch(long resetEpoch) {
+        this.resetEpoch = resetEpoch;
+    }
+
+    /**
+     * @return the uniqueId
+     */
+    @Override
+    public String getUniqueId() {
+        return uniqueId;
+    }
+
+    /**
+     * @param uniqueId the uniqueId to set
+     */
+    @Override
+    public void setUniqueId(String uniqueId) {
+        this.uniqueId = uniqueId;
+    }
+
+    @Override
+    public int getIslandXOffset() {
+        return 0;
+    }
+
+    @Override
+    public int getIslandZOffset() {
+        return 0;
+    }
+
+    @Override
+    public int getMaxHomes() {
+        return 0;
+    }
+
+    @Override
+    public int getMaxIslands() {
+        return -1;
+    }
+
+    @Override
+    public int getNetherSpawnRadius() {
+        return 0;
+    }
+
+    @Override
+    public String getPermissionPrefix() {
+        return "skygrid";
+    }
+
+    @Override
+    public int getSeaHeight() {
+        return 0;
+    }
+
+    @Override
+    public boolean isDragonSpawn() {
+        return false;
+    }
+
+    @Override
+    public boolean isEndIslands() {
+        return true;
+    }
+
+    @Override
+    public boolean isNetherIslands() {
+        return true;
+    }
+
+    @Override
+    public boolean isUseOwnGenerator() {
+        return true;
+    }
+
+    @Override
+    public boolean isWaterUnsafe() {
+        return false;
+    }
+
 
 }

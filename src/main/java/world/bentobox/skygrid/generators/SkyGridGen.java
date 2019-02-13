@@ -1,6 +1,11 @@
 package world.bentobox.skygrid.generators;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
+import java.util.Random;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -159,16 +164,16 @@ public class SkyGridGen extends ChunkGenerator {
                 result.setBlock( x, y, z, Material.SOUL_SAND);
                 result.setBlock( x, y+1, z, blockMat);
                 break;
+            case END_ROD:
+                result.setBlock( x, y, z, Material.END_STONE);
+                result.setBlock( x, y+1, z, blockMat);
+                break;
+            case CHORUS_PLANT:
+                result.setBlock( x, y, z, Material.END_STONE);
+                result.setBlock( x, y+1, z, blockMat);
+                break;
             default:
-                if (blockMat.equals(Material.END_ROD)) {
-                    result.setBlock( x, y, z, Material.END_STONE);
-                    result.setBlock( x, y+1, z, blockMat);
-                } else if (blockMat.equals(Material.CHORUS_PLANT)) {
-                    result.setBlock( x, y, z, Material.END_STONE);
-                    result.setBlock( x, y+1, z, blockMat);
-                } else {
-                    result.setBlock( x, y, z, blockMat);
-                }
+                result.setBlock( x, y, z, blockMat);
             }
         }
 
@@ -176,7 +181,6 @@ public class SkyGridGen extends ChunkGenerator {
 
     @Override
     public List<BlockPopulator> getDefaultPopulators(World world) {
-        //return Arrays.asList(new BlockPopulator[0]);
         List<BlockPopulator> list = new ArrayList<>(1);
         list.add(new SkyGridPop(addon));
         return list;
@@ -186,7 +190,6 @@ public class SkyGridGen extends ChunkGenerator {
 
     @Override
     public Location getFixedSpawnLocation(World world, Random random) {
-        //Bukkit.getLogger().info("DEBUG: fixed spawn loc requested");
         return new Location(world, 0, addon.getSettings().getIslandHeight() + 2, 0);
     }
 

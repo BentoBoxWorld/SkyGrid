@@ -68,7 +68,7 @@ public class SkyGridPop extends BlockPopulator {
     public void populate(World world, Random random, Chunk chunk) {
         boolean chunkHasPortal = false;
         for (int x = 0; x < 16; x += 4) {
-            for (int y = 0; y < size; y += 4) {
+            for (int y = 0; y <= size; y += 4) {
                 for (int z = 0; z < 16; z +=4) {
                     Block b = chunk.getBlock(x, y, z);
                     // Do an end portal check
