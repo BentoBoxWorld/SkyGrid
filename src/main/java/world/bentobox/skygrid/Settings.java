@@ -276,7 +276,7 @@ public class Settings implements DataObject, WorldSettings {
      */
     @Override
     public boolean isUseOwnGenerator() {
-        return false;
+        return true;
     }
 
     /**
