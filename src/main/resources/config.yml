@@ -1,5 +1,13 @@
 # SkyGrid Configuration ${version}
-# 
+#
+skygrid:
+  command:
+    # Island Command. What command users will run to access their island.
+    # To define alias, just separate commands with white space.
+    island: skygrid sg
+    # The island admin command.
+    # To define alias, just separate commands with white space.
+    admin: sgadmin sga
 world:
   # World block types. If the material cannot be placed, bedrock will be used.
   # Format: Material : Probability

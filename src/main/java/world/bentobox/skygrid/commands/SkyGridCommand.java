@@ -24,7 +24,9 @@ import world.bentobox.skygrid.SkyGrid;
 public class SkyGridCommand extends CompositeCommand {
 
     public SkyGridCommand(SkyGrid addon) {
-        super(addon, "skygrid", "sg");
+        super(addon,
+            addon.getSettings().getIslandCommand().split(" ")[0],
+            addon.getSettings().getIslandCommand().split(" "));
     }
 
     /* (non-Javadoc)

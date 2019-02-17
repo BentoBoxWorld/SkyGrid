@@ -31,6 +31,17 @@ import world.bentobox.bentobox.database.objects.adapters.FlagSerializer2;
 @ConfigComment("")
 public class Settings implements DataObject, WorldSettings {
 
+    /* Commands */
+    @ConfigComment("Island Command. What command users will run to access their island.")
+    @ConfigComment("To define alias, just separate commands with white space.")
+    @ConfigEntry(path = "skygrid.command.island")
+    private String islandCommand = "skygrid sg";
+
+    @ConfigComment("The island admin command.")
+    @ConfigComment("To define alias, just separate commands with white space.")
+    @ConfigEntry(path = "skygrid.command.admin")
+    private String adminCommand = "sgadmin sga";
+
     /* Blocks */
     @ConfigComment("World block types. If the material cannot be placed, bedrock will be used.")
     @ConfigComment("Format: Material : Probability")
@@ -1044,4 +1055,44 @@ public class Settings implements DataObject, WorldSettings {
     }
 
 
+    /**
+     * This method returns the islandCommand object.
+     * @return the islandCommand object.
+     */
+    public String getIslandCommand()
+    {
+        return islandCommand;
+    }
+
+
+    /**
+     * This method returns the adminCommand object.
+     * @return the adminCommand object.
+     */
+    public String getAdminCommand()
+    {
+        return adminCommand;
+    }
+
+
+    /**
+     * This method sets the islandCommand object value.
+     * @param islandCommand the islandCommand object new value.
+     *
+     */
+    public void setIslandCommand(String islandCommand)
+    {
+        this.islandCommand = islandCommand;
+    }
+
+
+    /**
+     * This method sets the adminCommand object value.
+     * @param adminCommand the adminCommand object new value.
+     *
+     */
+    public void setAdminCommand(String adminCommand)
+    {
+        this.adminCommand = adminCommand;
+    }
 }
