@@ -28,7 +28,9 @@ import world.bentobox.skygrid.SkyGrid;
 public class AdminCommand extends CompositeCommand {
 
     public AdminCommand(SkyGrid addon) {
-        super(addon, "sgadmin");
+        super(addon,
+            addon.getSettings().getAdminCommand().split(" ")[0],
+            addon.getSettings().getAdminCommand().split(" "));
     }
 
     @Override
