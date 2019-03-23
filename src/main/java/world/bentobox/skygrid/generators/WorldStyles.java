@@ -122,7 +122,6 @@ public class WorldStyles {
      * @return map of overworld spawners
      */
     private TreeMap<Integer,EntityType> normalSpawns() {
-        // Use strings to enable backwards compatibility
         TreeMap<Integer,EntityType> s = new TreeMap<>();
         List<EntityType> types = new ArrayList<>();
         types.add(EntityType.CREEPER);
@@ -146,7 +145,6 @@ public class WorldStyles {
         types.add(EntityType.WITCH);
         types.add(EntityType.LLAMA);
         types.add(EntityType.POLAR_BEAR);
-        types.add(EntityType.BAT);
         types.add(EntityType.HUSK);
         types.add(EntityType.MULE);
         types.add(EntityType.MUSHROOM_COW);
