@@ -647,7 +647,7 @@ public class Settings implements DataObject, WorldSettings {
     /**
      * @param hiddenFlags the hidden flags to set
      */
-    public void setVisibleSettings(List<String> hiddenFlags) {
+    public void setHiddenFlags(List<String> hiddenFlags) {
         this.hiddenFlags = hiddenFlags;
     }
 
