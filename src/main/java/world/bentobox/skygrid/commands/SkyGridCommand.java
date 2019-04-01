@@ -7,6 +7,7 @@ import java.util.List;
 import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.commands.island.IslandBanCommand;
 import world.bentobox.bentobox.api.commands.island.IslandBanlistCommand;
+import world.bentobox.bentobox.api.commands.island.IslandExpelCommand;
 import world.bentobox.bentobox.api.commands.island.IslandInfoCommand;
 import world.bentobox.bentobox.api.commands.island.IslandLanguageCommand;
 import world.bentobox.bentobox.api.commands.island.IslandResetnameCommand;
@@ -25,8 +26,8 @@ public class SkyGridCommand extends CompositeCommand {
 
     public SkyGridCommand(SkyGrid addon) {
         super(addon,
-            addon.getSettings().getIslandCommand().split(" ")[0],
-            addon.getSettings().getIslandCommand().split(" "));
+                addon.getSettings().getIslandCommand().split(" ")[0],
+                addon.getSettings().getIslandCommand().split(" "));
     }
 
     /* (non-Javadoc)
@@ -50,6 +51,7 @@ public class SkyGridCommand extends CompositeCommand {
         new IslandUnbanCommand(this);
         new IslandBanlistCommand(this);
         new IslandSpawnCommand(this);
+        new IslandExpelCommand(this);
         // Team commands
         new IslandTeamCommand(this);
         // SkyGrid sub commands
