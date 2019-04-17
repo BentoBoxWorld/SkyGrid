@@ -9,6 +9,13 @@ skygrid:
     # To define alias, just separate commands with white space.
     admin: sgadmin sga
 world:
+  chest-fill:
+    # Chest fill setting. 1 = normal, 0 = nothing, 1+ for more items
+    overworld: 1
+    # Nether chest fill setting
+    nether: 1
+    # The End chest fill setting
+    end: 1
   # World block types. If the material cannot be placed, bedrock will be used.
   # Format: Material : Probability
   # Block types must be Bukkit Material types.

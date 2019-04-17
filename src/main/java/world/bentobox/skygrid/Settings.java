@@ -42,6 +42,17 @@ public class Settings implements DataObject, WorldSettings {
     @ConfigEntry(path = "skygrid.command.admin")
     private String adminCommand = "sgadmin sga";
 
+    /* Chests */
+    @ConfigComment("Chest fill setting. 1 = normal, 0 = nothing, 1+ for more items")
+    @ConfigEntry(path = "world.chest-fill.overworld")
+    private int chestFill = 1;
+    @ConfigComment("Nether chest fill setting")
+    @ConfigEntry(path = "world.chest-fill.nether")
+    private int chestFillNether = 1;
+    @ConfigComment("The End chest fill setting")
+    @ConfigEntry(path = "world.chest-fill.end")
+    private int chestFillEnd = 1;
+
     /* Blocks */
     @ConfigComment("World block types. If the material cannot be placed, bedrock will be used.")
     @ConfigComment("Format: Material : Probability")
@@ -1095,5 +1106,47 @@ public class Settings implements DataObject, WorldSettings {
     public void setAdminCommand(String adminCommand)
     {
         this.adminCommand = adminCommand;
+    }
+
+    /**
+     * @return the chestFill
+     */
+    public int getChestFill() {
+        return chestFill;
+    }
+
+    /**
+     * @param chestFill the chestFill to set
+     */
+    public void setChestFill(int chestFill) {
+        this.chestFill = chestFill;
+    }
+
+    /**
+     * @return the chestFillNether
+     */
+    public int getChestFillNether() {
+        return chestFillNether;
+    }
+
+    /**
+     * @param chestFillNether the chestFillNether to set
+     */
+    public void setChestFillNether(int chestFillNether) {
+        this.chestFillNether = chestFillNether;
+    }
+
+    /**
+     * @return the chestFillEnd
+     */
+    public int getChestFillEnd() {
+        return chestFillEnd;
+    }
+
+    /**
+     * @param chestFillEnd the chestFillEnd to set
+     */
+    public void setChestFillEnd(int chestFillEnd) {
+        this.chestFillEnd = chestFillEnd;
     }
 }

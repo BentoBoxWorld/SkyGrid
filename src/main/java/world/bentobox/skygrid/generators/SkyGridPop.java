@@ -243,94 +243,96 @@ public class SkyGridPop extends BlockPopulator {
         HashSet<ItemStack> set = new HashSet<>();
         switch (b.getWorld().getEnvironment()) {
         case NETHER:
-            if (random.nextDouble() < 0.7)
-                set.add(itemInRange(256, 294, random)); //weapon/random
-            if (random.nextDouble() < 0.7) {
-                ItemStack armor = itemInRange(298, 317, random); //armor
-                if (armor.getType().toString().endsWith("BOOTS")) {
-                    if (random.nextDouble() < 0.5) {
-                        armor.addEnchantment(Enchantment.PROTECTION_FALL, random.nextInt(4) + 1);
+            for (int i = 0; i < addon.getSettings().getChestFillNether(); i ++) {
+                if (random.nextDouble() < 0.7)
+                    set.add(itemInRange(256, 294, random)); //weapon/random
+                if (random.nextDouble() < 0.7) {
+                    ItemStack armor = itemInRange(298, 317, random); //armor
+                    if (armor.getType().toString().endsWith("BOOTS")) {
+                        if (random.nextDouble() < 0.5) {
+                            armor.addEnchantment(Enchantment.PROTECTION_FALL, random.nextInt(4) + 1);
+                        }
+                    }
+                    set.add(armor); //armor
+                }
+
+                if (random.nextDouble() < 0.9) {
+                    // ghast, pigman, enderman
+                    set.add(pickEgg(random, EntityType.GHAST, EntityType.PIG_ZOMBIE, EntityType.ENDERMAN)); //spawn eggs
+                } else if (random.nextDouble() < 0.9) {
+                    // Blaze, Magma Cube
+                    set.add(pickEgg(random, EntityType.BLAZE, EntityType.MAGMA_CUBE)); //spawn eggs
+                }
+                if (random.nextDouble() < 0.3) {
+
+                    double rand1 = random.nextDouble();
+                    if (rand1 < 0.1)
+                        set.add(new ItemStack(Material.CLOCK)); // clock
+                    else if (rand1 < 0.5) {
+                        set.add(new ItemStack(Material.BLAZE_ROD));
+                    } else if (rand1 < 0.6) {
+                        set.add(new ItemStack(Material.SADDLE));
+                    } else if (rand1 < 0.7) {
+                        set.add(new ItemStack(Material.IRON_HORSE_ARMOR));
+                    } else if (rand1 < 0.8) {
+                        set.add(new ItemStack(Material.GOLDEN_HORSE_ARMOR));
+                    } else if (rand1 < 0.9) {
+                        set.add(new ItemStack(Material.DIAMOND_HORSE_ARMOR));
+                    } else {
+                        set.add(new ItemStack(Material.GHAST_TEAR));
                     }
                 }
-                set.add(armor); //armor
             }
-
-            if (random.nextDouble() < 0.9) {
-                // ghast, pigman, enderman
-                set.add(pickEgg(random, EntityType.GHAST, EntityType.PIG_ZOMBIE, EntityType.ENDERMAN)); //spawn eggs
-            } else if (random.nextDouble() < 0.9) {
-                // Blaze, Magma Cube
-                set.add(pickEgg(random, EntityType.BLAZE, EntityType.MAGMA_CUBE)); //spawn eggs
-            }
-            if (random.nextDouble() < 0.3) {
-
-                double rand1 = random.nextDouble();
-                if (rand1 < 0.1)
-                    set.add(new ItemStack(Material.CLOCK)); // clock
-                else if (rand1 < 0.5) {
-                    set.add(new ItemStack(Material.BLAZE_ROD));
-                } else if (rand1 < 0.6) {
-                    set.add(new ItemStack(Material.SADDLE));
-                } else if (rand1 < 0.7) {
-                    set.add(new ItemStack(Material.IRON_HORSE_ARMOR));
-                } else if (rand1 < 0.8) {
-                    set.add(new ItemStack(Material.GOLDEN_HORSE_ARMOR));
-                } else if (rand1 < 0.9) {
-                    set.add(new ItemStack(Material.DIAMOND_HORSE_ARMOR));
-                } else {
-                    set.add(new ItemStack(Material.GHAST_TEAR));
-                }
-            }
-
             break;
         case NORMAL:
-            if (random.nextDouble() < 0.7) {
-                set.add(new ItemStack(FOOD.get(random.nextInt(FOOD.size())), random.nextInt(3))); //food/tools
-                set.add(new ItemStack(FOOD.get(random.nextInt(FOOD.size())), random.nextInt(3))); //food/tools
-                set.add(new ItemStack(FOOD.get(random.nextInt(FOOD.size())), random.nextInt(3))); //food/tools
-            }
-            if (random.nextDouble() < 0.3) {
-                set.add(new ItemStack(SPAWNEGGS.get(random.nextInt(SPAWNEGGS.size()))));
-            }
-            if (random.nextDouble() < 0.7) {
-                set.add(new ItemStack(BLOCKS.get(random.nextInt(BLOCKS.size())), random.nextInt(3)));
-            }
-            if (random.nextDouble() < 0.2) {
-                set.add(new ItemStack(ITEMS.get(random.nextInt(ITEMS.size())), random.nextInt(3)));
-            }
-            if (random.nextDouble() < 0.1) {
-                set.add(new ItemStack(Material.WATER_BUCKET));
-            }
-
-            break;
-        case THE_END:
-            set.add(itemInRange(318, 350, random)); //food/tools
-            set.add(itemInRange(318, 350, random)); //food/tools
-            set.add(itemInRange(318, 350, random)); //food/tools
-            if (random.nextDouble() < 0.2)
-                set.add(new ItemStack(Material.ENDERMAN_SPAWN_EGG)); //enderman spawn egg
-            if (random.nextDouble() < 0.4)
-                set.add(itemInRange(256, 294, random)); //weapon/random
-            for (Material mat : Material.values()) {
-                if (END_ITEMS.containsKey(mat)) {
-                    int qty = (int)((double)END_ITEMS.get(mat));
-                    double probability = END_ITEMS.get(mat) - qty;
-                    if (random.nextDouble() < probability) {
-                        set.add(new ItemStack(mat, qty));
-                    }
+            for (int i = 0; i < addon.getSettings().getChestFill(); i ++) {
+                if (random.nextDouble() < 0.7) {
+                    set.add(new ItemStack(FOOD.get(random.nextInt(FOOD.size())), random.nextInt(3))); //food/tools
+                    set.add(new ItemStack(FOOD.get(random.nextInt(FOOD.size())), random.nextInt(3))); //food/tools
+                    set.add(new ItemStack(FOOD.get(random.nextInt(FOOD.size())), random.nextInt(3))); //food/tools
+                }
+                if (random.nextDouble() < 0.3) {
+                    set.add(new ItemStack(SPAWNEGGS.get(random.nextInt(SPAWNEGGS.size()))));
+                }
+                if (random.nextDouble() < 0.7) {
+                    set.add(new ItemStack(BLOCKS.get(random.nextInt(BLOCKS.size())), random.nextInt(3)));
+                }
+                if (random.nextDouble() < 0.2) {
+                    set.add(new ItemStack(ITEMS.get(random.nextInt(ITEMS.size())), random.nextInt(3)));
+                }
+                if (random.nextDouble() < 0.1) {
+                    set.add(new ItemStack(Material.WATER_BUCKET));
                 }
             }
-            if (random.nextDouble() < 0.2)
-                set.add(new ItemStack(Material.SHULKER_SPAWN_EGG)); //shulker spawn egg
+            break;
+        case THE_END:
+            for (int i = 0; i < addon.getSettings().getChestFillEnd(); i ++) {
+                set.add(itemInRange(318, 350, random)); //food/tools
+                set.add(itemInRange(318, 350, random)); //food/tools
+                set.add(itemInRange(318, 350, random)); //food/tools
+                if (random.nextDouble() < 0.2)
+                    set.add(new ItemStack(Material.ENDERMAN_SPAWN_EGG)); //enderman spawn egg
+                if (random.nextDouble() < 0.4)
+                    set.add(itemInRange(256, 294, random)); //weapon/random
+                for (Material mat : Material.values()) {
+                    if (END_ITEMS.containsKey(mat)) {
+                        int qty = (int)((double)END_ITEMS.get(mat));
+                        double probability = END_ITEMS.get(mat) - qty;
+                        if (random.nextDouble() < probability) {
+                            set.add(new ItemStack(mat, qty));
+                        }
+                    }
+                }
+                if (random.nextDouble() < 0.2)
+                    set.add(new ItemStack(Material.SHULKER_SPAWN_EGG)); //shulker spawn egg
+            }
             break;
         default:
             break;
 
         }
-
-        for (ItemStack i : set) {
-            inv.setItem(slt.next(random), i);
-        }
+        // Put the first 27 items into the chest
+        set.stream().limit(27).forEach(i -> inv.setItem(slt.next(random), i));
         slt.reset();
     }
 

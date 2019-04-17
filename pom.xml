@@ -6,7 +6,7 @@
 
 	<groupId>world.bentobox</groupId>
 	<artifactId>skygrid</artifactId>
-	<version>1.4.1</version>
+	<version>1.5.0-SNAPSHOT</version>
 
 	<description>Skygrid is an add-on for BentoBox, an expandable Minecraft Bukkit plugin for island-type games like BSkyBlock or AcidIsland.</description>
 	<url>https://github.com/BentoBoxWorld/SkyGrid</url>
