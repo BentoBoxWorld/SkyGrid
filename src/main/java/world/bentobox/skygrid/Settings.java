@@ -1053,7 +1053,7 @@ public class Settings implements DataObject, WorldSettings {
 
     @Override
     public boolean isNetherIslands() {
-        return true;
+        return false;
     }
 
     @Override

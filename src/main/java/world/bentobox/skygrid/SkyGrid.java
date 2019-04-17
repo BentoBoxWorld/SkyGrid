@@ -91,24 +91,16 @@ public class SkyGrid extends GameModeAddon {
             if (getServer().getWorld(worldName + NETHER) == null) {
                 log("Creating SkyGrid's Nether...");
             }
-            if (!settings.isNetherIslands()) {
-                netherWorld = WorldCreator.name(worldName + NETHER).type(WorldType.NORMAL).environment(World.Environment.NETHER).createWorld();
-            } else {
-                netherWorld = WorldCreator.name(worldName + NETHER).type(WorldType.FLAT).generator(gen)
-                        .environment(World.Environment.NETHER).createWorld();
-            }
+            netherWorld = WorldCreator.name(worldName + NETHER).type(WorldType.FLAT).generator(gen)
+                    .environment(World.Environment.NETHER).createWorld();
         }
         // Make the end if it does not exist
         if (settings.isEndGenerate()) {
             if (getServer().getWorld(worldName + THE_END) == null) {
                 log("Creating SkyGrid's End World...");
             }
-            if (!settings.isEndIslands()) {
-                endWorld = WorldCreator.name(worldName + THE_END).type(WorldType.NORMAL).environment(World.Environment.THE_END).createWorld();
-            } else {
-                endWorld = WorldCreator.name(worldName + THE_END).type(WorldType.FLAT).generator(gen)
-                        .environment(World.Environment.THE_END).createWorld();
-            }
+            endWorld = WorldCreator.name(worldName + THE_END).type(WorldType.FLAT).generator(gen)
+                    .environment(World.Environment.THE_END).createWorld();
         }
     }
 
