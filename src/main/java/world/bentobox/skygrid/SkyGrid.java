@@ -48,13 +48,18 @@ public class SkyGrid extends GameModeAddon {
         }
         saveWorldSettings();
         worldStyles = new WorldStyles(this);
+
+        // Generator
+        gen = new SkyGridGen(this);
+
+        // Register commands
+        playerCommand = new SkyGridCommand(this);
+        adminCommand = new AdminCommand(this);
+
     }
 
     @Override
     public void onEnable(){
-        // Register commands
-        playerCommand = new SkyGridCommand(this);
-        adminCommand = new AdminCommand(this);
         // Set default protection flags for world to allow everything
         Flags.values().stream().filter(f -> f.getType().equals(Type.PROTECTION)).forEach(f -> f.setDefaultSetting(getOverWorld(), true));
     }
@@ -82,7 +87,6 @@ public class SkyGrid extends GameModeAddon {
             getLogger().info("Creating SkyGrid world ...");
         }
         // Create the world if it does not exist
-        gen = new SkyGridGen(this);
         islandWorld = WorldCreator.name(worldName).type(WorldType.FLAT).environment(World.Environment.NORMAL).generator(gen)
                 .createWorld();
 
