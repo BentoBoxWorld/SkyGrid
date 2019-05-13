@@ -1,6 +1,9 @@
 name: SkyGrid
 main: world.bentobox.skygrid.SkyGrid
 version: ${version}
+metrics: true
+repository: "BentoBoxWorld/SkyGrid"
+icon: "COBWEB"
 
 authors: tastybento
 
