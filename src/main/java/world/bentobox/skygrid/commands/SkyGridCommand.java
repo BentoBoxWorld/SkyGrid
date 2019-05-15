@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import world.bentobox.bentobox.api.addons.GameModeAddon;
 import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.commands.island.IslandBanCommand;
 import world.bentobox.bentobox.api.commands.island.IslandBanlistCommand;
@@ -74,7 +75,7 @@ public class SkyGridCommand extends CompositeCommand {
             try {
                 NewIsland.builder()
                 .player(user)
-                .world(getWorld())
+                .addon((GameModeAddon) getAddon())
                 .reason(Reason.CREATE)
                 .noPaste()
                 .build();
