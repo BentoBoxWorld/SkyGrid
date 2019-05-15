@@ -48,7 +48,6 @@ public class SkyGridGen extends ChunkGenerator {
             Material.RED_MUSHROOM,
             Material.RED_TULIP,
             Material.ROSE_BUSH,
-            Material.ROSE_RED,
             Material.SPRUCE_SAPLING,
             Material.SUGAR_CANE,
             Material.SUNFLOWER,

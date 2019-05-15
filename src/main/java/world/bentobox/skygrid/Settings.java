@@ -106,7 +106,7 @@ public class Settings implements WorldSettings {
     @ConfigComment("Name of the world - if it does not exist then it will be generated.")
     @ConfigComment("It acts like a prefix for nether and end")
     @ConfigEntry(path = "world.world-name")
-    private String worldName = "SkyGrid-world";
+    private String worldName = "skygrid-world";
 
     @ConfigComment("World difficulty setting - PEACEFUL, EASY, NORMAL, HARD")
     @ConfigComment("Other plugins may override this setting")

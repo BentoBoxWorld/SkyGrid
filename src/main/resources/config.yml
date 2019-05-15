@@ -170,7 +170,7 @@ world:
   friendly-name: SkyGrid
   # Name of the world - if it does not exist then it will be generated.
   # It acts like a prefix for nether and end
-  world-name: SkyGrid-world
+  world-name: skygrid-world
   # World difficulty setting - PEACEFUL, EASY, NORMAL, HARD
   # Other plugins may override this setting
   difficulty: NORMAL
