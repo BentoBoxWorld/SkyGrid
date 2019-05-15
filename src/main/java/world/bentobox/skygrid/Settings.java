@@ -17,7 +17,6 @@ import world.bentobox.bentobox.api.configuration.ConfigEntry;
 import world.bentobox.bentobox.api.configuration.StoreAt;
 import world.bentobox.bentobox.api.configuration.WorldSettings;
 import world.bentobox.bentobox.api.flags.Flag;
-import world.bentobox.bentobox.database.objects.DataObject;
 import world.bentobox.bentobox.database.objects.adapters.Adapter;
 import world.bentobox.bentobox.database.objects.adapters.FlagSerializer;
 import world.bentobox.bentobox.database.objects.adapters.FlagSerializer2;
@@ -29,7 +28,7 @@ import world.bentobox.bentobox.database.objects.adapters.FlagSerializer2;
 @StoreAt(filename="config.yml", path="addons/SkyGrid") // Explicitly call out what name this should have.
 @ConfigComment("SkyGrid Configuration [version]")
 @ConfigComment("")
-public class Settings implements DataObject, WorldSettings {
+public class Settings implements WorldSettings {
 
     /* Commands */
     @ConfigComment("Island Command. What command users will run to access their island.")

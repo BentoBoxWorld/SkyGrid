@@ -6,6 +6,7 @@ import java.util.List;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
+import world.bentobox.bentobox.api.addons.GameModeAddon;
 import world.bentobox.bentobox.api.commands.CompositeCommand;
 import world.bentobox.bentobox.api.commands.ConfirmableCommand;
 import world.bentobox.bentobox.api.events.island.IslandEvent.Reason;
@@ -92,7 +93,7 @@ public class ResetCommand extends ConfirmableCommand {
         try {
             NewIsland.builder()
             .player(user)
-            .world(getWorld())
+            .addon((GameModeAddon) getAddon())
             .reason(Reason.RESET)
             .noPaste()
             .build();
