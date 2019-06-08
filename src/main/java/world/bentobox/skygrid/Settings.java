@@ -201,8 +201,7 @@ public class Settings implements WorldSettings {
     private boolean leaversLoseReset = false;
 
     @ConfigComment("Allow kicked players to keep their inventory.")
-    @ConfigComment("If false, kicked player's inventory will be thrown at the leader if the")
-    @ConfigComment("kicked player is online and in the world.")
+    @ConfigComment("Overrides the on-leave inventory reset for kicked players.")
     @ConfigEntry(path = "area.reset.kicked-keep-inventory")
     private boolean kickedKeepInventory = false;
 
@@ -709,6 +708,7 @@ public class Settings implements WorldSettings {
     /**
      * @return the leaversLoseReset
      */
+    @Override
     public boolean isLeaversLoseReset() {
         return leaversLoseReset;
     }
@@ -723,6 +723,7 @@ public class Settings implements WorldSettings {
     /**
      * @return the kickedKeepInventory
      */
+    @Override
     public boolean isKickedKeepInventory() {
         return kickedKeepInventory;
     }
@@ -917,6 +918,7 @@ public class Settings implements WorldSettings {
     /**
      * @return the deathsSumTeam
      */
+    @Override
     public boolean isDeathsSumTeam() {
         return deathsSumTeam;
     }
