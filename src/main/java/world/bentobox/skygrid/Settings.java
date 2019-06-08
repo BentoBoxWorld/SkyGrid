@@ -261,9 +261,6 @@ public class Settings implements WorldSettings {
     @ConfigEntry(path = "area.deaths.max")
     private int deathsMax = 10;
 
-    @ConfigEntry(path = "area.deaths.sum-team")
-    private boolean deathsSumTeam = false;
-
     @ConfigComment("When a player joins a team, reset their death count")
     @ConfigEntry(path = "area.deaths.team-join-reset")
     private boolean teamJoinDeathReset = true;
@@ -913,21 +910,6 @@ public class Settings implements WorldSettings {
      */
     public void setDeathsMax(int deathsMax) {
         this.deathsMax = deathsMax;
-    }
-
-    /**
-     * @return the deathsSumTeam
-     */
-    @Override
-    public boolean isDeathsSumTeam() {
-        return deathsSumTeam;
-    }
-
-    /**
-     * @param deathsSumTeam the deathsSumTeam to set
-     */
-    public void setDeathsSumTeam(boolean deathsSumTeam) {
-        this.deathsSumTeam = deathsSumTeam;
     }
 
     /**
