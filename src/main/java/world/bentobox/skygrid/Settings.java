@@ -94,10 +94,6 @@ public class Settings implements WorldSettings {
     @ConfigEntry(path = "world.end-frame-probability")
     private double endFrameProb = 0.1;
 
-    @ConfigComment("Allow saplings to grow into trees sometimes.")
-    @ConfigEntry(path = "world.grow-trees")
-    private boolean growTrees = true;
-
     /*      WORLD       */
     @ConfigComment("Friendly name for this world. Used in admin commands. Must be a single word")
     @ConfigEntry(path = "world.friendly-name")
@@ -356,20 +352,6 @@ public class Settings implements WorldSettings {
      */
     public void setEndFrameProb(double endFrameProb) {
         this.endFrameProb = endFrameProb;
-    }
-
-    /**
-     * @return the growTrees
-     */
-    public boolean isGrowTrees() {
-        return growTrees;
-    }
-
-    /**
-     * @param growTrees the growTrees to set
-     */
-    public void setGrowTrees(boolean growTrees) {
-        this.growTrees = growTrees;
     }
 
     /**

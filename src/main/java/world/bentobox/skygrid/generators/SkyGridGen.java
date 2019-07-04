@@ -1,10 +1,8 @@
 package world.bentobox.skygrid.generators;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 import org.bukkit.Location;
@@ -58,47 +56,49 @@ public class SkyGridGen extends ChunkGenerator {
             // TODO add all the other plants that need to go on dirt
             );
 
+    private BiomeGenerator biomeGenerator;
 
+    private BlockPopulator populator;
 
     /**
      * @param addon - addon
      */
     public SkyGridGen(SkyGrid addon) {
         this.addon = addon;
+        this.populator = new SkyGridPop(addon);
     }
 
     @Override
     public ChunkData generateChunkData(World world, Random random, int chunkX, int chunkZ, ChunkGenerator.BiomeGrid biomeGrid) {
-
-        BiomeGenerator biomeGenerator = new BiomeGenerator(world);
-
         // This gets all the blocks that can be picked and their probabilities
         BlockProbability prob = addon.getWorldStyles().get(world.getEnvironment()).getProb();
 
         // The chunk we are making
         ChunkData result = createChunkData(world);
-        for (int x = 0; x < 16; x ++) {
-            for (int z = 0; z < 16; z ++) {
-                // Set biome
-                if (addon.getSettings().isCreateBiomes() && world.getEnvironment().equals(Environment.NORMAL)) {
+        for (int x = 1; x < 16; x += 4) {
+            for (int z = 1; z < 16; z += 4) {
+                for (int y = 0; y <= addon.getSettings().getIslandHeight(); y += 4) {
+                    setBlock(prob, x, y, z, biomeGrid, random, result);
+                }
+            }
+        }
+        // Set biome
+        if (addon.getSettings().isCreateBiomes() && world.getEnvironment().equals(Environment.NORMAL)) {
+            if (biomeGenerator == null) {
+                biomeGenerator = new BiomeGenerator(world);
+            }
+            for (int x = 0; x < 16; x ++) {
+                for (int z = 0; z < 16; z ++) {
                     int realX = x + chunkX * 16; //used so that the noise function gives us
                     int realZ = z + chunkZ * 16; //different values each chunk
-                    //We get the 3 closest biome's to the temperature and rainfall at this block
-                    HashMap<Biomes, Double> biomes = biomeGenerator.getBiomes(realX, realZ);
-                    //And tell bukkit (who tells the client) what the biggest biome here is
-                    biomeGrid.setBiome(x, z, getDominantBiome(biomes));
-                }
-                if (x % 4 == 0 && z % 4 == 0) {
-                    for (int y = 0; y <= addon.getSettings().getIslandHeight(); y += 4) {
-                        setBlock(prob, x, y, z, result, biomeGrid, random);
-                    }
+                    biomeGrid.setBiome(x, z, biomeGenerator.getDominantBiome(realX, realZ));
                 }
             }
         }
         return result;
     }
 
-    private void setBlock(BlockProbability prob, int x, int y, int z, ChunkData result, BiomeGrid biomeGrid, Random random) {
+    private void setBlock(BlockProbability prob, int x, int y, int z, BiomeGrid biomeGrid, Random random, ChunkData result) {
         // Get a random block and feed in the last block (true if cactus or cane)
         Material blockMat = prob.getBlock(random, y == 0, false);
         // If blockMat is not "a block" then cannot be generated
@@ -121,7 +121,8 @@ public class SkyGridGen extends ChunkGenerator {
                 result.setBlock( x, y, z, Material.DIRT);
                 result.setBlock( x, y+1, z, blockMat);
                 if (blockMat.equals(Material.SUGAR_CANE)) {
-                    result.setBlock( x+1, y, z, Material.WATER);
+                    // x will never be more than 12
+                    result.setBlock(x+1, y, z, Material.WATER);
                 }
             }
         } else {
@@ -180,31 +181,15 @@ public class SkyGridGen extends ChunkGenerator {
 
     @Override
     public List<BlockPopulator> getDefaultPopulators(World world) {
-        List<BlockPopulator> list = new ArrayList<>(1);
-        list.add(new SkyGridPop(addon));
-        return list;
+        //return Collections.emptyList();
+        return Collections.singletonList(populator);
     }
-
-
 
     @Override
     public Location getFixedSpawnLocation(World world, Random random) {
         return new Location(world, 0, addon.getSettings().getIslandHeight() + 2, 0);
     }
 
-    //We get the closest biome to send to the client (using the biomegrid)
-    private Biome getDominantBiome(HashMap<Biomes, Double> biomes) {
-        double maxNoiz = 0.0;
-        Biomes maxBiome = null;
-
-        for (Biomes biome : biomes.keySet()) {
-            if (biomes.get(biome) >= maxNoiz) {
-                maxNoiz = biomes.get(biome);
-                maxBiome = biome;
-            }
-        }
-        return Objects.requireNonNull(maxBiome).biome;
-    }
 
 
 }
