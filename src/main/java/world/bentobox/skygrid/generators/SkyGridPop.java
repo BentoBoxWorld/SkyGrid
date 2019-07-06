@@ -53,9 +53,9 @@ public class SkyGridPop extends BlockPopulator {
         // double format - integer part is the quantity, decimal is the probability
         END_ITEMS.put(Material.FIREWORK_ROCKET, 20.2); // for elytra
         END_ITEMS.put(Material.EMERALD, 1.1);
-        END_ITEMS.put(Material.CHORUS_FRUIT, 3.2);
-        END_ITEMS.put(Material.ELYTRA, 1.1);
-        END_ITEMS.put(Material.SHULKER_BOX, 1.2);
+        END_ITEMS.put(Material.CHORUS_FRUIT, 3.1);
+        END_ITEMS.put(Material.ELYTRA, 1.2);
+        END_ITEMS.put(Material.SHULKER_BOX, 1.1);
     }
 
     public SkyGridPop(SkyGrid addon) {
@@ -271,13 +271,19 @@ public class SkyGridPop extends BlockPopulator {
                     set.add(new ItemStack(Material.ENDERMAN_SPAWN_EGG)); //enderman spawn egg
                 if (random.nextDouble() < 0.4)
                     set.add(itemInRange(256, 294, random)); //weapon/random
+                END_ITEMS.entrySet().forEach(en -> {
+                    if (random.nextDouble() < en.getValue()) {
+                        // The quantity and probability are encoded. The integer is the qty, the decimal the prob
+                        int qty = en.getValue().intValue();
+                        double probability = en.getValue() - qty;
+                        if (random.nextDouble() < probability) {
+                            set.add(new ItemStack(en.getKey(), qty));
+                        }
+                    }
+                });
                 for (Material mat : Material.values()) {
                     if (END_ITEMS.containsKey(mat)) {
-                        int qty = (int)((double)END_ITEMS.get(mat));
-                        double probability = END_ITEMS.get(mat) - qty;
-                        if (random.nextDouble() < probability) {
-                            set.add(new ItemStack(mat, qty));
-                        }
+
                     }
                 }
                 if (random.nextDouble() < 0.2)
