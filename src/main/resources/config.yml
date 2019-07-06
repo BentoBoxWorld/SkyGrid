@@ -10,7 +10,7 @@ skygrid:
     admin: sgadmin sga
 world:
   chest-fill:
-    # Chest fill setting. 1 = normal, 0 = nothing, 1+ for more items
+    # Chest fill setting. 1 = normal, 0 = nothing, 2 or more for more items
     overworld: 1
     # Nether chest fill setting
     nether: 1

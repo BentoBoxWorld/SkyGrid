@@ -42,7 +42,7 @@ public class Settings implements WorldSettings {
     private String adminCommand = "sgadmin sga";
 
     /* Chests */
-    @ConfigComment("Chest fill setting. 1 = normal, 0 = nothing, 1+ for more items")
+    @ConfigComment("Chest fill setting. 1 = normal, 0 = nothing, 2 or more for more items")
     @ConfigEntry(path = "world.chest-fill.overworld")
     private int chestFill = 1;
     @ConfigComment("Nether chest fill setting")
