@@ -128,8 +128,6 @@ world:
   nether:
     # Generate SkyGrid Nether - if this is false, the nether world will not be made
     generate: true
-    # Nether trees are made if a player grows a tree in the nether (gravel and glowstone)
-    trees: true
     # Nether block types
     # Beware with glowstone and lava - the lighting calcs will lag the
     # server badly if there are too many blocks.
@@ -340,6 +338,9 @@ area:
     max: 10
     # When a player joins a team, reset their death count
     team-join-reset: true
+    # Reset player death count when they start new or reset
+    reset-on-new-island: true
+    
 protection:
   # Geo restrict mobs.
   # Mobs that exit the protected space where they were spawned will be removed.

@@ -66,10 +66,6 @@ public class Settings implements WorldSettings {
     @ConfigEntry(path = "world.nether.generate")
     private boolean netherGenerate = true;
 
-    @ConfigComment("Nether trees are made if a player grows a tree in the nether (gravel and glowstone)")
-    @ConfigEntry(path = "world.nether.trees")
-    private boolean netherTrees = true;
-
     @ConfigComment("Nether block types")
     @ConfigComment("Beware with glowstone and lava - the lighting calcs will lag the")
     @ConfigComment("server badly if there are too many blocks.")
@@ -260,6 +256,10 @@ public class Settings implements WorldSettings {
     @ConfigComment("When a player joins a team, reset their death count")
     @ConfigEntry(path = "area.deaths.team-join-reset")
     private boolean teamJoinDeathReset = true;
+
+    @ConfigComment("Reset player death count when they start reset")
+    @ConfigEntry(path = "island.deaths.reset-on-new-island")
+    private boolean deathsResetOnNewIsland = true;
 
     // ---------------------------------------------
     /*      PROTECTION      */
@@ -532,21 +532,6 @@ public class Settings implements WorldSettings {
      */
     public void setNetherGenerate(boolean netherGenerate) {
         this.netherGenerate = netherGenerate;
-    }
-
-    /**
-     * @return the netherTrees
-     */
-    @Override
-    public boolean isNetherTrees() {
-        return netherTrees;
-    }
-
-    /**
-     * @param netherTrees the netherTrees to set
-     */
-    public void setNetherTrees(boolean netherTrees) {
-        this.netherTrees = netherTrees;
     }
 
     /**
@@ -1113,5 +1098,20 @@ public class Settings implements WorldSettings {
      */
     public void setChestFillEnd(int chestFillEnd) {
         this.chestFillEnd = chestFillEnd;
+    }
+
+    /**
+     * @return the deathsResetOnNewIsland
+     */
+    @Override
+    public boolean isDeathsResetOnNewIsland() {
+        return deathsResetOnNewIsland;
+    }
+
+    /**
+     * @param deathsResetOnNewIsland the deathsResetOnNewIsland to set
+     */
+    public void setDeathsResetOnNewIsland(boolean deathsResetOnNewIsland) {
+        this.deathsResetOnNewIsland = deathsResetOnNewIsland;
     }
 }
