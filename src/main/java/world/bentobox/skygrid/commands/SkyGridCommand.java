@@ -70,7 +70,7 @@ public class SkyGridCommand extends CompositeCommand {
         if (args.isEmpty()) {
             // Known player, go
             if (getIslands().getIsland(getWorld(), user.getUniqueId()) != null) {
-                return getSubCommand("go").map(goCmd -> goCmd.execute(user, goCmd.getLabel(), new ArrayList<>())).orElse(false);
+                return getSubCommand("go").map(goCmd -> goCmd.call(user, goCmd.getLabel(), new ArrayList<>())).orElse(false);
             }
             try {
                 NewIsland.builder()
