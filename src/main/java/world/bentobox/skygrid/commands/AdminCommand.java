@@ -10,6 +10,7 @@ import world.bentobox.bentobox.api.commands.admin.AdminRegisterCommand;
 import world.bentobox.bentobox.api.commands.admin.AdminReloadCommand;
 import world.bentobox.bentobox.api.commands.admin.AdminSetrankCommand;
 import world.bentobox.bentobox.api.commands.admin.AdminSetspawnCommand;
+import world.bentobox.bentobox.api.commands.admin.AdminSettingsCommand;
 import world.bentobox.bentobox.api.commands.admin.AdminTeleportCommand;
 import world.bentobox.bentobox.api.commands.admin.AdminUnregisterCommand;
 import world.bentobox.bentobox.api.commands.admin.AdminVersionCommand;
@@ -29,8 +30,8 @@ public class AdminCommand extends CompositeCommand {
 
     public AdminCommand(SkyGrid addon) {
         super(addon,
-            addon.getSettings().getAdminCommand().split(" ")[0],
-            addon.getSettings().getAdminCommand().split(" "));
+                addon.getSettings().getAdminCommand().split(" ")[0],
+                addon.getSettings().getAdminCommand().split(" "));
     }
 
     @Override
@@ -69,6 +70,8 @@ public class AdminCommand extends CompositeCommand {
         new AdminReloadCommand(this);
         // Set Spawn
         new AdminSetspawnCommand(this);
+        // Settings
+        new AdminSettingsCommand(this);
     }
 
     @Override
