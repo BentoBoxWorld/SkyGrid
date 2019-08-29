@@ -1003,7 +1003,7 @@ public class Settings implements WorldSettings {
 
     @Override
     public boolean isNetherIslands() {
-        return false;
+        return true;
     }
 
     @Override
