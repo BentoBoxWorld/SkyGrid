@@ -11,6 +11,7 @@ import world.bentobox.bentobox.api.commands.island.IslandBanlistCommand;
 import world.bentobox.bentobox.api.commands.island.IslandExpelCommand;
 import world.bentobox.bentobox.api.commands.island.IslandInfoCommand;
 import world.bentobox.bentobox.api.commands.island.IslandLanguageCommand;
+import world.bentobox.bentobox.api.commands.island.IslandResetCommand;
 import world.bentobox.bentobox.api.commands.island.IslandResetnameCommand;
 import world.bentobox.bentobox.api.commands.island.IslandSethomeCommand;
 import world.bentobox.bentobox.api.commands.island.IslandSetnameCommand;
@@ -42,7 +43,7 @@ public class SkyGridCommand extends CompositeCommand {
         setPermission("skygrid");
         // Set up subcommands
         new IslandInfoCommand(this);
-        new ResetCommand(this);
+        new IslandResetCommand(this, true);
         new IslandSetnameCommand(this);
         new IslandResetnameCommand(this);
         new IslandSethomeCommand(this);
