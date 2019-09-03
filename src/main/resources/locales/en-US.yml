@@ -30,7 +30,7 @@ skygrid:
       reset:
         description: "restart in another area"
         parameters: ""
-        must-remove-members: "&cYou must remove all team players before you can restart (/skygrid team kick <player>)."
+        must-remove-members: "&cYou must remove all team players before you can restart (/[label] team kick <player>)."
       sethome:
         must-be-on-your-island: "&cYou must be in your area to set home!"
         home-set: "&6Your home has been set to your current location."
