@@ -123,31 +123,15 @@ skygrid:
         description: "unregister owner from an area, but keep area blocks as-is"
         unregistered-island: "&aUnregistered player from area at [xyz]."
       info:
-        parameters: "<player>"
         description: "get info on where you are or on player"
         no-island: "&cYou are not in a registered area right now..."
-        title: "========== Area Info ============"
-        owner: "Owner: [owner] ([uuid])"
-        last-login: "Last login: [date]"
-        deaths: "Deaths: [number]"
-        resets-left: "Resets: [number] (Max: [total])"
-        team-members-title: "Team members:"
-        team-owner-format: "&a[name] [rank]"
-        team-member-format: "&b[name] [rank]"
         island-location: "Area location: [xyz]"
         island-coords: "Area coordinates: [xz1] to [xz2]"
-        protection-range: "Protection range: [range]"
-        max-protection-range: "Largest historical protection range: [range]"
-        protection-coords: "Protection coordinates: [xz1] to [xz2]"
         is-spawn: "Area is a spawn island"
-        banned-players: "Banned players:"
-        banned-format: "&c[name]"
-        unowned: "&cUnowned"
       setrange:
         description: "set the range of player's area"
         range-updated: "Area range updated to [number]"
       tp:
-        parameters: "<player>"
         description: "teleport to a player's area"
       getrank:
         description: "get a player's rank in their area"
@@ -160,9 +144,7 @@ skygrid:
         no-island-here: "&cThere is no registered area here."
         confirmation: "&cAre you sure you want to set this area as the spawn for this world?"
       delete:
-        parameters: ""
         description: "deletes a player and regenerates their area"
-        cannot-delete-owner: "&cAll team members must be kicked before deleting."
         deleted-island: "&aArea at &e[xyz] &ahas been successfully regenerated."
 
   protection:
