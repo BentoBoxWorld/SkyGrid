@@ -4,210 +4,214 @@
 ###########################################################################################
 # These strings are deltas to the strings in BentoBox. Any BentoBox string can be
 # overridden by placing it under the skygrid key.
+meta:
+  authors:
+  - DuckSoft
+
 skygrid:
   # General strings
   general:
     errors:
-      no-island: "&cYou do not have an area!"
-      player-has-island: "&cPlayer already has an area!"
-      player-has-no-island: "&cThat player has no area!"
-      already-have-island: "&cYou already have an area!"
-      no-safe-location: "&cNo safe location found in area!"
-      not-owner: "&cYou are not the owner of your team!"
+      no-island: "&c你还没地皮呢!"
+      player-has-island: "&c那人已经有地皮了!"
+      player-has-no-island: "&c那人没有地皮!"
+      already-have-island: "&c你已经有地皮了!"
+      no-safe-location: "&c地皮内没发现安全的地方!"
+      not-owner: "&c你不是队长!"
   commands:
     #Main SkyGrid command
     skygrid:
       help:
-        description: "Start a SkyGrid game or teleport to your SkyGrid home"
+        description: "开始玩 SkyGrid 或传送至你在 SkyGrid 中的地皮传送点"
       go:
-        description: "Go home"
-        tip: "&cYou cannot teleport when falling!"
+        description: "回家"
+        tip: "&c自由下落时无法进行传送!"
 
     # Override BentoBox default island command strings
     island:
       info:
-        description: "display info about your area or the player's area"
+        description: "显示您或其他玩家的地皮信息"
       reset:
-        description: "restart in another area"
+        description: "换个地皮重来"
         parameters: ""
-        must-remove-members: "&cYou must remove all team players before you can restart (/[label] team kick <player>)."
+        must-remove-members: "&c重来之前你得踢光你小队里的人 (/[label] team kick <player>)."
       sethome:
-        must-be-on-your-island: "&cYou must be in your area to set home!"
-        home-set: "&6Your home has been set to your current location."
+        must-be-on-your-island: "&c地皮传送点必须在你自己的地皮里!"
+        home-set: "&6地皮传送点已置于当前位置."
       setname:
-        description: "set a name for your area"
+        description: "给你的地皮起个名"
       resetname:
-        description: "reset your area name"
+        description: "复原地皮名"
       team:
         coop:
-          description: "make a player coop rank"
+          description: "授予某人合作信任等级"
         uncoop:
-          you-are-no-longer-a-coop-member: "&cYou are no longer a coop member of [name]'s area"
-          all-members-logged-off: "&cAll team members logged off so you are no longer a coop member of [name]'s area"
+          you-are-no-longer-a-coop-member: "&c你已不再是 [name] 地皮的合作信任等级成员"
+          all-members-logged-off: "&c小队里的人都不在线，因此你不是 [name] 地皮的合作信任等级成员"
         trust:
-          description: "give a player trusted rank"
+          description: "授予某人完全信任等级"
         invite:
-          description: "invite a player to join your team"
-          name-has-invited-you: "&a[name] has invited you to join their team."
-          to-accept-or-reject: "&aDo /[label] team accept to accept, or /[label] team reject to reject"
-          you-will-lose-your-island: "&cWARNING! You will lose your our area if you accept!"
+          description: "拉人来你队伍"
+          name-has-invited-you: "&a[name] 刚邀请你加入他们的小队."
+          to-accept-or-reject: "&a用 /[label] team accept 指令接受邀请, 或 /[label] team reject 指令拒绝邀请"
+          you-will-lose-your-island: "&c警告! 接受后你的地皮会消失!"
           errors:
-            island-is-full: "&cYour team is full, you can't invite anyone else."
+            island-is-full: "&c小队满了，拉不进人了."
           accept:
-            you-joined-island: "&aYou joined a team! Use /[label] team info to see the other members."
-            name-joined-your-island: "&a[name] joined your team!"
+            you-joined-island: "&a你刚进了一个小队! 用 /[label] team info 看看其他人叫啥吧."
+            name-joined-your-island: "&a[name] 进了你的小队!"
             confirmation: |-
-              &cAre you sure you want to accept this invite?
-              &c&lThis will &nWIPE &r&c&lyour current area!
+              &c你真的要接受邀请吗?
+              &c&l这会 &n核平 &r&c&l你当前的地皮!
           reject:
-            you-rejected-invite: "&aYou rejected the invitation to join a team."
-            name-rejected-your-invite: "&c[name] rejected your invite!"
+            you-rejected-invite: "&a你拒绝了一个小队邀请."
+            name-rejected-your-invite: "&c[name] 拒绝了你的邀请!"
           cancel:
-            description: "cancel the pending invite to join your team"
+            description: "取消一个等待回复的邀请"
         leave:
-          description: "leave your team"
-          left-your-island: "&c[name] &cleft your team"
+          description: "离开小队"
+          left-your-island: "&c[name] &c离开了小队"
         kick:
-          description: "remove a team member"
-          owner-kicked: "&cThe owner kicked you from the team!"
+          description: "踢人"
+          owner-kicked: "&c小队队长把你踢了!"
         demote:
-          description: "demote a player one rank"
+          description: "降低某人的信任等级"
         promote:
-          description: "promote a player one rank"
+          description: "提升某人的信任等级"
         setowner:
-          description: "transfer team ownership to a member"
+          description: "转让小队"
           errors:
-            target-is-not-member: "&cThat player is not part of your team!"
-          name-is-the-owner: "&a[name] is now the area owner!"
-          you-are-the-owner: "&aYou are now the area owner!"
+            target-is-not-member: "&c那人不是你们小队的!"
+          name-is-the-owner: "&a[name] 现在是地皮小队的队长了!"
+          you-are-the-owner: "&a你现在是小队队长了!"
       ban:
-        description: "ban a player from your area"
-        cannot-ban-more-players: "&cYou reached the ban limit, you cannot ban any more players."
-        owner-banned-you: "&b[name]&c banned you from their area!"
-        you-are-banned: "&bYou are banned from this area!"
+        description: "ban 一个人"
+        cannot-ban-more-players: "&c最多只能 ban 这些人了!"
+        owner-banned-you: "&b[name]&c 把你从他们地皮 ban 出去了!"
+        you-are-banned: "&b你被这地皮 ban 了!"
       unban:
-        description: "unban a player from your area"
-        you-are-unbanned: "&b[name]&a unbanned you from their area!"
+        description: "撤销一个人的 ban"
+        you-are-unbanned: "&b[name]&a 把对你的 ban 撤销了!"
       banlist:
-        noone: "&aNo one is banned on this area"
+        noone: "&a这块地上没人被 ban "
       settings:
-        description: "display area settings"
+        description: "显示地皮设定"
     # Admin command /sgadmin
     admin:
       team:
         add:
-          name-has-island: "&c[name] has an area. Unregister or delete them first!"
+          name-has-island: "&c[name] 自己有块地. 先解除关联或删除他的地皮!"
         setowner:
-          description: "transfers area ownership to the player"
-          already-owner: "&cPlayer is already the owner of this area!"
+          description: "转交地皮所有权"
+          already-owner: "&c他已经是地皮所有者了!"
       range:
-        description: "Admin area range command"
+        description: "管理员地皮区域命令"
         display:
-          description: "Show/hide area range indicators"
+          description: "切换地皮区域指示器的显隐"
           hint: |-
-            &cRed Barrier icons &fshow the current protected range limit.
-            &7Gray Particles &fshow the max limit.
-            &aGreen Particles &fshow the default protected range if the protection range differs from it.
+            &c红标&f指示当前受保护区域的范围.
+            &7灰粒子&f指示最大范围.
+            &a绿粒子&f指示默认情况下的受保护范围.
         set:
-          description: "Sets the area protected range"
+          description: "设置地皮受保护范围"
         reset:
-          description: "Resets the protected range to the world default"
+          description: "重设地皮保护范围"
       register:
         parameters: "<player>"
-        description: "register player to unowned area you are in"
-        registered-island: "&aRegistered player to area at [xyz]."
-        already-owned: "&cArea is already owned by another player!"
-        no-island-here: "&cThere is no player area here. Confirm to make one."
-        in-deletion: "&cThis space is currently being regenerated. Try later."
+        description: "关联玩家到你所在的无主之地"
+        registered-island: "&a已将玩家关联至地皮 [xyz]."
+        already-owned: "&c地皮已被他人占有!"
+        no-island-here: "&c这里没人用. 确认以建立一块地皮."
+        in-deletion: "&c地皮翻修中. 稍后再试."
       unregister:
-        description: "unregister owner from an area, but keep area blocks as-is"
-        unregistered-island: "&aUnregistered player from area at [xyz]."
+        description: "解除玩家与地皮的关联并保留其上的内容"
+        unregistered-island: "&a已将玩家与地皮 [xyz] 解除关联."
       info:
-        description: "get info on where you are or on player"
-        no-island: "&cYou are not in a registered area right now..."
-        island-location: "Area location: [xyz]"
-        island-coords: "Area coordinates: [xz1] to [xz2]"
-        is-spawn: "Area is a spawn island"
+        description: "获取你所在的位置的地皮与关联玩家信息"
+        no-island: "&c你在一片无主之地上..."
+        island-location: "地皮坐标: [xyz]"
+        island-coords: "区域坐标: [xz1] to [xz2]"
+        is-spawn: "这是出生地皮"
       setrange:
-        description: "set the range of player's area"
-        range-updated: "Area range updated to [number]"
+        description: "设置某个玩家地皮的范围"
+        range-updated: "地皮范围更新至 [number]"
       tp:
-        description: "teleport to a player's area"
+        description: "传送到某人的地皮上"
       getrank:
-        description: "get a player's rank in their area"
-        rank-is: "&aRank is [rank] in their area."
+        description: "获取某人在地皮上的信任等级"
+        rank-is: "&a地皮上的信任等级为 [rank]."
       setrank:
-        description: "set a player's rank in their area"
+        description: "设置某人在地皮上的信任等级"
       setspawn:
-        description: "set an area as spawn for this world"
-        already-spawn: "&cThis area is already a spawn!"
-        no-island-here: "&cThere is no registered area here."
-        confirmation: "&cAre you sure you want to set this area as the spawn for this world?"
+        description: "为整个世界设置出生地皮"
+        already-spawn: "&c这地皮已经是出生地皮了!"
+        no-island-here: "&c这是一块无主之地."
+        confirmation: "&c确信要将此地皮作为世界的出生地皮吗?"
       delete:
-        description: "deletes a player and regenerates their area"
-        deleted-island: "&aArea at &e[xyz] &ahas been successfully regenerated."
+        description: "强制解除玩家与地皮的关联并重新生成地皮"
+        deleted-island: "&a地皮 &e[xyz] &a成功重新生成."
 
   protection:
     flags:
       ELYTRA: 
-        description: "Toggle use"
+        description: "切换使用"
       ENDERMAN_GRIEFING: 
         description: |-
-           &aEndermen can remove
-           &ablocks
+           &a末影人能否
+           &a偷取方块
       ENTER_EXIT_MESSAGES: 
-        description: "Display entry and exit messages"
-        island: "[name]'s protected area"
-        name: "Enter/Exit messages"
-        now-entering: "&bNow entering [name]"
-        now-leaving: "&bNow leaving [name]"
+        description: "显示进入/离开消息"
+        island: "[name] 的受保护地皮"
+        name: "进入/离开消息"
+        now-entering: "&b正在进入 [name]"
+        now-leaving: "&b正在离开 [name]"
       GEO_LIMIT_MOBS: 
         description: |-
-           &aRemove mobs that go
-           &aoutside protected
-           &aplayer space
-        name: "&eLimit mobs to player area"
+           &a走出保护区
+           &a的怪物是否
+           &a会被移除
+        name: "&e限制怪物只能在地皮内生存"
       ISLAND_RESPAWN:
         description: |-
-          &aPlayers respawn
-          &ain their area
-        name: "Area respawn"
+          &a玩家是否在
+          &a地皮内重生
+        name: "地皮重生设定"
       LOCK: 
-        name: "Lock player area"
+        name: "锁定玩家地皮"
       OFFLINE_REDSTONE:
         description: |-
-            &aWhen disabled, redstone
-            &awill not operate in areas
-            &awhere all members are offline.
-            &aMay help reduce lag.   
+            &a禁用后若地
+            &a皮小队无人
+            &a在线将禁用
+            &a红石 
       PISTON_PUSH: 
         description: |-
-            &aAllow pistons to push
-            &ablocks outside a player's area
+            &a允许活塞推
+            &a出地皮区域
       PVP_OVERWORLD: 
         description: |-
-            &cEnable/Disable PVP
-            &cin protected area.
+            &c在保护区域
+            &c内切换PVP
       REMOVE_MOBS: 
         description: |-
-          &aRemove monsters when
-          &ateleporting to an area
+          &a传送到地皮
+          &a时移除怪物
       PREVENT_TELEPORT_WHEN_FALLING:
         description: |-
-          &aPrevent players from teleporting
-          &aif they are falling.
-        hint: "&cYou cannot teleport while you are falling!"
-    locked: "&cThis area is locked!"
-    protected: "&cArea protected: [description]"
+          &a自由下落时
+          &a禁止传送
+        hint: "&c自由下落时无法进行传送!"
+    locked: "&c地皮已锁定!"
+    protected: "&c地皮受保护: [description]"
 
     panel:
       PROTECTION:
-        title: "&6Protection"
+        title: "&6保护"
         description: |-
-          &aProtection settings
-          &afor this area
+          &a本地皮的
+          &a保护设置
       SETTING:
         description: |-
-          &aGeneral settings
-          &afor this area
+          &a本地皮的
+          &a通用设置
 
