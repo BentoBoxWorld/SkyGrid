@@ -53,11 +53,11 @@ public class Settings implements WorldSettings {
     private int chestFillEnd = 5;
     @ConfigComment("Chest items will be taken randomly from this list. All items have an equal chance.")
     @ConfigEntry(path = "world.chest-items.overworld")
-    private List<String> chestItemsOverworld;
+    private List<String> chestItemsOverworld = new ArrayList<>();
     @ConfigEntry(path = "world.chest-items.nether")
-    private List<String> chestItemsNether;
+    private List<String> chestItemsNether = new ArrayList<>();
     @ConfigEntry(path = "world.chest-items.end")
-    private List<String> chestItemsEnd;
+    private List<String> chestItemsEnd = new ArrayList<>();
 
     /* Blocks */
     @ConfigComment("World block types. If the material cannot be placed, bedrock will be used.")
@@ -288,8 +288,6 @@ public class Settings implements WorldSettings {
     @ConfigComment("These settings should not be edited")
     @ConfigEntry(path = "do-not-edit-these-settings.reset-epoch")
     private long resetEpoch = 0;
-
-    private String uniqueId = "config";
 
     /**
      * @return the blocks
@@ -945,22 +943,6 @@ public class Settings implements WorldSettings {
     @Override
     public void setResetEpoch(long resetEpoch) {
         this.resetEpoch = resetEpoch;
-    }
-
-    /**
-     * @return the uniqueId
-     */
-    @Override
-    public String getUniqueId() {
-        return uniqueId;
-    }
-
-    /**
-     * @param uniqueId the uniqueId to set
-     */
-    @Override
-    public void setUniqueId(String uniqueId) {
-        this.uniqueId = uniqueId;
     }
 
     @Override
