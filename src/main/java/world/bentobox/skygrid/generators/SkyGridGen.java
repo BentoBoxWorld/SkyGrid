@@ -10,6 +10,8 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
 import org.bukkit.block.Biome;
+import org.bukkit.block.data.Bisected;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 
@@ -20,7 +22,7 @@ public class SkyGridGen extends ChunkGenerator {
     private final SkyGrid addon;
 
     // Blocks that need to be placed on dirt
-    private final static List<Material> needDirt = Arrays.asList(
+    private final static List<Material> NEEDS_DIRT = Arrays.asList(
             Material.ACACIA_SAPLING,
             Material.ALLIUM,
             Material.AZURE_BLUET,
@@ -106,7 +108,7 @@ public class SkyGridGen extends ChunkGenerator {
             return;
         }
         // Check if the block needs dirt
-        if (needDirt.contains(blockMat)) {
+        if (NEEDS_DIRT.contains(blockMat)) {
             // Check biome
             if (biomeGrid.getBiome(x, z).equals(Biome.DESERT)) {
                 // No plants in desert except for cactus
@@ -119,7 +121,16 @@ public class SkyGridGen extends ChunkGenerator {
             } else {
                 // Add dirt
                 result.setBlock( x, y, z, Material.DIRT);
-                result.setBlock( x, y+1, z, blockMat);
+                BlockData dataBottom = blockMat.createBlockData();
+                if (dataBottom instanceof Bisected) {
+                    ((Bisected) dataBottom).setHalf(Bisected.Half.BOTTOM);
+                    BlockData dataTop = blockMat.createBlockData();
+                    ((Bisected) dataTop).setHalf(Bisected.Half.TOP);
+                    result.setBlock(x, y + 1, z, dataBottom);
+                    result.setBlock(x, y + 2, z, dataTop);
+                } else { 
+                    result.setBlock( x, y+1, z, blockMat);
+                }
                 if (blockMat.equals(Material.SUGAR_CANE)) {
                     // x will never be more than 12
                     result.setBlock(x+1, y, z, Material.WATER);

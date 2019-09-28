@@ -1,0 +1,217 @@
+###########################################################################################
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+###########################################################################################
+# These strings are deltas to the strings in BentoBox. Any BentoBox string can be
+# overridden by placing it under the skygrid key.
+meta:
+  authors:
+  - DuckSoft
+
+skygrid:
+  # General strings
+  general:
+    errors:
+      no-island: "&c你还没地皮呢!"
+      player-has-island: "&c那人已经有地皮了!"
+      player-has-no-island: "&c那人没有地皮!"
+      already-have-island: "&c你已经有地皮了!"
+      no-safe-location: "&c地皮内没发现安全的地方!"
+      not-owner: "&c你不是队长!"
+  commands:
+    #Main SkyGrid command
+    skygrid:
+      help:
+        description: "开始玩 SkyGrid 或传送至你在 SkyGrid 中的地皮传送点"
+      go:
+        description: "回家"
+        tip: "&c自由下落时无法进行传送!"
+
+    # Override BentoBox default island command strings
+    island:
+      info:
+        description: "显示您或其他玩家的地皮信息"
+      reset:
+        description: "换个地皮重来"
+        parameters: ""
+        must-remove-members: "&c重来之前你得踢光你小队里的人 (/[label] team kick <player>)."
+      sethome:
+        must-be-on-your-island: "&c地皮传送点必须在你自己的地皮里!"
+        home-set: "&6地皮传送点已置于当前位置."
+      setname:
+        description: "给你的地皮起个名"
+      resetname:
+        description: "复原地皮名"
+      team:
+        coop:
+          description: "授予某人合作信任等级"
+        uncoop:
+          you-are-no-longer-a-coop-member: "&c你已不再是 [name] 地皮的合作信任等级成员"
+          all-members-logged-off: "&c小队里的人都不在线，因此你不是 [name] 地皮的合作信任等级成员"
+        trust:
+          description: "授予某人完全信任等级"
+        invite:
+          description: "拉人来你队伍"
+          name-has-invited-you: "&a[name] 刚邀请你加入他们的小队."
+          to-accept-or-reject: "&a用 /[label] team accept 指令接受邀请, 或 /[label] team reject 指令拒绝邀请"
+          you-will-lose-your-island: "&c警告! 接受后你的地皮会消失!"
+          errors:
+            island-is-full: "&c小队满了，拉不进人了."
+          accept:
+            you-joined-island: "&a你刚进了一个小队! 用 /[label] team info 看看其他人叫啥吧."
+            name-joined-your-island: "&a[name] 进了你的小队!"
+            confirmation: |-
+              &c你真的要接受邀请吗?
+              &c&l这会 &n核平 &r&c&l你当前的地皮!
+          reject:
+            you-rejected-invite: "&a你拒绝了一个小队邀请."
+            name-rejected-your-invite: "&c[name] 拒绝了你的邀请!"
+          cancel:
+            description: "取消一个等待回复的邀请"
+        leave:
+          description: "离开小队"
+          left-your-island: "&c[name] &c离开了小队"
+        kick:
+          description: "踢人"
+          owner-kicked: "&c小队队长把你踢了!"
+        demote:
+          description: "降低某人的信任等级"
+        promote:
+          description: "提升某人的信任等级"
+        setowner:
+          description: "转让小队"
+          errors:
+            target-is-not-member: "&c那人不是你们小队的!"
+          name-is-the-owner: "&a[name] 现在是地皮小队的队长了!"
+          you-are-the-owner: "&a你现在是小队队长了!"
+      ban:
+        description: "ban 一个人"
+        cannot-ban-more-players: "&c最多只能 ban 这些人了!"
+        owner-banned-you: "&b[name]&c 把你从他们地皮 ban 出去了!"
+        you-are-banned: "&b你被这地皮 ban 了!"
+      unban:
+        description: "撤销一个人的 ban"
+        you-are-unbanned: "&b[name]&a 把对你的 ban 撤销了!"
+      banlist:
+        noone: "&a这块地上没人被 ban "
+      settings:
+        description: "显示地皮设定"
+    # Admin command /sgadmin
+    admin:
+      team:
+        add:
+          name-has-island: "&c[name] 自己有块地. 先解除关联或删除他的地皮!"
+        setowner:
+          description: "转交地皮所有权"
+          already-owner: "&c他已经是地皮所有者了!"
+      range:
+        description: "管理员地皮区域命令"
+        display:
+          description: "切换地皮区域指示器的显隐"
+          hint: |-
+            &c红标&f指示当前受保护区域的范围.
+            &7灰粒子&f指示最大范围.
+            &a绿粒子&f指示默认情况下的受保护范围.
+        set:
+          description: "设置地皮受保护范围"
+        reset:
+          description: "重设地皮保护范围"
+      register:
+        parameters: "<player>"
+        description: "关联玩家到你所在的无主之地"
+        registered-island: "&a已将玩家关联至地皮 [xyz]."
+        already-owned: "&c地皮已被他人占有!"
+        no-island-here: "&c这里没人用. 确认以建立一块地皮."
+        in-deletion: "&c地皮翻修中. 稍后再试."
+      unregister:
+        description: "解除玩家与地皮的关联并保留其上的内容"
+        unregistered-island: "&a已将玩家与地皮 [xyz] 解除关联."
+      info:
+        description: "获取你所在的位置的地皮与关联玩家信息"
+        no-island: "&c你在一片无主之地上..."
+        island-location: "地皮坐标: [xyz]"
+        island-coords: "区域坐标: [xz1] to [xz2]"
+        is-spawn: "这是出生地皮"
+      setrange:
+        description: "设置某个玩家地皮的范围"
+        range-updated: "地皮范围更新至 [number]"
+      tp:
+        description: "传送到某人的地皮上"
+      getrank:
+        description: "获取某人在地皮上的信任等级"
+        rank-is: "&a地皮上的信任等级为 [rank]."
+      setrank:
+        description: "设置某人在地皮上的信任等级"
+      setspawn:
+        description: "为整个世界设置出生地皮"
+        already-spawn: "&c这地皮已经是出生地皮了!"
+        no-island-here: "&c这是一块无主之地."
+        confirmation: "&c确信要将此地皮作为世界的出生地皮吗?"
+      delete:
+        description: "强制解除玩家与地皮的关联并重新生成地皮"
+        deleted-island: "&a地皮 &e[xyz] &a成功重新生成."
+
+  protection:
+    flags:
+      ELYTRA: 
+        description: "切换使用"
+      ENDERMAN_GRIEFING: 
+        description: |-
+           &a末影人能否
+           &a偷取方块
+      ENTER_EXIT_MESSAGES: 
+        description: "显示进入/离开消息"
+        island: "[name] 的受保护地皮"
+        name: "进入/离开消息"
+        now-entering: "&b正在进入 [name]"
+        now-leaving: "&b正在离开 [name]"
+      GEO_LIMIT_MOBS: 
+        description: |-
+           &a走出保护区
+           &a的怪物是否
+           &a会被移除
+        name: "&e限制怪物只能在地皮内生存"
+      ISLAND_RESPAWN:
+        description: |-
+          &a玩家是否在
+          &a地皮内重生
+        name: "地皮重生设定"
+      LOCK: 
+        name: "锁定玩家地皮"
+      OFFLINE_REDSTONE:
+        description: |-
+            &a禁用后若地
+            &a皮小队无人
+            &a在线将禁用
+            &a红石 
+      PISTON_PUSH: 
+        description: |-
+            &a允许活塞推
+            &a出地皮区域
+      PVP_OVERWORLD: 
+        description: |-
+            &c在保护区域
+            &c内切换PVP
+      REMOVE_MOBS: 
+        description: |-
+          &a传送到地皮
+          &a时移除怪物
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          &a自由下落时
+          &a禁止传送
+        hint: "&c自由下落时无法进行传送!"
+    locked: "&c地皮已锁定!"
+    protected: "&c地皮受保护: [description]"
+
+    panel:
+      PROTECTION:
+        title: "&6保护"
+        description: |-
+          &a本地皮的
+          &a保护设置
+      SETTING:
+        description: |-
+          &a本地皮的
+          &a通用设置
+
