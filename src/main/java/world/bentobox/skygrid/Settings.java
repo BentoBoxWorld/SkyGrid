@@ -238,6 +238,15 @@ public class Settings implements WorldSettings {
     @ConfigEntry(path = "area.reset.on-leave.ender-chest")
     private boolean onLeaveResetEnderChest = false;
 
+    // Commands
+    @ConfigComment("List of commands to run when a player joins.")
+    @ConfigEntry(path = "area.commands.on-join")
+    private List<String> onJoinCommands = new ArrayList<>();
+
+    @ConfigComment("list of commands to run when a player leaves.")
+    @ConfigEntry(path = "area.commands.on-leave")
+    private List<String> onLeaveCommands = new ArrayList<>();
+
     // Sethome
     @ConfigEntry(path = "area.sethome.nether.allow")
     private boolean allowSetHomeInNether = true;
@@ -1162,5 +1171,35 @@ public class Settings implements WorldSettings {
      */
     public void setDeathsResetOnNewIsland(boolean deathsResetOnNewIsland) {
         this.deathsResetOnNewIsland = deathsResetOnNewIsland;
+    }
+
+    /**
+     * @return the onJoinCommands
+     */
+    @Override
+    public List<String> getOnJoinCommands() {
+        return onJoinCommands;
+    }
+
+    /**
+     * @param onJoinCommands the onJoinCommands to set
+     */
+    public void setOnJoinCommands(List<String> onJoinCommands) {
+        this.onJoinCommands = onJoinCommands;
+    }
+
+    /**
+     * @return the onLeaveCommands
+     */
+    @Override
+    public List<String> getOnLeaveCommands() {
+        return onLeaveCommands;
+    }
+
+    /**
+     * @param onLeaveCommands the onLeaveCommands to set
+     */
+    public void setOnLeaveCommands(List<String> onLeaveCommands) {
+        this.onLeaveCommands = onLeaveCommands;
     }
 }
