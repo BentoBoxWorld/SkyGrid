@@ -111,7 +111,7 @@ public class SkyGrid extends GameModeAddon {
 
     @Override
     public WorldSettings getWorldSettings() {
-        return settings;
+        return getSettings();
     }
 
     public WorldStyles getWorldStyles() {

@@ -128,7 +128,7 @@ public class SkyGridGen extends ChunkGenerator {
                     ((Bisected) dataTop).setHalf(Bisected.Half.TOP);
                     result.setBlock(x, y + 1, z, dataBottom);
                     result.setBlock(x, y + 2, z, dataTop);
-                } else { 
+                } else {
                     result.setBlock( x, y+1, z, blockMat);
                 }
                 if (blockMat.equals(Material.SUGAR_CANE)) {
@@ -198,7 +198,7 @@ public class SkyGridGen extends ChunkGenerator {
 
     @Override
     public Location getFixedSpawnLocation(World world, Random random) {
-        return new Location(world, 0, addon.getSettings().getIslandHeight() + 2, 0);
+        return new Location(world, 0, addon.getSettings().getIslandHeight() + 2D, 0);
     }
 
 
