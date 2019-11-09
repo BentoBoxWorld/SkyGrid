@@ -176,6 +176,12 @@ public class Settings implements WorldSettings {
     @ConfigComment("Visitor banned commands - Visitors to islands cannot use these commands in this world")
     @ConfigEntry(path = "world.visitor-banned-commands")
     private List<String> visitorBannedCommands = new ArrayList<>();
+
+    @ConfigComment("Falling banned commands - players cannot use these commands when falling")
+    @ConfigComment("if the PREVENT_TELEPORT_WHEN_FALLING world setting flag is active")
+    @ConfigEntry(path = "world.falling-banned-commands")
+    private List<String> fallingBannedCommands = new ArrayList<>();
+    
     // ---------------------------------------------
 
     /*      PROTECTED AREA      */
@@ -218,15 +224,15 @@ public class Settings implements WorldSettings {
     private boolean onJoinResetInventory = false;
 
     @ConfigComment("Reset health - if true, the player's health will be reset.")
-    @ConfigEntry(path = "island.reset.on-join.health")
+    @ConfigEntry(path = "area.reset.on-join.health")
     private boolean onJoinResetHealth = true;
 
     @ConfigComment("Reset hunger - if true, the player's hunger will be reset.")
-    @ConfigEntry(path = "island.reset.on-join.hunger")
+    @ConfigEntry(path = "area.reset.on-join.hunger")
     private boolean onJoinResetHunger = true;
 
     @ConfigComment("Reset experience points - if true, the player's experience will be reset.")
-    @ConfigEntry(path = "island.reset.on-join.exp")
+    @ConfigEntry(path = "area.reset.on-join.exp")
     private boolean onJoinResetXP = false;
 
     @ConfigComment("Reset Ender Chest - if true, the player's Ender Chest will be cleared.")
@@ -247,21 +253,56 @@ public class Settings implements WorldSettings {
     private boolean onLeaveResetInventory = false;
 
     @ConfigComment("Reset health - if true, the player's health will be reset.")
-    @ConfigEntry(path = "island.reset.on-leave.health")
+    @ConfigEntry(path = "area.reset.on-leave.health")
     private boolean onLeaveResetHealth = false;
 
     @ConfigComment("Reset hunger - if true, the player's hunger will be reset.")
-    @ConfigEntry(path = "island.reset.on-leave.hunger")
+    @ConfigEntry(path = "area.reset.on-leave.hunger")
     private boolean onLeaveResetHunger = false;
 
     @ConfigComment("Reset experience - if true, the player's experience will be reset.")
-    @ConfigEntry(path = "island.reset.on-leave.exp")
+    @ConfigEntry(path = "area.reset.on-leave.exp")
     private boolean onLeaveResetXP = false;
 
     @ConfigComment("Reset Ender Chest - if true, the player's Ender Chest will be cleared.")
     @ConfigEntry(path = "area.reset.on-leave.ender-chest")
     private boolean onLeaveResetEnderChest = false;
 
+    @ConfigComment("Toggles the automatic area creation upon the player's first login on your server.")
+    @ConfigComment("If set to true,")
+    @ConfigComment("   * Upon connecting to your server for the first time, the player will be told that")
+    @ConfigComment("    an area will be created for him.")
+    @ConfigComment("  * An area will be created for the player without needing him to run the create command.")
+    @ConfigComment("If set to false, this will disable this feature entirely.")
+    @ConfigComment("Warning:")
+    @ConfigComment("  * If you are running multiple gamemodes on your server, and all of them have")
+    @ConfigComment("    this feature enabled, an area in all the gamemodes will be created simultaneously.")
+    @ConfigComment("    However, it is impossible to know on which area the player will be teleported to afterwards.")
+    @ConfigComment("  * Area creation can be resource-intensive, please consider the options below to help mitigate")
+    @ConfigComment("    the potential issues, especially if you expect a lot of players to connect to your server")
+    @ConfigComment("    in a limited period of time.")
+    @ConfigEntry(path = "area.create-area-on-first-login.enable")
+    private boolean createIslandOnFirstLoginEnabled;
+
+    @ConfigComment("Time in seconds after the player logged in, before his area gets created.")
+    @ConfigComment("If set to 0 or less, the island will be created directly upon the player's login.")
+    @ConfigComment("It is recommended to keep this value under a minute's time.")
+    @ConfigEntry(path = "area.create-area-on-first-login.delay")
+    private int createIslandOnFirstLoginDelay = 5;
+
+    @ConfigComment("Toggles whether the area creation should be aborted if the player logged off while the")
+    @ConfigComment("delay (see the option above) has not worn off yet.")
+    @ConfigComment("If set to true,")
+    @ConfigComment("  * If the player has logged off the server while the delay (see the option above) has not")
+    @ConfigComment("    worn off yet, this will cancel the area creation.")
+    @ConfigComment("  * If the player relogs afterward, since he will not be recognized as a new player, no area")
+    @ConfigComment("    would be created for him.")
+    @ConfigComment("  * If the area creation started before the player logged off, it will continue.")
+    @ConfigComment("If set to false, the player's area will be created even if he went offline in the meantime.")
+    @ConfigComment("Note this option has no effect if the delay (see the option above) is set to 0 or less.")
+    @ConfigEntry(path = "area.create-area-on-first-login.abort-on-logout")
+    private boolean createIslandOnFirstLoginAbortOnLogout = true;
+    
     // Commands
     @ConfigComment("List of commands to run when a player joins.")
     @ConfigEntry(path = "area.commands.on-join")
@@ -298,7 +339,7 @@ public class Settings implements WorldSettings {
     private boolean teamJoinDeathReset = true;
 
     @ConfigComment("Reset player death count when they start reset")
-    @ConfigEntry(path = "island.deaths.reset-on-new-island")
+    @ConfigEntry(path = "area.deaths.reset-on-new-island")
     private boolean deathsResetOnNewIsland = true;
 
     // ---------------------------------------------
@@ -678,6 +719,24 @@ public class Settings implements WorldSettings {
     }
 
     /**
+     * Optional list of commands that are banned when falling. Not applicable to all game modes so defaults to empty.
+     *
+     * @return the fallingBannedCommands
+     * @since 1.8.0
+     */
+    @Override
+    public List<String> getFallingBannedCommands() {
+        return fallingBannedCommands;
+    }
+
+    /**
+     * @param fallingBannedCommands the fallingBannedCommands to set
+     */
+    public void setFallingBannedCommands(List<String> fallingBannedCommands) {
+        this.fallingBannedCommands = fallingBannedCommands;
+    }
+
+    /**
      * @return the maxTeamSize
      */
     @Override
@@ -728,6 +787,39 @@ public class Settings implements WorldSettings {
     @Override
     public boolean isKickedKeepInventory() {
         return kickedKeepInventory;
+    }
+
+    /**
+     * This method returns the createIslandOnFirstLoginEnabled boolean value.
+     * @return the createIslandOnFirstLoginEnabled value
+     * @since 1.9.0
+     */
+    @Override
+    public boolean isCreateIslandOnFirstLoginEnabled()
+    {
+        return createIslandOnFirstLoginEnabled;
+    }
+
+    /**
+     * This method returns the createIslandOnFirstLoginDelay int value.
+     * @return the createIslandOnFirstLoginDelay value
+     * @since 1.9.0
+     */
+    @Override
+    public int getCreateIslandOnFirstLoginDelay()
+    {
+        return createIslandOnFirstLoginDelay;
+    }
+
+    /**
+     * This method returns the createIslandOnFirstLoginAbortOnLogout boolean value.
+     * @return the createIslandOnFirstLoginAbortOnLogout value
+     * @since 1.9.0
+     */
+    @Override
+    public boolean isCreateIslandOnFirstLoginAbortOnLogout()
+    {
+        return createIslandOnFirstLoginAbortOnLogout;
     }
 
     /**
@@ -1297,5 +1389,29 @@ public class Settings implements WorldSettings {
      */
     public void setOnLeaveResetXP(boolean onLeaveResetXP) {
         this.onLeaveResetXP = onLeaveResetXP;
+    }
+
+    /**
+     * @param createIslandOnFirstLoginEnabled the createIslandOnFirstLoginEnabled to set
+     */
+    public void setCreateIslandOnFirstLoginEnabled(boolean createIslandOnFirstLoginEnabled)
+    {
+        this.createIslandOnFirstLoginEnabled = createIslandOnFirstLoginEnabled;
+    }
+
+    /**
+     * @param createIslandOnFirstLoginDelay the createIslandOnFirstLoginDelay to set
+     */
+    public void setCreateIslandOnFirstLoginDelay(int createIslandOnFirstLoginDelay)
+    {
+        this.createIslandOnFirstLoginDelay = createIslandOnFirstLoginDelay;
+    }
+
+    /**
+     * @param createIslandOnFirstLoginAbortOnLogout the createIslandOnFirstLoginAbortOnLogout to set
+     */
+    public void setCreateIslandOnFirstLoginAbortOnLogout(boolean createIslandOnFirstLoginAbortOnLogout)
+    {
+        this.createIslandOnFirstLoginAbortOnLogout = createIslandOnFirstLoginAbortOnLogout;
     }
 }
