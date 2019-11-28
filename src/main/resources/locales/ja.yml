@@ -80,6 +80,7 @@ skygrid:
       team:
         setowner:
           description: エリアの所有権をプレーヤーに譲渡します
+          already-owner: "＆c プレイヤーはすでにこのエリアの所有者です！"
         add:
           name-has-island: "＆c [name]には領域があります。最初に登録解除または削除してください！"
       range:
@@ -100,6 +101,7 @@ skygrid:
         already-owned: "＆cエリアは既に別のプレイヤーが所有しています！"
         no-island-here: "＆cここにはプレーヤーエリアがありません。確認して作成してください。"
         in-deletion: "＆cこのスペースは現在再生成中です。後で試してください。"
+        parameters: "<プレイヤー>"
       unregister:
         description: エリアから所有者の登録を解除しますが、エリアブロックはそのままにします
         unregistered-island: "＆a [xyz]のエリアからの未登録プレーヤー。"
@@ -134,6 +136,9 @@ skygrid:
       ENTER_EXIT_MESSAGES:
         description: 入口および出口メッセージを表示する
         name: メッセージの入力/終了
+        island: "[name]の保護領域"
+        now-entering: "＆b [name]を入力しています"
+        now-leaving: "＆b [name]を離れます"
       ISLAND_RESPAWN:
         name: エリアリスポーン
         description: |-
@@ -178,6 +183,14 @@ skygrid:
     panel:
       PROTECTION:
         title: "＆6保護"
+        description: |-
+          &aこのエリアの
+          ＆a保護設定
+      SETTING:
+        description: |-
+          &aこのエリアの
+          ＆a一般設定
+    protected: "＆cエリア保護：[description]"
   general:
     errors:
       no-island: "＆cエリアがありません！"
@@ -185,3 +198,4 @@ skygrid:
       already-have-island: "＆c既にエリアがあります！"
       no-safe-location: "＆cエリアに安全な場所が見つかりません！"
       not-owner: "＆cあなたはチームのオーナーではありません！"
+      player-has-island: "＆c プレイヤーにはすでに領域があります！"
