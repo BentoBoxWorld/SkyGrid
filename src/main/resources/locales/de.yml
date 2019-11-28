@@ -1,0 +1,90 @@
+---
+skygrid:
+  commands:
+    skygrid:
+      help:
+        description: Starten Sie ein SkyGrid-Spiel oder teleportieren Sie sich zu
+          Ihrem SkyGrid-Zuhause
+      go:
+        description: Nach Hause gehen
+    island:
+      info:
+        description: Informationen zu Ihrer Region oder der Region des Players anzeigen
+      reset:
+        description: in einem anderen Bereich neu starten
+      setname:
+        description: Geben Sie Ihrem Gebiet einen Namen
+      resetname:
+        description: Setzen Sie Ihren Gebietsnamen zurück
+      team:
+        coop:
+          description: Erstelle einen Coop-Rang
+        trust:
+          description: Gib einem Spieler einen vertrauenswürdigen Rang
+        invite:
+          description: Laden Sie einen Spieler in Ihr Team ein
+          cancel:
+            description: Brechen Sie die ausstehende Einladung zu Ihrem Team ab
+        leave:
+          description: Verlasse dein Team
+        kick:
+          description: ein Teammitglied entfernen
+        demote:
+          description: einen Spieler um einen Rang herabstufen
+        promote:
+          description: befördere einen Spieler um einen Rang
+        setowner:
+          description: Übertragen Sie die Team-Inhaberschaft auf ein Mitglied
+      ban:
+        description: verbanne einen Spieler aus deiner Gegend
+      unban:
+        description: Bannen Sie einen Spieler aus Ihrer Nähe auf
+      settings:
+        description: Einstellungen für den Anzeigebereich
+    admin:
+      team:
+        setowner:
+          description: überträgt das Gebietseigentum auf den Spieler
+      range:
+        description: Befehl für den Admin-Bereich
+        display:
+          description: Bereichsanzeiger ein- / ausblenden
+        set:
+          description: Legt den Bereichsschutzbereich fest
+        reset:
+          description: Setzt den geschützten Bereich auf den Weltstandard zurück
+      register:
+        parameters: "<player>"
+        description: Registrieren Sie den Spieler in einem nicht besessenen Bereich,
+          in dem Sie sich befinden
+      unregister:
+        description: Entfernen Sie die Registrierung des Besitzers aus einem Gebiet,
+          aber behalten Sie die Gebietsblöcke wie sie sind bei
+      info:
+        description: Erhalte Informationen darüber, wo du bist oder über den Spieler
+        island-location: 'Gebietsstandort: [xyz]'
+        island-coords: 'Gebietskoordinaten: [xz1] bis [xz2]'
+        is-spawn: Das Gebiet ist eine Laichinsel
+      setrange:
+        description: Stellen Sie die Reichweite des Spielerbereichs ein
+      tp:
+        description: In den Bereich eines Spielers teleportieren
+      getrank:
+        description: Erreiche den Rang eines Spielers in seiner Nähe
+      setrank:
+        description: Setze den Rang eines Spielers in seinem Gebiet
+      setspawn:
+        description: Stelle ein Gebiet als Spawn für diese Welt ein
+      delete:
+        description: löscht einen Spieler und regeneriert seinen Bereich
+  protection:
+    flags:
+      ELYTRA:
+        description: Verwendung umschalten
+      ENTER_EXIT_MESSAGES:
+        description: Ein- und Ausstiegsmeldungen anzeigen
+        name: Nachrichten eingeben / beenden
+      ISLAND_RESPAWN:
+        name: Area Respawn
+      LOCK:
+        name: Spielerbereich sperren
