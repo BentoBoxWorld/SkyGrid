@@ -1,0 +1,201 @@
+---
+skygrid:
+  commands:
+    skygrid:
+      help:
+        description: SkyGridゲームを開始するか、SkyGridホームにテレポートします
+      go:
+        description: 家に帰る
+        tip: "＆c落下するとテレポートできません！"
+    island:
+      info:
+        description: お住まいの地域またはプレイヤーの地域に関する情報を表示する
+      reset:
+        description: 別のエリアで再起動する
+        must-remove-members: "＆c再起動する前に、すべてのチームプレーヤーを削除する必要があります（/ [label] team kick
+          <player> ）。"
+      setname:
+        description: お住まいの地域の名前を設定します
+      resetname:
+        description: エリア名をリセット
+      team:
+        coop:
+          description: プレイヤー協同組合ランクを作る
+        trust:
+          description: プレーヤーに信頼できるランクを与える
+        invite:
+          description: プレイヤーをチームに招待する
+          cancel:
+            description: チームに参加するための保留中の招待をキャンセルする
+          name-has-invited-you: "＆a [name]があなたをチームに招待しています。"
+          to-accept-or-reject: "＆a Do / [label] team accept to accept、または/ [label]
+            team reject to reject"
+          you-will-lose-your-island: "＆c警告！あなたが受け入れるならば、あなたは私たちの地域を失うでしょう！"
+          errors:
+            island-is-full: "＆cチームは満員です。他の人を招待することはできません。"
+          accept:
+            you-joined-island: "＆aチームに参加しました！ / [label]チーム情報を使用して、他のメンバーを表示します。"
+            name-joined-your-island: "＆a [name]があなたのチームに加わりました！"
+            confirmation: |-
+              ＆cこの招待を受け入れてもよろしいですか？
+              ＆c＆lこれは、現在のエリアをワイプ＆n＆c＆lします！
+          reject:
+            you-rejected-invite: "＆aチームに参加するための招待を拒否しました。"
+            name-rejected-your-invite: "＆c [name]は招待を拒否しました！"
+        leave:
+          description: チームを離れる
+          left-your-island: "＆c [name]＆cはチームを去りました"
+        kick:
+          description: チームメンバーを削除する
+          owner-kicked: "＆cオーナーがあなたをチームから追い出した！"
+        demote:
+          description: プレイヤーを1ランク降格させる
+        promote:
+          description: プレイヤーを1ランク昇格させる
+        setowner:
+          description: チームの所有権をメンバーに譲渡する
+          errors:
+            target-is-not-member: "＆cそのプレイヤーはチームの一員ではありません！"
+          name-is-the-owner: "＆a [name]がエリアオーナーになりました！"
+          you-are-the-owner: "＆aこれでエリアのオーナーになりました！"
+        uncoop:
+          you-are-no-longer-a-coop-member: "＆cあなたは[name]のエリアの協力メンバーではなくなりました"
+          all-members-logged-off: "＆cすべてのチームメンバーがログオフしたため、あなたは[name]の地域の協力メンバーではなくなりました"
+      ban:
+        description: お住まいの地域からプレイヤーを禁止する
+        cannot-ban-more-players: "＆c制限に達したため、これ以上プレイヤーを禁止することはできません。"
+        owner-banned-you: "＆b [name]＆cはあなたを彼らのエリアから追放しました！"
+        you-are-banned: "＆bこのエリアへの立ち入りは禁止されています！"
+      unban:
+        description: お住まいの地域からプレイヤーを禁止解除
+        you-are-unbanned: "＆b [name]＆aはあなたをその地域から禁止しませんでした！"
+      settings:
+        description: 表示領域の設定
+      sethome:
+        must-be-on-your-island: "＆c家に帰るにはあなたの地域にいなければなりません！"
+        home-set: "＆6あなたの家は現在の場所に設定されています。"
+      banlist:
+        noone: "＆aこのエリアでは誰も禁止されていません"
+    admin:
+      team:
+        setowner:
+          description: エリアの所有権をプレーヤーに譲渡します
+          already-owner: "＆c プレイヤーはすでにこのエリアの所有者です！"
+        add:
+          name-has-island: "＆c [name]には領域があります。最初に登録解除または削除してください！"
+      range:
+        description: 管理領域範囲コマンド
+        display:
+          description: エリア範囲インジケーターの表示/非表示
+          hint: |-
+            ＆cレッドバリアアイコン＆fは、現在の保護範囲の制限を示します。
+            ＆7灰色粒子＆fは最大制限を示します。
+            ＆a Green Particles＆fは、保護範囲が異なる場合、デフォルトの保護範囲を表示します。
+        set:
+          description: エリア保護範囲を設定します
+        reset:
+          description: 保護された範囲を世界のデフォルトにリセットします
+      register:
+        description: あなたがいる非所有地域にプレイヤーを登録する
+        registered-island: "＆a [xyz]のエリアに登録されたプレーヤー。"
+        already-owned: "＆cエリアは既に別のプレイヤーが所有しています！"
+        no-island-here: "＆cここにはプレーヤーエリアがありません。確認して作成してください。"
+        in-deletion: "＆cこのスペースは現在再生成中です。後で試してください。"
+        parameters: "<プレイヤー>"
+      unregister:
+        description: エリアから所有者の登録を解除しますが、エリアブロックはそのままにします
+        unregistered-island: "＆a [xyz]のエリアからの未登録プレーヤー。"
+      info:
+        description: 現在地またはプレーヤーに関する情報を取得
+        island-location: エリアの場所：[xyz]
+        island-coords: エリア座標：[xz1]から[xz2]
+        is-spawn: エリアはスポーン島です
+        no-island: "＆c現在、登録されたエリアにいません..."
+      setrange:
+        description: プレイヤーのエリアの範囲を設定します
+        range-updated: エリア範囲が[number]に更新されました
+      tp:
+        description: プレイヤーのエリアにテレポートする
+      getrank:
+        description: エリア内でプレイヤーのランクを取得する
+        rank-is: "＆aは、その地域の[ランク]です。"
+      setrank:
+        description: エリア内のプレイヤーのランクを設定します
+      setspawn:
+        description: この世界のスポーンとしてエリアを設定します
+        already-spawn: "＆cこのエリアはすでに出現しています！"
+        no-island-here: "＆c登録されたエリアはありません。"
+        confirmation: "＆cこの領域をこの世界のスポーンとして設定してもよろしいですか？"
+      delete:
+        description: プレイヤーを削除し、エリアを再生成します
+        deleted-island: "＆a [xyz]＆aのエリアは正常に再生成されました。"
+  protection:
+    flags:
+      ELYTRA:
+        description: トグル使用
+      ENTER_EXIT_MESSAGES:
+        description: 入口および出口メッセージを表示する
+        name: メッセージの入力/終了
+        island: "[name]の保護領域"
+        now-entering: "＆b [name]を入力しています"
+        now-leaving: "＆b [name]を離れます"
+      ISLAND_RESPAWN:
+        name: エリアリスポーン
+        description: |-
+          ＆aプレイヤーのリスポーン
+          その地域の
+      LOCK:
+        name: プレイヤーエリアをロック
+      ENDERMAN_GRIEFING:
+        description: |-
+          エンダーメンは削除できます
+          ブロック
+      GEO_LIMIT_MOBS:
+        description: |-
+          ＆a移動するMobを削除する
+          ＆a外部保護
+          プレイヤースペース
+        name: "＆eモブをプレイヤーエリアに制限"
+      OFFLINE_REDSTONE:
+        description: |-
+          ＆a無効にすると、レッドストーン
+          ＆aはエリアでは機能しません
+          ＆aすべてのメンバーがオフラインの場合。
+          ＆a遅延の削減に役立つ場合があります。
+      PISTON_PUSH:
+        description: |-
+          ＆aピストンのプッシュを許可
+          ＆aプレイヤーのエリア外のブロック
+      PVP_OVERWORLD:
+        description: |-
+          ＆c PVPを有効/無効にします
+          保護領域内の＆c。
+      REMOVE_MOBS:
+        description: |-
+          ＆aモンスターを削除する
+          エリアへのテレポート
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          ＆aプレイヤーがテレポートしないようにする
+          ＆a落下している場合。
+        hint: "＆c落下中はテレポートできません！"
+    locked: "＆cこのエリアはロックされています！"
+    panel:
+      PROTECTION:
+        title: "＆6保護"
+        description: |-
+          &aこのエリアの
+          ＆a保護設定
+      SETTING:
+        description: |-
+          &aこのエリアの
+          ＆a一般設定
+    protected: "＆cエリア保護：[description]"
+  general:
+    errors:
+      no-island: "＆cエリアがありません！"
+      player-has-no-island: "＆cそのプレイヤーにはエリアがありません！"
+      already-have-island: "＆c既にエリアがあります！"
+      no-safe-location: "＆cエリアに安全な場所が見つかりません！"
+      not-owner: "＆cあなたはチームのオーナーではありません！"
+      player-has-island: "＆c プレイヤーにはすでに領域があります！"
