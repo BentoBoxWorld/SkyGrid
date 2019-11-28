@@ -1,0 +1,215 @@
+---
+skygrid:
+  commands:
+    skygrid:
+      help:
+        description: Starten Sie ein SkyGrid-Spiel oder teleportieren Sie sich zu
+          Ihrem SkyGrid-Zuhause
+      go:
+        description: Nach Hause gehen
+        tip: "&c Du kannst nicht teleportieren, wenn du fällst!"
+    island:
+      info:
+        description: Informationen zu Ihrer Region oder der Region des Players anzeigen
+      reset:
+        description: in einem anderen Bereich neu starten
+        must-remove-members: "&c Sie müssen alle Teamplayer entfernen, bevor Sie neu
+          starten können (/ [label] team kick <player> )."
+      setname:
+        description: Geben Sie Ihrem Gebiet einen Namen
+      resetname:
+        description: Setzen Sie Ihren Gebietsnamen zurück
+      team:
+        coop:
+          description: Erstelle einen Coop-Rang
+        trust:
+          description: Gib einem Spieler einen vertrauenswürdigen Rang
+        invite:
+          description: Laden Sie einen Spieler in Ihr Team ein
+          cancel:
+            description: Brechen Sie die ausstehende Einladung zu Ihrem Team ab
+          name-has-invited-you: "&a [name] hat Sie eingeladen, sich ihrem Team anzuschließen."
+          to-accept-or-reject: "&a Do / [label] team accept, um zu akzeptieren, oder
+            / [label] team reject, um abzulehnen"
+          you-will-lose-your-island: "&c WARNUNG! Sie verlieren unsere Fläche, wenn
+            Sie akzeptieren!"
+          errors:
+            island-is-full: "&c Dein Team ist voll, du kannst niemanden einladen."
+          accept:
+            you-joined-island: "&a Du bist einem Team beigetreten! Benutze / [label]
+              team info um die anderen Mitglieder zu sehen."
+            name-joined-your-island: "&a [name] ist deinem Team beigetreten!"
+            confirmation: |-
+              &c Möchten Sie diese Einladung wirklich annehmen?
+              &c &l Hiermit wird &n&r&c&l Ihr aktueller Bereich gelöscht!
+          reject:
+            you-rejected-invite: "&a Sie haben die Einladung, sich einem Team anzuschließen,
+              abgelehnt."
+            name-rejected-your-invite: "&c [name] hat Ihre Einladung abgelehnt!"
+        leave:
+          description: Verlasse dein Team
+          left-your-island: "&c [name] &c hat dein Team verlassen"
+        kick:
+          description: ein Teammitglied entfernen
+          owner-kicked: "&c Der Besitzer hat dich aus dem Team geworfen!"
+        demote:
+          description: einen Spieler um einen Rang herabstufen
+        promote:
+          description: befördere einen Spieler um einen Rang
+        setowner:
+          description: Übertragen Sie die Team-Inhaberschaft auf ein Mitglied
+          errors:
+            target-is-not-member: "&c Dieser Spieler gehört nicht zu deinem Team!"
+          name-is-the-owner: "&a [name] ist jetzt der Gebietseigentümer!"
+          you-are-the-owner: "&a Sie sind jetzt der Gebietseigentümer!"
+        uncoop:
+          you-are-no-longer-a-coop-member: "&c Sie sind nicht länger ein Mitglied
+            des [name] -Bereichs"
+          all-members-logged-off: "&c Alle Teammitglieder sind abgemeldet, sodass
+            Sie nicht länger ein Mitglied des [name] -Bereichs sind"
+      ban:
+        description: verbanne einen Spieler aus deiner Gegend
+        cannot-ban-more-players: "&c Du hast das Sperrlimit erreicht, du kannst keine
+          Spieler mehr sperren."
+        owner-banned-you: "&b [name] &c hat dich aus ihrer Gegend verbannt!"
+        you-are-banned: "&b Du bist aus diesem Bereich verbannt!"
+      unban:
+        description: Bannen Sie einen Spieler aus Ihrer Nähe auf
+        you-are-unbanned: "&b [name] &a hat dich aus ihrer Gegend entlassen!"
+      settings:
+        description: Einstellungen für den Anzeigebereich
+      sethome:
+        must-be-on-your-island: "&c Sie müssen in Ihrer Nähe sein, um nach Hause zu
+          gehen!"
+        home-set: "&6 Ihr Zuhause wurde auf Ihren aktuellen Standort eingestellt."
+      banlist:
+        noone: "&a In diesem Bereich ist niemand gesperrt"
+    admin:
+      team:
+        setowner:
+          description: überträgt das Gebietseigentum auf den Spieler
+          already-owner: "&c Spieler ist bereits der Besitzer dieses Gebiets!"
+        add:
+          name-has-island: "&c [name] hat einen Bereich. Erst abmelden oder löschen!"
+      range:
+        description: Befehl für den Admin-Bereich
+        display:
+          description: Bereichsanzeiger ein- / ausblenden
+          hint: |-
+            &c Rote Sperrsymbole &f zeigen die aktuelle Schutzbereichsgrenze an.
+            &7 Graue Partikel &f zeigen die maximale Anzahl.
+            &a Grüne Partikel & f zeigt den Standardschutzbereich an, wenn der Schutzbereich davon abweicht.
+        set:
+          description: Legt den Bereichsschutzbereich fest
+        reset:
+          description: Setzt den geschützten Bereich auf den Weltstandard zurück
+      register:
+        parameters: "<player>"
+        description: Registrieren Sie den Spieler in einem nicht besessenen Bereich,
+          in dem Sie sich befinden
+        registered-island: "&a Registrierter Spieler in den Bereich um [xyz]."
+        already-owned: "&c Area gehört bereits einem anderen Spieler!"
+        no-island-here: "& c Hier gibt es keinen Spielerbereich. Bestätigen Sie, um
+          eine zu erstellen."
+        in-deletion: "&c Dieser Speicherplatz wird gerade neu generiert. Versuche
+          es später."
+      unregister:
+        description: Entfernen Sie die Registrierung des Besitzers aus einem Gebiet,
+          aber behalten Sie die Gebietsblöcke wie sie sind bei
+        unregistered-island: "&a Nicht registrierter Spieler aus dem Gebiet um [xyz]."
+      info:
+        description: Erhalte Informationen darüber, wo du bist oder über den Spieler
+        island-location: 'Gebietsstandort: [xyz]'
+        island-coords: 'Gebietskoordinaten: [xz1] bis [xz2]'
+        is-spawn: Das Gebiet ist eine Laichinsel
+        no-island: "&c Sie befinden sich momentan nicht in einem registrierten Bereich
+          ..."
+      setrange:
+        description: Stellen Sie die Reichweite des Spielerbereichs ein
+        range-updated: Bereich aktualisiert auf [number]
+      tp:
+        description: In den Bereich eines Spielers teleportieren
+      getrank:
+        description: Erreiche den Rang eines Spielers in seiner Nähe
+        rank-is: "&a Rang ist [rank] in ihrem Gebiet."
+      setrank:
+        description: Setze den Rang eines Spielers in seinem Gebiet
+      setspawn:
+        description: Stelle ein Gebiet als Spawn für diese Welt ein
+        already-spawn: "&c Dieser Bereich ist bereits ein Spawn!"
+        no-island-here: "&c Hier gibt es keinen registrierten Bereich."
+        confirmation: "&c Möchten Sie diesen Bereich wirklich als Spawn für diese
+          Welt festlegen?"
+      delete:
+        description: löscht einen Spieler und regeneriert seinen Bereich
+        deleted-island: "&a Bereich bei &e [xyz] &a wurde erfolgreich neu generiert."
+  protection:
+    flags:
+      ELYTRA:
+        description: Verwendung umschalten
+      ENTER_EXIT_MESSAGES:
+        description: Ein- und Ausstiegsmeldungen anzeigen
+        name: Nachrichten eingeben / beenden
+        island: Der geschützte Bereich von [name]
+        now-entering: "&b Geben Sie nun [name] ein"
+        now-leaving: "&b Verlasse jetzt [name]"
+      ISLAND_RESPAWN:
+        name: Area Respawn
+        description: |-
+          &a Spieler respawnen
+          &a in ihrer Nähe
+      LOCK:
+        name: Spielerbereich sperren
+      ENDERMAN_GRIEFING:
+        description: |-
+          &a Endermen kann entfernen
+          &a Block
+      GEO_LIMIT_MOBS:
+        description: |-
+          &a Entferne Mobs, die gehen
+          &a außen geschützte
+          &a Spielerraum
+        name: "&e Beschränke Mobs auf den Spielerbereich"
+      OFFLINE_REDSTONE:
+        description: |-
+          &a Wenn deaktiviert, redstone
+          &a funktioniert nicht in Gebieten
+          &a wo alle Mitglieder offline sind.
+          &a Kann dazu beitragen, die Verzögerung zu verringern.
+      PISTON_PUSH:
+        description: |-
+          &a Kolben drücken lassen
+          &a Block außerhalb des Spielerbereichs
+      PVP_OVERWORLD:
+        description: |-
+          &c PVP aktivieren / deaktivieren
+          &c im geschützten Bereich.
+      REMOVE_MOBS:
+        description: |-
+          &a Entferne Monster wenn
+          &a Teleportieren in ein Gebiet
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          &a Verhindern, dass Spieler sich teleportieren
+          &a wenn sie fallen.
+        hint: "&c Du kannst nicht teleportieren, während du fällst!"
+    locked: "&c Dieser Bereich ist gesperrt!"
+    protected: "&c Bereich geschützt: [description]"
+    panel:
+      PROTECTION:
+        title: "&6 Schutz"
+        description: |-
+          &a Schutzeinstellungen
+          &a für diesen Bereich
+      SETTING:
+        description: |-
+          &a Allgemeine Einstellungen
+          &a für diesen Bereich
+  general:
+    errors:
+      no-island: "&c Sie haben keine Fläche!"
+      player-has-island: "&c Spieler hat bereits einen Bereich!"
+      player-has-no-island: "&c Dieser Spieler hat kein Gebiet!Than"
+      already-have-island: "&c Du hast bereits ein Gebiet!"
+      no-safe-location: "&c Kein sicherer Ort in der Gegend gefunden!"
+      not-owner: "&c Du bist nicht der Besitzer deines Teams!"
