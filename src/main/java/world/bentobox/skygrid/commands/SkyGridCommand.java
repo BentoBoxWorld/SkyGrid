@@ -11,6 +11,7 @@ import world.bentobox.bentobox.api.commands.island.IslandBanlistCommand;
 import world.bentobox.bentobox.api.commands.island.IslandExpelCommand;
 import world.bentobox.bentobox.api.commands.island.IslandInfoCommand;
 import world.bentobox.bentobox.api.commands.island.IslandLanguageCommand;
+import world.bentobox.bentobox.api.commands.island.IslandNearCommand;
 import world.bentobox.bentobox.api.commands.island.IslandResetCommand;
 import world.bentobox.bentobox.api.commands.island.IslandResetnameCommand;
 import world.bentobox.bentobox.api.commands.island.IslandSethomeCommand;
@@ -58,6 +59,8 @@ public class SkyGridCommand extends CompositeCommand {
         new IslandTeamCommand(this);
         // SkyGrid sub commands
         new GoCommand(this);
+
+        new IslandNearCommand(this);
     }
 
     /* (non-Javadoc)
@@ -78,7 +81,6 @@ public class SkyGridCommand extends CompositeCommand {
                 .player(user)
                 .addon((GameModeAddon) getAddon())
                 .reason(Reason.CREATE)
-                .noPaste()
                 .build();
                 return true;
             } catch (IOException e) {
