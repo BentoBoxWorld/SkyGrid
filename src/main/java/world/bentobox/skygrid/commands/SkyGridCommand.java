@@ -44,7 +44,7 @@ public class SkyGridCommand extends CompositeCommand {
         setPermission("skygrid");
         // Set up subcommands
         new IslandInfoCommand(this);
-        new IslandResetCommand(this, true);
+        new IslandResetCommand(this);
         new IslandSetnameCommand(this);
         new IslandResetnameCommand(this);
         new IslandSethomeCommand(this);
