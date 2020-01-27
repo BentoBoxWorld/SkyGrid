@@ -65,8 +65,6 @@ public class SkyGridPop extends BlockPopulator {
             for (int z = 1; z < 16; z +=4) {
                 for (int y = 0; y <= size; y += 4) {
                     Block b = chunk.getBlock(x, y, z);
-                    if (b.getType().equals(Material.AIR))
-                        continue;
                     // Alter blocks
                     switch (b.getType()) {
                     case CHEST:
