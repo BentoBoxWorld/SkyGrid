@@ -1,0 +1,216 @@
+###########################################################################################
+# This is a YML file. Be careful when editing. Check your edits in a YAML checker like    #
+# the one at http://yaml-online-parser.appspot.com                                        #
+#                                                                                         #
+# Translation by: CZghost                                                                 #
+###########################################################################################
+# These strings are deltas to the strings in BentoBox. Any BentoBox string can be
+# overridden by placing it under the skygrid key.
+skygrid:
+  # General strings
+  general:
+    errors:
+      no-island: "&c Nemáš žádný prostor!"
+      player-has-island: "&c Hráč již má ostrov!"
+      player-has-no-island: "&c Tento hráč nemá svůj prostor!"
+      already-have-island: "&c Již máš svůj prostor!"
+      no-safe-location: "&c V prostoru nebylo nalezeno bezpečné místo!"
+      not-owner: "&c Nejsi vlastník svého týmu!"
+  commands:
+    #Main SkyGrid command
+    skygrid:
+      help:
+        description: "Začít hru SkyGrid nebo se teleportovat do svého SkyGrid domova"
+      go:
+        description: "Běž domů"
+        tip: "&c Nemůžeš se teleportovat, zatímco padáš!"
+
+    # Override BentoBox default island command strings
+    island:
+      info:
+        description: "ukázat info o tvé oblasti nebo oblasti hráče"
+      reset:
+        description: "restartuj v jiné oblasti"
+        parameters: ""
+        must-remove-members: "&c Nejdříve musíš odebrat všechny členy týmu, než budeš moci restartovat prostor (/[label] team kick <player>)."
+      sethome:
+        must-be-on-your-island: "&c Musíš být ve svém prostoru k nastavení domova!"
+        home-set: "&6 Tvůj domov byl nastaven na tvou nynější lokaci."
+      setname:
+        description: "nastavit jméno tvé oblasti"
+      resetname:
+        description: "obnovit jméno tvé oblasti"
+      team:
+        coop:
+          description: "učinit hráče pomocníkem"
+        uncoop:
+          you-are-no-longer-a-coop-member: "&c Nadále již nejsi pomocníkem v oblasti [name]"
+          all-members-logged-off: "&c Všichni členové týmu se odpojili, takže nadále nejsi pomocníkem v oblasti [name]"
+        trust:
+          description: "dát hráči hodnost důvěryhodného"
+        invite:
+          description: "pozvat hráče do svého týmu"
+          name-has-invited-you: "&a [name] tě pozval jako člena svého týmu."
+          to-accept-or-reject: "&a Proveď /[label] team accept k přijetí žádosti, nebo /[label] team reject k odmítnutí"
+          you-will-lose-your-island: "&c VAROVÁNÍ! Ztratíš svůj prostor, pokud žádost přijmeš!"
+          errors:
+            island-is-full: "&c Tvůj tým je plný, nemůžeš pozvat další hráče."
+          accept:
+            you-joined-island: "&a Přidal ses k týmu! Použij /[label] team info zobrazení ostatních členů."
+            name-joined-your-island: "&a [name] se přidal k tvému týmu!"
+            confirmation: |-
+              &c Jsi si jistý, že chceš přijmout tuto pozvánku?
+              &c&l Tato akce &n SMAŽE &r&c&l tvůj dosavadní prostor!
+          reject:
+            you-rejected-invite: "&a Odmítl jsi pozvánku do týmu."
+            name-rejected-your-invite: "&c [name] odmítl tvou pozvánku!"
+          cancel:
+            description: "zrušit čekající pozvánku do týmu"
+        leave:
+          description: "opustit svůj tým"
+          left-your-island: "&c [name] &c opustil tvůj tým"
+        kick:
+          description: "odstranit člena týmu"
+          owner-kicked: "&c Vlastník tě vykopl ze svého týmu!"
+        demote:
+          description: "degrafovat hráče"
+        promote:
+          description: "povýšit hráče"
+        setowner:
+          description: "přenést vlastnictví týmu na jiného hráče"
+          errors:
+            target-is-not-member: "&c Tento hráč není členem tvého týmu!"
+          name-is-the-owner: "&a [name] je nyní vlastníkem prostoru!"
+          you-are-the-owner: "&a Nyní jsi vlastníkem prostoru!"
+      ban:
+        description: "zakázat hráči přístup do tvého prostoru"
+        cannot-ban-more-players: "&c Dosáhl jsi limitu zákazů, nemůžeš zakázat přístup dalším hráčům."
+        owner-banned-you: "&b [name]&c  ti zakázal přístup do svého prostoru!"
+        you-are-banned: "&b Přístup do tohoto prostoru ti byl zakázán!"
+      unban:
+        description: "povolit hráči přístup do tvého prostoru"
+        you-are-unbanned: "&b [name]&a  ti povolil přístup do svého prostoru!"
+      banlist:
+        noone: "&a Nikdo nemá přístup do tohoto prostoru zakázán"
+      settings:
+        description: "ukázat nastavení prostoru"
+    # Admin command /sgadmin
+    admin:
+      team:
+        add:
+          name-has-island: "&c [name] má svůj prostor. Nejdříve ho odregistruj nebo smaž!"
+        setowner:
+          description: "přenese vlastnictví prostoru na hráče"
+          already-owner: "&c Hráč již je vlastníkem tohoto prostoru!"
+      range:
+        description: "Administrátorský příkaz pro vzdálenost prostorů"
+        display:
+          description: "ukázat nebo skrýt ukazatele vzdálenosti prostoru"
+          hint: |-
+            &c Ikony červené bariéry &f ukazují nynější limit chráněné oblasti prostoru.
+            &7 Šedé partikly &f ukazují maximální limit chráněné oblasti.
+            &a Zelené partikly &f ukazují výchozí chráněnou oblast, pokud se od ní nynější odlišuje.
+        set:
+          description: "Nastaví chráněnou oblast prostoru"
+        reset:
+          description: "Nastaví chráněnou oblast prostoru na výchozí hodnotu světa"
+      register:
+        parameters: "<player>"
+        description: "registrovat hráče na nevlastněný prostor, na kterém se nacházíš"
+        registered-island: "&a Hráč registrován na prostor [xyz]."
+        already-owned: "&c Prostor je již vlastněn jiným hráčem!"
+        no-island-here: "&c Zde není žádný prostor. Potvrď jeho vytvoření."
+        in-deletion: "&c Tento prostor je momentálně regenerován. Zkus později."
+      unregister:
+        description: "odregistrovat vlastníka z prostoru, ale zachovat bloky ostrova"
+        unregistered-island: "&a Hráč odregistrován z prostoru [xyz]."
+      info:
+        description: "získat info, kde se nacházíš ty nebo hráčův prostor"
+        no-island: "&c Právě nejsi v registrovaném prostoru..."
+        island-location: "Pozice prostoru: [xyz]"
+        island-coords: "Souřadnice prostoru: [xz1] - [xz2]"
+        is-spawn: "Prostor je spawn"
+      setrange:
+        description: "nastavit vzdálenost prostoru hráče"
+        range-updated: "Vzdálenost prostoru nastavena na [number]"
+      tp:
+        description: "teleport do prostoru hráče"
+      getrank:
+        description: "získat hodnost hráče v jejich prostoru"
+        rank-is: "&a Hodnost je [rank] v jejich prostoru."
+      setrank:
+        description: "nastavit hodnost hráče v jejich prostoru"
+      setspawn:
+        description: "nastavit prostor jako spawn pro tento svět"
+        already-spawn: "&c Tento prostor již je spawn!"
+        no-island-here: "&c Zde není registrovaný prostor."
+        confirmation: "&c Jsi si jistý, že chceš tento prostor nastavit jako spawn pro tento svět?"
+      delete:
+        description: "odstraní hráče a regeneruje jeho prostor"
+        deleted-island: "&a Prostor na &e [xyz] &a byl úspěšně regenerován."
+
+  protection:
+    flags:
+      ELYTRA: 
+        description: "Přepnout použití"
+      ENDERMAN_GRIEFING: 
+        description: |-
+          &a Endermeni mohou brát
+          &a bloky
+      ENTER_EXIT_MESSAGES: 
+        description: "Ukázat zprávy o příchodu a odchodu"
+        island: "Chráněný prostor [name]"
+        name: "Zprávy příchodu/odchodu"
+        now-entering: "&b Právě přicházíš k [name]"
+        now-leaving: "&b Právě odcházíš od [name]"
+      GEO_LIMIT_MOBS: 
+        description: |-
+          &a Odstranit moby, které
+          &a se zapletou mimo chráněný
+          &a prostor hráče
+        name: "&e Omezit moby na prostor"
+      ISLAND_RESPAWN:
+        description: |-
+          &a Hráči se respawnují
+          &a v jejich prostoru
+        name: "Respawn v prostoru"
+      LOCK: 
+        name: "Zamknout prostor hráče"
+      OFFLINE_REDSTONE:
+        description: |-
+            &a Je-li zakázáno, rudit
+            &a nebude funkční v prostorech, jejichž
+            &a členové jsou všichni offline.
+            &a Může pomoci snížit lagy.
+      PISTON_PUSH: 
+        description: |-
+            &a Povolit pístům vytlačit
+            &a blok mimo prostor hráče
+      PVP_OVERWORLD: 
+        description: |-
+            &c Zapnout/Vypnout PVP
+            &c v chráněném prostoru.
+      REMOVE_MOBS: 
+        description: |-
+          &a Odstranit příšery při
+          &a teleportu do prostoru
+      PREVENT_TELEPORT_WHEN_FALLING:
+        description: |-
+          &a Zabránit hráčům v teleportaci zpět
+          &a do jejich prostoru použitím příkazu,
+          &a pokud padají.
+        hint: "&c Nemůžeš se teleportovat, zatímco padáš!"
+    locked: "&c Tento prostor je zamčený!"
+    protected: "&c Prostor chráněn: [description]"
+
+    panel:
+      PROTECTION:
+        title: "&6 Protekce"
+        description: |-
+          &a Nastavení protekce
+          &a tohoto prostoru
+      SETTING:
+        description: |-
+          &a Obecné nastavení
+          &a tohoto prostoru
+
