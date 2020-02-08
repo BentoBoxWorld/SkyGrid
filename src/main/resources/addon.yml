@@ -71,6 +71,9 @@ permissions:
   skygrid.mod.bypasscooldowns:
     description: Allow moderator to bypass cooldowns
     default: op
+  skygrid.mod.bypassdelays:
+    description: Allow moderator to bypass delays
+    default: op
   skygrid.mod.bypassprotect:
     description: Allow moderator to bypass area protection
     default: op
