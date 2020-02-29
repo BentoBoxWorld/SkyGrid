@@ -120,7 +120,7 @@ public class Settings implements WorldSettings {
     private int islandStartZ = 0;
 
     @ConfigComment("SkyGrid height")
-    @ConfigComment("This is the height of the top sky grid layer")
+    @ConfigComment("This is the height of the top sky grid layer. 255 max.")
     @ConfigEntry(path = "world.skygrid-height")
     private int islandHeight = 128;
 
@@ -181,7 +181,7 @@ public class Settings implements WorldSettings {
     @ConfigComment("if the PREVENT_TELEPORT_WHEN_FALLING world setting flag is active")
     @ConfigEntry(path = "world.falling-banned-commands")
     private List<String> fallingBannedCommands = new ArrayList<>();
-    
+
     // ---------------------------------------------
 
     /*      PROTECTED AREA      */
@@ -302,7 +302,7 @@ public class Settings implements WorldSettings {
     @ConfigComment("Note this option has no effect if the delay (see the option above) is set to 0 or less.")
     @ConfigEntry(path = "area.create-area-on-first-login.abort-on-logout")
     private boolean createIslandOnFirstLoginAbortOnLogout = true;
-    
+
     // Commands
     @ConfigComment("List of commands to run when a player joins.")
     @ConfigEntry(path = "area.commands.on-join")
@@ -514,6 +514,8 @@ public class Settings implements WorldSettings {
      */
     @Override
     public int getIslandHeight() {
+        if (islandHeight > 255) islandHeight = 255;
+        else if (islandHeight < 0) islandHeight = 0;
         return islandHeight;
     }
 
@@ -521,6 +523,8 @@ public class Settings implements WorldSettings {
      * @param islandHeight the islandHeight to set
      */
     public void setIslandHeight(int islandHeight) {
+        if (islandHeight > 255) islandHeight = 255;
+        else if (islandHeight < 0) islandHeight = 0;
         this.islandHeight = islandHeight;
     }
 
