@@ -172,19 +172,19 @@ public class SkyGridPop extends BlockPopulator {
         slt.reset();
         switch (b.getWorld().getEnvironment()) {
         case NETHER:
-            for (int i = 0; i < addon.getSettings().getChestFillNether() && i < 27; i ++) {
+            for (int i = 0; chestItemsNether.size() > 0 && i < addon.getSettings().getChestFillNether() && i < 27; i ++) {
                 ItemStack item = new ItemStack(this.chestItemsNether.get(random.nextInt(chestItemsNether.size())));
                 inv.setItem(slt.next(), item);
             }
             break;
         case THE_END:
-            for (int i = 0; i < addon.getSettings().getChestFillEnd() && i < 27; i ++) {
+            for (int i = 0; chestItemsEnd.size() > 0 && i < addon.getSettings().getChestFillEnd() && i < 27; i ++) {
                 ItemStack item = new ItemStack(this.chestItemsEnd.get(random.nextInt(chestItemsEnd.size())));
                 inv.setItem(slt.next(), item);
             }
             break;
         default:
-            for (int i = 0; i < addon.getSettings().getChestFill() && i < 27; i ++) {
+            for (int i = 0; chestItemsWorld.size() > 0 && i < addon.getSettings().getChestFill() && i < 27; i ++) {
                 ItemStack item = new ItemStack(this.chestItemsWorld.get(random.nextInt(chestItemsWorld.size())));
                 inv.setItem(slt.next(), item);
             }
