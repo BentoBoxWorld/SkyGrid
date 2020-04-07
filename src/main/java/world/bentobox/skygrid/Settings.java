@@ -190,6 +190,18 @@ public class Settings implements WorldSettings {
     @ConfigEntry(path = "area.max-team-size")
     private int maxTeamSize = 4;
 
+    @ConfigComment("Default maximum number of coop rank members per area")
+    @ConfigComment("Players can have the skygrid.coop.maxsize.<number> permission to be bigger but")
+    @ConfigComment("permission size cannot be less than the default below. ")
+    @ConfigEntry(path = "island.max-coop-size", since = "1.13.0")
+    private int maxCoopSize = 4;
+    
+    @ConfigComment("Default maximum number of trusted rank members per area")
+    @ConfigComment("Players can have the skygrid.trust.maxsize.<number> permission to be bigger but")
+    @ConfigComment("permission size cannot be less than the default below. ")
+    @ConfigEntry(path = "island.max-trusted-size", since = "1.13.0")
+    private int maxTrustSize = 4;
+
     // Reset
     @ConfigComment("How many resets a player is allowed (override with /sgadmin clearresets <player>)")
     @ConfigComment("Value of -1 means unlimited, 0 means hardcore - no resets.")
@@ -1417,5 +1429,35 @@ public class Settings implements WorldSettings {
     public void setCreateIslandOnFirstLoginAbortOnLogout(boolean createIslandOnFirstLoginAbortOnLogout)
     {
         this.createIslandOnFirstLoginAbortOnLogout = createIslandOnFirstLoginAbortOnLogout;
+    }
+    
+    /**
+     * @return the maxCoopSize
+     */
+    @Override
+    public int getMaxCoopSize() {
+        return maxCoopSize;
+    }
+
+    /**
+     * @param maxCoopSize the maxCoopSize to set
+     */
+    public void setMaxCoopSize(int maxCoopSize) {
+        this.maxCoopSize = maxCoopSize;
+    }
+
+    /**
+     * @return the maxTrustSize
+     */
+    @Override
+    public int getMaxTrustSize() {
+        return maxTrustSize;
+    }
+
+    /**
+     * @param maxTrustSize the maxTrustSize to set
+     */
+    public void setMaxTrustSize(int maxTrustSize) {
+        this.maxTrustSize = maxTrustSize;
     }
 }
