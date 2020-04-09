@@ -9,8 +9,11 @@ authors: tastybento
 
 permissions: 
   skygrid.skygrid:
-    description: Use the skygrid command 
-    default: true  
+    description: Use the skygrid command
+    default: true 
+  skygrid.skygrid.go:
+    description: Use the skygrid go command
+    default: true    
   skygrid.island.create:
     description: Allow creating of a player area
     default: true
