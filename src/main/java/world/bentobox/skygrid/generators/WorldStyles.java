@@ -152,6 +152,20 @@ public class WorldStyles {
         types.add(EntityType.VINDICATOR);
         types.add(EntityType.ZOMBIE_HORSE);
         types.add(EntityType.ZOMBIE_VILLAGER);
+        types.add(EntityType.BEE);
+        types.add(EntityType.CAT);
+        types.add(EntityType.COD);
+        types.add(EntityType.DOLPHIN);
+        types.add(EntityType.DONKEY);
+        types.add(EntityType.DROWNED);
+        types.add(EntityType.ELDER_GUARDIAN);
+        types.add(EntityType.FOX);
+        types.add(EntityType.HUSK);
+        types.add(EntityType.PANDA);
+        types.add(EntityType.PILLAGER);
+        types.add(EntityType.RAVAGER);
+        types.add(EntityType.TURTLE);
+        types.add(EntityType.VEX);
 
         int step = 1000 / types.size();
         int i = step;
@@ -172,8 +186,13 @@ public class WorldStyles {
         s.put(50,  EntityType.MAGMA_CUBE);
         s.put(75,  EntityType.SKELETON);
         s.put(100,  EntityType.WITHER_SKELETON);
-        s.put(125,  EntityType.PIG_ZOMBIE);
+        s.put(125,  EntityType.ZOMBIFIED_PIGLIN);
         s.put(150,  EntityType.SKELETON_HORSE);
+        s.put(50,  EntityType.STRIDER);
+        s.put(125, EntityType.PIGLIN);
+        s.put(125,  EntityType.ZOGLIN);
+        s.put(125,  EntityType.HOGLIN);
+        s.put(25,  EntityType.ENDERMAN);
         return s;
     }
 

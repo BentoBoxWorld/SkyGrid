@@ -716,7 +716,7 @@ world:
   - GUARDIAN
   - ZOMBIE_VILLAGER
   - WITHER
-  - PIG_ZOMBIE
+  - ZOMBIFIED_PIGLIN
   # World flags. These are boolean settings for various flags for this world
   flags:
     OBSIDIAN_SCOOPING: true
