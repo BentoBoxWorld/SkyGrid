@@ -11,6 +11,8 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 
+import com.google.common.base.Enums;
+
 import world.bentobox.skygrid.SkyGrid;
 
 
@@ -186,13 +188,15 @@ public class WorldStyles {
         s.put(50,  EntityType.MAGMA_CUBE);
         s.put(75,  EntityType.SKELETON);
         s.put(100,  EntityType.WITHER_SKELETON);
-        s.put(125,  EntityType.ZOMBIFIED_PIGLIN);
         s.put(150,  EntityType.SKELETON_HORSE);
-        s.put(50,  EntityType.STRIDER);
-        s.put(125, EntityType.PIGLIN);
-        s.put(125,  EntityType.ZOGLIN);
-        s.put(125,  EntityType.HOGLIN);
         s.put(25,  EntityType.ENDERMAN);
+        if (Enums.getIfPresent(EntityType.class, "ZOMBIFIED_PIGLIN").isPresent()) {
+            s.put(125,  EntityType.ZOMBIFIED_PIGLIN);
+            s.put(50,  EntityType.STRIDER);
+            s.put(125, EntityType.PIGLIN);
+            s.put(125,  EntityType.ZOGLIN);
+            s.put(125,  EntityType.HOGLIN);
+        }
         return s;
     }
 
