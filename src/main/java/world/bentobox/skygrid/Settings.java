@@ -195,7 +195,7 @@ public class Settings implements WorldSettings {
     @ConfigComment("permission size cannot be less than the default below. ")
     @ConfigEntry(path = "island.max-coop-size", since = "1.13.0")
     private int maxCoopSize = 4;
-    
+
     @ConfigComment("Default maximum number of trusted rank members per area")
     @ConfigComment("Players can have the skygrid.trust.maxsize.<number> permission to be bigger but")
     @ConfigComment("permission size cannot be less than the default below. ")
@@ -325,12 +325,14 @@ public class Settings implements WorldSettings {
     private List<String> onLeaveCommands = new ArrayList<>();
 
     // Sethome
+    @ConfigComment("Allow setting home in the nether. Only available on nether islands, not vanilla nether.")
     @ConfigEntry(path = "area.sethome.nether.allow")
     private boolean allowSetHomeInNether = true;
 
     @ConfigEntry(path = "area.sethome.nether.require-confirmation")
     private boolean requireConfirmationToSetHomeInNether = true;
 
+    @ConfigComment("Allow setting home in the end. Only available on end islands, not vanilla end.")
     @ConfigEntry(path = "area.sethome.the-end.allow")
     private boolean allowSetHomeInTheEnd = true;
 
@@ -1430,7 +1432,7 @@ public class Settings implements WorldSettings {
     {
         this.createIslandOnFirstLoginAbortOnLogout = createIslandOnFirstLoginAbortOnLogout;
     }
-    
+
     /**
      * @return the maxCoopSize
      */
