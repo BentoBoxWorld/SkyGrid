@@ -169,7 +169,7 @@ public class WorldStyles {
         types.add(EntityType.TURTLE);
         types.add(EntityType.VEX);
 
-        int step = 1000 / types.size();
+        int step = 10000 / types.size();
         int i = step;
         for (EntityType type: types) {
             s.put(i, type);
@@ -184,18 +184,19 @@ public class WorldStyles {
      */
     private TreeMap<Integer,EntityType> netherSpawns() {
         TreeMap<Integer,EntityType> s = new TreeMap<>();
+        // Keys should increment and cannot be the same!
         s.put(25,  EntityType.BLAZE);
         s.put(50,  EntityType.MAGMA_CUBE);
         s.put(75,  EntityType.SKELETON);
         s.put(100,  EntityType.WITHER_SKELETON);
         s.put(150,  EntityType.SKELETON_HORSE);
-        s.put(25,  EntityType.ENDERMAN);
+        s.put(175,  EntityType.ENDERMAN);
         if (Enums.getIfPresent(EntityType.class, "ZOMBIFIED_PIGLIN").isPresent()) {
-            s.put(125,  EntityType.ZOMBIFIED_PIGLIN);
-            s.put(50,  EntityType.STRIDER);
-            s.put(125, EntityType.PIGLIN);
-            s.put(125,  EntityType.ZOGLIN);
-            s.put(125,  EntityType.HOGLIN);
+            s.put(300,  EntityType.ZOMBIFIED_PIGLIN);
+            s.put(350,  EntityType.STRIDER);
+            s.put(475, EntityType.PIGLIN);
+            s.put(600,  EntityType.ZOGLIN);
+            s.put(725,  EntityType.HOGLIN);
         }
         return s;
     }
@@ -208,7 +209,7 @@ public class WorldStyles {
         TreeMap<Integer,EntityType> s = new TreeMap<>();
         s.put(50, EntityType.ENDERMAN);
         s.put(55, EntityType.ENDERMITE);
-        s.put(10, EntityType.SHULKER);
+        s.put(65, EntityType.SHULKER);
         return s;
     }
 
