@@ -159,8 +159,10 @@ skygrid:
         description: "Display entry and exit messages"
         island: "[name]'s protected area"
         name: "Enter/Exit messages"
-        now-entering: "&b Now entering [name]"
-        now-leaving: "&b Now leaving [name]"
+        now-entering: '&a Now entering &b [name]&a .'
+        now-entering-your-island: '&a Now entering your area.'
+        now-leaving: '&a Now leaving &b [name]&a .'
+        now-leaving-your-island: '&a Now leaving your area.'
       GEO_LIMIT_MOBS: 
         description: |-
            &a Remove mobs that go
