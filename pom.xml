@@ -65,6 +65,10 @@
         <build.number>-LOCAL</build.number>
         <!-- This allows to change between versions. -->
         <build.version>1.16.0</build.version>
+        <!-- SonarCloud -->
+        <sonar.projectKey>BentoBoxWorld_SkyGrid</sonar.projectKey>
+        <sonar.organization>bentobox-world</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <!-- Profiles will allow to automatically change build version. -->
