@@ -7,12 +7,12 @@ import org.bukkit.generator.ChunkGenerator;
 import org.eclipse.jdt.annotation.NonNull;
 
 import world.bentobox.bentobox.api.addons.GameModeAddon;
+import world.bentobox.bentobox.api.commands.admin.DefaultAdminCommand;
+import world.bentobox.bentobox.api.commands.island.DefaultPlayerCommand;
 import world.bentobox.bentobox.api.configuration.Config;
 import world.bentobox.bentobox.api.configuration.WorldSettings;
 import world.bentobox.bentobox.api.flags.Flag.Type;
 import world.bentobox.bentobox.lists.Flags;
-import world.bentobox.skygrid.commands.AdminCommand;
-import world.bentobox.skygrid.commands.SkyGridCommand;
 import world.bentobox.skygrid.generators.SkyGridGen;
 import world.bentobox.skygrid.generators.WorldStyles;
 
@@ -54,8 +54,8 @@ public class SkyGrid extends GameModeAddon {
         gen = new SkyGridGen(this);
 
         // Register commands
-        playerCommand = new SkyGridCommand(this);
-        adminCommand = new AdminCommand(this);
+        playerCommand = new DefaultPlayerCommand(this) {};
+        adminCommand = new DefaultAdminCommand(this) {};
 
     }
 

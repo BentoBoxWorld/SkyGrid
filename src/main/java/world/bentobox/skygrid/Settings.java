@@ -34,12 +34,12 @@ public class Settings implements WorldSettings {
     @ConfigComment("Island Command. What command users will run to access their island.")
     @ConfigComment("To define alias, just separate commands with white space.")
     @ConfigEntry(path = "skygrid.command.island")
-    private String islandCommand = "skygrid sg";
+    private String playerCommandAliases = "skygrid sg";
 
     @ConfigComment("The island admin command.")
     @ConfigComment("To define alias, just separate commands with white space.")
     @ConfigEntry(path = "skygrid.command.admin")
-    private String adminCommand = "sgadmin sga";
+    private String adminCommandAliases = "sgadmin sga";
 
     /* Chests */
     @ConfigComment("Number of unique items per chest")
@@ -1148,46 +1148,34 @@ public class Settings implements WorldSettings {
         return false;
     }
 
-
     /**
-     * This method returns the islandCommand object.
-     * @return the islandCommand object.
+     * @return the playerCommandAliases
      */
-    public String getIslandCommand()
-    {
-        return islandCommand;
+    @Override
+    public String getPlayerCommandAliases() {
+        return playerCommandAliases;
     }
 
-
     /**
-     * This method returns the adminCommand object.
-     * @return the adminCommand object.
+     * @param playerCommandAliases the playerCommandAliases to set
      */
-    public String getAdminCommand()
-    {
-        return adminCommand;
+    public void setPlayerCommandAliases(String playerCommandAliases) {
+        this.playerCommandAliases = playerCommandAliases;
     }
 
-
     /**
-     * This method sets the islandCommand object value.
-     * @param islandCommand the islandCommand object new value.
-     *
+     * @return the adminCommandAliases
      */
-    public void setIslandCommand(String islandCommand)
-    {
-        this.islandCommand = islandCommand;
+    @Override
+    public String getAdminCommandAliases() {
+        return adminCommandAliases;
     }
 
-
     /**
-     * This method sets the adminCommand object value.
-     * @param adminCommand the adminCommand object new value.
-     *
+     * @param adminCommandAliases the adminCommandAliases to set
      */
-    public void setAdminCommand(String adminCommand)
-    {
-        this.adminCommand = adminCommand;
+    public void setAdminCommandAliases(String adminCommandAliases) {
+        this.adminCommandAliases = adminCommandAliases;
     }
 
     /**
