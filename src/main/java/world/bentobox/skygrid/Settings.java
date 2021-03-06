@@ -97,7 +97,7 @@ public class Settings implements WorldSettings {
     @ConfigEntry(path = "world.end.generate")
     private boolean endGenerate = true;
 
-    @ConfigComment("The End blocks. END_CRYSTAL is blocked because it causes serious performance issues.")
+    @ConfigComment("The End blocks.")
     @ConfigEntry(path = "world.end.blocks")
     private Map<Material, Integer> endBlocks = new EnumMap<>(Material.class);
 

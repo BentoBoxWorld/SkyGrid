@@ -694,17 +694,18 @@ world:
   end:
     # Generate SkyGrid End - if this is false, the end world will not be made
     generate: true
-    # The End blocks. END_CRYSTAL is blocked because it causes serious performance issues.
+    # The End blocks.
     blocks:
-      CHEST: 5
+      CHEST: 1
       END_ROD: 1
+      OBSIDIAN: 5
       CHORUS_PLANT: 2
-      OBSIDIAN: 1
+      PURPLE_STAINED_GLASS: 50
+      AIR: 200
       END_STONE: 200
-      SPAWNER: 5
       GRAVEL: 10
-      PURPUR_BLOCK: 10
-      PURPLE_STAINED_GLASS: 10
+      SPAWNER: 1
+      PURPUR_BLOCK: 50
       
   # Biomes - this will affect some block types and tree types.
   create-biomes: true

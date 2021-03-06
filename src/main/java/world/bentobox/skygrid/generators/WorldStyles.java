@@ -207,9 +207,9 @@ public class WorldStyles {
      */
     private TreeMap<Integer,EntityType> endSpawns() {
         TreeMap<Integer,EntityType> s = new TreeMap<>();
-        s.put(50, EntityType.ENDERMAN);
+        s.put(100, EntityType.ENDERMAN);
         s.put(55, EntityType.ENDERMITE);
-        s.put(65, EntityType.SHULKER);
+        s.put(1, EntityType.SHULKER);
         return s;
     }
 

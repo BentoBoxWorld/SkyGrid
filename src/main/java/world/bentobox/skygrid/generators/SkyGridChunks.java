@@ -54,7 +54,7 @@ public class SkyGridChunks {
             Material.WHITE_TULIP
             ));
 
-    private static final int PRE_MADE_CHUNKS_NUMBER = 30;
+    private static final int PRE_MADE_CHUNKS_NUMBER = 100;
 
     private final SkyGrid addon;
 
@@ -115,7 +115,7 @@ public class SkyGridChunks {
         // Get a random block and feed in the last block (true if cactus or cane)
         Material blockMat = prob.getBlock(random, y == 0, false);
         // If blockMat is not "a block" then cannot be generated
-        if (!blockMat.isBlock()) {
+        if (!blockMat.isAir() && !blockMat.isBlock()) {
             blockMat = Material.STONE;
         }
         // Check if the block needs dirt

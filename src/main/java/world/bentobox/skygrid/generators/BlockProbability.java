@@ -1,5 +1,6 @@
 package world.bentobox.skygrid.generators;
 
+import java.util.NavigableMap;
 import java.util.Random;
 import java.util.TreeMap;
 
@@ -10,7 +11,7 @@ public class BlockProbability {
     /**
      * Tree map of all materials and their probabilities as a ratio to the sum of all probabilities
      */
-    private final TreeMap<Integer, Material> probMap = new TreeMap<>();
+    private final NavigableMap<Integer, Material> probMap = new TreeMap<>();
     /**
      * Sum of all probabilities
      */
