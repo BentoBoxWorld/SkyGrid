@@ -52,7 +52,6 @@ public class SkyGridChunks {
             Material.TALL_GRASS,
             Material.WHEAT,
             Material.WHITE_TULIP
-            // TODO add all the other plants that need to go on dirt
             ));
 
     private static final int PRE_MADE_CHUNKS_NUMBER = 30;
@@ -60,10 +59,10 @@ public class SkyGridChunks {
     private final SkyGrid addon;
 
     private final Random random = new Random(System.currentTimeMillis());
-    private final List<List<SkyGridBlock>> skyGridChunks = new ArrayList<>();
-    private final List<List<SkyGridBlock>> skyGridChunksEnd = new ArrayList<>();
+    private final List<List<SkyGridBlock>> chunks = new ArrayList<>();
+    private final List<List<SkyGridBlock>> chunksEnd = new ArrayList<>();
 
-    private final List<List<SkyGridBlock>> skyGridChunksNether = new ArrayList<>();
+    private final List<List<SkyGridBlock>> chunksNether = new ArrayList<>();
 
     public SkyGridChunks(SkyGrid addon) {
         super();
@@ -75,9 +74,9 @@ public class SkyGridChunks {
         // Generate a number of chunks in advance
         addon.log("Making chunks for SkyGrid");
         for (int i = 0; i < PRE_MADE_CHUNKS_NUMBER; i++) {
-            skyGridChunks.add(getChunk(prob));
-            skyGridChunksNether.add(getChunk(probNether));
-            skyGridChunksEnd.add(getChunk(probEnd));
+            chunks.add(getChunk(prob));
+            chunksNether.add(getChunk(probNether));
+            chunksEnd.add(getChunk(probEnd));
         }
         addon.log("Done making chunks");
     }
@@ -103,11 +102,11 @@ public class SkyGridChunks {
     public List<SkyGridBlock> getSkyGridChunk(Environment env) {
         switch (env) {
         case NETHER:
-            return skyGridChunksNether.get(random.nextInt(skyGridChunksNether.size()));
+            return chunksNether.get(random.nextInt(chunksNether.size()));
         case THE_END:
-            return skyGridChunksEnd.get(random.nextInt(skyGridChunksEnd.size()));
+            return chunksEnd.get(random.nextInt(chunksEnd.size()));
         default:
-            return skyGridChunks.get(random.nextInt(skyGridChunks.size()));
+            return chunks.get(random.nextInt(chunks.size()));
         }
 
     }
@@ -149,9 +148,6 @@ public class SkyGridChunks {
                 result.add(new SkyGridBlock(x, y+1, z, blockMat));
                 break;
             case END_ROD:
-                result.add(new SkyGridBlock(x, y, z, Material.END_STONE));
-                result.add(new SkyGridBlock(x, y+1, z, blockMat));
-                break;
             case CHORUS_PLANT:
                 result.add(new SkyGridBlock(x, y, z, Material.END_STONE));
                 result.add(new SkyGridBlock(x, y+1, z, blockMat));

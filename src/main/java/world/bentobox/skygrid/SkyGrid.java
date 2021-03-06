@@ -67,6 +67,7 @@ public class SkyGrid extends GameModeAddon {
 
     @Override
     public void onDisable() {
+        // Nothing to do here
     }
 
     @Override

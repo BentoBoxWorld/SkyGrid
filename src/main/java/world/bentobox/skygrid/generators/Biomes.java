@@ -1,6 +1,7 @@
 package world.bentobox.skygrid.generators;
 
-import java.util.HashMap;
+import java.util.EnumMap;
+import java.util.Map;
 
 import org.bukkit.World.Environment;
 import org.bukkit.block.Biome;
@@ -45,7 +46,7 @@ public enum Biomes {
     END_MIDLANDS(Environment.THE_END, Biome.END_MIDLANDS, 50, 60),
     END_HIGHLANDS(Environment.THE_END, Biome.END_HIGHLANDS, 20, 60),
     END_BARRENS(Environment.THE_END, Biome.END_BARRENS, 60, 4);
-    
+
     public final Environment env;
     public final Biome biome;
     public final double optimumTemperature;
@@ -66,12 +67,16 @@ public enum Biomes {
      * @param rain - rain
      * @return Map of 3 biomes
      */
-    public static HashMap<Biomes, Double> getBiomes(Environment env, double temp, double rain) {
+    public static Map<Biomes, Double> getBiomes(Environment env, double temp, double rain) {
         // We tell it the capacity we need to avoid expensive dynamic lengthening
-        HashMap<Biomes, Double> biomes = new HashMap<>(3);
+        Map<Biomes, Double> biomes = new EnumMap<>(Biomes.class);
 
-        Biomes closestBiome = null, secondClosestBiome = null, thirdClosestBiome = null;
-        double closestDist = 10000000, secondClosestDist = 10000000, thirdClosestDist = 10000000;
+        Biomes closestBiome = null;
+        Biomes secondClosestBiome = null;
+        Biomes thirdClosestBiome = null;
+        double closestDist = 10000000;
+        double secondClosestDist = 10000000;
+        double thirdClosestDist = 10000000;
 
         for (Biomes biome : Biomes.values()) {
             if (!env.equals(biome.env)) continue;

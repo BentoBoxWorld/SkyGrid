@@ -1,14 +1,14 @@
 package world.bentobox.skygrid.generators;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NavigableMap;
 import java.util.TreeMap;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.World.Environment;
 import org.bukkit.entity.EntityType;
 
 import com.google.common.base.Enums;
@@ -21,28 +21,28 @@ import world.bentobox.skygrid.SkyGrid;
  *
  */
 public class WorldStyles {
-    private static final Map<World.Environment, WorldStyles> map = new HashMap<>();
+    private static final Map<Environment, WorldStyles> map = new EnumMap<>(Environment.class);
+
+    private static final String LOADED = "Loaded ";
 
     private SkyGrid addon;
 
     private BlockProbability prob;
-    private TreeMap<Integer,EntityType> spawns;
+    private NavigableMap<Integer,EntityType> spawns;
 
     public WorldStyles(SkyGrid addon) {
         this.addon = addon;
-        map.put(World.Environment.NORMAL, new WorldStyles(normalWorldProbabilities(), normalSpawns()));
-        map.put(World.Environment.NETHER, new WorldStyles(netherWorldProbabilities(), netherSpawns()));
-        map.put(World.Environment.THE_END, new WorldStyles(endWorldProbabilities(), endSpawns()));
+        map.put(Environment.NORMAL, new WorldStyles(normalWorldProbabilities(), normalSpawns()));
+        map.put(Environment.NETHER, new WorldStyles(netherWorldProbabilities(), netherSpawns()));
+        map.put(Environment.THE_END, new WorldStyles(endWorldProbabilities(), endSpawns()));
     }
 
-    public WorldStyles(BlockProbability prob, TreeMap<Integer, EntityType> spawns) {
+    public WorldStyles(BlockProbability prob, NavigableMap<Integer, EntityType> spawns) {
         this.prob = prob;
         this.spawns = spawns;
     }
 
-    public WorldStyles get(World.Environment style) {
-        if (!map.containsKey(style))
-            throw new Error("SkyGrid does not know that type");
+    public WorldStyles get(Environment style) {
         return map.get(style);
     }
 
@@ -56,7 +56,7 @@ public class WorldStyles {
     /**
      * @return the spawns
      */
-    public TreeMap<Integer,EntityType> getSpawns() {
+    public NavigableMap<Integer,EntityType> getSpawns() {
         return spawns;
     }
 
@@ -67,10 +67,10 @@ public class WorldStyles {
     private BlockProbability normalWorldProbabilities() {
         BlockProbability blockProbability = new BlockProbability();
         addon.getSettings().getBlocks().forEach(blockProbability::addBlock);
-        Bukkit.getLogger().info("Loaded " + blockProbability.getSize() + " block types for SkyGrid over world");
+        addon.log(LOADED + blockProbability.getSize() + " block types for SkyGrid over world");
         if (blockProbability.isEmpty()) {
             blockProbability.addBlock(Material.STONE, 100);
-            Bukkit.getLogger().severe("Using default stone as only block (fix/update config.yml)");
+            addon.logError("Using default stone as only block (fix/update config.yml)");
         }
         return blockProbability;
     }
@@ -82,7 +82,7 @@ public class WorldStyles {
     private BlockProbability netherWorldProbabilities() {
         BlockProbability blockProbability = new BlockProbability();
         addon.getSettings().getNetherBlocks().forEach(blockProbability::addBlock);
-        Bukkit.getLogger().info("Loaded " + blockProbability.getSize() + " block types for SkyGrid nether");
+        addon.log(LOADED + blockProbability.getSize() + " block types for SkyGrid nether");
         if (blockProbability.isEmpty()) {
             blockProbability.addBlock(Material.NETHERRACK, 100);
             blockProbability.addBlock(Material.LAVA, 300);
@@ -96,7 +96,7 @@ public class WorldStyles {
             blockProbability.addBlock(Material.NETHER_BRICK_STAIRS,15);
             blockProbability.addBlock(Material.NETHER_WART_BLOCK, 30);
             blockProbability.addBlock(Material.NETHER_QUARTZ_ORE, 15);
-            Bukkit.getLogger().warning("Using default nether blocks (fix/update config.yml)");
+            addon.logWarning("Using default nether blocks (fix/update config.yml)");
         }
         return blockProbability;
     }
@@ -108,13 +108,13 @@ public class WorldStyles {
     private BlockProbability endWorldProbabilities() {
         BlockProbability blockProbability = new BlockProbability();
         addon.getSettings().getEndBlocks().forEach(blockProbability::addBlock);
-        Bukkit.getLogger().info("Loaded " + blockProbability.getSize() + " block types for SkyGrid end world");
+        addon.log(LOADED + blockProbability.getSize() + " block types for SkyGrid end world");
         if (blockProbability.isEmpty()) {
             blockProbability.addBlock(Material.END_STONE, 300);
             blockProbability.addBlock(Material.OBSIDIAN, 10);
             blockProbability.addBlock(Material.SPAWNER, 2);
             blockProbability.addBlock(Material.CHEST, 1);
-            Bukkit.getLogger().warning("Using default end settings for blocks (fix/update config.yml)");
+            addon.logWarning("Using default end settings for blocks (fix/update config.yml)");
         }
         return blockProbability;
     }

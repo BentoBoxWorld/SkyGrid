@@ -1,6 +1,7 @@
 package world.bentobox.skygrid;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -78,7 +79,7 @@ public class Settings implements WorldSettings {
     @ConfigComment("Chests have different items in them in different world types.")
     @ConfigComment("Over world blocks. Beware of making too many chests, they can lag a lot.")
     @ConfigEntry(path = "world.blocks")
-    private Map<Material, Integer> blocks = new HashMap<>();
+    private Map<Material, Integer> blocks = new EnumMap<>(Material.class);
 
     // Nether
     @ConfigComment("Generate SkyGrid Nether - if this is false, the nether world will not be made")
@@ -89,7 +90,7 @@ public class Settings implements WorldSettings {
     @ConfigComment("Beware with glowstone and lava - the lighting calcs will lag the")
     @ConfigComment("server badly if there are too many blocks.")
     @ConfigEntry(path = "world.nether.blocks")
-    private Map<Material, Integer> netherBlocks = new HashMap<>();
+    private Map<Material, Integer> netherBlocks = new EnumMap<>(Material.class);
 
     // End
     @ConfigComment("Generate SkyGrid End - if this is false, the end world will not be made")
@@ -98,7 +99,7 @@ public class Settings implements WorldSettings {
 
     @ConfigComment("The End blocks. END_CRYSTAL is blocked because it causes serious performance issues.")
     @ConfigEntry(path = "world.end.blocks")
-    private Map<Material, Integer> endBlocks = new HashMap<>();
+    private Map<Material, Integer> endBlocks = new EnumMap<>(Material.class);
 
     /* SkyGrid */
     @ConfigComment("Biomes - this will affect some block types and tree types.")

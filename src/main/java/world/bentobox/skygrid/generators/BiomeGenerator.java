@@ -1,6 +1,7 @@
 package world.bentobox.skygrid.generators;
 
-import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 
 import org.bukkit.World;
@@ -32,16 +33,16 @@ public class BiomeGenerator {
      */
     public Biome getDominantBiome(int realX, int realZ) {
         //We get the 3 closest biome's to the temperature and rainfall at this block
-        HashMap<Biomes, Double> biomes = Biomes.getBiomes(env, Math.abs(temperatureGen.noise(realX, realZ, 0.5, 0.5)*100.0), 
+        Map<Biomes, Double> biomes = Biomes.getBiomes(env, Math.abs(temperatureGen.noise(realX, realZ, 0.5, 0.5)*100.0), 
                 Math.abs(rainfallGen.noise(realX, realZ, 0.5, 0.5)*100.0));
         //And tell bukkit (who tells the client) what the biggest biome here is
         double maxNoiz = 0.0;
         Biomes maxBiome = null;
 
-        for (Biomes biome : biomes.keySet()) {
-            if (biomes.get(biome) >= maxNoiz) {
-                maxNoiz = biomes.get(biome);
-                maxBiome = biome;
+        for (Entry<Biomes, Double> biome : biomes.entrySet()) {
+            if (biome.getValue() >= maxNoiz) {
+                maxNoiz = biome.getValue();
+                maxBiome = biome.getKey();
             }
         }
         return Objects.requireNonNull(maxBiome).biome;
