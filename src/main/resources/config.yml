@@ -518,6 +518,7 @@ world:
     end:
     - BLACK_SHULKER_BOX
     - BLUE_SHULKER_BOX
+    - BREWING_STAND
     - BROWN_SHULKER_BOX
     - CHORUS_FLOWER
     - CHORUS_FRUIT
@@ -675,6 +676,21 @@ world:
       COBWEB: 7
       GLOWSTONE: 1
       RED_NETHER_BRICKS: 12
+      NETHER_BRICKS: 12
+      CHISELED_POLISHED_BLACKSTONE: 12
+      POLISHED_BLACKSTONE_BRICKS: 12
+      POLISHED_BLACKSTONE_BRICK_STAIRS: 12
+      CRACKED_POLISHED_BLACKSTONE_BRICKS: 12
+      NETHERITE_BLOCK: 10
+      ANCIENT_DEBRIS: 10
+      BONE_BLOCK: 10
+      CRYING_OBSIDIAN: 10
+      OBSIDIAN: 10
+      BLACKSTONE: 10
+      GILDED_BLACKSTONE: 10
+      SOUL_SOIL: 80
+      NETHER_GOLD_ORE: 12
+      
   end:
     # Generate SkyGrid End - if this is false, the end world will not be made
     generate: true
@@ -688,8 +704,10 @@ world:
       SPAWNER: 5
       GRAVEL: 10
       PURPUR_BLOCK: 10
-  # Overworld has biomes - this will affect some block types and tree types.
-  create-biomes: false
+      PURPLE_STAINED_GLASS: 10
+      
+  # Biomes - this will affect some block types and tree types.
+  create-biomes: true
   # The probability of a frame being created in a chunk. Frames are always at y=0.
   end-frame-probability: 0.1
   # Friendly name for this world. Used in admin commands. Must be a single word

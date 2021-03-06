@@ -59,7 +59,6 @@ public class SkyGridGen extends ChunkGenerator {
 
     @Override
     public List<BlockPopulator> getDefaultPopulators(World world) {
-        //return Collections.emptyList();
         return Collections.singletonList(populator);
     }
 

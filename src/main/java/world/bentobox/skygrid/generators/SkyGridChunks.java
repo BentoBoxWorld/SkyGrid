@@ -2,6 +2,7 @@ package world.bentobox.skygrid.generators;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -20,11 +21,10 @@ import world.bentobox.skygrid.SkyGrid;
 public class SkyGridChunks {
 
     // Blocks that need to be placed on dirt
-    private static final List<Material> NEEDS_DIRT = Arrays.asList(
+    private static final List<Material> NEEDS_DIRT = Collections.unmodifiableList(Arrays.asList(
             Material.ACACIA_SAPLING,
             Material.ALLIUM,
             Material.AZURE_BLUET,
-            Material.BEETROOTS,
             Material.BEETROOTS,
             Material.BIRCH_SAPLING,
             Material.BLUE_ORCHID,
@@ -49,12 +49,11 @@ public class SkyGridChunks {
             Material.SPRUCE_SAPLING,
             Material.SUGAR_CANE,
             Material.SUNFLOWER,
-            Material.SUNFLOWER,
             Material.TALL_GRASS,
             Material.WHEAT,
             Material.WHITE_TULIP
             // TODO add all the other plants that need to go on dirt
-            );
+            ));
 
     private static final int PRE_MADE_CHUNKS_NUMBER = 30;
 

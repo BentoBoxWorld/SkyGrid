@@ -101,9 +101,9 @@ public class Settings implements WorldSettings {
     private Map<Material, Integer> endBlocks = new HashMap<>();
 
     /* SkyGrid */
-    @ConfigComment("Overworld has biomes - this will affect some block types and tree types.")
+    @ConfigComment("Biomes - this will affect some block types and tree types.")
     @ConfigEntry(path = "world.create-biomes")
-    private boolean createBiomes = false;
+    private boolean createBiomes = true;
 
     @ConfigComment("The probability of a frame being created in a chunk. Frames are always at y=0.")
     @ConfigEntry(path = "world.end-frame-probability")
