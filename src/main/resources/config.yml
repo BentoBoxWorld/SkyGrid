@@ -1,5 +1,5 @@
 # SkyGrid Configuration ${version}
-#
+# 
 skygrid:
   command:
     # Island Command. What command users will run to access their island.
@@ -8,6 +8,16 @@ skygrid:
     # The island admin command.
     # To define alias, just separate commands with white space.
     admin: sgadmin sga
+    # The default action for new player command call.
+    # Sub-command of main player command that will be run on first player command call.
+    # By default it is sub-command 'create'.
+    # Added since 1.16.0.
+    new-player-action: create
+    # The default action for player command.
+    # Sub-command of main player command that will be run on each player command call.
+    # By default it is sub-command 'go'.
+    # Added since 1.16.0.
+    default-action: go
 world:
   chest-fill:
     # Number of unique items per chest
@@ -16,8 +26,8 @@ world:
     nether: 5
     # The End chest fill setting
     end: 5
-  # Chest items will be taken randomly from this list. All items have an equal chance.
   chest-items:
+    # Chest items will be taken randomly from this list. All items have an equal chance.
     overworld:
     - ACTIVATOR_RAIL
     - ANVIL
@@ -536,7 +546,6 @@ world:
     - SHULKER_SPAWN_EGG
     - WHITE_SHULKER_BOX
     - YELLOW_SHULKER_BOX
-
   # World block types. If the material cannot be placed, bedrock will be used.
   # Format: Material : Probability
   # Block types must be Bukkit Material types.
@@ -553,14 +562,14 @@ world:
     BOOKSHELF: 10
     PINK_TULIP: 8
     STRIPPED_ACACIA_LOG: 1
-    OAK_WOOD: 19
     JUNGLE_SAPLING: 19
+    OAK_WOOD: 19
     WHITE_TULIP: 2
     CACTUS: 6
     SPRUCE_WOOD: 9
     BLUE_ORCHID: 1
-    PUMPKIN: 9
     STRIPPED_ACACIA_WOOD: 1
+    PUMPKIN: 9
     STRIPPED_BIRCH_LOG: 1
     WHEAT: 4
     STRIPPED_OAK_LOG: 1
@@ -568,8 +577,8 @@ world:
     GRASS_PATH: 7
     STRIPPED_BIRCH_WOOD: 1
     SPRUCE_LOG: 3
-    STRIPPED_DARK_OAK_WOOD: 1
     RED_MUSHROOM: 8
+    STRIPPED_DARK_OAK_WOOD: 1
     SPRUCE_SAPLING: 2
     REDSTONE_ORE: 2
     TALL_GRASS: 13
@@ -597,9 +606,9 @@ world:
     GRASS: 100
     STRIPPED_SPRUCE_WOOD: 1
     LARGE_FERN: 8
-    FIRE_CORAL_BLOCK: 1
     GRANITE: 50
     SAND: 50
+    FIRE_CORAL_BLOCK: 1
     SUGAR_CANE: 4
     JUNGLE_LEAVES: 10
     JUNGLE_WOOD: 20
@@ -612,10 +621,10 @@ world:
     DANDELION: 16
     ALLIUM: 12
     ACACIA_WOOD: 16
-    OAK_SAPLING: 11
     PEONY: 7
-    LAVA: 5
+    OAK_SAPLING: 11
     STRIPPED_DARK_OAK_LOG: 1
+    LAVA: 5
     OBSIDIAN: 1
     AZURE_BLUET: 1
     OXEYE_DAISY: 6
@@ -627,8 +636,8 @@ world:
     COARSE_DIRT: 17
     LAPIS_ORE: 6
     ACACIA_SAPLING: 17
-    OAK_LOG: 10
     BIRCH_SAPLING: 8
+    OAK_LOG: 10
     BEETROOTS: 9
     STRIPPED_JUNGLE_WOOD: 1
     BIRCH_LOG: 2
@@ -641,8 +650,8 @@ world:
     SPRUCE_LEAVES: 9
     SPONGE: 1
     SNOW_BLOCK: 1
-    ORANGE_TULIP: 10
     BIRCH_LEAVES: 9
+    ORANGE_TULIP: 10
     ANDESITE: 90
     STONE: 180
     ROSE_BUSH: 8
@@ -661,8 +670,8 @@ world:
       GRAVEL: 10
       SPAWNER: 2
       CHEST: 15
-      NETHER_WART: 19
       NETHERRACK: 200
+      NETHER_WART: 19
       COBWEB: 7
       GLOWSTONE: 1
       RED_NETHER_BRICKS: 12
@@ -676,8 +685,8 @@ world:
       CHORUS_PLANT: 2
       OBSIDIAN: 1
       END_STONE: 200
-      GRAVEL: 10
       SPAWNER: 5
+      GRAVEL: 10
       PURPUR_BLOCK: 10
   # Overworld has biomes - this will affect some block types and tree types.
   create-biomes: false
@@ -692,10 +701,12 @@ world:
   # Other plugins may override this setting
   difficulty: NORMAL
   # Start at these coordinates.
+  # /!\ BentoBox currently does not support changing this value mid-game. If you do need to change it, do a full reset of your databases and worlds.
   start-x: 0
+  # /!\ BentoBox currently does not support changing this value mid-game. If you do need to change it, do a full reset of your databases and worlds.
   start-z: 0
   # SkyGrid height
-  # This is the height of the top sky grid layer
+  # This is the height of the top sky grid layer. 255 max.
   skygrid-height: 128
   # Spawn height
   # Height where players will spawn. Can be less than the grid height
@@ -713,71 +724,151 @@ world:
   ban-limit: -1
   # Mob white list - these mobs will NOT be removed when logging in or doing /island
   remove-mobs-whitelist:
-  - GUARDIAN
-  - ZOMBIE_VILLAGER
   - WITHER
+  - ZOMBIE_VILLAGER
+  - GUARDIAN
   - ZOMBIFIED_PIGLIN
   # World flags. These are boolean settings for various flags for this world
   flags:
-    OBSIDIAN_SCOOPING: true
-    ENTER_EXIT_MESSAGES: true
+    HURT_ANIMALS: true
+    DRAGON_EGG: true
     ISLAND_RESPAWN: true
-    LIQUIDS_FLOWING_OUT: false
-    REMOVE_END_EXIT_ISLAND: true
-    REMOVE_MOBS: true
-    TREES_GROWING_OUTSIDE_RANGE: false
-    PREVENT_TELEPORT_WHEN_FALLING: false
+    REDSTONE: true
+    BUCKET: true
+    LOCK: true
+    ENDER_PEARL: true
+    DOOR: true
     NATURAL_SPAWNING_OUTSIDE_RANGE: true
+    BREAK_HOPPERS: true
+    FURNACE: true
+    LIQUIDS_FLOWING_OUT: false
+    ANVIL: true
+    MINECART: true
+    FISH_SCOOPING: true
+    END_PORTAL: true
+    BREEDING: true
+    HURT_VILLAGERS: true
+    TREES_GROWING_OUTSIDE_RANGE: false
+    FROST_WALKER: true
+    TURTLE_EGGS: true
+    COLLECT_LAVA: true
+    BREAK_SPAWNERS: true
+    LEVER: true
+    ELYTRA: true
+    CAKE: true
+    RIDING: true
+    HURT_MONSTERS: true
+    ARMOR_STAND: true
+    NAME_TAG: true
+    CLEAN_SUPER_FLAT: false
+    TRADING: true
+    EGGS: true
+    ITEM_DROP: true
+    NOTE_BLOCK: true
+    ENTER_EXIT_MESSAGES: true
+    FLINT_AND_STEEL: true
+    NETHER_PORTAL: true
+    REMOVE_END_EXIT_ISLAND: true
+    LECTERN: true
+    CROP_TRAMPLE: true
+    ITEM_PICKUP: true
+    BREWING: true
+    DROPPER: true
+    OBSIDIAN_SCOOPING: true
+    TNT_PRIMING: true
+    COLLECT_WATER: true
+    BUTTON: true
+    FIRE_EXTINGUISH: true
+    COMMAND_RANKS: true
+    BEACON: true
+    TRAPDOOR: true
+    PRESSURE_PLATE: true
+    EXPERIENCE_BOTTLE_THROWING: true
+    HIVE: true
+    DYE: true
+    PLACE_BLOCKS: true
+    ITEM_FRAME: true
+    CRAFTING: true
+    REMOVE_MOBS: true
+    ENCHANTING: true
+    SHEARING: true
+    BOAT: true
+    BED: true
+    SPAWN_EGGS: true
+    MILKING: true
+    DISPENSER: true
+    GATE: true
+    EXPERIENCE_PICKUP: true
+    PREVENT_TELEPORT_WHEN_FALLING: false
+    HOPPER: true
+    LEASH: true
+    BREAK_BLOCKS: true
+    MOUNT_INVENTORY: true
+    CHORUS_FRUIT: true
+    CONTAINER: true
+    JUKEBOX: true
+    POTION_THROWING: true
   # These are the default protection settings protected areas.
   # The value is the minimum island rank required to do the action
   # Ranks are: Visitor = 0, Member = 900, Owner = 1000
   default-protection-flags:
     HURT_ANIMALS: 500
+    DRAGON_EGG: 500
     REDSTONE: 500
     BUCKET: 500
     LOCK: 0
     ENDER_PEARL: 500
     DOOR: 500
+    BREAK_HOPPERS: 500
     FURNACE: 500
     ANVIL: 500
     MINECART: 500
     FISH_SCOOPING: 500
-    FIRE: 500
     END_PORTAL: 500
     BREEDING: 500
     HURT_VILLAGERS: 500
-    TNT: 500
-    TURTLE_EGGS: 500
     FROST_WALKER: 500
+    TURTLE_EGGS: 500
     COLLECT_LAVA: 500
+    BREAK_SPAWNERS: 500
     LEVER: 500
+    ELYTRA: 0
+    CAKE: 500
     RIDING: 500
     HURT_MONSTERS: 500
-    ARMOR_STAND: 500
     NAME_TAG: 500
+    ARMOR_STAND: 500
     TRADING: 500
     EGGS: 500
     ITEM_DROP: 500
     NOTE_BLOCK: 500
+    FLINT_AND_STEEL: 500
     NETHER_PORTAL: 500
-    CROP_TRAMPLE: 500
+    LECTERN: 500
     ITEM_PICKUP: 500
+    CROP_TRAMPLE: 500
+    MOVE_BOX: 1000
     BREWING: 500
     DROPPER: 500
+    TNT_PRIMING: 500
     COLLECT_WATER: 500
     BUTTON: 500
     FIRE_EXTINGUISH: 500
+    COMMAND_RANKS: 500
     BEACON: 500
     TRAPDOOR: 500
     PRESSURE_PLATE: 500
+    EXPERIENCE_BOTTLE_THROWING: 500
+    HIVE: 500
+    DYE: 500
     PLACE_BLOCKS: 500
     ITEM_FRAME: 500
     CRAFTING: 500
-    ENCHANTING: 500
     SHEARING: 500
+    ENCHANTING: 500
     BOAT: 500
-    BED: 500
     SPAWN_EGGS: 500
+    BED: 500
     MILKING: 500
     DISPENSER: 500
     GATE: 500
@@ -794,9 +885,15 @@ world:
   default-settings:
     PVP_END: false
     PVP_NETHER: false
-    ANIMAL_SPAWN: true
-    MONSTER_SPAWN: true
+    LEAF_DECAY: true
+    TNT_DAMAGE: true
+    MONSTER_SPAWNERS_SPAWN: true
+    ANIMAL_NATURAL_SPAWN: true
+    MONSTER_NATURAL_SPAWN: true
+    FIRE_IGNITE: true
     FIRE_SPREAD: true
+    FIRE_BURNING: true
+    ANIMAL_SPAWNERS_SPAWN: true
     PVP_OVERWORLD: false
   # These settings/flags are hidden from users
   # Ops can toggle hiding in-game using SHIFT-LEFT-CLICK on flags in settings
@@ -806,22 +903,12 @@ world:
   # Falling banned commands - players cannot use these commands when falling
   # if the PREVENT_TELEPORT_WHEN_FALLING world setting flag is active
   falling-banned-commands:
-    - warp
-    - spawn
+  - warp
+  - spawn
 area:
   # Default max team size
   # Permission size cannot be less than the default below. 
   max-team-size: 4
-  # Default maximum number of coop rank members per area
-  # Players can have the skygrid.coop.maxsize.<number> permission to be bigger but
-  # permission size cannot be less than the default below.
-  # Added since 1.13.0.
-  max-coop-size: 4
-  # Default maximum number of trusted rank members per area
-  # Players can have the skygrid.trust.maxsize.<number> permission to be bigger but
-  # permission size cannot be less than the default below.
-  # Added since 1.13.0.
-  max-trusted-size: 4
   reset:
     # How many resets a player is allowed (override with /sgadmin clearresets <player>)
     # Value of -1 means unlimited, 0 means hardcore - no resets.
@@ -875,7 +962,7 @@ area:
   create-area-on-first-login:
     # Toggles the automatic area creation upon the player's first login on your server.
     # If set to true,
-    #   * Upon connecting to your server for the first time, the player will be told that
+    #    * Upon connecting to your server for the first time, the player will be told that
     #     an area will be created for him.
     #   * An area will be created for the player without needing him to run the create command.
     # If set to false, this will disable this feature entirely.
@@ -888,7 +975,7 @@ area:
     #     in a limited period of time.
     enable: false
     # Time in seconds after the player logged in, before his area gets created.
-    # If set to 0 or less, the area will be created directly upon the player's login.
+    # If set to 0 or less, the island will be created directly upon the player's login.
     # It is recommended to keep this value under a minute's time.
     delay: 5
     # Toggles whether the area creation should be aborted if the player logged off while the
@@ -905,7 +992,7 @@ area:
   commands:
     # List of commands to run when a player joins.
     on-join: []
-    # List of commands to run when a player leaves.
+    # list of commands to run when a player leaves.
     on-leave: []
   sethome:
     nether:
@@ -923,9 +1010,19 @@ area:
     max: 10
     # When a player joins a team, reset their death count
     team-join-reset: true
-    # Reset player death count when they start new or reset
+    # Reset player death count when they start reset
     reset-on-new-island: true
-    
+island:
+  # Default maximum number of coop rank members per area
+  # Players can have the skygrid.coop.maxsize.<number> permission to be bigger but
+  # permission size cannot be less than the default below. 
+  # Added since 1.13.0.
+  max-coop-size: 4
+  # Default maximum number of trusted rank members per area
+  # Players can have the skygrid.trust.maxsize.<number> permission to be bigger but
+  # permission size cannot be less than the default below. 
+  # Added since 1.13.0.
+  max-trusted-size: 4
 protection:
   # Geo restrict mobs.
   # Mobs that exit the protected space where they were spawned will be removed.
@@ -936,4 +1033,3 @@ protection:
 do-not-edit-these-settings:
   # These settings should not be edited
   reset-epoch: 0
-

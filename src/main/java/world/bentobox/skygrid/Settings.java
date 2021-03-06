@@ -41,6 +41,18 @@ public class Settings implements WorldSettings {
     @ConfigEntry(path = "skygrid.command.admin")
     private String adminCommandAliases = "sgadmin sga";
 
+    @ConfigComment("The default action for new player command call.")
+    @ConfigComment("Sub-command of main player command that will be run on first player command call.")
+    @ConfigComment("By default it is sub-command 'create'.")
+    @ConfigEntry(path = "skygrid.command.new-player-action", since = "1.16.0")
+    private String defaultNewPlayerAction = "create";
+
+    @ConfigComment("The default action for player command.")
+    @ConfigComment("Sub-command of main player command that will be run on each player command call.")
+    @ConfigComment("By default it is sub-command 'go'.")
+    @ConfigEntry(path = "skygrid.command.default-action", since = "1.16.0")
+    private String defaultPlayerAction = "go";
+
     /* Chests */
     @ConfigComment("Number of unique items per chest")
     @ConfigEntry(path = "world.chest-fill.overworld")
@@ -1449,5 +1461,35 @@ public class Settings implements WorldSettings {
      */
     public void setMaxTrustSize(int maxTrustSize) {
         this.maxTrustSize = maxTrustSize;
+    }
+
+    /**
+     * @return the defaultNewPlayerAction
+     */
+    @Override
+    public String getDefaultNewPlayerAction() {
+        return defaultNewPlayerAction;
+    }
+
+    /**
+     * @param defaultNewPlayerAction the defaultNewPlayerAction to set
+     */
+    public void setDefaultNewPlayerAction(String defaultNewPlayerAction) {
+        this.defaultNewPlayerAction = defaultNewPlayerAction;
+    }
+
+    /**
+     * @return the defaultPlayerAction
+     */
+    @Override
+    public String getDefaultPlayerAction() {
+        return defaultPlayerAction;
+    }
+
+    /**
+     * @param defaultPlayerAction the defaultPlayerAction to set
+     */
+    public void setDefaultPlayerAction(String defaultPlayerAction) {
+        this.defaultPlayerAction = defaultPlayerAction;
     }
 }
