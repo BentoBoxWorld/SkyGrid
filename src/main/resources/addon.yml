@@ -9,10 +9,10 @@ api-version: 1.14
 authors: tastybento
 
 permissions: 
-  skygrid.skygrid:
+  skygrid.island:
     description: Use the skygrid command
     default: true 
-  skygrid.skygrid.go:
+  skygrid.island.go:
     description: Use the skygrid go command
     default: true    
   skygrid.island.create:
