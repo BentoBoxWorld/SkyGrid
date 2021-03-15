@@ -92,6 +92,12 @@ public class Settings implements WorldSettings {
     @ConfigEntry(path = "world.nether.blocks")
     private Map<Material, Integer> netherBlocks = new EnumMap<>(Material.class);
 
+    @ConfigComment("This option indicates if nether portals should be linked via dimensions.")
+    @ConfigComment("Option will simulate vanilla portal mechanics that links portals together")
+    @ConfigComment("or creates a new portal, if there is not a portal in that dimension.")
+    @ConfigEntry(path = "world.nether.create-and-link-portals", since = "1.16")
+    private boolean makeNetherPortals = false;
+
     // End
     @ConfigComment("Generate SkyGrid End - if this is false, the end world will not be made")
     @ConfigEntry(path = "world.end.generate")
@@ -100,6 +106,11 @@ public class Settings implements WorldSettings {
     @ConfigComment("The End blocks.")
     @ConfigEntry(path = "world.end.blocks")
     private Map<Material, Integer> endBlocks = new EnumMap<>(Material.class);
+
+    @ConfigComment("This option indicates if obsidian platform in the end should be generated")
+    @ConfigComment("when player enters the end world.")
+    @ConfigEntry(path = "world.end.create-obsidian-platform", since = "1.16")
+    private boolean makeEndPortals = false;
 
     /* SkyGrid */
     @ConfigComment("Biomes - this will affect some block types and tree types.")
@@ -1492,5 +1503,37 @@ public class Settings implements WorldSettings {
      */
     public void setDefaultPlayerAction(String defaultPlayerAction) {
         this.defaultPlayerAction = defaultPlayerAction;
+    }
+
+    /**
+     * @return the makeNetherPortals
+     */
+    @Override
+    public boolean isMakeNetherPortals() {
+        return makeNetherPortals;
+    }
+
+    /**
+     * @return the makeEndPortals
+     */
+    @Override
+    public boolean isMakeEndPortals() {
+        return makeEndPortals;
+    }
+
+    /**
+     * Sets make nether portals.
+     * @param makeNetherPortals the make nether portals
+     */
+    public void setMakeNetherPortals(boolean makeNetherPortals) {
+        this.makeNetherPortals = makeNetherPortals;
+    }
+
+    /**
+     * Sets make end portals.
+     * @param makeEndPortals the make end portals
+     */
+    public void setMakeEndPortals(boolean makeEndPortals) {
+        this.makeEndPortals = makeEndPortals;
     }
 }

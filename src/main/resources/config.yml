@@ -690,7 +690,11 @@ world:
       GILDED_BLACKSTONE: 10
       SOUL_SOIL: 80
       NETHER_GOLD_ORE: 12
-      
+
+    # This option indicates if nether portals should be linked via dimensions.
+    # Option will simulate vanilla portal mechanics that links portals together or creates a new portal, if there is not a portal in other dimension.
+    # Added since 1.16
+    create-and-link-portals: false
   end:
     # Generate SkyGrid End - if this is false, the end world will not be made
     generate: true
@@ -706,7 +710,9 @@ world:
       GRAVEL: 10
       SPAWNER: 1
       PURPUR_BLOCK: 50
-      
+    # This option indicates if obsidian platform in the end should be generated when player enters the end world.
+    # Added since 1.16
+    create-obsidian-platform: false
   # Biomes - this will affect some block types and tree types.
   create-biomes: true
   # The probability of a frame being created in a chunk. Frames are always at y=0.
