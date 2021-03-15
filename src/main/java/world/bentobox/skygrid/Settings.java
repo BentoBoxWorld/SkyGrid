@@ -377,6 +377,11 @@ public class Settings implements WorldSettings {
     @ConfigEntry(path = "protection.geo-limit-settings")
     private List<String> geoLimitSettings = new ArrayList<>();
 
+    @ConfigComment("AcidIsland blocked mobs.")
+    @ConfigComment("List of mobs that should not spawn in AcidIsland.")
+    @ConfigEntry(path = "protection.block-mobs")
+    private List<String> mobLimitSettings = new ArrayList<>();
+
     // Invincible visitor settings
     @ConfigComment("Invincible visitors. List of damages that will not affect visitors.")
     @ConfigComment("Make list blank if visitors should receive all damages")
@@ -1492,5 +1497,20 @@ public class Settings implements WorldSettings {
      */
     public void setDefaultPlayerAction(String defaultPlayerAction) {
         this.defaultPlayerAction = defaultPlayerAction;
+    }
+
+    /**
+     * @return the mobLimitSettings
+     */
+    @Override
+    public List<String> getMobLimitSettings() {
+        return mobLimitSettings;
+    }
+
+    /**
+     * @param mobLimitSettings the mobLimitSettings to set
+     */
+    public void setMobLimitSettings(List<String> mobLimitSettings) {
+        this.mobLimitSettings = mobLimitSettings;
     }
 }
