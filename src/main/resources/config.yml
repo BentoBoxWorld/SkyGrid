@@ -1046,6 +1046,9 @@ protection:
   # Geo restrict mobs.
   # Mobs that exit the protected space where they were spawned will be removed.
   geo-limit-settings: []
+  # SkyGrid blocked mobs.
+  # List of mobs that should not spawn in SkyGrid.
+  block-mobs: []
   # Invincible visitors. List of damages that will not affect visitors.
   # Make list blank if visitors should receive all damages
   invincible-visitors: []
