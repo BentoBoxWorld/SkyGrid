@@ -1493,15 +1493,4 @@ public class Settings implements WorldSettings {
     public void setDefaultPlayerAction(String defaultPlayerAction) {
         this.defaultPlayerAction = defaultPlayerAction;
     }
-
-
-    /**
-     * Similar to CaveBlock, SkyGrid should not check for blocks.
-     * @return false
-     */
-    @Override
-    public boolean isCheckForBlocks()
-    {
-        return false;
-    }
 }
