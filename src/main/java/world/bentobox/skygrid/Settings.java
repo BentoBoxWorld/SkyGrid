@@ -1610,4 +1610,14 @@ public class Settings implements WorldSettings {
     public void setMakeEndPortals(boolean makeEndPortals) {
         this.makeEndPortals = makeEndPortals;
     }
+    
+    /**
+     * SkyGrid should not check for blocks.
+     * @return false
+     */
+    @Override
+    public boolean isCheckForBlocks()
+    {
+        return false;
+    }
 }
