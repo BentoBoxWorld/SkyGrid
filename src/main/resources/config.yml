@@ -1,4 +1,4 @@
-# SkyGrid Configuration ${version}
+# SkyGrid Configuration {$version}
 # 
 skygrid:
   command:
@@ -490,7 +490,7 @@ world:
     - VINE
     - WALL_TORCH
     - WANDERING_TRADER_SPAWN_EGG
-    - WARPED_FUNGUS_ON_A_STICK 
+    - WARPED_FUNGUS_ON_A_STICK
     - WATER_BUCKET
     - WHEAT
     - WHEAT_SEEDS
@@ -509,6 +509,78 @@ world:
     - YELLOW_WOOL
     - ZOMBIE_SPAWN_EGG
     - ZOMBIE_VILLAGER_SPAWN_EGG
+    - BLAZE_SPAWN_EGG
+    - CHISELED_QUARTZ_BLOCK
+    - DIAMOND_HORSE_ARMOR
+    - ELYTRA
+    - ENDER_EYE
+    - HOGLIN_SPAWN_EGG
+    - MUSIC_DISC_PIGSTEP
+    - NETHER_BRICK
+    - NETHER_BRICK_FENCE
+    - NETHER_BRICK_SLAB
+    - NETHER_BRICK_STAIRS
+    - NETHER_BRICK_WALL
+    - NETHER_BRICKS
+    - NETHER_PORTAL
+    - NETHER_QUARTZ_ORE
+    - NETHER_STAR
+    - NETHER_WART
+    - NETHER_WART_BLOCK
+    - NETHERITE_INGOT
+    - NETHERITE_SCRAP
+    - NETHERRACK
+    - PIGLIN_BANNER_PATTERN
+    - PIGLIN_BRUTE_SPAWN_EGG
+    - PIGLIN_SPAWN_EGG
+    - QUARTZ
+    - QUARTZ_BLOCK
+    - QUARTZ_PILLAR
+    - QUARTZ_SLAB
+    - QUARTZ_STAIRS
+    - RED_NETHER_BRICK_SLAB
+    - RED_NETHER_BRICK_STAIRS
+    - RED_NETHER_BRICK_WALL
+    - RED_NETHER_BRICKS
+    - STRIDER_SPAWN_EGG
+    - WITHER_ROSE
+    - WITHER_SKELETON_SKULL
+    - WITHER_SKELETON_SPAWN_EGG
+    - ZOGLIN_SPAWN_EGG
+    - ZOMBIE_HORSE_SPAWN_EGG
+    - ZOMBIFIED_PIGLIN_SPAWN_EGG
+    - BLACK_SHULKER_BOX
+    - BLUE_SHULKER_BOX
+    - BREWING_STAND
+    - BROWN_SHULKER_BOX
+    - CHORUS_FLOWER
+    - CHORUS_FRUIT
+    - CHORUS_PLANT
+    - CYAN_SHULKER_BOX
+    - DRAGON_BREATH
+    - END_CRYSTAL
+    - END_ROD
+    - END_STONE
+    - ENDERMAN_SPAWN_EGG
+    - ENDERMITE_SPAWN_EGG
+    - LIGHT_BLUE_SHULKER_BOX
+    - LIGHT_GRAY_SHULKER_BOX
+    - LIME_SHULKER_BOX
+    - MAGENTA_SHULKER_BOX
+    - ORANGE_SHULKER_BOX
+    - PINK_SHULKER_BOX
+    - POPPED_CHORUS_FRUIT
+    - PURPLE_SHULKER_BOX
+    - PURPUR_BLOCK
+    - PURPUR_PILLAR
+    - PURPUR_SLAB
+    - PURPUR_STAIRS
+    - RED_SHULKER_BOX
+    - SHULKER_BOX
+    - SHULKER_SHELL
+    - SHULKER_SPAWN_EGG
+    - WHITE_SHULKER_BOX
+    - YELLOW_SHULKER_BOX
     nether:
     - BLAZE_SPAWN_EGG
     - CHISELED_QUARTZ_BLOCK
@@ -589,117 +661,26 @@ world:
   # Chests have different items in them in different world types.
   # Over world blocks. Beware of making too many chests, they can lag a lot.
   blocks:
-    BROWN_MUSHROOM: 8
-    STRIPPED_SPRUCE_LOG: 8
-    SANDSTONE: 120
-    RED_SAND: 20
-    ACACIA_LOG: 20
-    TNT: 1
-    FERN: 4
-    BOOKSHELF: 10
-    PINK_TULIP: 8
-    STRIPPED_ACACIA_LOG: 1
-    JUNGLE_SAPLING: 19
-    OAK_WOOD: 19
-    WHITE_TULIP: 2
-    CACTUS: 6
-    SPRUCE_WOOD: 9
-    BLUE_ORCHID: 1
-    STRIPPED_ACACIA_WOOD: 1
-    PUMPKIN: 9
-    STRIPPED_BIRCH_LOG: 1
-    WHEAT: 4
-    STRIPPED_OAK_LOG: 1
-    CHEST: 5
-    DIRT_PATH: 7
-    STRIPPED_BIRCH_WOOD: 1
-    SPRUCE_LOG: 3
-    RED_MUSHROOM: 8
-    STRIPPED_DARK_OAK_WOOD: 1
-    SPRUCE_SAPLING: 2
-    REDSTONE_ORE: 2
-    TALL_GRASS: 13
-    DEAD_BUSH: 1
-    DARK_OAK_SAPLING: 3
-    GRASS_BLOCK: 200
-    EMERALD_ORE: 5
-    COAL_ORE: 70
-    PETRIFIED_OAK_SLAB: 1
-    SUNFLOWER: 3
-    INFESTED_COBBLESTONE: 1
-    DIORITE: 2
-    STRIPPED_OAK_WOOD: 1
-    FARMLAND: 7
-    POPPY: 5
-    DARK_OAK_WOOD: 18
-    GOLD_ORE: 3
-    DARK_OAK_LOG: 10
-    CLAY: 5
-    LILAC: 7
-    DARK_PRISMARINE: 3
-    STRIPPED_JUNGLE_LOG: 1
-    PODZOL: 4
     ACACIA_LEAVES: 8
-    GRASS: 100
-    STRIPPED_SPRUCE_WOOD: 1
-    LARGE_FERN: 8
-    GRANITE: 50
-    SAND: 50
-    FIRE_CORAL_BLOCK: 1
-    SUGAR_CANE: 4
-    JUNGLE_LEAVES: 10
-    JUNGLE_WOOD: 20
-    BONE_BLOCK: 1
-    RED_TULIP: 3
-    SPAWNER: 5
-    JUNGLE_LOG: 17
-    MOSSY_COBBLESTONE: 1
-    PRISMARINE: 3
-    DANDELION: 16
-    ALLIUM: 12
-    ACACIA_WOOD: 16
-    PEONY: 7
-    OAK_SAPLING: 11
-    STRIPPED_DARK_OAK_LOG: 1
-    LAVA: 5
-    OBSIDIAN: 1
-    AZURE_BLUET: 1
-    OXEYE_DAISY: 6
-    DARK_OAK_LEAVES: 9
-    GRAVEL: 20
-    SEA_LANTERN: 1
-    MELON: 15
-    COBWEB: 7
-    COARSE_DIRT: 17
-    LAPIS_ORE: 6
-    ACACIA_SAPLING: 17
-    BIRCH_SAPLING: 8
-    OAK_LOG: 10
-    BEETROOTS: 9
-    STRIPPED_JUNGLE_WOOD: 1
-    BIRCH_LOG: 2
-    BIRCH_WOOD: 16
-    MYCELIUM: 2
-    DIAMOND_ORE: 1
-    RED_SANDSTONE: 19
-    OAK_LEAVES: 4
-    IRON_ORE: 10
-    SPRUCE_LEAVES: 9
-    SPONGE: 1
-    SNOW_BLOCK: 1
-    BIRCH_LEAVES: 9
-    ORANGE_TULIP: 10
-    ANDESITE: 90
-    STONE: 180
-    ROSE_BUSH: 8
+    ACACIA_LOG: 20
     ACACIA_PLANKS: 1
+    ACACIA_SAPLING: 17
+    ACACIA_WOOD: 16
+    ALLIUM: 12
     AMETHYST_BLOCK: 1
     AMETHYST_CLUSTER: 1
-    AZALEA: 1
+    ANDESITE: 90
     AZALEA_LEAVES: 1
+    AZALEA: 1
+    AZURE_BLUET: 1
     BARREL: 1
     BEE_NEST: 1
+    BEETROOTS: 9
+    BIRCH_LEAVES: 9
+    BIRCH_LOG: 2
     BIRCH_PLANKS: 1
+    BIRCH_SAPLING: 8
+    BIRCH_WOOD: 16
     BLACK_CONCRETE: 1
     BLACK_GLAZED_TERRACOTTA: 1
     BLACK_STAINED_GLASS: 1
@@ -708,33 +689,42 @@ world:
     BLUE_CONCRETE: 1
     BLUE_GLAZED_TERRACOTTA: 1
     BLUE_ICE: 1
+    BLUE_ORCHID: 1
     BLUE_STAINED_GLASS: 1
     BLUE_TERRACOTTA: 1
     BLUE_WOOL: 1
+    BONE_BLOCK: 1
+    BOOKSHELF: 10
     BRAIN_CORAL_BLOCK: 1
     BRICKS: 1
     BROWN_CONCRETE: 1
     BROWN_GLAZED_TERRACOTTA: 1
     BROWN_MUSHROOM_BLOCK: 1
+    BROWN_MUSHROOM: 8
     BROWN_STAINED_GLASS: 1
     BROWN_TERRACOTTA: 1
     BROWN_WOOL: 1
     BUBBLE_CORAL_BLOCK: 1
+    CACTUS: 6
     CALCITE: 1
+    CHEST: 5
     CHISELED_DEEPSLATE: 1
     CHISELED_QUARTZ_BLOCK: 1
     CHISELED_RED_SANDSTONE: 1
     CHISELED_SANDSTONE: 1
     CHISELED_STONE_BRICKS: 1
+    CLAY: 5
     COAL_BLOCK: 1
+    COAL_ORE: 70
+    COARSE_DIRT: 17
     COBBLED_DEEPSLATE: 1
     COBBLESTONE: 1
+    COBWEB: 7
     COMPOSTER: 1
     COPPER_BLOCK: 1
     COPPER_ORE: 1
     CRACKED_DEEPSLATE_BRICKS: 1
     CRACKED_STONE_BRICKS: 1
-    CRIMSON_PLANKS: 1
     CUT_COPPER: 1
     CUT_RED_SANDSTONE: 1
     CUT_SANDSTONE: 1
@@ -743,13 +733,19 @@ world:
     CYAN_STAINED_GLASS: 1
     CYAN_TERRACOTTA: 1
     CYAN_WOOL: 1
+    DANDELION: 16
+    DARK_OAK_LEAVES: 9
+    DARK_OAK_LOG: 10
     DARK_OAK_PLANKS: 1
+    DARK_OAK_SAPLING: 3
+    DARK_OAK_WOOD: 18
+    DARK_PRISMARINE: 3
     DEAD_BRAIN_CORAL_BLOCK: 1
     DEAD_BUBBLE_CORAL_BLOCK: 1
+    DEAD_BUSH: 1
     DEAD_FIRE_CORAL_BLOCK: 1
     DEAD_HORN_CORAL_BLOCK: 1
     DEAD_TUBE_CORAL_BLOCK: 1
-    DEEPSLATE: 1
     DEEPSLATE_COAL_ORE: 1
     DEEPSLATE_COPPER_ORE: 1
     DEEPSLATE_DIAMOND_ORE: 1
@@ -758,13 +754,26 @@ world:
     DEEPSLATE_IRON_ORE: 1
     DEEPSLATE_LAPIS_ORE: 1
     DEEPSLATE_REDSTONE_ORE: 1
+    DEEPSLATE: 1
+    DIAMOND_ORE: 1
+    DIORITE: 2
+    DIRT_PATH: 7
     DIRT: 1
     DRIPSTONE_BLOCK: 1
+    EMERALD_ORE: 5
     END_STONE_BRICKS: 1
     EXPOSED_COPPER: 1
     EXPOSED_CUT_COPPER: 1
+    FARMLAND: 7
+    FERN: 4
+    FIRE_CORAL_BLOCK: 1
     FROSTED_ICE: 1
     GLASS: 1
+    GOLD_ORE: 3
+    GRANITE: 50
+    GRASS_BLOCK: 200
+    GRASS: 100
+    GRAVEL: 20
     GRAY_CONCRETE: 1
     GRAY_GLAZED_TERRACOTTA: 1
     GRAY_STAINED_GLASS: 1
@@ -779,9 +788,18 @@ world:
     HONEY_BLOCK: 1
     HONEYCOMB_BLOCK: 1
     HORN_CORAL_BLOCK: 1
+    INFESTED_COBBLESTONE: 1
+    IRON_ORE: 10
+    JUNGLE_LEAVES: 10
+    JUNGLE_LOG: 17
     JUNGLE_PLANKS: 1
+    JUNGLE_SAPLING: 19
+    JUNGLE_WOOD: 20
+    LAPIS_ORE: 6
     LARGE_AMETHYST_BUD: 1
+    LARGE_FERN: 8
     LAVA_CAULDRON: 1
+    LAVA: 5
     LIGHT_BLUE_CONCRETE: 1
     LIGHT_BLUE_GLAZED_TERRACOTTA: 1
     LIGHT_BLUE_STAINED_GLASS: 1
@@ -792,6 +810,7 @@ world:
     LIGHT_GRAY_STAINED_GLASS: 1
     LIGHT_GRAY_TERRACOTTA: 1
     LIGHT_GRAY_WOOL: 1
+    LILAC: 7
     LIME_CONCRETE: 1
     LIME_GLAZED_TERRACOTTA: 1
     LIME_STAINED_GLASS: 1
@@ -803,23 +822,37 @@ world:
     MAGENTA_STAINED_GLASS: 1
     MAGENTA_TERRACOTTA: 1
     MEDIUM_AMETHYST_BUD: 1
+    MELON: 15
     MOSS_BLOCK: 1
+    MOSSY_COBBLESTONE: 1
     MOSSY_STONE_BRICKS: 1
     MUSHROOM_STEM: 1
+    MYCELIUM: 2
+    OAK_LEAVES: 4
+    OAK_LOG: 10
     OAK_PLANKS: 1
+    OAK_SAPLING: 11
+    OAK_WOOD: 19
+    OBSIDIAN: 1
     ORANGE_CONCRETE: 1
     ORANGE_GLAZED_TERRACOTTA: 1
     ORANGE_STAINED_GLASS: 1
     ORANGE_TERRACOTTA: 1
+    ORANGE_TULIP: 10
     ORANGE_WOOL: 1
+    OXEYE_DAISY: 6
     OXIDIZED_COPPER: 1
     OXIDIZED_CUT_COPPER: 1
     PACKED_ICE: 1
+    PEONY: 7
+    PETRIFIED_OAK_SLAB: 1
     PINK_CONCRETE: 1
     PINK_GLAZED_TERRACOTTA: 1
     PINK_STAINED_GLASS: 1
     PINK_TERRACOTTA: 1
+    PINK_TULIP: 8
     PINK_WOOL: 1
+    PODZOL: 4
     POINTED_DRIPSTONE: 1
     POLISHED_ANDESITE: 1
     POLISHED_BASALT: 1
@@ -827,27 +860,37 @@ world:
     POLISHED_DEEPSLATE: 1
     POLISHED_DIORITE: 1
     POLISHED_GRANITE: 1
+    POPPY: 5
     POWDER_SNOW_CAULDRON: 1
     PRISMARINE_BRICKS: 1
+    PRISMARINE: 3
+    PUMPKIN: 9
     PURPLE_CONCRETE: 1
     PURPLE_GLAZED_TERRACOTTA: 1
     PURPLE_TERRACOTTA: 1
-    PURPUR_PILLAR: 1
-    QUARTZ_BLOCK: 1
     RAW_COPPER_BLOCK: 1
     RAW_GOLD_BLOCK: 1
     RAW_IRON_BLOCK: 1
     RED_CONCRETE: 1
     RED_GLAZED_TERRACOTTA: 1
     RED_MUSHROOM_BLOCK: 1
+    RED_MUSHROOM: 8
+    RED_SAND: 20
+    RED_SANDSTONE: 19
     RED_STAINED_GLASS: 1
     RED_TERRACOTTA: 1
+    RED_TULIP: 3
     RED_WOOL: 1
     REDSTONE_BLOCK: 1
     REDSTONE_LAMP: 1
+    REDSTONE_ORE: 3
     ROOTED_DIRT: 1
+    ROSE_BUSH: 8
+    SAND: 50
+    SANDSTONE: 120
     SCAFFOLDING: 1
     SCULK_SENSOR: 1
+    SEA_LANTERN: 1
     SHROOMLIGHT: 1
     SLIME_BLOCK: 1
     SMALL_AMETHYST_BUD: 1
@@ -857,17 +900,37 @@ world:
     SMOOTH_RED_SANDSTONE: 1
     SMOOTH_SANDSTONE: 1
     SMOOTH_STONE: 1
+    SNOW_BLOCK: 1
     SNOW: 1
+    SPAWNER: 5
+    SPONGE: 1
+    SPRUCE_LEAVES: 9
+    SPRUCE_LOG: 3
     SPRUCE_PLANKS: 1
+    SPRUCE_SAPLING: 2
+    SPRUCE_WOOD: 9
     STICKY_PISTON: 1
     STONE_BRICKS: 1
-    STRIPPED_CRIMSON_HYPHAE: 1
-    STRIPPED_CRIMSON_STEM: 1
-    STRIPPED_WARPED_HYPHAE: 1
-    STRIPPED_WARPED_STEM: 1
+    STONE: 180
+    STRIPPED_ACACIA_LOG: 10
+    STRIPPED_ACACIA_WOOD: 10
+    STRIPPED_BIRCH_LOG: 10
+    STRIPPED_BIRCH_WOOD: 10
+    STRIPPED_DARK_OAK_LOG: 10
+    STRIPPED_DARK_OAK_WOOD: 10
+    STRIPPED_JUNGLE_LOG: 10
+    STRIPPED_JUNGLE_WOOD: 10
+    STRIPPED_OAK_LOG: 10
+    STRIPPED_OAK_WOOD: 10
+    STRIPPED_SPRUCE_LOG: 10
+    STRIPPED_SPRUCE_WOOD: 10
+    SUGAR_CANE: 4
+    SUNFLOWER: 3
+    TALL_GRASS: 13
     TARGET: 1
     TERRACOTTA: 1
     TINTED_GLASS: 1
+    TNT: 1
     TUBE_CORAL_BLOCK: 1
     WATER_CAULDRON: 1
     WAXED_COPPER_BLOCK: 1
@@ -881,10 +944,12 @@ world:
     WEATHERED_COPPER: 1
     WEATHERED_CUT_COPPER: 1
     WET_SPONGE: 1
+    WHEAT: 4
     WHITE_CONCRETE: 1
     WHITE_GLAZED_TERRACOTTA: 1
     WHITE_STAINED_GLASS: 1
     WHITE_TERRACOTTA: 1
+    WHITE_TULIP: 2
     WHITE_WOOL: 1
     YELLOW_CONCRETE: 1
     YELLOW_GLAZED_TERRACOTTA: 1
@@ -898,46 +963,53 @@ world:
     # Beware with glowstone and lava - the lighting calcs will lag the
     # server badly if there are too many blocks.
     blocks:
-      SOUL_SAND: 90
+      POLISHED_BLACKSTONE_BRICKS: 12
       LAVA: 1
+      OBSIDIAN: 10
       NETHER_QUARTZ_ORE: 15
+      NETHERITE_BLOCK: 10
       MAGMA_BLOCK: 1
-      NETHER_WART_BLOCK: 12
       GRAVEL: 10
-      SPAWNER: 2
-      CHEST: 15
-      NETHERRACK: 200
-      NETHER_WART: 19
+      CRACKED_POLISHED_BLACKSTONE_BRICKS: 12
+      BASALT: 20
+      GILDED_BLACKSTONE: 10
+      WARPED_WART_BLOCK: 1
+      CRACKED_NETHER_BRICKS: 10
       COBWEB: 7
+      WARPED_NYLIUM: 1
       GLOWSTONE: 2
+      CHISELED_POLISHED_BLACKSTONE: 12
+      ANCIENT_DEBRIS: 10
       RED_NETHER_BRICKS: 12
       NETHER_BRICKS: 12
-      CHISELED_POLISHED_BLACKSTONE: 12
-      POLISHED_BLACKSTONE_BRICKS: 12
-      POLISHED_BLACKSTONE_BRICK_STAIRS: 12
-      CRACKED_POLISHED_BLACKSTONE_BRICKS: 12
-      NETHERITE_BLOCK: 10
-      ANCIENT_DEBRIS: 10
-      BONE_BLOCK: 10
-      CRYING_OBSIDIAN: 10
-      OBSIDIAN: 10
+      SOUL_SAND: 90
       BLACKSTONE: 10
-      GILDED_BLACKSTONE: 10
-      SOUL_SOIL: 80
+      POLISHED_BLACKSTONE_BRICK_STAIRS: 12
+      NETHER_WART_BLOCK: 12
       NETHER_GOLD_ORE: 12
-      BASALT: 20
-      CHISELED_NETHER_BRICKS: 12
-      CRACKED_NETHER_BRICKS: 10
-      RESPAWN_ANCHOR: 1
-      WARPED_FUNGUS: 1
-      WARPED_HYPHAE: 1
-      WARPED_NYLIUM: 1
-      WARPED_PLANKS: 1
+      BONE_BLOCK: 10
+      SPAWNER: 2
       WARPED_ROOTS: 1
-      WARPED_WART_BLOCK: 1
+      WARPED_FUNGUS: 1
+      CHEST: 15
+      NETHER_WART: 19
+      NETHERRACK: 200
+      WARPED_PLANKS: 1
+      WARPED_HYPHAE: 1
+      RESPAWN_ANCHOR: 1
+      CHISELED_NETHER_BRICKS: 12
+      SOUL_SOIL: 80
+      CRYING_OBSIDIAN: 10
+      STRIPPED_CRIMSON_HYPHAE: 100
+      STRIPPED_CRIMSON_STEM: 100
+      STRIPPED_WARPED_HYPHAE: 100
+      STRIPPED_WARPED_STEM: 100
+      CRIMSON_PLANKS: 100
+
     # This option indicates if nether portals should be linked via dimensions.
-    # Option will simulate vanilla portal mechanics that links portals together or creates a new portal, if there is not a portal in other dimension.
-    # Added since 1.16
+    # Option will simulate vanilla portal mechanics that links portals together
+    # or creates a new portal, if there is not a portal in that dimension.
+    # Added since 1.16.
     create-and-link-portals: false
   end:
     # Generate SkyGrid End - if this is false, the end world will not be made
@@ -946,16 +1018,17 @@ world:
     blocks:
       CHEST: 1
       END_ROD: 1
-      OBSIDIAN: 5
       CHORUS_PLANT: 2
+      OBSIDIAN: 5
       PURPLE_STAINED_GLASS: 50
       AIR: 200
       END_STONE: 200
       GRAVEL: 10
       SPAWNER: 1
       PURPUR_BLOCK: 50
-    # This option indicates if obsidian platform in the end should be generated when player enters the end world.
-    # Added since 1.16
+    # This option indicates if obsidian platform in the end should be generated
+    # when player enters the end world.
+    # Added since 1.16.
     create-obsidian-platform: false
   # Biomes - this will affect some block types and tree types.
   create-biomes: true
@@ -1003,8 +1076,10 @@ world:
     DRAGON_EGG: true
     ISLAND_RESPAWN: true
     REDSTONE: true
+    VISITOR_KEEP_INVENTORY: false
     BUCKET: true
     LOCK: true
+    PETS_STAY_AT_HOME: true
     ENDER_PEARL: true
     DOOR: true
     NATURAL_SPAWNING_OUTSIDE_RANGE: true
@@ -1014,6 +1089,7 @@ world:
     ANVIL: true
     MINECART: true
     FISH_SCOOPING: true
+    TRAPPED_CHEST: true
     END_PORTAL: true
     BREEDING: true
     HURT_VILLAGERS: true
@@ -1033,12 +1109,15 @@ world:
     TRADING: true
     EGGS: true
     ITEM_DROP: true
+    CHEST: true
     NOTE_BLOCK: true
     ENTER_EXIT_MESSAGES: true
     FLINT_AND_STEEL: true
     NETHER_PORTAL: true
     REMOVE_END_EXIT_ISLAND: true
     LECTERN: true
+    SHULKER_BOX: true
+    OFFLINE_GROWTH: true
     CROP_TRAMPLE: true
     ITEM_PICKUP: true
     BREWING: true
@@ -1047,6 +1126,7 @@ world:
     TNT_PRIMING: true
     COLLECT_WATER: true
     BUTTON: true
+    COMPOSTER: true
     FIRE_EXTINGUISH: true
     COMMAND_RANKS: true
     BEACON: true
@@ -1061,6 +1141,7 @@ world:
     REMOVE_MOBS: true
     ENCHANTING: true
     SHEARING: true
+    FLOWER_POT: true
     BOAT: true
     BED: true
     SPAWN_EGGS: true
@@ -1073,10 +1154,12 @@ world:
     LEASH: true
     BREAK_BLOCKS: true
     MOUNT_INVENTORY: true
+    OFFLINE_REDSTONE: true
     CHORUS_FRUIT: true
     CONTAINER: true
     JUKEBOX: true
     POTION_THROWING: true
+    BARREL: true
   # These are the default protection settings protected areas.
   # The value is the minimum island rank required to do the action
   # Ranks are: Visitor = 0, Member = 900, Owner = 1000
@@ -1090,9 +1173,10 @@ world:
     DOOR: 500
     BREAK_HOPPERS: 500
     FURNACE: 500
-    ANVIL: 500
     MINECART: 500
+    ANVIL: 500
     FISH_SCOOPING: 500
+    TRAPPED_CHEST: 500
     END_PORTAL: 500
     BREEDING: 500
     HURT_VILLAGERS: 500
@@ -1102,39 +1186,42 @@ world:
     BREAK_SPAWNERS: 500
     LEVER: 500
     ELYTRA: 0
-    CAKE: 500
     RIDING: 500
+    CAKE: 500
     HURT_MONSTERS: 500
     NAME_TAG: 500
     ARMOR_STAND: 500
     TRADING: 500
     EGGS: 500
     ITEM_DROP: 500
+    CHEST: 500
     NOTE_BLOCK: 500
     FLINT_AND_STEEL: 500
     NETHER_PORTAL: 500
     LECTERN: 500
+    SHULKER_BOX: 500
     ITEM_PICKUP: 500
     CROP_TRAMPLE: 500
-    MOVE_BOX: 1000
-    BREWING: 500
     DROPPER: 500
+    BREWING: 500
     TNT_PRIMING: 500
     COLLECT_WATER: 500
+    COMPOSTER: 500
     BUTTON: 500
     FIRE_EXTINGUISH: 500
     COMMAND_RANKS: 500
     BEACON: 500
     TRAPDOOR: 500
-    PRESSURE_PLATE: 500
     EXPERIENCE_BOTTLE_THROWING: 500
-    HIVE: 500
+    PRESSURE_PLATE: 500
     DYE: 500
+    HIVE: 500
     PLACE_BLOCKS: 500
     ITEM_FRAME: 500
     CRAFTING: 500
-    SHEARING: 500
     ENCHANTING: 500
+    SHEARING: 500
+    FLOWER_POT: 500
     BOAT: 500
     SPAWN_EGGS: 500
     BED: 500
@@ -1144,25 +1231,26 @@ world:
     EXPERIENCE_PICKUP: 500
     HOPPER: 500
     LEASH: 500
-    MOUNT_INVENTORY: 500
     BREAK_BLOCKS: 500
+    MOUNT_INVENTORY: 500
     CHORUS_FRUIT: 500
     CONTAINER: 500
-    JUKEBOX: 500
+    BARREL: 500
     POTION_THROWING: 500
+    JUKEBOX: 500
   # These are the default settings for new protected areas
   default-settings:
     PVP_END: false
     PVP_NETHER: false
     LEAF_DECAY: true
-    TNT_DAMAGE: true
     MONSTER_SPAWNERS_SPAWN: true
+    TNT_DAMAGE: true
     ANIMAL_NATURAL_SPAWN: true
     MONSTER_NATURAL_SPAWN: true
     FIRE_IGNITE: true
     FIRE_SPREAD: true
-    FIRE_BURNING: true
     ANIMAL_SPAWNERS_SPAWN: true
+    FIRE_BURNING: true
     PVP_OVERWORLD: false
   # These settings/flags are hidden from users
   # Ops can toggle hiding in-game using SHIFT-LEFT-CLICK on flags in settings
@@ -1262,43 +1350,43 @@ area:
     # List of commands to run when a player joins.
     # These commands are run by the console, unless otherwise stated using the [SUDO] prefix,
     # in which case they are executed by the player.
-    #
+    # 
     # Available placeholders for the commands are the following:
     #    * [name]: name of the player
-    #
+    # 
     # Here are some examples of valid commands to execute:
     #    * '[SUDO] bbox version'
     #    * 'bsbadmin deaths set [player] 0'
-    #
+    # 
     # Note that player-executed commands might not work, as these commands can be run with said player being offline.
     on-join: []
     # list of commands to run when a player leaves.
     # These commands are run by the console, unless otherwise stated using the [SUDO] prefix,
     # in which case they are executed by the player.
-    #
+    # 
     # Available placeholders for the commands are the following:
     #    * [name]: name of the player
-    #
+    # 
     # Here are some examples of valid commands to execute:
     #    * '[SUDO] bbox version'
     #    * 'bsbadmin deaths set [player] 0'
-    #
+    # 
     # Note that player-executed commands might not work, as these commands can be run with said player being offline.
     on-leave: []
-    # Returns a list of commands that should be executed when the player respawns after death if Flags.ISLAND_RESPAWN is true.
+    # List of commands that should be executed when the player respawns after death if Flags.ISLAND_RESPAWN is true.
     # These commands are run by the console, unless otherwise stated using the [SUDO] prefix,
     # in which case they are executed by the player.
-    #
+    # 
     # Available placeholders for the commands are the following:
     #    * [name]: name of the player
-    #
+    # 
     # Here are some examples of valid commands to execute:
     #    * '[SUDO] bbox version'
     #    * 'bsbadmin deaths set [player] 0'
-    #
+    # 
     # Note that player-executed commands might not work, as these commands can be run with said player being offline.
     # Added since 1.14.0.
-    on-respawn: [ ]
+    on-respawn: []
   sethome:
     nether:
       # Allow setting home in the nether. Only available on nether islands, not vanilla nether.
@@ -1332,8 +1420,8 @@ protection:
   # Geo restrict mobs.
   # Mobs that exit the protected space where they were spawned will be removed.
   geo-limit-settings: []
-  # SkyGrid blocked mobs.
-  # List of mobs that should not spawn in SkyGrid.
+  # AcidIsland blocked mobs.
+  # List of mobs that should not spawn in AcidIsland.
   block-mobs: []
   # Invincible visitors. List of damages that will not affect visitors.
   # Make list blank if visitors should receive all damages
