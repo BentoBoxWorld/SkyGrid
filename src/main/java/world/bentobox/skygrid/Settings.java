@@ -1,12 +1,6 @@
 package world.bentobox.skygrid;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.bukkit.Difficulty;
 import org.bukkit.GameMode;
@@ -92,6 +86,12 @@ public class Settings implements WorldSettings {
     @ConfigEntry(path = "world.nether.blocks")
     private Map<Material, Integer> netherBlocks = new EnumMap<>(Material.class);
 
+    @ConfigComment("This option indicates if nether portals should be linked via dimensions.")
+    @ConfigComment("Option will simulate vanilla portal mechanics that links portals together")
+    @ConfigComment("or creates a new portal, if there is not a portal in that dimension.")
+    @ConfigEntry(path = "world.nether.create-and-link-portals", since = "1.16")
+    private boolean makeNetherPortals = false;
+
     // End
     @ConfigComment("Generate SkyGrid End - if this is false, the end world will not be made")
     @ConfigEntry(path = "world.end.generate")
@@ -100,6 +100,11 @@ public class Settings implements WorldSettings {
     @ConfigComment("The End blocks.")
     @ConfigEntry(path = "world.end.blocks")
     private Map<Material, Integer> endBlocks = new EnumMap<>(Material.class);
+
+    @ConfigComment("This option indicates if obsidian platform in the end should be generated")
+    @ConfigComment("when player enters the end world.")
+    @ConfigEntry(path = "world.end.create-obsidian-platform", since = "1.16")
+    private boolean makeEndPortals = false;
 
     /* SkyGrid */
     @ConfigComment("Biomes - this will affect some block types and tree types.")
@@ -330,12 +335,49 @@ public class Settings implements WorldSettings {
 
     // Commands
     @ConfigComment("List of commands to run when a player joins.")
+    @ConfigComment("These commands are run by the console, unless otherwise stated using the [SUDO] prefix,")
+    @ConfigComment("in which case they are executed by the player.")
+    @ConfigComment("")
+    @ConfigComment("Available placeholders for the commands are the following:")
+    @ConfigComment("   * [name]: name of the player")
+    @ConfigComment("")
+    @ConfigComment("Here are some examples of valid commands to execute:")
+    @ConfigComment("   * '[SUDO] bbox version'")
+    @ConfigComment("   * 'bsbadmin deaths set [player] 0'")
+    @ConfigComment("")
+    @ConfigComment("Note that player-executed commands might not work, as these commands can be run with said player being offline.")
     @ConfigEntry(path = "area.commands.on-join")
     private List<String> onJoinCommands = new ArrayList<>();
 
     @ConfigComment("list of commands to run when a player leaves.")
+    @ConfigComment("These commands are run by the console, unless otherwise stated using the [SUDO] prefix,")
+    @ConfigComment("in which case they are executed by the player.")
+    @ConfigComment("")
+    @ConfigComment("Available placeholders for the commands are the following:")
+    @ConfigComment("   * [name]: name of the player")
+    @ConfigComment("")
+    @ConfigComment("Here are some examples of valid commands to execute:")
+    @ConfigComment("   * '[SUDO] bbox version'")
+    @ConfigComment("   * 'bsbadmin deaths set [player] 0'")
+    @ConfigComment("")
+    @ConfigComment("Note that player-executed commands might not work, as these commands can be run with said player being offline.")
     @ConfigEntry(path = "area.commands.on-leave")
     private List<String> onLeaveCommands = new ArrayList<>();
+
+    @ConfigComment("List of commands that should be executed when the player respawns after death if Flags.ISLAND_RESPAWN is true.")
+    @ConfigComment("These commands are run by the console, unless otherwise stated using the [SUDO] prefix,")
+    @ConfigComment("in which case they are executed by the player.")
+    @ConfigComment("")
+    @ConfigComment("Available placeholders for the commands are the following:")
+    @ConfigComment("   * [name]: name of the player")
+    @ConfigComment("")
+    @ConfigComment("Here are some examples of valid commands to execute:")
+    @ConfigComment("   * '[SUDO] bbox version'")
+    @ConfigComment("   * 'bsbadmin deaths set [player] 0'")
+    @ConfigComment("")
+    @ConfigComment("Note that player-executed commands might not work, as these commands can be run with said player being offline.")
+    @ConfigEntry(path = "area.commands.on-respawn", since = "1.14.0")
+    private List<String> onRespawnCommands = new ArrayList<>();
 
     // Sethome
     @ConfigComment("Allow setting home in the nether. Only available on nether islands, not vanilla nether.")
@@ -376,6 +418,11 @@ public class Settings implements WorldSettings {
     @ConfigComment("Mobs that exit the protected space where they were spawned will be removed.")
     @ConfigEntry(path = "protection.geo-limit-settings")
     private List<String> geoLimitSettings = new ArrayList<>();
+
+    @ConfigComment("SkyGrid blocked mobs.")
+    @ConfigComment("List of mobs that should not spawn in SkyGrid.")
+    @ConfigEntry(path = "protection.block-mobs")
+    private List<String> mobLimitSettings = new ArrayList<>();
 
     // Invincible visitor settings
     @ConfigComment("Invincible visitors. List of damages that will not affect visitors.")
@@ -1295,7 +1342,7 @@ public class Settings implements WorldSettings {
      */
     @Override
     public List<String> getOnJoinCommands() {
-        return onJoinCommands;
+        return Objects.requireNonNullElseGet(onJoinCommands, ArrayList::new);
     }
 
     /**
@@ -1310,7 +1357,7 @@ public class Settings implements WorldSettings {
      */
     @Override
     public List<String> getOnLeaveCommands() {
-        return onLeaveCommands;
+        return Objects.requireNonNullElseGet(onLeaveCommands, ArrayList::new);
     }
 
     /**
@@ -1318,6 +1365,23 @@ public class Settings implements WorldSettings {
      */
     public void setOnLeaveCommands(List<String> onLeaveCommands) {
         this.onLeaveCommands = onLeaveCommands;
+    }
+
+    /**
+     * @return the onRespawnCommands
+     */
+    @Override
+    public List<String> getOnRespawnCommands() {
+        return Objects.requireNonNullElseGet(onRespawnCommands, ArrayList::new);
+    }
+
+    /**
+     * Sets on respawn commands.
+     *
+     * @param onRespawnCommands the on respawn commands
+     */
+    public void setOnRespawnCommands(List<String> onRespawnCommands) {
+        this.onRespawnCommands = onRespawnCommands;
     }
 
     /**
@@ -1492,5 +1556,62 @@ public class Settings implements WorldSettings {
      */
     public void setDefaultPlayerAction(String defaultPlayerAction) {
         this.defaultPlayerAction = defaultPlayerAction;
+    }
+
+    /**
+     * @return the mobLimitSettings
+     */
+    @Override
+    public List<String> getMobLimitSettings() {
+        return mobLimitSettings;
+    }
+
+    /**
+     * @param mobLimitSettings the mobLimitSettings to set
+     */
+    public void setMobLimitSettings(List<String> mobLimitSettings) {
+        this.mobLimitSettings = mobLimitSettings;
+    }
+
+    /**
+     * @return the makeNetherPortals
+     */
+    @Override
+    public boolean isMakeNetherPortals() {
+        return makeNetherPortals;
+    }
+
+    /**
+     * @return the makeEndPortals
+     */
+    @Override
+    public boolean isMakeEndPortals() {
+        return makeEndPortals;
+    }
+
+    /**
+     * Sets make nether portals.
+     * @param makeNetherPortals the make nether portals
+     */
+    public void setMakeNetherPortals(boolean makeNetherPortals) {
+        this.makeNetherPortals = makeNetherPortals;
+    }
+
+    /**
+     * Sets make end portals.
+     * @param makeEndPortals the make end portals
+     */
+    public void setMakeEndPortals(boolean makeEndPortals) {
+        this.makeEndPortals = makeEndPortals;
+    }
+
+    /**
+     * SkyGrid should not check for blocks.
+     * @return false
+     */
+    @Override
+    public boolean isCheckForBlocks()
+    {
+        return false;
     }
 }

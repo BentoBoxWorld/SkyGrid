@@ -30,7 +30,7 @@ public class SkyGrid extends GameModeAddon {
     private Settings settings;
     private WorldStyles worldStyles;
     private SkyGridGen gen;
-    private Config<Settings> configObject = new Config<>(this, Settings.class);
+    private final Config<Settings> configObject = new Config<>(this, Settings.class);
 
     @Override
     public void onLoad() {
@@ -46,6 +46,7 @@ public class SkyGrid extends GameModeAddon {
             // Disable
             logError("SkyGrid settings could not load! Addon disabled.");
             setState(State.DISABLED);
+            return;
         }
         saveWorldSettings();
         worldStyles = new WorldStyles(this);
@@ -60,7 +61,7 @@ public class SkyGrid extends GameModeAddon {
     }
 
     @Override
-    public void onEnable(){
+    public void onEnable() {
         // Set default protection flags for world to allow everything
         Flags.values().stream().filter(f -> f.getType().equals(Type.PROTECTION)).forEach(f -> f.setDefaultSetting(getOverWorld(), true));
     }

@@ -1,8 +1,6 @@
 package world.bentobox.skygrid.generators;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -21,38 +19,13 @@ import world.bentobox.skygrid.SkyGrid;
 public class SkyGridChunks {
 
     // Blocks that need to be placed on dirt
-    private static final List<Material> NEEDS_DIRT = Collections.unmodifiableList(Arrays.asList(
-            Material.ACACIA_SAPLING,
-            Material.ALLIUM,
-            Material.AZURE_BLUET,
-            Material.BEETROOTS,
-            Material.BIRCH_SAPLING,
-            Material.BLUE_ORCHID,
-            Material.BROWN_MUSHROOM,
-            Material.DANDELION,
-            Material.DARK_OAK_SAPLING,
-            Material.DEAD_BUSH,
-            Material.FERN,
-            Material.GRASS,
-            Material.JUNGLE_SAPLING,
-            Material.LARGE_FERN,
-            Material.LILAC,
-            Material.OAK_SAPLING,
-            Material.ORANGE_TULIP,
-            Material.OXEYE_DAISY,
-            Material.PEONY,
-            Material.PINK_TULIP,
-            Material.POPPY,
-            Material.RED_MUSHROOM,
-            Material.RED_TULIP,
-            Material.ROSE_BUSH,
-            Material.SPRUCE_SAPLING,
-            Material.SUGAR_CANE,
-            Material.SUNFLOWER,
-            Material.TALL_GRASS,
-            Material.WHEAT,
-            Material.WHITE_TULIP
-            ));
+    private static final List<Material> NEEDS_DIRT = List.of(Material.ACACIA_SAPLING, Material.ALLIUM, Material.AZURE_BLUET,
+            Material.BEETROOTS, Material.BIRCH_SAPLING, Material.BLUE_ORCHID, Material.BROWN_MUSHROOM, Material.DANDELION,
+            Material.DARK_OAK_SAPLING, Material.DEAD_BUSH, Material.FERN, Material.GRASS, Material.JUNGLE_SAPLING,
+            Material.LARGE_FERN, Material.LILAC, Material.OAK_SAPLING, Material.ORANGE_TULIP, Material.OXEYE_DAISY,
+            Material.PEONY, Material.PINK_TULIP, Material.POPPY, Material.RED_MUSHROOM, Material.RED_TULIP,
+            Material.ROSE_BUSH, Material.SPRUCE_SAPLING, Material.SUGAR_CANE, Material.SUNFLOWER, Material.TALL_GRASS,
+            Material.WHEAT, Material.WHITE_TULIP);
 
     private static final int PRE_MADE_CHUNKS_NUMBER = 100;
 
@@ -100,14 +73,11 @@ public class SkyGridChunks {
      * @return list of sky grid blocks
      */
     public List<SkyGridBlock> getSkyGridChunk(Environment env) {
-        switch (env) {
-        case NETHER:
-            return chunksNether.get(random.nextInt(chunksNether.size()));
-        case THE_END:
-            return chunksEnd.get(random.nextInt(chunksEnd.size()));
-        default:
-            return chunks.get(random.nextInt(chunks.size()));
-        }
+        return switch (env) {
+        case NETHER -> chunksNether.get(random.nextInt(chunksNether.size()));
+        case THE_END -> chunksEnd.get(random.nextInt(chunksEnd.size()));
+        default -> chunks.get(random.nextInt(chunks.size()));
+        };
 
     }
 
@@ -123,10 +93,10 @@ public class SkyGridChunks {
             // Add dirt
             result.add(new SkyGridBlock(x, y, z, Material.DIRT.createBlockData()));
             BlockData dataBottom = blockMat.createBlockData();
-            if (dataBottom instanceof Bisected) {
-                ((Bisected) dataBottom).setHalf(Bisected.Half.BOTTOM);
+            if (dataBottom instanceof Bisected bisected) {
+                bisected.setHalf(Bisected.Half.BOTTOM);
                 BlockData dataTop = blockMat.createBlockData();
-                ((Bisected) dataTop).setHalf(Bisected.Half.TOP);
+                bisected.setHalf(Bisected.Half.TOP);
                 result.add(new SkyGridBlock(x, y + 1, z, dataBottom));
                 result.add(new SkyGridBlock(x, y + 2, z, dataTop));
             } else {
@@ -138,22 +108,20 @@ public class SkyGridChunks {
             }
         } else {
             switch (blockMat) {
-            case CACTUS:
+            case CACTUS -> {
                 result.add(new SkyGridBlock(x, y, z, Material.SAND));
-                result.add(new SkyGridBlock(x, y-1, z, Material.SANDSTONE));
-                result.add(new SkyGridBlock(x, y+1, z, blockMat));
-                break;
-            case NETHER_WART:
+                result.add(new SkyGridBlock(x, y - 1, z, Material.SANDSTONE));
+                result.add(new SkyGridBlock(x, y + 1, z, blockMat));
+            }
+            case NETHER_WART -> {
                 result.add(new SkyGridBlock(x, y, z, Material.SOUL_SAND));
-                result.add(new SkyGridBlock(x, y+1, z, blockMat));
-                break;
-            case END_ROD:
-            case CHORUS_PLANT:
+                result.add(new SkyGridBlock(x, y + 1, z, blockMat));
+            }
+            case END_ROD, CHORUS_PLANT -> {
                 result.add(new SkyGridBlock(x, y, z, Material.END_STONE));
-                result.add(new SkyGridBlock(x, y+1, z, blockMat));
-                break;
-            default:
-                result.add(new SkyGridBlock(x, y, z, blockMat));
+                result.add(new SkyGridBlock(x, y + 1, z, blockMat));
+            }
+            default -> result.add(new SkyGridBlock(x, y, z, blockMat));
             }
         }
 

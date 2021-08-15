@@ -1,0 +1,7 @@
+name: Pladdon
+main: world.bentobox.skygrid.SkyGrid
+version: ${version}
+api-version: 1.17
+description: SkyGrid
+author: tastybento
+depend: [BentoBox]

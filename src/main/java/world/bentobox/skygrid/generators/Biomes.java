@@ -7,14 +7,14 @@ import org.bukkit.World.Environment;
 import org.bukkit.block.Biome;
 
 /**
- * In order to find the biome of a region, we look up how close it's
- * conditions are to the conditions on this map. We can use it's proximity
+ * In order to find the biome of a region, we look up how close its
+ * conditions are to the conditions on this map. We can use its proximity
  * to a biome to determine how much influence that biome's noise generators,
  * vegetation and features should have on the area of the map. This allows us
  * to have seamless transitions between the biomes (at the price of speed)
  *
- * For example, a place with no precipitation and -30 degree (celcius) weather
- * is a tundra, but it is also much closer to a dessert than a rain forest.
+ * For example, a place with no precipitation and -30 degree (Celcius) weather
+ * is a tundra, but it is also much closer to a desert than a rain forest.
  *
  */
 public enum Biomes {
