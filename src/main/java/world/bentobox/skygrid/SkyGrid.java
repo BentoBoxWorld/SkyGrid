@@ -1,6 +1,7 @@
 package world.bentobox.skygrid;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -36,7 +37,7 @@ public class SkyGrid extends GameModeAddon {
     private Settings settings;
     private WorldStyles worldStyles;
     private SkyGridGen gen;
-    private Config<Settings> configObject = new Config<>(this, Settings.class);
+    private final Config<Settings> configObject = new Config<>(this, Settings.class);
 
     @Override
     public void onLoad() {
@@ -78,9 +79,9 @@ public class SkyGrid extends GameModeAddon {
         // Blocks
         @SuppressWarnings("deprecation")
         List<Material> blocks = Arrays.stream(Material.values()).filter(Material::isBlock).filter(m -> !m.isLegacy()).collect(Collectors.toList());
-        Set<Material> allBlocks = settings.getBlocks().keySet().stream().collect(Collectors.toSet());
-        settings.getNetherBlocks().keySet().forEach(allBlocks::add);
-        settings.getEndBlocks().keySet().forEach(allBlocks::add);
+        Set<Material> allBlocks = new HashSet<>(settings.getBlocks().keySet());
+        allBlocks.addAll(settings.getNetherBlocks().keySet());
+        allBlocks.addAll(settings.getEndBlocks().keySet());
         Set<Material> missingBlocks = blocks.stream().filter(s -> !allBlocks.contains(s)).collect(Collectors.toSet());
         if (!missingBlocks.isEmpty()) {
             this.logWarning("Missing blocks from config:");

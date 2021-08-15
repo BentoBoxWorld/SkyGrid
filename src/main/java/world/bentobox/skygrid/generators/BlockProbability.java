@@ -31,7 +31,7 @@ public class BlockProbability {
     /**
      * This picks a random block with the following constraints:
      * A cactus is never chosen as the bottom block.
-     * Water or lava never is placed above sugar cane or cactuses because when they grow, they will touch the
+     * Water or lava is never placed above sugar cane or cacti because when they grow, they will touch the
      * liquid and cause it to flow.
      * @param random - random object
      * @param bottom - if true, result will never be CACTUS

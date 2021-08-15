@@ -1,12 +1,6 @@
 package world.bentobox.skygrid;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.bukkit.Difficulty;
 import org.bukkit.GameMode;
@@ -1348,7 +1342,7 @@ public class Settings implements WorldSettings {
      */
     @Override
     public List<String> getOnJoinCommands() {
-        return onJoinCommands;
+        return Objects.requireNonNullElseGet(onJoinCommands, () -> new ArrayList<>());
     }
 
     /**
@@ -1363,7 +1357,7 @@ public class Settings implements WorldSettings {
      */
     @Override
     public List<String> getOnLeaveCommands() {
-        return onLeaveCommands;
+        return Objects.requireNonNullElseGet(onLeaveCommands, () -> new ArrayList<>());
     }
 
     /**
@@ -1378,7 +1372,7 @@ public class Settings implements WorldSettings {
      */
     @Override
     public List<String> getOnRespawnCommands() {
-        return onRespawnCommands;
+        return Objects.requireNonNullElseGet(onRespawnCommands, () -> new ArrayList<>());
     }
 
     /**

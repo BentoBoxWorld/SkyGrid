@@ -19,11 +19,11 @@ public class SkyGridGen extends ChunkGenerator {
 
     private final SkyGrid addon;
 
-    private Map<Environment, BiomeGenerator> biomeGenerator;
+    private final Map<Environment, BiomeGenerator> biomeGenerator;
 
-    private BlockPopulator populator;
+    private final BlockPopulator populator;
 
-    private SkyGridChunks preMade;
+    private final SkyGridChunks preMade;
 
     /**
      * @param addon - addon

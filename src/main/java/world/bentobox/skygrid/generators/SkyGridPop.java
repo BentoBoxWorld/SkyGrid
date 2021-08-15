@@ -28,7 +28,7 @@ import world.bentobox.skygrid.SkyGrid;
 public class SkyGridPop extends BlockPopulator {
     private static final RandomSeries slt = new RandomSeries(27);
     private final int size;
-    private SkyGrid addon;
+    private final SkyGrid addon;
     private final List<Material> chestItemsWorld;
     private final List<Material> chestItemsNether;
     private final List<Material> chestItemsEnd;

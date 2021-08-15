@@ -8,7 +8,7 @@ import java.util.Random;
  *
  */
 public class RandomSeries {
-    private Random random = new Random();
+    private final Random random = new Random();
     private final int[] reset;
     private int[] series;
     private int pos;
