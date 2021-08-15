@@ -1,12 +1,5 @@
 package world.bentobox.skygrid;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
@@ -65,28 +58,6 @@ public class SkyGrid extends GameModeAddon {
         playerCommand = new DefaultPlayerCommand(this) {};
         adminCommand = new DefaultAdminCommand(this) {};
 
-        // Check for missing items and blocks
-        @SuppressWarnings("deprecation")
-        List<Material> items = Arrays.stream(Material.values()).filter(Material::isItem).filter(m -> !m.isLegacy()).filter(m -> !m.isBlock()).collect(Collectors.toList());
-        List<String> allItems = settings.getChestItemsOverworld();
-        allItems.addAll(settings.getChestItemsNether());
-        allItems.addAll(settings.getChestItemsEnd());
-        List<String> missingItems = items.stream().map(Material::name).filter(s -> !allItems.contains(s)).collect(Collectors.toList());
-        if (!missingItems.isEmpty()) {
-            this.logWarning("Missing items from config:");
-            missingItems.forEach(this::logWarning);
-        }
-        // Blocks
-        @SuppressWarnings("deprecation")
-        List<Material> blocks = Arrays.stream(Material.values()).filter(Material::isBlock).filter(m -> !m.isLegacy()).collect(Collectors.toList());
-        Set<Material> allBlocks = new HashSet<>(settings.getBlocks().keySet());
-        allBlocks.addAll(settings.getNetherBlocks().keySet());
-        allBlocks.addAll(settings.getEndBlocks().keySet());
-        Set<Material> missingBlocks = blocks.stream().filter(s -> !allBlocks.contains(s)).collect(Collectors.toSet());
-        if (!missingBlocks.isEmpty()) {
-            this.logWarning("Missing blocks from config:");
-            missingBlocks.stream().map(Material::name).forEach(this::logWarning);
-        }
     }
 
     @Override
