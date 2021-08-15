@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.NavigableMap;
 import java.util.Objects;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 import org.bukkit.Chunk;
 import org.bukkit.Material;
@@ -43,16 +42,16 @@ public class SkyGridPop extends BlockPopulator {
             Material.OAK_SAPLING,
             Material.SPRUCE_SAPLING
     };
-    
+
     private static final String LOADED = "Loaded ";
 
     public SkyGridPop(SkyGrid addon) {
         this.addon = addon;
         this.size = addon.getSettings().getIslandHeight();
         // Load the chest items
-        chestItemsWorld = addon.getSettings().getChestItemsOverworld().stream().map(Material::matchMaterial).filter(Objects::nonNull).collect(Collectors.toList());
-        chestItemsNether = addon.getSettings().getChestItemsNether().stream().map(Material::matchMaterial).filter(Objects::nonNull).collect(Collectors.toList());
-        chestItemsEnd = addon.getSettings().getChestItemsEnd().stream().map(Material::matchMaterial).filter(Objects::nonNull).collect(Collectors.toList());
+        chestItemsWorld = addon.getSettings().getChestItemsOverworld().stream().map(Material::matchMaterial).filter(Objects::nonNull).toList();
+        chestItemsNether = addon.getSettings().getChestItemsNether().stream().map(Material::matchMaterial).filter(Objects::nonNull).toList();
+        chestItemsEnd = addon.getSettings().getChestItemsEnd().stream().map(Material::matchMaterial).filter(Objects::nonNull).toList();
         addon.log(LOADED + chestItemsWorld.size() + " chest items for world");
         addon.log(LOADED + chestItemsNether.size() + " chest items for nether world");
         addon.log(LOADED + chestItemsEnd.size() + " chest items for end world");
@@ -60,19 +59,21 @@ public class SkyGridPop extends BlockPopulator {
     }
 
     @Override
+    @Deprecated
     public void populate(World world, Random random, Chunk chunk) {
         this.random = random;
         this.chunk = chunk;
-        // Do an end portal check
-        if (addon.getSettings().isEndGenerate() && world.getEnvironment().equals(Environment.NORMAL)) {
-            checkEndPortal();
-        }
         for (int x = 1; x < 16; x += 4) {
             for (int z = 1; z < 16; z +=4) {
                 for (int y = 0; y <= size; y += 4) {
                     alterBlocks(chunk.getBlock(x, y, z));
                 }
             }
+        }
+        // Do an end portal check
+        if (addon.getSettings().isEndGenerate() && world.getEnvironment().equals(Environment.NORMAL)
+                && random.nextDouble() < addon.getSettings().getEndFrameProb()) {
+            makeEndPortal();
         }
     }
 
@@ -97,18 +98,16 @@ public class SkyGridPop extends BlockPopulator {
         default:
             break;
         }
-        
+
     }
 
-    private void checkEndPortal() {
-        if (random.nextDouble() < addon.getSettings().getEndFrameProb()) {
-            for (int xx = 1; xx< 6; xx++) {
-                for (int zz = 1; zz < 6; zz++) {
-                    if (xx == zz || (xx==1 && zz==5) || (xx==5 && zz==1) || (xx>1 && xx<5 && zz>1 && zz<5)) {
-                        continue;
-                    }
-                    setFrame(xx, zz, chunk.getBlock(xx, 0, zz));
+    private void makeEndPortal() {
+        for (int xx = 1; xx< 6; xx++) {
+            for (int zz = 1; zz < 6; zz++) {
+                if (xx == zz || (xx==1 && zz==5) || (xx==5 && zz==1) || (xx>1 && xx<5 && zz>1 && zz<5)) {
+                    continue;
                 }
+                setFrame(xx, zz, chunk.getBlock(xx, 0, zz));
             }
         }
     }
@@ -153,10 +152,9 @@ public class SkyGridPop extends BlockPopulator {
             break;
         case SWAMP:
             break;
-        case DESERT:
-        case DESERT_HILLS:
+        case DESERT, DESERT_HILLS:
             b.setType(Material.DEAD_BUSH, false);
-            break;
+        break;
         case SAVANNA:
             b.setType(Material.ACACIA_SAPLING, false); // Acacia
             break;

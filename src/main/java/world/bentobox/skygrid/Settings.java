@@ -1342,7 +1342,7 @@ public class Settings implements WorldSettings {
      */
     @Override
     public List<String> getOnJoinCommands() {
-        return Objects.requireNonNullElseGet(onJoinCommands, () -> new ArrayList<>());
+        return Objects.requireNonNullElseGet(onJoinCommands, ArrayList::new);
     }
 
     /**
@@ -1357,7 +1357,7 @@ public class Settings implements WorldSettings {
      */
     @Override
     public List<String> getOnLeaveCommands() {
-        return Objects.requireNonNullElseGet(onLeaveCommands, () -> new ArrayList<>());
+        return Objects.requireNonNullElseGet(onLeaveCommands, ArrayList::new);
     }
 
     /**
@@ -1372,7 +1372,7 @@ public class Settings implements WorldSettings {
      */
     @Override
     public List<String> getOnRespawnCommands() {
-        return Objects.requireNonNullElseGet(onRespawnCommands, () -> new ArrayList<>());
+        return Objects.requireNonNullElseGet(onRespawnCommands, ArrayList::new);
     }
 
     /**

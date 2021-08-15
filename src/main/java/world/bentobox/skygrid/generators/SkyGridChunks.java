@@ -74,9 +74,9 @@ public class SkyGridChunks {
      */
     public List<SkyGridBlock> getSkyGridChunk(Environment env) {
         return switch (env) {
-            case NETHER -> chunksNether.get(random.nextInt(chunksNether.size()));
-            case THE_END -> chunksEnd.get(random.nextInt(chunksEnd.size()));
-            default -> chunks.get(random.nextInt(chunks.size()));
+        case NETHER -> chunksNether.get(random.nextInt(chunksNether.size()));
+        case THE_END -> chunksEnd.get(random.nextInt(chunksEnd.size()));
+        default -> chunks.get(random.nextInt(chunks.size()));
         };
 
     }
@@ -93,10 +93,10 @@ public class SkyGridChunks {
             // Add dirt
             result.add(new SkyGridBlock(x, y, z, Material.DIRT.createBlockData()));
             BlockData dataBottom = blockMat.createBlockData();
-            if (dataBottom instanceof Bisected) {
-                ((Bisected) dataBottom).setHalf(Bisected.Half.BOTTOM);
+            if (dataBottom instanceof Bisected bisected) {
+                bisected.setHalf(Bisected.Half.BOTTOM);
                 BlockData dataTop = blockMat.createBlockData();
-                ((Bisected) dataTop).setHalf(Bisected.Half.TOP);
+                bisected.setHalf(Bisected.Half.TOP);
                 result.add(new SkyGridBlock(x, y + 1, z, dataBottom));
                 result.add(new SkyGridBlock(x, y + 2, z, dataTop));
             } else {
@@ -108,20 +108,20 @@ public class SkyGridChunks {
             }
         } else {
             switch (blockMat) {
-                case CACTUS -> {
-                    result.add(new SkyGridBlock(x, y, z, Material.SAND));
-                    result.add(new SkyGridBlock(x, y - 1, z, Material.SANDSTONE));
-                    result.add(new SkyGridBlock(x, y + 1, z, blockMat));
-                }
-                case NETHER_WART -> {
-                    result.add(new SkyGridBlock(x, y, z, Material.SOUL_SAND));
-                    result.add(new SkyGridBlock(x, y + 1, z, blockMat));
-                }
-                case END_ROD, CHORUS_PLANT -> {
-                    result.add(new SkyGridBlock(x, y, z, Material.END_STONE));
-                    result.add(new SkyGridBlock(x, y + 1, z, blockMat));
-                }
-                default -> result.add(new SkyGridBlock(x, y, z, blockMat));
+            case CACTUS -> {
+                result.add(new SkyGridBlock(x, y, z, Material.SAND));
+                result.add(new SkyGridBlock(x, y - 1, z, Material.SANDSTONE));
+                result.add(new SkyGridBlock(x, y + 1, z, blockMat));
+            }
+            case NETHER_WART -> {
+                result.add(new SkyGridBlock(x, y, z, Material.SOUL_SAND));
+                result.add(new SkyGridBlock(x, y + 1, z, blockMat));
+            }
+            case END_ROD, CHORUS_PLANT -> {
+                result.add(new SkyGridBlock(x, y, z, Material.END_STONE));
+                result.add(new SkyGridBlock(x, y + 1, z, blockMat));
+            }
+            default -> result.add(new SkyGridBlock(x, y, z, blockMat));
             }
         }
 
