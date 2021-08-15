@@ -419,8 +419,8 @@ public class Settings implements WorldSettings {
     @ConfigEntry(path = "protection.geo-limit-settings")
     private List<String> geoLimitSettings = new ArrayList<>();
 
-    @ConfigComment("AcidIsland blocked mobs.")
-    @ConfigComment("List of mobs that should not spawn in AcidIsland.")
+    @ConfigComment("SkyGrid blocked mobs.")
+    @ConfigComment("List of mobs that should not spawn in SkyGrid.")
     @ConfigEntry(path = "protection.block-mobs")
     private List<String> mobLimitSettings = new ArrayList<>();
 
@@ -1572,8 +1572,8 @@ public class Settings implements WorldSettings {
     public void setMobLimitSettings(List<String> mobLimitSettings) {
         this.mobLimitSettings = mobLimitSettings;
     }
-    
-   /**
+
+    /**
      * @return the makeNetherPortals
      */
     @Override
@@ -1604,7 +1604,7 @@ public class Settings implements WorldSettings {
     public void setMakeEndPortals(boolean makeEndPortals) {
         this.makeEndPortals = makeEndPortals;
     }
-    
+
     /**
      * SkyGrid should not check for blocks.
      * @return false
