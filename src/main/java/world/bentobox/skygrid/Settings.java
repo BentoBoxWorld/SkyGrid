@@ -107,10 +107,6 @@ public class Settings implements WorldSettings {
     private boolean makeEndPortals = false;
 
     /* SkyGrid */
-    @ConfigComment("Biomes - this will affect some block types and tree types.")
-    @ConfigEntry(path = "world.create-biomes")
-    private boolean createBiomes = true;
-
     @ConfigComment("The probability of a frame being created in a chunk. Frames are always at y=0.")
     @ConfigEntry(path = "world.end-frame-probability")
     private double endFrameProb = 0.1;
@@ -477,20 +473,6 @@ public class Settings implements WorldSettings {
      */
     public void setEndBlocks(Map<Material, Integer> endBlocks) {
         this.endBlocks = endBlocks;
-    }
-
-    /**
-     * @return the createBiomes
-     */
-    public boolean isCreateBiomes() {
-        return createBiomes;
-    }
-
-    /**
-     * @param createBiomes the createBiomes to set
-     */
-    public void setCreateBiomes(boolean createBiomes) {
-        this.createBiomes = createBiomes;
     }
 
     /**

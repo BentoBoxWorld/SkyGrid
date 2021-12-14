@@ -2,7 +2,6 @@ package world.bentobox.skygrid;
 
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
-import org.bukkit.WorldType;
 import org.bukkit.generator.ChunkGenerator;
 import org.eclipse.jdt.annotation.NonNull;
 
@@ -90,24 +89,21 @@ public class SkyGrid extends GameModeAddon {
             getLogger().info("Creating SkyGrid world ...");
         }
         // Create the world if it does not exist
-        islandWorld = WorldCreator.name(worldName).type(WorldType.FLAT).environment(World.Environment.NORMAL).generator(gen)
-                .createWorld();
+        islandWorld = WorldCreator.name(worldName).environment(World.Environment.NORMAL).generator(gen).createWorld();
 
         // Make the nether if it does not exist
         if (settings.isNetherGenerate()) {
             if (getServer().getWorld(worldName + NETHER) == null) {
                 log("Creating SkyGrid's Nether...");
             }
-            netherWorld = WorldCreator.name(worldName + NETHER).type(WorldType.FLAT).generator(gen)
-                    .environment(World.Environment.NETHER).createWorld();
+            netherWorld = WorldCreator.name(worldName + NETHER).generator(gen).environment(World.Environment.NETHER).createWorld();
         }
         // Make the end if it does not exist
         if (settings.isEndGenerate()) {
             if (getServer().getWorld(worldName + THE_END) == null) {
                 log("Creating SkyGrid's End World...");
             }
-            endWorld = WorldCreator.name(worldName + THE_END).type(WorldType.FLAT).generator(gen)
-                    .environment(World.Environment.THE_END).createWorld();
+            endWorld = WorldCreator.name(worldName + THE_END).generator(gen).environment(World.Environment.THE_END).createWorld();
         }
     }
 

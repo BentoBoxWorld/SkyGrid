@@ -152,9 +152,9 @@ public class SkyGridPop extends BlockPopulator {
             break;
         case SWAMP:
             break;
-        case DESERT, DESERT_HILLS:
+        case DESERT:
             b.setType(Material.DEAD_BUSH, false);
-        break;
+            break;
         case SAVANNA:
             b.setType(Material.ACACIA_SAPLING, false); // Acacia
             break;
