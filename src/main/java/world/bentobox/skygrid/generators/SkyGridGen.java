@@ -18,7 +18,6 @@ public class SkyGridGen extends ChunkGenerator {
     private final SkyGrid addon;
 
     private final BlockPopulator populator;
-
     private final SkyGridChunks preMade;
 
     /**
