@@ -8,6 +8,7 @@
     <artifactId>skygrid</artifactId>
     <version>${revision}</version>
 
+    <name>SkyGrid</name>
     <description>Skygrid is an add-on for BentoBox, an expandable Minecraft Bukkit plugin for island-type games like BSkyBlock or AcidIsland.</description>
     <url>https://github.com/BentoBoxWorld/SkyGrid</url>
     <inceptionYear>2017</inceptionYear>
@@ -53,12 +54,12 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>16</java.version>
+        <java.version>17</java.version>
         <!-- Non-minecraft related dependencies -->
         <powermock.version>2.0.2</powermock.version>
         <!-- More visible way how to change dependency versions -->
-        <spigot.version>1.18.1-R0.1-SNAPSHOT</spigot.version>
-        <bentobox.version>1.18.0-SNAPSHOT</bentobox.version>
+        <spigot.version>1.19.1-R0.1-SNAPSHOT</spigot.version>
+        <bentobox.version>1.21.0</bentobox.version>
         <!-- Revision variable removes warning about dynamic version -->
         <revision>${build.version}-SNAPSHOT</revision>
         <!-- Do not change unless you want different name for local builds. -->
@@ -315,6 +316,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <name>SkyGrid</name>
 </project>
