@@ -1030,8 +1030,6 @@ world:
     # when player enters the end world.
     # Added since 1.16.
     create-obsidian-platform: false
-  # Biomes - this will affect some block types and tree types.
-  create-biomes: true
   # The probability of a frame being created in a chunk. Frames are always at y=0.
   end-frame-probability: 0.1
   # Friendly name for this world. Used in admin commands. Must be a single word

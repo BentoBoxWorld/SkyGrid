@@ -20,19 +20,17 @@ import org.bukkit.block.Biome;
 public enum Biomes {
 
     //We store the biome, the temperature and rainfall for each biome.
-    SNOWY_TUNDRA(Environment.NORMAL, Biome.SNOWY_TUNDRA, 0, 100),
+    SNOWY_PLAINS(Environment.NORMAL, Biome.SNOWY_PLAINS, 0, 100),
     SNOWY_TAIGA(Environment.NORMAL, Biome.SNOWY_TAIGA, 0, 100),
     FROZEN_RIVER(Environment.NORMAL, Biome.FROZEN_RIVER, 0, 10),
     SNOWY_BEACH(Environment.NORMAL, Biome.SNOWY_BEACH, 0, 100),
-    MOUNTAINS(Environment.NORMAL, Biome.MOUNTAINS, 20, 60),
-    WOODED_MOUNTAINS(Environment.NORMAL, Biome.WOODED_MOUNTAINS, 20, 60),
+    STONY_PEAKS(Environment.NORMAL, Biome.STONY_PEAKS, 20, 60),
     DESERT(Environment.NORMAL, Biome.DESERT, 60, 4),
     FOREST(Environment.NORMAL, Biome.FOREST, 50, 60),
     PLAINS(Environment.NORMAL, Biome.PLAINS, 40, 30),
     SWAMP(Environment.NORMAL, Biome.SWAMP, 40, 70),
     JUNGLE(Environment.NORMAL, Biome.JUNGLE, 60, 50),
     SAVANNA(Environment.NORMAL, Biome.SAVANNA, 40, 10),
-    DESERT_HILLS(Environment.NORMAL, Biome.DESERT_HILLS, 60, 5),
     TAIGA(Environment.NORMAL, Biome.TAIGA, 30, 5),
     // Nether
     NETHER_WASTES(Environment.NETHER, Biome.NETHER_WASTES, 40, 30),
