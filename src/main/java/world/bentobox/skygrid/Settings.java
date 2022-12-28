@@ -105,7 +105,7 @@ public class Settings implements WorldSettings {
     @ConfigComment("This option indicates if obsidian platform in the end should be generated")
     @ConfigComment("when player enters the end world.")
     @ConfigEntry(path = "world.end.create-obsidian-platform", since = "1.16")
-    private boolean makeEndPortals = false;
+    private boolean makeEndPortals = true;
 
     /* SkyGrid */
     @ConfigComment("The probability of a frame being created in a chunk. Frames are always at y=0.")
@@ -722,6 +722,7 @@ public class Settings implements WorldSettings {
      * @return the defaultIslandFlags
      * @deprecated since 1.21
      */
+    @Deprecated
     @Override
     public Map<Flag, Integer> getDefaultIslandFlags() {
         return Collections.emptyMap();
@@ -749,6 +750,7 @@ public class Settings implements WorldSettings {
      * @return the defaultIslandSettings
      * @deprecated since 1.21
      */
+    @Deprecated
     @Override
     public Map<Flag, Integer> getDefaultIslandSettings() {
         return Collections.emptyMap();

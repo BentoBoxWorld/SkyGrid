@@ -1029,7 +1029,7 @@ world:
     # This option indicates if obsidian platform in the end should be generated
     # when player enters the end world.
     # Added since 1.16.
-    create-obsidian-platform: false
+    create-obsidian-platform: true
   # The probability of a frame being created in a chunk. Frames are always at y=0.
   end-frame-probability: 0.1
   # Friendly name for this world. Used in admin commands. Must be a single word
