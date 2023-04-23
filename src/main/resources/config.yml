@@ -10,12 +10,12 @@ skygrid:
     admin: sgadmin sga
     # The default action for new player command call.
     # Sub-command of main player command that will be run on first player command call.
-    # By default, it is the sub-command 'create'.
+    # By default it is sub-command 'create'.
     # Added since 1.16.0.
     new-player-action: create
     # The default action for player command.
     # Sub-command of main player command that will be run on each player command call.
-    # By default, it is the sub-command 'go'.
+    # By default it is sub-command 'go'.
     # Added since 1.16.0.
     default-action: go
 world:
@@ -661,322 +661,327 @@ world:
   # Chests have different items in them in different world types.
   # Over world blocks. Beware of making too many chests, they can lag a lot.
   blocks:
-    ACACIA_LEAVES: 8
-    ACACIA_LOG: 20
-    ACACIA_PLANKS: 1
-    ACACIA_SAPLING: 17
-    ACACIA_WOOD: 16
-    ALLIUM: 12
-    AMETHYST_BLOCK: 1
-    AMETHYST_CLUSTER: 1
-    ANDESITE: 90
-    AZALEA_LEAVES: 1
-    AZALEA: 1
-    AZURE_BLUET: 1
-    BARREL: 1
-    BEE_NEST: 1
-    BEETROOTS: 9
-    BIRCH_LEAVES: 9
-    BIRCH_LOG: 2
-    BIRCH_PLANKS: 1
-    BIRCH_SAPLING: 8
-    BIRCH_WOOD: 16
-    BLACK_CONCRETE: 1
-    BLACK_GLAZED_TERRACOTTA: 1
-    BLACK_STAINED_GLASS: 1
-    BLACK_TERRACOTTA: 1
-    BLACK_WOOL: 1
-    BLUE_CONCRETE: 1
-    BLUE_GLAZED_TERRACOTTA: 1
-    BLUE_ICE: 1
-    BLUE_ORCHID: 1
-    BLUE_STAINED_GLASS: 1
-    BLUE_TERRACOTTA: 1
-    BLUE_WOOL: 1
-    BONE_BLOCK: 1
-    BOOKSHELF: 10
-    BRAIN_CORAL_BLOCK: 1
-    BRICKS: 1
-    BROWN_CONCRETE: 1
-    BROWN_GLAZED_TERRACOTTA: 1
-    BROWN_MUSHROOM_BLOCK: 1
     BROWN_MUSHROOM: 8
-    BROWN_STAINED_GLASS: 1
-    BROWN_TERRACOTTA: 1
-    BROWN_WOOL: 1
-    BUBBLE_CORAL_BLOCK: 1
-    CACTUS: 6
-    CALCITE: 1
-    CHEST: 5
-    CHISELED_DEEPSLATE: 1
-    CHISELED_QUARTZ_BLOCK: 1
-    CHISELED_RED_SANDSTONE: 1
-    CHISELED_SANDSTONE: 1
-    CHISELED_STONE_BRICKS: 1
-    CLAY: 5
-    COAL_BLOCK: 1
-    COAL_ORE: 70
-    COARSE_DIRT: 17
-    COBBLED_DEEPSLATE: 1
-    COBBLESTONE: 1
-    COBWEB: 7
-    COMPOSTER: 1
-    COPPER_BLOCK: 1
-    COPPER_ORE: 1
-    CRACKED_DEEPSLATE_BRICKS: 1
-    CRACKED_STONE_BRICKS: 1
-    CUT_COPPER: 1
-    CUT_RED_SANDSTONE: 1
-    CUT_SANDSTONE: 1
-    CYAN_CONCRETE: 1
-    CYAN_GLAZED_TERRACOTTA: 1
-    CYAN_STAINED_GLASS: 1
-    CYAN_TERRACOTTA: 1
-    CYAN_WOOL: 1
-    DANDELION: 16
-    DARK_OAK_LEAVES: 9
-    DARK_OAK_LOG: 10
-    DARK_OAK_PLANKS: 1
-    DARK_OAK_SAPLING: 3
-    DARK_OAK_WOOD: 18
-    DARK_PRISMARINE: 3
-    DEAD_BRAIN_CORAL_BLOCK: 1
-    DEAD_BUBBLE_CORAL_BLOCK: 1
-    DEAD_BUSH: 1
-    DEAD_FIRE_CORAL_BLOCK: 1
-    DEAD_HORN_CORAL_BLOCK: 1
-    DEAD_TUBE_CORAL_BLOCK: 1
-    DEEPSLATE_COAL_ORE: 1
-    DEEPSLATE_COPPER_ORE: 1
-    DEEPSLATE_DIAMOND_ORE: 1
-    DEEPSLATE_EMERALD_ORE: 1
-    DEEPSLATE_GOLD_ORE: 1
-    DEEPSLATE_IRON_ORE: 1
-    DEEPSLATE_LAPIS_ORE: 1
-    DEEPSLATE_REDSTONE_ORE: 1
-    DEEPSLATE: 1
-    DIAMOND_ORE: 1
-    DIORITE: 2
-    DIRT_PATH: 7
-    DIRT: 1
-    DRIPSTONE_BLOCK: 1
-    EMERALD_ORE: 5
-    END_STONE_BRICKS: 1
-    EXPOSED_COPPER: 1
-    EXPOSED_CUT_COPPER: 1
-    FARMLAND: 7
-    FERN: 4
-    FIRE_CORAL_BLOCK: 1
-    FROSTED_ICE: 1
-    GLASS: 1
-    GOLD_ORE: 3
-    GRANITE: 50
-    GRASS_BLOCK: 200
-    GRASS: 100
-    GRAVEL: 20
-    GRAY_CONCRETE: 1
-    GRAY_GLAZED_TERRACOTTA: 1
-    GRAY_STAINED_GLASS: 1
-    GRAY_TERRACOTTA: 1
-    GRAY_WOOL: 1
-    GREEN_CONCRETE: 1
-    GREEN_GLAZED_TERRACOTTA: 1
-    GREEN_STAINED_GLASS: 1
-    GREEN_TERRACOTTA: 1
-    GREEN_WOOL: 1
-    HAY_BLOCK: 1
-    HONEY_BLOCK: 1
-    HONEYCOMB_BLOCK: 1
-    HORN_CORAL_BLOCK: 1
-    INFESTED_COBBLESTONE: 1
-    IRON_ORE: 10
-    JUNGLE_LEAVES: 10
-    JUNGLE_LOG: 17
-    JUNGLE_PLANKS: 1
-    JUNGLE_SAPLING: 19
-    JUNGLE_WOOD: 20
-    LAPIS_ORE: 6
-    LARGE_AMETHYST_BUD: 1
-    LARGE_FERN: 8
-    LAVA_CAULDRON: 1
-    LAVA: 5
-    LIGHT_BLUE_CONCRETE: 1
-    LIGHT_BLUE_GLAZED_TERRACOTTA: 1
-    LIGHT_BLUE_STAINED_GLASS: 1
-    LIGHT_BLUE_TERRACOTTA: 1
-    LIGHT_BLUE_WOOL: 1
-    LIGHT_GRAY_CONCRETE: 1
-    LIGHT_GRAY_GLAZED_TERRACOTTA: 1
-    LIGHT_GRAY_STAINED_GLASS: 1
-    LIGHT_GRAY_TERRACOTTA: 1
-    LIGHT_GRAY_WOOL: 1
-    LILAC: 7
-    LIME_CONCRETE: 1
-    LIME_GLAZED_TERRACOTTA: 1
-    LIME_STAINED_GLASS: 1
-    LIME_TERRACOTTA: 1
-    LIME_WOOL: 1
-    LODESTONE: 1
-    MAGENTA_CONCRETE: 1
-    MAGENTA_GLAZED_TERRACOTTA: 1
-    MAGENTA_STAINED_GLASS: 1
-    MAGENTA_TERRACOTTA: 1
-    MEDIUM_AMETHYST_BUD: 1
-    MELON: 15
-    MOSS_BLOCK: 1
-    MOSSY_COBBLESTONE: 1
-    MOSSY_STONE_BRICKS: 1
-    MUSHROOM_STEM: 1
-    MYCELIUM: 2
-    OAK_LEAVES: 4
-    OAK_LOG: 10
-    OAK_PLANKS: 1
-    OAK_SAPLING: 11
-    OAK_WOOD: 19
-    OBSIDIAN: 1
-    ORANGE_CONCRETE: 1
-    ORANGE_GLAZED_TERRACOTTA: 1
-    ORANGE_STAINED_GLASS: 1
-    ORANGE_TERRACOTTA: 1
-    ORANGE_TULIP: 10
-    ORANGE_WOOL: 1
-    OXEYE_DAISY: 6
-    OXIDIZED_COPPER: 1
-    OXIDIZED_CUT_COPPER: 1
-    PACKED_ICE: 1
-    PEONY: 7
-    PETRIFIED_OAK_SLAB: 1
-    PINK_CONCRETE: 1
-    PINK_GLAZED_TERRACOTTA: 1
-    PINK_STAINED_GLASS: 1
-    PINK_TERRACOTTA: 1
-    PINK_TULIP: 8
-    PINK_WOOL: 1
-    PODZOL: 4
-    POINTED_DRIPSTONE: 1
-    POLISHED_ANDESITE: 1
-    POLISHED_BASALT: 1
-    POLISHED_BLACKSTONE: 1
-    POLISHED_DEEPSLATE: 1
-    POLISHED_DIORITE: 1
-    POLISHED_GRANITE: 1
-    POPPY: 5
-    POWDER_SNOW_CAULDRON: 1
-    PRISMARINE_BRICKS: 1
-    PRISMARINE: 3
-    PUMPKIN: 9
-    PURPLE_CONCRETE: 1
-    PURPLE_GLAZED_TERRACOTTA: 1
-    PURPLE_TERRACOTTA: 1
-    RAW_COPPER_BLOCK: 1
-    RAW_GOLD_BLOCK: 1
-    RAW_IRON_BLOCK: 1
-    RED_CONCRETE: 1
-    RED_GLAZED_TERRACOTTA: 1
-    RED_MUSHROOM_BLOCK: 1
-    RED_MUSHROOM: 8
-    RED_SAND: 20
-    RED_SANDSTONE: 19
-    RED_STAINED_GLASS: 1
-    RED_TERRACOTTA: 1
-    RED_TULIP: 3
-    RED_WOOL: 1
-    REDSTONE_BLOCK: 1
-    REDSTONE_LAMP: 1
-    REDSTONE_ORE: 3
-    ROOTED_DIRT: 1
-    ROSE_BUSH: 8
-    SAND: 50
-    SANDSTONE: 120
-    SCAFFOLDING: 1
-    SCULK_SENSOR: 1
-    SEA_LANTERN: 1
-    SHROOMLIGHT: 1
-    SLIME_BLOCK: 1
-    SMALL_AMETHYST_BUD: 1
-    SMALL_DRIPLEAF: 1
-    SMOOTH_BASALT: 1
-    SMOOTH_QUARTZ: 1
-    SMOOTH_RED_SANDSTONE: 1
-    SMOOTH_SANDSTONE: 1
-    SMOOTH_STONE: 1
-    SNOW_BLOCK: 1
-    SNOW: 1
-    SPAWNER: 5
-    SPONGE: 1
-    SPRUCE_LEAVES: 9
-    SPRUCE_LOG: 3
-    SPRUCE_PLANKS: 1
-    SPRUCE_SAPLING: 2
-    SPRUCE_WOOD: 9
-    STICKY_PISTON: 1
     STONE_BRICKS: 1
-    STONE: 180
-    STRIPPED_ACACIA_LOG: 10
-    STRIPPED_ACACIA_WOOD: 10
-    STRIPPED_BIRCH_LOG: 10
-    STRIPPED_BIRCH_WOOD: 10
-    STRIPPED_DARK_OAK_LOG: 10
-    STRIPPED_DARK_OAK_WOOD: 10
-    STRIPPED_JUNGLE_LOG: 10
-    STRIPPED_JUNGLE_WOOD: 10
-    STRIPPED_OAK_LOG: 10
-    STRIPPED_OAK_WOOD: 10
-    STRIPPED_SPRUCE_LOG: 10
-    STRIPPED_SPRUCE_WOOD: 10
-    SUGAR_CANE: 4
-    SUNFLOWER: 3
-    TALL_GRASS: 13
-    TARGET: 1
-    TERRACOTTA: 1
-    TINTED_GLASS: 1
-    TNT: 1
-    TUBE_CORAL_BLOCK: 1
+    DIRT_PATH: 7
+    MAGENTA_TERRACOTTA: 1
+    RED_SAND: 20
+    FROSTED_ICE: 1
+    SMALL_AMETHYST_BUD: 1
+    SPRUCE_PLANKS: 1
+    POWDER_SNOW_CAULDRON: 1
+    GREEN_GLAZED_TERRACOTTA: 1
+    EXPOSED_CUT_COPPER: 1
     WATER_CAULDRON: 1
-    WAXED_COPPER_BLOCK: 1
-    WAXED_CUT_COPPER: 1
-    WAXED_EXPOSED_COPPER: 1
-    WAXED_EXPOSED_CUT_COPPER: 1
-    WAXED_OXIDIZED_COPPER: 1
-    WAXED_OXIDIZED_CUT_COPPER: 1
-    WAXED_WEATHERED_COPPER: 1
-    WAXED_WEATHERED_CUT_COPPER: 1
-    WEATHERED_COPPER: 1
-    WEATHERED_CUT_COPPER: 1
-    WET_SPONGE: 1
-    WHEAT: 4
-    WHITE_CONCRETE: 1
-    WHITE_GLAZED_TERRACOTTA: 1
-    WHITE_STAINED_GLASS: 1
-    WHITE_TERRACOTTA: 1
+    GREEN_WOOL: 1
+    BLACK_WOOL: 1
+    PURPLE_CONCRETE: 1
+    LARGE_AMETHYST_BUD: 1
+    OAK_WOOD: 19
     WHITE_TULIP: 2
-    WHITE_WOOL: 1
-    YELLOW_CONCRETE: 1
-    YELLOW_GLAZED_TERRACOTTA: 1
-    YELLOW_STAINED_GLASS: 1
+    GRAY_STAINED_GLASS: 1
+    CACTUS: 6
+    STICKY_PISTON: 1
+    BLUE_ORCHID: 1
+    SMOOTH_QUARTZ: 1
+    STRIPPED_ACACIA_WOOD: 10
+    PUMPKIN: 9
+    STRIPPED_BIRCH_LOG: 10
+    LIGHT_BLUE_TERRACOTTA: 1
+    WHEAT: 4
+    BROWN_WOOL: 1
+    BLUE_STAINED_GLASS: 1
+    PINK_CONCRETE: 1
+    STRIPPED_BIRCH_WOOD: 10
+    CRACKED_STONE_BRICKS: 1
+    SLIME_BLOCK: 1
+    ORANGE_TERRACOTTA: 1
+    BLACK_CONCRETE: 1
+    RED_MUSHROOM: 8
+    WAXED_WEATHERED_COPPER: 1
+    SPRUCE_SAPLING: 2
+    AZALEA: 1
+    LIGHT_BLUE_STAINED_GLASS: 1
+    MUSHROOM_STEM: 1
+    BLUE_TERRACOTTA: 1
+    JUNGLE_PLANKS: 1
+    BROWN_MUSHROOM_BLOCK: 1
+    BLACK_STAINED_GLASS: 1
+    MAGENTA_GLAZED_TERRACOTTA: 1
+    COBBLESTONE: 1
+    REDSTONE_ORE: 3
+    POINTED_DRIPSTONE: 1
+    WAXED_EXPOSED_COPPER: 1
+    DEAD_FIRE_CORAL_BLOCK: 1
+    WHITE_GLAZED_TERRACOTTA: 1
+    CHISELED_SANDSTONE: 1
+    LIGHT_GRAY_TERRACOTTA: 1
+    DARK_OAK_SAPLING: 3
+    WAXED_OXIDIZED_COPPER: 1
+    GRASS_BLOCK: 200
+    RED_WOOL: 1
+    EMERALD_ORE: 5
+    MAGENTA_STAINED_GLASS: 1
+    COAL_ORE: 70
+    ROOTED_DIRT: 1
+    POLISHED_ANDESITE: 1
+    SUNFLOWER: 3
+    LIGHT_BLUE_GLAZED_TERRACOTTA: 1
+    PINK_STAINED_GLASS: 1
+    OXIDIZED_COPPER: 1
+    INFESTED_COBBLESTONE: 1
+    DIORITE: 2
+    BLUE_ICE: 1
+    SCAFFOLDING: 1
+    LIGHT_BLUE_CONCRETE: 1
+    STRIPPED_OAK_WOOD: 10
+    HORN_CORAL_BLOCK: 1
+    CYAN_WOOL: 1
+    DARK_OAK_WOOD: 18
+    GOLD_ORE: 3
+    POLISHED_BLACKSTONE: 1
+    COPPER_BLOCK: 1
+    CLAY: 5
+    TUBE_CORAL_BLOCK: 1
+    LILAC: 7
+    TARGET: 1
+    DRIPSTONE_BLOCK: 1
+    DARK_PRISMARINE: 3
+    STRIPPED_JUNGLE_LOG: 10
+    CRACKED_DEEPSLATE_BRICKS: 1
+    BUBBLE_CORAL_BLOCK: 1
+    BLUE_GLAZED_TERRACOTTA: 1
+    ACACIA_LEAVES: 8
+    STRIPPED_SPRUCE_WOOD: 10
+    LIGHT_GRAY_CONCRETE: 1
     YELLOW_TERRACOTTA: 1
+    GRANITE: 50
+    SAND: 50
+    CHISELED_RED_SANDSTONE: 1
+    JUNGLE_LEAVES: 10
+    JUNGLE_WOOD: 20
+    BROWN_TERRACOTTA: 1
+    RED_TULIP: 3
+    JUNGLE_LOG: 17
+    PINK_GLAZED_TERRACOTTA: 1
+    HAY_BLOCK: 1
+    MOSSY_STONE_BRICKS: 1
+    PRISMARINE: 3
+    DANDELION: 16
+    RAW_COPPER_BLOCK: 1
+    DEAD_TUBE_CORAL_BLOCK: 1
+    AZALEA_LEAVES: 1
+    SMOOTH_SANDSTONE: 1
+    RED_GLAZED_TERRACOTTA: 1
+    ALLIUM: 12
+    OAK_SAPLING: 11
+    PEONY: 7
+    LAVA: 5
+    CHISELED_DEEPSLATE: 1
+    AMETHYST_CLUSTER: 1
+    OXEYE_DAISY: 6
+    GRAY_CONCRETE: 1
+    DARK_OAK_LEAVES: 9
+    GRAVEL: 20
+    WAXED_OXIDIZED_CUT_COPPER: 1
+    SEA_LANTERN: 1
+    MOSS_BLOCK: 1
+    MELON: 15
+    HONEYCOMB_BLOCK: 1
+    TERRACOTTA: 1
+    GREEN_CONCRETE: 1
+    END_STONE_BRICKS: 1
+    COBWEB: 7
+    COARSE_DIRT: 17
+    CYAN_STAINED_GLASS: 1
+    LIGHT_GRAY_GLAZED_TERRACOTTA: 1
+    SMOOTH_STONE: 1
+    LAPIS_ORE: 6
+    ORANGE_CONCRETE: 1
+    OAK_LOG: 10
+    STRIPPED_JUNGLE_WOOD: 10
+    DEAD_BRAIN_CORAL_BLOCK: 1
+    TINTED_GLASS: 1
+    WAXED_COPPER_BLOCK: 1
+    BIRCH_PLANKS: 1
+    DIAMOND_ORE: 1
+    DEEPSLATE_COPPER_ORE: 1
+    CYAN_CONCRETE: 1
+    CHISELED_QUARTZ_BLOCK: 1
+    DEEPSLATE_EMERALD_ORE: 1
+    OAK_LEAVES: 4
+    IRON_ORE: 10
+    PURPLE_GLAZED_TERRACOTTA: 1
+    WHITE_CONCRETE: 1
+    SPONGE: 1
+    STONE: 180
     YELLOW_WOOL: 1
+    ROSE_BUSH: 8
+    STRIPPED_SPRUCE_LOG: 10
+    EXPOSED_COPPER: 1
+    SANDSTONE: 120
+    SMOOTH_RED_SANDSTONE: 1
+    BROWN_STAINED_GLASS: 1
+    ACACIA_LOG: 20
+    ORANGE_GLAZED_TERRACOTTA: 1
+    BRICKS: 1
+    FERN: 4
+    WET_SPONGE: 1
+    TNT: 1
+    BOOKSHELF: 10
+    PINK_TULIP: 8
+    POLISHED_GRANITE: 1
+    STRIPPED_ACACIA_LOG: 10
+    RAW_IRON_BLOCK: 1
+    JUNGLE_SAPLING: 19
+    YELLOW_STAINED_GLASS: 1
+    DEAD_BUBBLE_CORAL_BLOCK: 1
+    SPRUCE_WOOD: 9
+    DEEPSLATE: 1
+    BLACK_TERRACOTTA: 1
+    BEE_NEST: 1
+    STRIPPED_OAK_LOG: 10
+    CHEST: 5
+    SPRUCE_LOG: 3
+    LIME_WOOL: 1
+    ORANGE_WOOL: 1
+    SCULK_SENSOR: 1
+    HONEY_BLOCK: 1
+    LIME_TERRACOTTA: 1
+    STRIPPED_DARK_OAK_WOOD: 10
+    WHITE_WOOL: 1
+    GREEN_TERRACOTTA: 1
+    MEDIUM_AMETHYST_BUD: 1
+    SMALL_DRIPLEAF: 1
+    LIME_STAINED_GLASS: 1
+    COMPOSTER: 1
+    RED_MUSHROOM_BLOCK: 1
+    ORANGE_STAINED_GLASS: 1
+    OXIDIZED_CUT_COPPER: 1
+    GLASS: 1
+    TALL_GRASS: 13
+    POLISHED_DEEPSLATE: 1
+    DEAD_BUSH: 1
+    BLACK_GLAZED_TERRACOTTA: 1
+    BLUE_CONCRETE: 1
+    PETRIFIED_OAK_SLAB: 1
+    REDSTONE_LAMP: 1
+    RED_STAINED_GLASS: 1
+    GREEN_STAINED_GLASS: 1
+    BLUE_WOOL: 1
+    DEEPSLATE_REDSTONE_ORE: 1
+    FARMLAND: 7
+    POPPY: 5
+    CYAN_TERRACOTTA: 1
+    DEEPSLATE_IRON_ORE: 1
+    PACKED_ICE: 1
+    COAL_BLOCK: 1
+    YELLOW_CONCRETE: 1
+    WHITE_STAINED_GLASS: 1
+    PRISMARINE_BRICKS: 1
+    SMOOTH_BASALT: 1
+    WEATHERED_CUT_COPPER: 1
+    LIGHT_BLUE_WOOL: 1
+    DARK_OAK_LOG: 10
+    CALCITE: 1
+    RAW_GOLD_BLOCK: 1
+    CHISELED_STONE_BRICKS: 1
+    COPPER_ORE: 1
+    PODZOL: 4
+    WAXED_CUT_COPPER: 1
+    REDSTONE_BLOCK: 1
+    DEEPSLATE_LAPIS_ORE: 1
+    GRASS: 100
+    WAXED_WEATHERED_CUT_COPPER: 1
+    LARGE_FERN: 8
+    PINK_TERRACOTTA: 1
+    FIRE_CORAL_BLOCK: 1
+    PURPLE_TERRACOTTA: 1
+    GRAY_GLAZED_TERRACOTTA: 1
+    SNOW: 1
+    SUGAR_CANE: 4
+    DIRT: 1
+    COBBLED_DEEPSLATE: 1
+    BONE_BLOCK: 1
+    SPAWNER: 5
+    POLISHED_BASALT: 1
+    POLISHED_DIORITE: 1
+    MOSSY_COBBLESTONE: 1
+    CUT_SANDSTONE: 1
+    WHITE_TERRACOTTA: 1
+    GRAY_TERRACOTTA: 1
+    DEEPSLATE_DIAMOND_ORE: 1
+    DEAD_HORN_CORAL_BLOCK: 1
+    AMETHYST_BLOCK: 1
+    DARK_OAK_PLANKS: 1
+    SHROOMLIGHT: 1
+    ACACIA_WOOD: 16
+    CYAN_GLAZED_TERRACOTTA: 1
+    CUT_COPPER: 1
+    LIGHT_GRAY_STAINED_GLASS: 1
+    GRAY_WOOL: 1
+    PINK_WOOL: 1
+    STRIPPED_DARK_OAK_LOG: 10
+    OBSIDIAN: 1
+    LIGHT_GRAY_WOOL: 1
+    AZURE_BLUET: 1
+    LIME_GLAZED_TERRACOTTA: 1
+    RED_CONCRETE: 1
+    WEATHERED_COPPER: 1
+    OAK_PLANKS: 1
+    ACACIA_SAPLING: 17
+    CUT_RED_SANDSTONE: 1
+    BIRCH_SAPLING: 8
+    LIME_CONCRETE: 1
+    DEEPSLATE_COAL_ORE: 1
+    BEETROOTS: 9
+    BIRCH_LOG: 2
+    RED_TERRACOTTA: 1
+    BIRCH_WOOD: 16
+    ACACIA_PLANKS: 1
+    MYCELIUM: 2
+    BROWN_CONCRETE: 1
+    RED_SANDSTONE: 19
+    LODESTONE: 1
+    WAXED_EXPOSED_CUT_COPPER: 1
+    MAGENTA_CONCRETE: 1
+    SPRUCE_LEAVES: 9
+    SNOW_BLOCK: 1
+    BIRCH_LEAVES: 9
+    ORANGE_TULIP: 10
+    ANDESITE: 90
+    BARREL: 1
+    BROWN_GLAZED_TERRACOTTA: 1
+    DEEPSLATE_GOLD_ORE: 1
+    LAVA_CAULDRON: 1
+    BRAIN_CORAL_BLOCK: 1
+    YELLOW_GLAZED_TERRACOTTA: 1
   nether:
     # Generate SkyGrid Nether - if this is false, the nether world will not be made
     generate: true
     # Nether block types
-    # Beware of glowstone and lava - the lighting calcs will lag the
+    # Beware with glowstone and lava - the lighting calcs will lag the
     # server badly if there are too many blocks.
     blocks:
       POLISHED_BLACKSTONE_BRICKS: 12
+      STRIPPED_WARPED_HYPHAE: 100
       LAVA: 1
       OBSIDIAN: 10
       NETHER_QUARTZ_ORE: 15
       NETHERITE_BLOCK: 10
+      STRIPPED_CRIMSON_HYPHAE: 100
       MAGMA_BLOCK: 1
+      STRIPPED_WARPED_STEM: 100
       GRAVEL: 10
+      GILDED_BLACKSTONE: 10
       CRACKED_POLISHED_BLACKSTONE_BRICKS: 12
       BASALT: 20
-      GILDED_BLACKSTONE: 10
       WARPED_WART_BLOCK: 1
       CRACKED_NETHER_BRICKS: 10
+      CRIMSON_PLANKS: 100
       COBWEB: 7
       WARPED_NYLIUM: 1
+      STRIPPED_CRIMSON_STEM: 100
       GLOWSTONE: 2
       CHISELED_POLISHED_BLACKSTONE: 12
       ANCIENT_DEBRIS: 10
@@ -990,8 +995,8 @@ world:
       BONE_BLOCK: 10
       SPAWNER: 2
       WARPED_ROOTS: 1
-      WARPED_FUNGUS: 1
       CHEST: 15
+      WARPED_FUNGUS: 1
       NETHER_WART: 19
       NETHERRACK: 200
       WARPED_PLANKS: 1
@@ -1000,12 +1005,6 @@ world:
       CHISELED_NETHER_BRICKS: 12
       SOUL_SOIL: 80
       CRYING_OBSIDIAN: 10
-      STRIPPED_CRIMSON_HYPHAE: 100
-      STRIPPED_CRIMSON_STEM: 100
-      STRIPPED_WARPED_HYPHAE: 100
-      STRIPPED_WARPED_STEM: 100
-      CRIMSON_PLANKS: 100
-
     # This option indicates if nether portals should be linked via dimensions.
     # Option will simulate vanilla portal mechanics that links portals together
     # or creates a new portal, if there is not a portal in that dimension.
@@ -1048,9 +1047,6 @@ world:
   # SkyGrid height
   # This is the height of the top sky grid layer. 255 max.
   skygrid-height: 128
-  # Spawn height
-  # Height where players will spawn. Can be less than the grid height
-  spawn-height: 128
   # Space around new players in blocks (will be rounded up to nearest 16 blocks)
   space-around-players: 1000
   # Default protection radius around player's home (so total size is 2x this)
@@ -1092,6 +1088,7 @@ world:
     BREEDING: true
     HURT_VILLAGERS: true
     TREES_GROWING_OUTSIDE_RANGE: false
+    HARVEST: true
     FROST_WALKER: true
     TURTLE_EGGS: true
     COLLECT_LAVA: true
@@ -1104,6 +1101,7 @@ world:
     ARMOR_STAND: true
     NAME_TAG: true
     CLEAN_SUPER_FLAT: false
+    CHANGE_SETTINGS: true
     TRADING: true
     EGGS: true
     ITEM_DROP: true
@@ -1112,6 +1110,7 @@ world:
     ENTER_EXIT_MESSAGES: true
     FLINT_AND_STEEL: true
     NETHER_PORTAL: true
+    SCULK_SENSOR: true
     REMOVE_END_EXIT_ISLAND: true
     LECTERN: true
     SHULKER_BOX: true
@@ -1123,11 +1122,13 @@ world:
     OBSIDIAN_SCOOPING: true
     TNT_PRIMING: true
     COLLECT_WATER: true
+    AXOLOTL_SCOOPING: true
     BUTTON: true
     COMPOSTER: true
     FIRE_EXTINGUISH: true
     COMMAND_RANKS: true
     BEACON: true
+    ALLAY: true
     TRAPDOOR: true
     PRESSURE_PLATE: true
     EXPERIENCE_BOTTLE_THROWING: true
@@ -1135,6 +1136,7 @@ world:
     DYE: true
     PLACE_BLOCKS: true
     ITEM_FRAME: true
+    CROP_PLANTING: true
     CRAFTING: true
     REMOVE_MOBS: true
     ENCHANTING: true
@@ -1145,6 +1147,7 @@ world:
     SPAWN_EGGS: true
     MILKING: true
     DISPENSER: true
+    SCULK_SHRIEKER: true
     GATE: true
     EXPERIENCE_PICKUP: true
     PREVENT_TELEPORT_WHEN_FALLING: false
@@ -1158,6 +1161,7 @@ world:
     JUKEBOX: true
     POTION_THROWING: true
     BARREL: true
+    COLLECT_POWDERED_SNOW: true
   # These are the default protection settings protected areas.
   # The value is the minimum island rank required to do the action
   # Ranks are: Visitor = 0, Member = 900, Owner = 1000
@@ -1178,6 +1182,7 @@ world:
     END_PORTAL: 500
     BREEDING: 500
     HURT_VILLAGERS: 500
+    HARVEST: 500
     FROST_WALKER: 500
     TURTLE_EGGS: 500
     COLLECT_LAVA: 500
@@ -1189,6 +1194,7 @@ world:
     HURT_MONSTERS: 500
     NAME_TAG: 500
     ARMOR_STAND: 500
+    CHANGE_SETTINGS: 1000
     TRADING: 500
     EGGS: 500
     ITEM_DROP: 500
@@ -1196,6 +1202,7 @@ world:
     NOTE_BLOCK: 500
     FLINT_AND_STEEL: 500
     NETHER_PORTAL: 500
+    SCULK_SENSOR: 500
     LECTERN: 500
     SHULKER_BOX: 500
     ITEM_PICKUP: 500
@@ -1204,11 +1211,13 @@ world:
     BREWING: 500
     TNT_PRIMING: 500
     COLLECT_WATER: 500
+    AXOLOTL_SCOOPING: 500
     COMPOSTER: 500
     BUTTON: 500
     FIRE_EXTINGUISH: 500
     COMMAND_RANKS: 500
     BEACON: 500
+    ALLAY: 500
     TRAPDOOR: 500
     EXPERIENCE_BOTTLE_THROWING: 500
     PRESSURE_PLATE: 500
@@ -1216,6 +1225,7 @@ world:
     HIVE: 500
     PLACE_BLOCKS: 500
     ITEM_FRAME: 500
+    CROP_PLANTING: 500
     CRAFTING: 500
     ENCHANTING: 500
     SHEARING: 500
@@ -1225,6 +1235,7 @@ world:
     BED: 500
     MILKING: 500
     DISPENSER: 500
+    SCULK_SHRIEKER: 500
     GATE: 500
     EXPERIENCE_PICKUP: 500
     HOPPER: 500
@@ -1236,20 +1247,24 @@ world:
     BARREL: 500
     POTION_THROWING: 500
     JUKEBOX: 500
+    COLLECT_POWDERED_SNOW: 500
   # These are the default settings for new protected areas
   default-settings:
     PVP_END: false
     PVP_NETHER: false
     LEAF_DECAY: true
-    MONSTER_SPAWNERS_SPAWN: true
-    TNT_DAMAGE: true
+    ENDERMAN_TELEPORT: true
     ANIMAL_NATURAL_SPAWN: true
     MONSTER_NATURAL_SPAWN: true
-    FIRE_IGNITE: true
+    SHULKER_TELEPORT: true
     FIRE_SPREAD: true
-    ANIMAL_SPAWNERS_SPAWN: true
     FIRE_BURNING: true
     PVP_OVERWORLD: false
+    MONSTER_SPAWNERS_SPAWN: true
+    TNT_DAMAGE: true
+    FIRE_IGNITE: true
+    ANIMAL_SPAWNERS_SPAWN: true
+    BLOCK_EXPLODE_DAMAGE: true
   # These settings/flags are hidden from users
   # Ops can toggle hiding in-game using SHIFT-LEFT-CLICK on flags in settings
   hidden-flags: []
@@ -1264,6 +1279,19 @@ area:
   # Default max team size
   # Permission size cannot be less than the default below. 
   max-team-size: 4
+  # Default maximum number of coop rank members per area
+  # Players can have the skygrid.coop.maxsize.<number> permission to be bigger but
+  # permission size cannot be less than the default below. 
+  # Added since 1.13.0.
+  max-coop-size: 4
+  # Default maximum number of trusted rank members per area
+  # Players can have the skygrid.trust.maxsize.<number> permission to be bigger but
+  # permission size cannot be less than the default below. 
+  # Added since 1.13.0.
+  max-trusted-size: 4
+  # Default maximum number of homes a player can have. Min = 1
+  # Accessed via /sg sethome <number> or /sg go <number>
+  max-homes: 5
   reset:
     # How many resets a player is allowed (override with /sgadmin clearresets <player>)
     # Value of -1 means unlimited, 0 means hardcore - no resets.
@@ -1324,7 +1352,7 @@ area:
     # Warning:
     #   * If you are running multiple gamemodes on your server, and all of them have
     #     this feature enabled, an area in all the gamemodes will be created simultaneously.
-    #     However, it is impossible to know on which area the player will be teleported afterwards.
+    #     However, it is impossible to know on which area the player will be teleported to afterwards.
     #   * Area creation can be resource-intensive, please consider the options below to help mitigate
     #     the potential issues, especially if you expect a lot of players to connect to your server
     #     in a limited period of time.
@@ -1403,23 +1431,12 @@ area:
     team-join-reset: true
     # Reset player death count when they start reset
     reset-on-new-island: true
-island:
-  # Default maximum number of coop rank members per area
-  # Players can have the skygrid.coop.maxsize.<number> permission to be bigger but
-  # permission size cannot be less than the default below. 
-  # Added since 1.13.0.
-  max-coop-size: 4
-  # Default maximum number of trusted rank members per area
-  # Players can have the skygrid.trust.maxsize.<number> permission to be bigger but
-  # permission size cannot be less than the default below. 
-  # Added since 1.13.0.
-  max-trusted-size: 4
 protection:
   # Geo restrict mobs.
   # Mobs that exit the protected space where they were spawned will be removed.
   geo-limit-settings: []
-  # AcidIsland blocked mobs.
-  # List of mobs that should not spawn in AcidIsland.
+  # SkyGrid blocked mobs.
+  # List of mobs that should not spawn in SkyGrid.
   block-mobs: []
   # Invincible visitors. List of damages that will not affect visitors.
   # Make list blank if visitors should receive all damages
