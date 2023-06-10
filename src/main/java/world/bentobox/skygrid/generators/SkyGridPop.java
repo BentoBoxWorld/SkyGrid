@@ -1,9 +1,9 @@
 package world.bentobox.skygrid.generators;
 
-import java.util.List;
+import java.util.Map.Entry;
 import java.util.NavigableMap;
-import java.util.Objects;
 import java.util.Random;
+import java.util.TreeMap;
 
 import org.bukkit.Chunk;
 import org.bukkit.Material;
@@ -28,9 +28,12 @@ public class SkyGridPop extends BlockPopulator {
     private static final RandomSeries slt = new RandomSeries(27);
     private final int size;
     private final SkyGrid addon;
-    private final List<Material> chestItemsWorld;
-    private final List<Material> chestItemsNether;
-    private final List<Material> chestItemsEnd;
+    private final NavigableMap<Integer, Material> chestItemsWorld = new TreeMap<>();
+    private final NavigableMap<Integer, Material> chestItemsNether = new TreeMap<>();
+    private final NavigableMap<Integer, Material> chestItemsEnd = new TreeMap<>();
+    private int worldTotal;
+    private int netherTotal;
+    private int endTotal;
     private Random random;
     private Chunk chunk;
 
@@ -49,9 +52,18 @@ public class SkyGridPop extends BlockPopulator {
         this.addon = addon;
         this.size = addon.getSettings().getIslandHeight();
         // Load the chest items
-        chestItemsWorld = addon.getSettings().getChestItemsOverworld().stream().map(Material::matchMaterial).filter(Objects::nonNull).toList();
-        chestItemsNether = addon.getSettings().getChestItemsNether().stream().map(Material::matchMaterial).filter(Objects::nonNull).toList();
-        chestItemsEnd = addon.getSettings().getChestItemsEnd().stream().map(Material::matchMaterial).filter(Objects::nonNull).toList();
+        for (Entry<Material, Integer> en : addon.getSettings().getChestItemsOverworld().entrySet()) {
+            worldTotal += en.getValue();
+            chestItemsWorld.put(worldTotal, en.getKey());
+        }
+        for (Entry<Material, Integer> en : addon.getSettings().getChestItemsNether().entrySet()) {
+            netherTotal += en.getValue();
+            chestItemsNether.put(netherTotal, en.getKey());
+        }
+        for (Entry<Material, Integer> en : addon.getSettings().getChestItemsEnd().entrySet()) {
+            endTotal += en.getValue();
+            chestItemsEnd.put(endTotal, en.getKey());
+        }
         addon.log(LOADED + chestItemsWorld.size() + " chest items for world");
         addon.log(LOADED + chestItemsNether.size() + " chest items for nether world");
         addon.log(LOADED + chestItemsEnd.size() + " chest items for end world");
@@ -154,7 +166,7 @@ public class SkyGridPop extends BlockPopulator {
             break;
         case DESERT:
             b.setType(Material.DEAD_BUSH, false);
-        break;
+            break;
         case SAVANNA:
             b.setType(Material.ACACIA_SAPLING, false); // Acacia
             break;
@@ -180,25 +192,25 @@ public class SkyGridPop extends BlockPopulator {
         Inventory inv = chest.getBlockInventory();
         slt.reset();
         switch (b.getWorld().getEnvironment()) {
-        case NETHER:
-            for (int i = 0; !chestItemsNether.isEmpty() && i < addon.getSettings().getChestFillNether() && i < 27; i ++) {
-                ItemStack item = new ItemStack(this.chestItemsNether.get(random.nextInt(chestItemsNether.size())));
-                inv.setItem(slt.next(), item);
-            }
-            break;
-        case THE_END:
-            for (int i = 0; !chestItemsNether.isEmpty() && i < addon.getSettings().getChestFillEnd() && i < 27; i ++) {
-                ItemStack item = new ItemStack(this.chestItemsEnd.get(random.nextInt(chestItemsEnd.size())));
-                inv.setItem(slt.next(), item);
-            }
-            break;
-        default:
-            for (int i = 0; !chestItemsNether.isEmpty() && i < addon.getSettings().getChestFill() && i < 27; i ++) {
-                ItemStack item = new ItemStack(this.chestItemsWorld.get(random.nextInt(chestItemsWorld.size())));
-                inv.setItem(slt.next(), item);
-            }
-            break;
+        case NETHER -> fillChest(inv, chestItemsNether, addon.getSettings().getChestFillNether(), netherTotal);
+        case THE_END -> fillChest(inv, chestItemsEnd, addon.getSettings().getChestFillEnd(), endTotal);
+        default -> fillChest(inv, chestItemsWorld, addon.getSettings().getChestFill(), worldTotal);
         }
+    }
+
+    private void fillChest(Inventory inv, NavigableMap<Integer, Material> probMap, int chestFill,
+            int total) {
+        for (int i = 0; !probMap.isEmpty() && i < chestFill && i < 27; i ++) {
+            Material temp = probMap.get(random.nextInt(total));
+            if (temp == null) {
+                temp = probMap.ceilingEntry(random.nextInt(total)).getValue();
+            }
+            if (temp == null) {
+                temp = probMap.firstEntry().getValue();
+            }
+            inv.setItem(slt.next(), new ItemStack(temp));
+        }
+
     }
 
 }

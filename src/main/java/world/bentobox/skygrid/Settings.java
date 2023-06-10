@@ -65,13 +65,15 @@ public class Settings implements WorldSettings {
     @ConfigComment("The End chest fill setting")
     @ConfigEntry(path = "world.chest-fill.end")
     private int chestFillEnd = 5;
-    @ConfigComment("Chest items will be taken randomly from this list. All items have an equal chance.")
+    @ConfigComment("Chest items will be taken randomly from this list according to the relative probabilities given")
+    @ConfigComment("Format: Material : Probability")
+    @ConfigComment("Material values can be found at https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html")
     @ConfigEntry(path = "world.chest-items.overworld")
-    private List<String> chestItemsOverworld = new ArrayList<>();
+    private Map<Material, Integer> chestItemsOverworld = new EnumMap<>(Material.class);
     @ConfigEntry(path = "world.chest-items.nether")
-    private List<String> chestItemsNether = new ArrayList<>();
+    private Map<Material, Integer> chestItemsNether = new EnumMap<>(Material.class);
     @ConfigEntry(path = "world.chest-items.end")
-    private List<String> chestItemsEnd = new ArrayList<>();
+    private Map<Material, Integer> chestItemsEnd = new EnumMap<>(Material.class);
 
     /* Blocks */
     @ConfigComment("World block types. If the material cannot be placed, bedrock will be used.")
@@ -1283,42 +1285,42 @@ public class Settings implements WorldSettings {
     /**
      * @return the chestItemsOverworld
      */
-    public List<String> getChestItemsOverworld() {
+    public Map<Material, Integer> getChestItemsOverworld() {
         return chestItemsOverworld;
     }
 
     /**
      * @param chestItemsOverworld the chestItemsOverworld to set
      */
-    public void setChestItemsOverworld(List<String> chestItemsOverworld) {
+    public void setChestItemsOverworld(Map<Material, Integer> chestItemsOverworld) {
         this.chestItemsOverworld = chestItemsOverworld;
     }
 
     /**
      * @return the chestItemsNether
      */
-    public List<String> getChestItemsNether() {
+    public Map<Material, Integer> getChestItemsNether() {
         return chestItemsNether;
     }
 
     /**
      * @param chestItemsNether the chestItemsNether to set
      */
-    public void setChestItemsNether(List<String> chestItemsNether) {
+    public void setChestItemsNether(Map<Material, Integer> chestItemsNether) {
         this.chestItemsNether = chestItemsNether;
     }
 
     /**
      * @return the chestItemsEnd
      */
-    public List<String> getChestItemsEnd() {
+    public Map<Material, Integer> getChestItemsEnd() {
         return chestItemsEnd;
     }
 
     /**
      * @param chestItemsEnd the chestItemsEnd to set
      */
-    public void setChestItemsEnd(List<String> chestItemsEnd) {
+    public void setChestItemsEnd(Map<Material, Integer> chestItemsEnd) {
         this.chestItemsEnd = chestItemsEnd;
     }
 

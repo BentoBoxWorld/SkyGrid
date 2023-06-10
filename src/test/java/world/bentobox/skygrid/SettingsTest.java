@@ -12,7 +12,6 @@ import org.bukkit.Difficulty;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,13 +33,6 @@ public class SettingsTest {
     @Before
     public void setUp() throws Exception {
         s = new Settings();
-    }
-
-    /**
-     * @throws java.lang.Exception
-     */
-    @After
-    public void tearDown() throws Exception {
     }
 
     /**
@@ -180,7 +172,7 @@ public class SettingsTest {
     @Test
     public void testSetChestItemsOverworld() {
         assertTrue(s.getChestItemsOverworld().isEmpty());
-        s.setChestItemsOverworld(List.of("thing"));
+        s.setChestItemsOverworld(Map.of(Material.ACACIA_BOAT, 1));
         assertFalse(s.getChestItemsOverworld().isEmpty());
     }
 
@@ -198,7 +190,7 @@ public class SettingsTest {
     @Test
     public void testSetChestItemsNether() {
         assertTrue(s.getChestItemsNether().isEmpty());
-        s.setChestItemsNether(List.of("thing"));
+        s.setChestItemsNether(Map.of(Material.ACACIA_BOAT, 1));
         assertFalse(s.getChestItemsNether().isEmpty());
     }
 
@@ -216,7 +208,7 @@ public class SettingsTest {
     @Test
     public void testSetChestItemsEnd() {
         assertTrue(s.getChestItemsEnd().isEmpty());
-        s.setChestItemsEnd(List.of("thing"));
+        s.setChestItemsEnd(Map.of(Material.ACACIA_BOAT, 1));
         assertFalse(s.getChestItemsEnd().isEmpty());
     }
 
