@@ -3,6 +3,8 @@ Welcome to the SkyGrid for Minecraft! This game introduces a unique and challeng
 
 This is a Game Mode Add-on that uses the BentoBox library plugin.
 
+<img src="https://github.com/BentoBoxWorld/SkyGrid/assets/4407265/d350349a-ff46-4f1e-9900-4690bae41fac" width="200" height="200">
+
 ## Features
 
 - **Challenging Gameplay**: SkyGrid presents a challenging environment where you must carefully navigate from block to block to avoid falling.
