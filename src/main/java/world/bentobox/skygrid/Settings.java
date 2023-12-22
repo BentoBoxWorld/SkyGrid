@@ -147,6 +147,11 @@ public class Settings implements WorldSettings {
     @ConfigEntry(path = "world.skygrid-height")
     private int islandHeight = 128;
 
+    @ConfigComment("End Frame height")
+    @ConfigComment("This is the height where end frames will generate.")
+    @ConfigEntry(path = "world.end-frame-height", since = "1.20.0")
+    private int endFrameHeight = 3;
+
     @ConfigComment("Space around new players in blocks (will be rounded up to nearest 16 blocks)")
     @ConfigEntry(path = "world.space-around-players")
     private int islandDistance = 1000;
@@ -1622,5 +1627,19 @@ public class Settings implements WorldSettings {
      */
     public void setMaxHomes(int maxHomes) {
         this.maxHomes = maxHomes;
+    }
+
+    /**
+     * @return the endFrameHeight
+     */
+    public int getEndFrameHeight() {
+        return endFrameHeight;
+    }
+
+    /**
+     * @param endFrameHeight the endFrameHeight to set
+     */
+    public void setEndFrameHeight(int endFrameHeight) {
+        this.endFrameHeight = endFrameHeight;
     }
 }
