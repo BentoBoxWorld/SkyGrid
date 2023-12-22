@@ -119,7 +119,7 @@ public class SkyGridPop extends BlockPopulator {
                 if (xx == zz || (xx==1 && zz==5) || (xx==5 && zz==1) || (xx>1 && xx<5 && zz>1 && zz<5)) {
                     continue;
                 }
-                setFrame(xx, zz, chunk.getBlock(xx, 0, zz));
+                setFrame(xx, zz, chunk.getBlock(xx, addon.getSettings().getEndFrameHeight(), zz));
             }
         }
     }
