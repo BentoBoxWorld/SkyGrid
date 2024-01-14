@@ -9,6 +9,8 @@ import org.bukkit.World.Environment;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.BlockData;
 
+import com.google.common.base.Enums;
+
 import world.bentobox.skygrid.SkyGrid;
 
 /**
@@ -21,7 +23,8 @@ public class SkyGridChunks {
     // Blocks that need to be placed on dirt
     private static final List<Material> NEEDS_DIRT = List.of(Material.ACACIA_SAPLING, Material.ALLIUM, Material.AZURE_BLUET,
             Material.BEETROOTS, Material.BIRCH_SAPLING, Material.BLUE_ORCHID, Material.BROWN_MUSHROOM, Material.DANDELION,
-            Material.DARK_OAK_SAPLING, Material.DEAD_BUSH, Material.FERN, Material.GRASS, Material.JUNGLE_SAPLING,
+            Material.DARK_OAK_SAPLING, Material.DEAD_BUSH, Material.FERN,
+            Enums.getIfPresent(Material.class, "GRASS").or(Material.SHORT_GRASS), Material.JUNGLE_SAPLING,
             Material.LARGE_FERN, Material.LILAC, Material.OAK_SAPLING, Material.ORANGE_TULIP, Material.OXEYE_DAISY,
             Material.PEONY, Material.PINK_TULIP, Material.POPPY, Material.RED_MUSHROOM, Material.RED_TULIP,
             Material.ROSE_BUSH, Material.SPRUCE_SAPLING, Material.SUGAR_CANE, Material.SUNFLOWER, Material.TALL_GRASS,
