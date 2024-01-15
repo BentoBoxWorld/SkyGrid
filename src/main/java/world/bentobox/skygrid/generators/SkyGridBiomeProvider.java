@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
+import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.bukkit.World;
+import org.bukkit.World.Environment;
 import org.bukkit.block.Biome;
 import org.bukkit.generator.BiomeProvider;
 import org.bukkit.generator.WorldInfo;
@@ -18,12 +20,18 @@ import org.bukkit.util.noise.PerlinOctaveGenerator;
  */
 public class SkyGridBiomeProvider extends BiomeProvider {
 
+    private static final Random RAND = new Random();
     private final Map<World.Environment, PerlinOctaveGenerator> temperatureGenMap = new ConcurrentHashMap<>();
     private final Map<World.Environment, PerlinOctaveGenerator> rainfallGenMap = new ConcurrentHashMap<>();
 
 
     @Override
     public Biome getBiome(WorldInfo worldInfo, int realX, int y, int realZ) {
+
+        // Handle caves
+        if (worldInfo.getEnvironment() == Environment.NORMAL && y < 0) {
+            return caveBiome(y);
+        }
 
         // Make and cache the PerlinOctaveGenerator for the environment
         PerlinOctaveGenerator temperatureGen = temperatureGenMap.computeIfAbsent(worldInfo.getEnvironment(), wf -> {
@@ -52,6 +60,13 @@ public class SkyGridBiomeProvider extends BiomeProvider {
             }
         }
         return Objects.requireNonNull(maxBiome).biome;
+    }
+
+    private Biome caveBiome(int y) {
+        if (y < -52) {
+            return Biome.DEEP_DARK;
+        }
+        return RAND.nextBoolean() ? Biome.LUSH_CAVES : Biome.DRIPSTONE_CAVES;
     }
 
     @Override

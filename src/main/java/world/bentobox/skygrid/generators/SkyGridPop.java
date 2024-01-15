@@ -1,32 +1,38 @@
 package world.bentobox.skygrid.generators;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.NavigableMap;
 import java.util.Random;
 import java.util.TreeMap;
+import java.util.UUID;
 
-import org.bukkit.Chunk;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
 import org.bukkit.block.Biome;
-import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Chest;
 import org.bukkit.block.CreatureSpawner;
 import org.bukkit.block.data.type.EndPortalFrame;
-import org.bukkit.block.data.type.Sapling;
 import org.bukkit.entity.EntityType;
 import org.bukkit.generator.BlockPopulator;
+import org.bukkit.generator.LimitedRegion;
+import org.bukkit.generator.WorldInfo;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 import world.bentobox.skygrid.SkyGrid;
 
 
 public class SkyGridPop extends BlockPopulator {
     private static final RandomSeries slt = new RandomSeries(27);
-    private final int size;
+    private final int islandHeight;
     private final SkyGrid addon;
     private final NavigableMap<Integer, Material> chestItemsWorld = new TreeMap<>();
     private final NavigableMap<Integer, Material> chestItemsNether = new TreeMap<>();
@@ -34,8 +40,8 @@ public class SkyGridPop extends BlockPopulator {
     private int worldTotal;
     private int netherTotal;
     private int endTotal;
-    private Random random;
-    private Chunk chunk;
+    private Map<UUID, Random> rand = new HashMap<>();
+    private Random random = new Random();
 
     private static final Material[] SAPLING_TYPE = {
             Material.ACACIA_SAPLING,
@@ -50,7 +56,7 @@ public class SkyGridPop extends BlockPopulator {
 
     public SkyGridPop(SkyGrid addon) {
         this.addon = addon;
-        this.size = addon.getSettings().getIslandHeight();
+        this.islandHeight = addon.getSettings().getIslandHeight();
         // Load the chest items
         for (Entry<Material, Integer> en : addon.getSettings().getChestItemsOverworld().entrySet()) {
             worldTotal += en.getValue();
@@ -70,40 +76,47 @@ public class SkyGridPop extends BlockPopulator {
 
     }
 
-    @Override
-    @Deprecated
-    public void populate(World world, Random random, Chunk chunk) {
-        this.random = random;
-        this.chunk = chunk;
-        for (int x = 1; x < 16; x += 4) {
-            for (int z = 1; z < 16; z +=4) {
-                for (int y = 0; y <= size; y += 4) {
-                    alterBlocks(chunk.getBlock(x, y, z));
+    private Location getLoc(World world, int x, int y, int z, int chunkX, int chunkZ) {
+        Vector v = new Vector(x, y, z);
+        return v.add(new Vector(chunkX << 4, 0, chunkZ << 4)).toLocation(world);
+    }
+
+    public void populate(WorldInfo worldInfo, Random random, int chunkX, int chunkZ, LimitedRegion region) {
+        random = rand.computeIfAbsent(worldInfo.getUID(), (b) -> new Random(worldInfo.getSeed()));
+        World world = Bukkit.getWorld(worldInfo.getUID());
+        for (int x = 0; x < 16; x += 4) {
+            for (int z = 0; z < 16; z += 4) {
+                for (int y = worldInfo.getMinHeight(); y <= islandHeight; y += 4) {
+                    Location loc = getLoc(world, x, y, z, chunkX, chunkZ);
+                    alterBlocks(region, loc, worldInfo.getEnvironment());
                 }
             }
         }
         // Do an end portal check
-        if (addon.getSettings().isEndGenerate() && world.getEnvironment().equals(Environment.NORMAL)
+        if (addon.getSettings().isEndGenerate() && worldInfo.getEnvironment().equals(Environment.NORMAL)
                 && random.nextDouble() < addon.getSettings().getEndFrameProb()) {
-            makeEndPortal();
+            makeEndPortal(region, chunkX, chunkZ);
         }
+
     }
 
-    private void alterBlocks(Block b) {
+    private void alterBlocks(LimitedRegion region, Location loc, Environment environment) {
         // Alter blocks
-        switch (b.getType()) {
+        Material m = region.getBlockData(loc).getMaterial();
+
+        switch (m) {
         case CHEST:
-            setChest(b);
+            setChest(region, loc, environment);
             break;
         case SPAWNER:
-            setSpawner(b);
+            setSpawner(region, loc, environment);
             break;
         case DIRT:
-            if (b.getRelative(BlockFace.UP).getBlockData() instanceof Sapling) {
-                if (b.getBiome().equals(Biome.DESERT)) {
-                    b.setType(Material.SAND, false);
+            if (Tag.SAPLINGS.isTagged(m)) {
+                if (region.getBiome(loc).equals(Biome.DESERT)) {
+                    region.setType(loc, Material.SAND);
                 } else {
-                    setSaplingType(b.getRelative(BlockFace.UP));
+                    setSaplingType(region, loc);
                 }
             }
             break;
@@ -113,21 +126,21 @@ public class SkyGridPop extends BlockPopulator {
 
     }
 
-    private void makeEndPortal() {
+    private void makeEndPortal(LimitedRegion region, int chunkX, int chunkZ) {
         for (int xx = 1; xx< 6; xx++) {
             for (int zz = 1; zz < 6; zz++) {
                 if (xx == zz || (xx==1 && zz==5) || (xx==5 && zz==1) || (xx>1 && xx<5 && zz>1 && zz<5)) {
                     continue;
                 }
-                setFrame(xx, zz, chunk.getBlock(xx, addon.getSettings().getEndFrameHeight(), zz));
+                setFrame(region, xx + (chunkX << 4), addon.getSettings().getEndFrameHeight(), zz + (chunkZ << 4));
             }
         }
     }
 
-    private void setFrame(int xx, int zz, Block frame) {
-        frame.setType(Material.END_PORTAL_FRAME, false);
+    private void setFrame(LimitedRegion region, int xx, int yy, int zz) {
+        region.setType(xx, yy, zz, Material.END_PORTAL_FRAME);
         // Cast to end frame
-        EndPortalFrame endFrame = (EndPortalFrame)frame.getBlockData();
+        EndPortalFrame endFrame = (EndPortalFrame) region.getBlockData(xx, yy, zz);
 
         // Add the odd eye of ender
         endFrame.setEye(random.nextDouble() < 0.8);
@@ -144,12 +157,12 @@ public class SkyGridPop extends BlockPopulator {
             // Face West
             endFrame.setFacing(BlockFace.WEST);
         }
-        frame.setBlockData(endFrame, false);
+        region.setBlockData(xx, yy, zz, endFrame);
     }
 
-    private void setSaplingType(Block b) {
+    private void setSaplingType(LimitedRegion region, Location loc) {
         // Set sapling type if there is one specific to this biome
-        Material sapling = switch (b.getBiome()) {
+        Material sapling = switch (region.getBiome(loc)) {
         case JUNGLE -> Material.JUNGLE_SAPLING;
         case PLAINS -> random.nextBoolean() ? Material.BIRCH_SAPLING : Material.OAK_SAPLING;
         case TAIGA -> Material.SPRUCE_SAPLING;
@@ -163,12 +176,12 @@ public class SkyGridPop extends BlockPopulator {
         case MUSHROOM_FIELDS -> random.nextBoolean() ? Material.RED_MUSHROOM : Material.BROWN_MUSHROOM;
         default -> SAPLING_TYPE[random.nextInt(6)];
         };
-        b.setType(sapling);
+        region.setType(loc.add(new Vector(0, 1, 0)), sapling);
     }
 
-    private void setSpawner(Block b) {
-        CreatureSpawner spawner = (CreatureSpawner) b.getState();
-        NavigableMap<Integer,EntityType> spawns = addon.getWorldStyles().get(b.getWorld().getEnvironment()).getSpawns();
+    private void setSpawner(LimitedRegion region, Location loc, Environment environment) {
+        CreatureSpawner spawner = (CreatureSpawner) region.getBlockState(loc);
+        NavigableMap<Integer, EntityType> spawns = addon.getWorldStyles().get(environment).getSpawns();
         int randKey = random.nextInt(spawns.lastKey());
         EntityType type = spawns.ceilingEntry(randKey).getValue();
         spawner.setDelay(120);
@@ -176,11 +189,11 @@ public class SkyGridPop extends BlockPopulator {
         spawner.update(true, false);
     }
 
-    private void setChest(Block b) {
-        Chest chest = (Chest) b.getState();
+    private void setChest(LimitedRegion region, Location loc, Environment environment) {
+        Chest chest = (Chest) region.getBlockState(loc);
         Inventory inv = chest.getBlockInventory();
         slt.reset();
-        switch (b.getWorld().getEnvironment()) {
+        switch (environment) {
         case NETHER -> fillChest(inv, chestItemsNether, addon.getSettings().getChestFillNether(), netherTotal);
         case THE_END -> fillChest(inv, chestItemsEnd, addon.getSettings().getChestFillEnd(), endTotal);
         default -> fillChest(inv, chestItemsWorld, addon.getSettings().getChestFill(), worldTotal);

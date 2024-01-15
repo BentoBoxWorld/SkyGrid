@@ -543,11 +543,10 @@ world:
     COAL_BLOCK: 10
     COAL_ORE: 70
     COARSE_DIRT: 107
-    COBBLED_DEEPSLATE: 10
-    COBBLESTONE: 10
+    COBBLESTONE: 50
     COBWEB: 7
     COMPOSTER: 10
-    COPPER_BLOCK: 10
+    COPPER_BLOCK: 5
     COPPER_ORE: 10
     CRACKED_DEEPSLATE_BRICKS: 10
     CRACKED_STONE_BRICKS: 10
@@ -572,15 +571,6 @@ world:
     DEAD_FIRE_CORAL_BLOCK: 10
     DEAD_HORN_CORAL_BLOCK: 10
     DEAD_TUBE_CORAL_BLOCK: 10
-    DEEPSLATE_COAL_ORE: 10
-    DEEPSLATE_COPPER_ORE: 10
-    DEEPSLATE_DIAMOND_ORE: 10
-    DEEPSLATE_EMERALD_ORE: 10
-    DEEPSLATE_GOLD_ORE: 10
-    DEEPSLATE_IRON_ORE: 10
-    DEEPSLATE_LAPIS_ORE: 10
-    DEEPSLATE_REDSTONE_ORE: 10
-    DEEPSLATE: 10
     DIAMOND_ORE: 10
     DIORITE: 2
     DIRT_PATH: 7
@@ -854,8 +844,8 @@ world:
     # when player enters the end world.
     # Added since 1.16.
     create-obsidian-platform: true
-  # The probability of a frame being created in a chunk. Frames are always at y=0.
-  end-frame-probability: 1.0
+  # The probability of a frame being created in a chunk.
+  end-frame-probability: 0.1
   # Friendly name for this world. Used in admin commands. Must be a single word
   friendly-name: SkyGrid
   # Name of the world - if it does not exist then it will be generated.
