@@ -33,7 +33,6 @@ public class SkyGridGen extends ChunkGenerator {
     public void generateNoise(WorldInfo worldInfo, Random r, int x, int z, ChunkData result) {
         result.setRegion(0, worldInfo.getMinHeight(), 0, 16, worldInfo.getMaxHeight(), 16, Material.AIR);
         preMade.getSkyGridChunk(worldInfo.getEnvironment()).forEach(b -> result.setBlock(b.getX(), b.getY(), b.getZ(), b.getBd()));
-
     }
 
     @Override
@@ -46,5 +45,52 @@ public class SkyGridGen extends ChunkGenerator {
         return new Location(world, 0, addon.getSettings().getIslandHeight() + 2D, 0);
     }
 
+    /**
+     * Gets if the server should generate Vanilla surface.
+     * @return true if the server should generate Vanilla surface
+     */
+    @Override
+    public boolean shouldGenerateSurface() {
+        return true;
+    }
+
+    /**
+     * Gets if the server should generate Vanilla caves.
+     * @return true if the server should generate Vanilla caves
+     */
+    @Override
+    public boolean shouldGenerateCaves() {
+        return true;
+    }
+
+    /**
+     * Gets if the server should generate Vanilla decorations after this
+     * ChunkGenerator.
+     * @return true if the server should generate Vanilla decorations
+     */
+    @Override
+    public boolean shouldGenerateDecorations() {
+        return true;
+    }
+
+    /**
+     * Gets if the server should generate Vanilla mobs after this
+     * ChunkGenerator.
+     * @return true if the server should generate Vanilla mobs
+     */
+    @Override
+    public boolean shouldGenerateMobs() {
+        return true;
+    }
+
+    /**
+     * Gets if the server should generate Vanilla structures after this
+     * ChunkGenerator.
+     * @return true if the server should generate Vanilla structures
+     */
+    @Override
+    public boolean shouldGenerateStructures() {
+        return true;
+    }
 
 }
