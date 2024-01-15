@@ -148,33 +148,22 @@ public class SkyGridPop extends BlockPopulator {
     }
 
     private void setSaplingType(Block b) {
-        // Set sapling type
-        switch (b.getBiome()) {
-        case JUNGLE:
-            b.setType(Material.JUNGLE_SAPLING, false);
-            break;
-        case PLAINS:
-            if (random.nextBoolean()) {
-                b.setType(Material.BIRCH_SAPLING, false); // Birch
-            }
-            // else Oak
-            break;
-        case TAIGA:
-            b.setType(Material.SPRUCE_SAPLING, false);
-            break;
-        case SWAMP:
-            break;
-        case DESERT:
-            b.setType(Material.DEAD_BUSH, false);
-            break;
-        case SAVANNA:
-            b.setType(Material.ACACIA_SAPLING, false); // Acacia
-            break;
-        case FOREST:
-        default:
-            b.setType(SAPLING_TYPE[random.nextInt(6)], false);
-        }
-
+        // Set sapling type if there is one specific to this biome
+        Material sapling = switch (b.getBiome()) {
+        case JUNGLE -> Material.JUNGLE_SAPLING;
+        case PLAINS -> random.nextBoolean() ? Material.BIRCH_SAPLING : Material.OAK_SAPLING;
+        case TAIGA -> Material.SPRUCE_SAPLING;
+        case SWAMP -> Material.MANGROVE_PROPAGULE;
+        case DESERT -> Material.DEAD_BUSH;
+        case BADLANDS -> Material.DEAD_BUSH;
+        case CHERRY_GROVE -> Material.CHERRY_SAPLING;
+        case BAMBOO_JUNGLE -> Material.BAMBOO;
+        case SAVANNA -> Material.ACACIA_SAPLING; // Acacia
+        case BIRCH_FOREST -> Material.BIRCH_SAPLING;
+        case MUSHROOM_FIELDS -> random.nextBoolean() ? Material.RED_MUSHROOM : Material.BROWN_MUSHROOM;
+        default -> SAPLING_TYPE[random.nextInt(6)];
+        };
+        b.setType(sapling);
     }
 
     private void setSpawner(Block b) {
