@@ -17,21 +17,28 @@ import org.bukkit.block.Biome;
  * is a tundra, but it is also much closer to a desert than a rain forest.
  *
  */
-public enum Biomes {
+public enum SkyGridBiomes {
 
     //We store the biome, the temperature and rainfall for each biome.
-    SNOWY_PLAINS(Environment.NORMAL, Biome.SNOWY_PLAINS, 0, 100),
-    SNOWY_TAIGA(Environment.NORMAL, Biome.SNOWY_TAIGA, 0, 100),
-    FROZEN_RIVER(Environment.NORMAL, Biome.FROZEN_RIVER, 0, 10),
-    SNOWY_BEACH(Environment.NORMAL, Biome.SNOWY_BEACH, 0, 100),
-    STONY_PEAKS(Environment.NORMAL, Biome.STONY_PEAKS, 20, 60),
-    DESERT(Environment.NORMAL, Biome.DESERT, 60, 4),
-    FOREST(Environment.NORMAL, Biome.FOREST, 50, 60),
     PLAINS(Environment.NORMAL, Biome.PLAINS, 40, 30),
+    DESERT(Environment.NORMAL, Biome.DESERT, 60, 4),
+    BADLANDS(Environment.NORMAL, Biome.BADLANDS, 90, 1),
+    FOREST(Environment.NORMAL, Biome.FOREST, 50, 60),
+    FLOWER_FOREST(Environment.NORMAL, Biome.FLOWER_FOREST, 50, 60),
+    BIRCH_FOREST(Environment.NORMAL, Biome.BIRCH_FOREST, 50, 59),
+    CHERRY_GROVE(Environment.NORMAL, Biome.CHERRY_GROVE, 45, 35),
     SWAMP(Environment.NORMAL, Biome.SWAMP, 40, 70),
     JUNGLE(Environment.NORMAL, Biome.JUNGLE, 60, 50),
+    BAMBOO_JUNGLE(Environment.NORMAL, Biome.BAMBOO_JUNGLE, 60, 49),
     SAVANNA(Environment.NORMAL, Biome.SAVANNA, 40, 10),
     TAIGA(Environment.NORMAL, Biome.TAIGA, 30, 5),
+    MUSHROOM_FIELDS(Environment.NORMAL, Biome.MUSHROOM_FIELDS, 50, 50),
+    SNOWY_PLAINS(Environment.NORMAL, Biome.SNOWY_PLAINS, 0, 100),
+    SNOWY_TAIGA(Environment.NORMAL, Biome.SNOWY_TAIGA, 0, 15),
+    FROZEN_RIVER(Environment.NORMAL, Biome.FROZEN_RIVER, 10, 10),
+    SNOWY_BEACH(Environment.NORMAL, Biome.SNOWY_BEACH, 10, 100),
+    STONY_PEAKS(Environment.NORMAL, Biome.STONY_PEAKS, 20, 60),
+
     // Nether
     NETHER_WASTES(Environment.NETHER, Biome.NETHER_WASTES, 40, 30),
     SOUL_SAND_VALLEY(Environment.NETHER, Biome.SOUL_SAND_VALLEY, 40, 70),
@@ -50,7 +57,7 @@ public enum Biomes {
     public final double optimumTemperature;
     public final double optimumRainfall;
 
-    Biomes(Environment env, Biome biome, double temp, double rain) {
+    SkyGridBiomes(Environment env, Biome biome, double temp, double rain) {
         this.env = env;
         this.biome = biome;
         this.optimumTemperature = temp;
@@ -65,18 +72,19 @@ public enum Biomes {
      * @param rain - rain
      * @return Map of 3 biomes
      */
-    public static Map<Biomes, Double> getBiomes(Environment env, double temp, double rain) {
+    public static Map<SkyGridBiomes, Double> getBiomes(Environment env, double temp, double rain) {
         // We tell it the capacity we need to avoid expensive dynamic lengthening
-        Map<Biomes, Double> biomes = new EnumMap<>(Biomes.class);
+        Map<SkyGridBiomes, Double> biomes = new EnumMap<>(SkyGridBiomes.class);
 
-        Biomes closestBiome = null;
-        Biomes secondClosestBiome = null;
-        Biomes thirdClosestBiome = null;
+        SkyGridBiomes closestBiome = null;
+        SkyGridBiomes secondClosestBiome = null;
+        SkyGridBiomes thirdClosestBiome = null;
         double closestDist = 10000000;
         double secondClosestDist = 10000000;
         double thirdClosestDist = 10000000;
 
-        for (Biomes biome : Biomes.values()) {
+        for (SkyGridBiomes biome : SkyGridBiomes.values()) {
+            // Only cover biomes for this environment, e.g., Nether
             if (!env.equals(biome.env)) continue;
             // To avoid having to do an expensive square root per biome per block,
             // we just compare the square distances, and take the square root at the
@@ -107,8 +115,15 @@ public enum Biomes {
         return biomes;
     }
 
-    private static double getSquaredDistance(Biomes biome, double temp, double rain) {
+    private static double getSquaredDistance(SkyGridBiomes biome, double temp, double rain) {
         return Math.abs((biome.optimumTemperature-temp)*(biome.optimumTemperature-temp) + (biome.optimumRainfall-rain)*(biome.optimumRainfall-rain));
+    }
+
+    /**
+     * @return the biome
+     */
+    public Biome getBiome() {
+        return biome;
     }
 
 }

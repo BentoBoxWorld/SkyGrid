@@ -65,13 +65,15 @@ public class Settings implements WorldSettings {
     @ConfigComment("The End chest fill setting")
     @ConfigEntry(path = "world.chest-fill.end")
     private int chestFillEnd = 5;
-    @ConfigComment("Chest items will be taken randomly from this list. All items have an equal chance.")
+    @ConfigComment("Chest items will be taken randomly from this list according to the relative probabilities given")
+    @ConfigComment("Format: Material : Probability")
+    @ConfigComment("Material values can be found at https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html")
     @ConfigEntry(path = "world.chest-items.overworld")
-    private List<String> chestItemsOverworld = new ArrayList<>();
+    private Map<Material, Integer> chestItemsOverworld = new EnumMap<>(Material.class);
     @ConfigEntry(path = "world.chest-items.nether")
-    private List<String> chestItemsNether = new ArrayList<>();
+    private Map<Material, Integer> chestItemsNether = new EnumMap<>(Material.class);
     @ConfigEntry(path = "world.chest-items.end")
-    private List<String> chestItemsEnd = new ArrayList<>();
+    private Map<Material, Integer> chestItemsEnd = new EnumMap<>(Material.class);
 
     /* Blocks */
     @ConfigComment("World block types. If the material cannot be placed, bedrock will be used.")
@@ -145,10 +147,10 @@ public class Settings implements WorldSettings {
     @ConfigEntry(path = "world.skygrid-height")
     private int islandHeight = 128;
 
-    @ConfigComment("Spawn height")
-    @ConfigComment("Height where players will spawn. Can be less than the grid height")
-    @ConfigEntry(path = "world.spawn-height")
-    private int spawnHeight = 128;
+    @ConfigComment("End Frame height")
+    @ConfigComment("This is the height where end frames will generate.")
+    @ConfigEntry(path = "world.end-frame-height", since = "1.20.0")
+    private int endFrameHeight = 3;
 
     @ConfigComment("Space around new players in blocks (will be rounded up to nearest 16 blocks)")
     @ConfigEntry(path = "world.space-around-players")
@@ -213,14 +215,19 @@ public class Settings implements WorldSettings {
     @ConfigComment("Default maximum number of coop rank members per area")
     @ConfigComment("Players can have the skygrid.coop.maxsize.<number> permission to be bigger but")
     @ConfigComment("permission size cannot be less than the default below. ")
-    @ConfigEntry(path = "island.max-coop-size", since = "1.13.0")
+    @ConfigEntry(path = "area.max-coop-size", since = "1.13.0")
     private int maxCoopSize = 4;
 
     @ConfigComment("Default maximum number of trusted rank members per area")
     @ConfigComment("Players can have the skygrid.trust.maxsize.<number> permission to be bigger but")
     @ConfigComment("permission size cannot be less than the default below. ")
-    @ConfigEntry(path = "island.max-trusted-size", since = "1.13.0")
+    @ConfigEntry(path = "area.max-trusted-size", since = "1.13.0")
     private int maxTrustSize = 4;
+
+    @ConfigComment("Default maximum number of homes a player can have. Min = 1")
+    @ConfigComment("Accessed via /sg sethome <number> or /sg go <number>")
+    @ConfigEntry(path = "area.max-homes")
+    private int maxHomes = 5;
 
     // Reset
     @ConfigComment("How many resets a player is allowed (override with /sgadmin clearresets <player>)")
@@ -577,7 +584,7 @@ public class Settings implements WorldSettings {
     @Override
     public int getIslandHeight() {
         if (islandHeight > 255) islandHeight = 255;
-        else if (islandHeight < 0) islandHeight = 0;
+        else if (islandHeight < -64) islandHeight = -64;
         return islandHeight;
     }
 
@@ -586,22 +593,8 @@ public class Settings implements WorldSettings {
      */
     public void setIslandHeight(int islandHeight) {
         if (islandHeight > 255) islandHeight = 255;
-        else if (islandHeight < 0) islandHeight = 0;
+        else if (islandHeight < -64) islandHeight = -64;
         this.islandHeight = islandHeight;
-    }
-
-    /**
-     * @return the spawnHeight
-     */
-    public int getSpawnHeight() {
-        return spawnHeight;
-    }
-
-    /**
-     * @param spawnHeight the spawnHeight to set
-     */
-    public void setSpawnHeight(int spawnHeight) {
-        this.spawnHeight = spawnHeight;
     }
 
     /**
@@ -1174,7 +1167,7 @@ public class Settings implements WorldSettings {
 
     @Override
     public int getMaxHomes() {
-        return 0;
+        return maxHomes;
     }
 
     @Override
@@ -1214,7 +1207,7 @@ public class Settings implements WorldSettings {
 
     @Override
     public boolean isUseOwnGenerator() {
-        return true;
+        return false;
     }
 
     @Override
@@ -1297,42 +1290,42 @@ public class Settings implements WorldSettings {
     /**
      * @return the chestItemsOverworld
      */
-    public List<String> getChestItemsOverworld() {
+    public Map<Material, Integer> getChestItemsOverworld() {
         return chestItemsOverworld;
     }
 
     /**
      * @param chestItemsOverworld the chestItemsOverworld to set
      */
-    public void setChestItemsOverworld(List<String> chestItemsOverworld) {
+    public void setChestItemsOverworld(Map<Material, Integer> chestItemsOverworld) {
         this.chestItemsOverworld = chestItemsOverworld;
     }
 
     /**
      * @return the chestItemsNether
      */
-    public List<String> getChestItemsNether() {
+    public Map<Material, Integer> getChestItemsNether() {
         return chestItemsNether;
     }
 
     /**
      * @param chestItemsNether the chestItemsNether to set
      */
-    public void setChestItemsNether(List<String> chestItemsNether) {
+    public void setChestItemsNether(Map<Material, Integer> chestItemsNether) {
         this.chestItemsNether = chestItemsNether;
     }
 
     /**
      * @return the chestItemsEnd
      */
-    public List<String> getChestItemsEnd() {
+    public Map<Material, Integer> getChestItemsEnd() {
         return chestItemsEnd;
     }
 
     /**
      * @param chestItemsEnd the chestItemsEnd to set
      */
-    public void setChestItemsEnd(List<String> chestItemsEnd) {
+    public void setChestItemsEnd(Map<Material, Integer> chestItemsEnd) {
         this.chestItemsEnd = chestItemsEnd;
     }
 
@@ -1627,5 +1620,26 @@ public class Settings implements WorldSettings {
     public boolean isCheckForBlocks()
     {
         return false;
+    }
+
+    /**
+     * @param maxHomes the maxHomes to set
+     */
+    public void setMaxHomes(int maxHomes) {
+        this.maxHomes = maxHomes;
+    }
+
+    /**
+     * @return the endFrameHeight
+     */
+    public int getEndFrameHeight() {
+        return endFrameHeight;
+    }
+
+    /**
+     * @param endFrameHeight the endFrameHeight to set
+     */
+    public void setEndFrameHeight(int endFrameHeight) {
+        this.endFrameHeight = endFrameHeight;
     }
 }
