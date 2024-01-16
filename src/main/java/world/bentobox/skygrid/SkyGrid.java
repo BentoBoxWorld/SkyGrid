@@ -135,4 +135,8 @@ public class SkyGrid extends GameModeAddon {
 
     }
 
+    @Override
+    public boolean isUsesNewChunkGeneration() {
+        return true;
+    }
 }

@@ -305,7 +305,7 @@ public class SettingsTest {
      */
     @Test
     public void testIsUseOwnGenerator() {
-        assertTrue(s.isUseOwnGenerator());
+        assertFalse(s.isUseOwnGenerator());
     }
 
     /**

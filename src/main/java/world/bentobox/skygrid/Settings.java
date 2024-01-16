@@ -1207,7 +1207,7 @@ public class Settings implements WorldSettings {
 
     @Override
     public boolean isUseOwnGenerator() {
-        return true;
+        return false;
     }
 
     @Override

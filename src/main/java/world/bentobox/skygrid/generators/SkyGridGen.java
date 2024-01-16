@@ -24,6 +24,7 @@ public class SkyGridGen extends ChunkGenerator {
      * @param addon - addon
      */
     public SkyGridGen(SkyGrid addon) {
+        super();
         this.addon = addon;
         this.populator = new SkyGridPop(addon);
     }
