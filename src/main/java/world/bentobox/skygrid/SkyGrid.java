@@ -92,7 +92,7 @@ public class SkyGrid extends GameModeAddon {
         }
         BiomeProvider bp = new SkyGridBiomeProvider();
         // Create the world if it does not exist
-        islandWorld = WorldCreator.name(worldName).environment(World.Environment.NORMAL).generator(gen).seed(123456L)
+        islandWorld = WorldCreator.name(worldName).environment(World.Environment.NORMAL).generator(gen)
                 .biomeProvider(bp).createWorld();
 
         // Make the nether if it does not exist
