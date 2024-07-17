@@ -11,8 +11,6 @@ import org.bukkit.Material;
 import org.bukkit.World.Environment;
 import org.bukkit.entity.EntityType;
 
-import com.google.common.base.Enums;
-
 import world.bentobox.skygrid.SkyGrid;
 
 
@@ -126,48 +124,63 @@ public class WorldStyles {
     private TreeMap<Integer,EntityType> normalSpawns() {
         TreeMap<Integer,EntityType> s = new TreeMap<>();
         List<EntityType> types = new ArrayList<>();
-        types.add(EntityType.CREEPER);
-        types.add(EntityType.SKELETON);
-        types.add(EntityType.SPIDER);
-        types.add(EntityType.CAVE_SPIDER);
-        types.add(EntityType.ZOMBIE);
-        types.add(EntityType.SLIME);
-        types.add(EntityType.PIG);
-        types.add(EntityType.SHEEP);
-        types.add(EntityType.COW);
-        types.add(EntityType.CHICKEN);
-        types.add(EntityType.SQUID);
-        types.add(EntityType.WOLF);
-        types.add(EntityType.ENDERMAN);
-        types.add(EntityType.SILVERFISH);
-        types.add(EntityType.VILLAGER);
-        types.add(EntityType.RABBIT);
-        types.add(EntityType.GUARDIAN);
-        types.add(EntityType.HORSE);
-        types.add(EntityType.WITCH);
-        types.add(EntityType.LLAMA);
-        types.add(EntityType.POLAR_BEAR);
-        types.add(EntityType.HUSK);
-        types.add(EntityType.MULE);
-        types.add(EntityType.MUSHROOM_COW);
-        types.add(EntityType.OCELOT);
-        types.add(EntityType.VINDICATOR);
-        types.add(EntityType.ZOMBIE_HORSE);
-        types.add(EntityType.ZOMBIE_VILLAGER);
+        //Arrays.stream(EntityType.values()).filter(EntityType::can)
+        types.add(EntityType.ALLAY);
+        types.add(EntityType.ARMADILLO);
+        types.add(EntityType.AXOLOTL);
         types.add(EntityType.BEE);
+        types.add(EntityType.BOGGED);
+        types.add(EntityType.CAMEL);
         types.add(EntityType.CAT);
+        types.add(EntityType.CAVE_SPIDER);
+        types.add(EntityType.CHICKEN);
         types.add(EntityType.COD);
+        types.add(EntityType.COW);
+        types.add(EntityType.CREEPER);
         types.add(EntityType.DOLPHIN);
         types.add(EntityType.DONKEY);
         types.add(EntityType.DROWNED);
         types.add(EntityType.ELDER_GUARDIAN);
+        types.add(EntityType.ENDERMAN);
         types.add(EntityType.FOX);
+        types.add(EntityType.FROG);
+        types.add(EntityType.GLOW_SQUID);
+        types.add(EntityType.GOAT);
+        types.add(EntityType.GUARDIAN);
+        types.add(EntityType.HORSE);
         types.add(EntityType.HUSK);
+        types.add(EntityType.ILLUSIONER);
+        types.add(EntityType.IRON_GOLEM);
+        types.add(EntityType.LLAMA);
+        types.add(EntityType.MOOSHROOM);
+        types.add(EntityType.MULE);
+        types.add(EntityType.OCELOT);
         types.add(EntityType.PANDA);
+        types.add(EntityType.PARROT);
+        types.add(EntityType.PIG);
         types.add(EntityType.PILLAGER);
+        types.add(EntityType.POLAR_BEAR);
+        types.add(EntityType.PUFFERFISH);
+        types.add(EntityType.RABBIT);
         types.add(EntityType.RAVAGER);
+        types.add(EntityType.SALMON);
+        types.add(EntityType.SHEEP);
+        types.add(EntityType.SILVERFISH);
+        types.add(EntityType.SKELETON);
+        types.add(EntityType.SLIME);
+        types.add(EntityType.SNIFFER);
+        types.add(EntityType.SPIDER);
+        types.add(EntityType.SQUID);
+        types.add(EntityType.STRAY);
         types.add(EntityType.TURTLE);
         types.add(EntityType.VEX);
+        types.add(EntityType.VILLAGER);
+        types.add(EntityType.VINDICATOR);
+        types.add(EntityType.WITCH);
+        types.add(EntityType.WOLF);
+        types.add(EntityType.ZOMBIE);
+        types.add(EntityType.ZOMBIE_HORSE);
+        types.add(EntityType.ZOMBIE_VILLAGER);
 
         int step = 10000 / types.size();
         int i = step;
@@ -185,19 +198,19 @@ public class WorldStyles {
     private TreeMap<Integer,EntityType> netherSpawns() {
         TreeMap<Integer,EntityType> s = new TreeMap<>();
         // Keys should increment and cannot be the same!
-        s.put(25,  EntityType.BLAZE);
-        s.put(50,  EntityType.MAGMA_CUBE);
-        s.put(75,  EntityType.SKELETON);
-        s.put(100,  EntityType.WITHER_SKELETON);
-        s.put(150,  EntityType.SKELETON_HORSE);
-        s.put(175,  EntityType.ENDERMAN);
-        if (Enums.getIfPresent(EntityType.class, "ZOMBIFIED_PIGLIN").isPresent()) {
-            s.put(300,  EntityType.ZOMBIFIED_PIGLIN);
-            s.put(350,  EntityType.STRIDER);
-            s.put(475, EntityType.PIGLIN);
-            s.put(600,  EntityType.ZOGLIN);
-            s.put(725,  EntityType.HOGLIN);
-        }
+        s.put(25, EntityType.BLAZE);
+        s.put(50, EntityType.MAGMA_CUBE);
+        s.put(75, EntityType.SKELETON);
+        s.put(100, EntityType.WITHER_SKELETON);
+        s.put(150, EntityType.SKELETON_HORSE);
+        s.put(175, EntityType.ENDERMAN);
+        s.put(300, EntityType.ZOMBIFIED_PIGLIN);
+        s.put(350, EntityType.STRIDER);
+        s.put(475, EntityType.PIGLIN);
+        s.put(600, EntityType.ZOGLIN);
+        s.put(725, EntityType.HOGLIN);
+        s.put(800, EntityType.GHAST);
+        s.put(850, EntityType.PIGLIN_BRUTE);
         return s;
     }
 
