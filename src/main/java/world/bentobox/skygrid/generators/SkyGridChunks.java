@@ -116,13 +116,10 @@ public class SkyGridChunks {
         }
         // Convert to deep
         if (y < 0) {
-            if (blockMat == Material.STONE) {
-                blockMat = Material.DEEPSLATE;
-
-            } else if (blockMat == Material.COBBLESTONE) {
-                blockMat = Material.COBBLED_DEEPSLATE;
-            } else {
-                blockMat = Enums.getIfPresent(Material.class, "DEEPSLATE_" + blockMat.name()).or(blockMat);
+            switch (blockMat) {
+            case STONE -> blockMat = Material.DEEPSLATE;
+            case COBBLESTONE -> blockMat = Material.COBBLED_DEEPSLATE;
+            default -> blockMat = Enums.getIfPresent(Material.class, "DEEPSLATE_" + blockMat.name()).or(blockMat);
             }
         }
 
