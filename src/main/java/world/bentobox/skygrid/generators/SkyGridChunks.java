@@ -9,6 +9,8 @@ import org.bukkit.World.Environment;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.BlockData;
 
+import com.google.common.base.Enums;
+
 import world.bentobox.skygrid.SkyGrid;
 
 /**
@@ -21,7 +23,8 @@ public class SkyGridChunks {
     // Blocks that need to be placed on dirt
     private static final List<Material> NEEDS_DIRT = List.of(Material.ACACIA_SAPLING, Material.ALLIUM, Material.AZURE_BLUET,
             Material.BEETROOTS, Material.BIRCH_SAPLING, Material.BLUE_ORCHID, Material.BROWN_MUSHROOM, Material.DANDELION,
-            Material.DARK_OAK_SAPLING, Material.DEAD_BUSH, Material.FERN, Material.GRASS, Material.JUNGLE_SAPLING,
+            Material.DARK_OAK_SAPLING, Material.DEAD_BUSH, Material.FERN,
+            Enums.getIfPresent(Material.class, "GRASS").or(Material.SHORT_GRASS), Material.JUNGLE_SAPLING,
             Material.LARGE_FERN, Material.LILAC, Material.OAK_SAPLING, Material.ORANGE_TULIP, Material.OXEYE_DAISY,
             Material.PEONY, Material.PINK_TULIP, Material.POPPY, Material.RED_MUSHROOM, Material.RED_TULIP,
             Material.ROSE_BUSH, Material.SPRUCE_SAPLING, Material.SUGAR_CANE, Material.SUNFLOWER, Material.TALL_GRASS,
@@ -54,12 +57,35 @@ public class SkyGridChunks {
         addon.log("Done making chunks");
     }
 
+    public Material getBlock(Environment env) {
+        BlockProbability prob = addon.getWorldStyles().get(env).getProb();
+        return prob.getBlock(random, false, false);
+        /*
+        // Get a random block and feed in the last block (true if cactus or cane)
+        Material blockMat = prob.getBlock(random, y == 0, false);
+        // If blockMat is not "a block" then cannot be generated
+        if (!blockMat.isAir() && !blockMat.isBlock()) {
+            blockMat = Material.STONE;
+        }
+        // Convert to deep
+        if (y < 0) {
+            if (blockMat == Material.STONE) {
+                blockMat = Material.DEEPSLATE;
+        
+            } else if (blockMat == Material.COBBLESTONE) {
+                blockMat = Material.COBBLED_DEEPSLATE;
+            } else {
+                blockMat = Enums.getIfPresent(Material.class, "DEEPSLATE_" + blockMat.name()).or(blockMat);
+            }
+        }
+        return new SkyGridBlock(x, y, z, blockMat);*/
+    }
 
     private List<SkyGridBlock> getChunk(BlockProbability prob) {
         List<SkyGridBlock> result = new ArrayList<>();
         for (int x = 1; x < 16; x += 4) {
             for (int z = 1; z < 16; z += 4) {
-                for (int y = 0; y <= addon.getSettings().getIslandHeight(); y += 4) {
+                for (int y = -64; y <= addon.getSettings().getIslandHeight(); y += 4) {
                     setBlock(prob, x, y, z, result);
                 }
             }
@@ -88,6 +114,15 @@ public class SkyGridChunks {
         if (!blockMat.isAir() && !blockMat.isBlock()) {
             blockMat = Material.STONE;
         }
+        // Convert to deep
+        if (y < 0) {
+            switch (blockMat) {
+            case STONE -> blockMat = Material.DEEPSLATE;
+            case COBBLESTONE -> blockMat = Material.COBBLED_DEEPSLATE;
+            default -> blockMat = Enums.getIfPresent(Material.class, "DEEPSLATE_" + blockMat.name()).or(blockMat);
+            }
+        }
+
         // Check if the block needs dirt
         if (NEEDS_DIRT.contains(blockMat)) {
             // Add dirt
@@ -108,7 +143,7 @@ public class SkyGridChunks {
             }
         } else {
             switch (blockMat) {
-            case CACTUS -> {
+            case CACTUS, DEAD_BUSH -> {
                 result.add(new SkyGridBlock(x, y, z, Material.SAND));
                 result.add(new SkyGridBlock(x, y - 1, z, Material.SANDSTONE));
                 result.add(new SkyGridBlock(x, y + 1, z, blockMat));
