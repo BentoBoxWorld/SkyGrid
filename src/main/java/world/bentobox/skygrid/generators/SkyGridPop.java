@@ -59,16 +59,28 @@ public class SkyGridPop extends BlockPopulator {
         this.islandHeight = addon.getSettings().getIslandHeight();
         // Load the chest items
         for (Entry<Material, Integer> en : addon.getSettings().getChestItemsOverworld().entrySet()) {
-            worldTotal += en.getValue();
-            chestItemsWorld.put(worldTotal, en.getKey());
+            if (en.getKey().isItem()) {
+                worldTotal += en.getValue();
+                chestItemsWorld.put(worldTotal, en.getKey());
+            } else {
+                addon.logWarning(en.getKey() + " is not an item so cannot go in a chest.");
+            }
         }
         for (Entry<Material, Integer> en : addon.getSettings().getChestItemsNether().entrySet()) {
-            netherTotal += en.getValue();
-            chestItemsNether.put(netherTotal, en.getKey());
+            if (en.getKey().isItem()) {
+                netherTotal += en.getValue();
+                chestItemsNether.put(netherTotal, en.getKey());
+            } else {
+                addon.logWarning(en.getKey() + " is not an item so cannot go in a chest.");
+            }
         }
         for (Entry<Material, Integer> en : addon.getSettings().getChestItemsEnd().entrySet()) {
-            endTotal += en.getValue();
-            chestItemsEnd.put(endTotal, en.getKey());
+            if (en.getKey().isItem()) {
+                endTotal += en.getValue();
+                chestItemsEnd.put(endTotal, en.getKey());
+            } else {
+                addon.logWarning(en.getKey() + " is not an item so cannot go in a chest.");
+            }
         }
         addon.log(LOADED + chestItemsWorld.size() + " chest items for world");
         addon.log(LOADED + chestItemsNether.size() + " chest items for nether world");
