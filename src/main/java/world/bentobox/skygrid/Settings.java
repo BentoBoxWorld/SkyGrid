@@ -15,6 +15,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 
+import world.bentobox.bentobox.BentoBox;
 import world.bentobox.bentobox.api.configuration.ConfigComment;
 import world.bentobox.bentobox.api.configuration.ConfigEntry;
 import world.bentobox.bentobox.api.configuration.StoreAt;
@@ -146,6 +147,15 @@ public class Settings implements WorldSettings {
     @ConfigComment("This is the height of the top sky grid layer. 255 max.")
     @ConfigEntry(path = "world.skygrid-height")
     private int islandHeight = 128;
+
+    @ConfigComment("The number of concurrent areas a player can have")
+    @ConfigComment("A value of 0 will use the BentoBox config.yml default")
+    @ConfigEntry(path = "world.concurrent-area")
+    private int concurrentIslands = 0;
+
+    @ConfigComment("Disallow team members from having their own area.")
+    @ConfigEntry(path = "world.disallow-team-member-areas")
+    private boolean disallowTeamMemberIslands = true;
 
     @ConfigComment("End Frame height")
     @ConfigComment("This is the height where end frames will generate.")
@@ -1641,5 +1651,36 @@ public class Settings implements WorldSettings {
      */
     public void setEndFrameHeight(int endFrameHeight) {
         this.endFrameHeight = endFrameHeight;
+    }
+
+    /**
+     * @return the concurrentIslands
+     */
+    public int getConcurrentIslands() {
+        if (concurrentIslands <= 0) {
+            return BentoBox.getInstance().getSettings().getIslandNumber();
+        }
+        return concurrentIslands;
+    }
+
+    /**
+     * @param concurrentIslands the concurrentIslands to set
+     */
+    public void setConcurrentIslands(int concurrentIslands) {
+        this.concurrentIslands = concurrentIslands;
+    }
+
+    /**
+     * @return the disallowTeamMemberIslands
+     */
+    public boolean isDisallowTeamMemberIslands() {
+        return disallowTeamMemberIslands;
+    }
+
+    /**
+     * @param disallowTeamMemberIslands the disallowTeamMemberIslands to set
+     */
+    public void setDisallowTeamMemberIslands(boolean disallowTeamMemberIslands) {
+        this.disallowTeamMemberIslands = disallowTeamMemberIslands;
     }
 }

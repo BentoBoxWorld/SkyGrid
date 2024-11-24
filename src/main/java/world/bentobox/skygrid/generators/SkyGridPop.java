@@ -174,18 +174,18 @@ public class SkyGridPop extends BlockPopulator {
 
     private void setSaplingType(LimitedRegion region, Location loc) {
         // Set sapling type if there is one specific to this biome
-        Material sapling = switch (region.getBiome(loc)) {
-        case JUNGLE -> Material.JUNGLE_SAPLING;
-        case PLAINS -> random.nextBoolean() ? Material.BIRCH_SAPLING : Material.OAK_SAPLING;
-        case TAIGA -> Material.SPRUCE_SAPLING;
-        case SWAMP -> Material.MANGROVE_PROPAGULE;
-        case DESERT -> Material.DEAD_BUSH;
-        case BADLANDS -> Material.DEAD_BUSH;
-        case CHERRY_GROVE -> Material.CHERRY_SAPLING;
-        case BAMBOO_JUNGLE -> Material.BAMBOO;
-        case SAVANNA -> Material.ACACIA_SAPLING; // Acacia
-        case BIRCH_FOREST -> Material.BIRCH_SAPLING;
-        case MUSHROOM_FIELDS -> random.nextBoolean() ? Material.RED_MUSHROOM : Material.BROWN_MUSHROOM;
+        Material sapling = switch (region.getBiome(loc).getKey().getKey()) {
+        case "jungle" -> Material.JUNGLE_SAPLING;
+        case "plains" -> random.nextBoolean() ? Material.BIRCH_SAPLING : Material.OAK_SAPLING;
+        case "taiga" -> Material.SPRUCE_SAPLING;
+        case "swamp" -> Material.MANGROVE_PROPAGULE;
+        case "desert" -> Material.DEAD_BUSH;
+        case "badlands" -> Material.DEAD_BUSH;
+        case "cherry_grove" -> Material.CHERRY_SAPLING;
+        case "bamboo_jungle" -> Material.BAMBOO;
+        case "savana" -> Material.ACACIA_SAPLING; // Acacia
+        case "birch_forest" -> Material.BIRCH_SAPLING;
+        case "mushroom_fields" -> random.nextBoolean() ? Material.RED_MUSHROOM : Material.BROWN_MUSHROOM;
         default -> SAPLING_TYPE[random.nextInt(6)];
         };
         region.setType(loc.add(new Vector(0, 1, 0)), sapling);
