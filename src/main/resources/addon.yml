@@ -4,7 +4,7 @@ version: ${version}${build.number}
 metrics: true
 repository: "BentoBoxWorld/SkyGrid"
 icon: "COBWEB"
-api-version: 2.4.1
+api-version: 2.7.1
 
 authors: tastybento
 
