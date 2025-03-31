@@ -139,38 +139,38 @@ public class SkyGridPop extends BlockPopulator {
     }
 
     private void makeEndPortal(LimitedRegion region, int chunkX, int chunkZ) {
+        int y = addon.getSettings().getEndFrameHeight();
         for (int xx = 1; xx< 6; xx++) {
             for (int zz = 1; zz < 6; zz++) {
                 if (xx == zz || (xx==1 && zz==5) || (xx==5 && zz==1) || (xx>1 && xx<5 && zz>1 && zz<5)) {
                     continue;
                 }
-                setFrame(region, xx + (chunkX << 4), addon.getSettings().getEndFrameHeight(), zz + (chunkZ << 4));
+                int x = xx + (chunkX << 4);
+                int z = zz + (chunkZ << 4);
+                region.setType(x, y, z, Material.END_PORTAL_FRAME);
+                // Cast to end frame
+                EndPortalFrame endFrame = (EndPortalFrame) region.getBlockData(x, y, z);
+
+                // Add the odd eye of ender
+                endFrame.setEye(random.nextDouble() < 0.8);
+                if (zz == 1) {
+                    // Face South
+                    endFrame.setFacing(BlockFace.SOUTH);
+                } else if (zz == 5) {
+                    // Face North
+                    endFrame.setFacing(BlockFace.NORTH);
+                } else if (xx == 1) {
+                    // Face East
+                    endFrame.setFacing(BlockFace.EAST);
+                } else {
+                    // Face West
+                    endFrame.setFacing(BlockFace.WEST);
+                }
+                region.setBlockData(x, y, z, endFrame);
             }
         }
     }
 
-    private void setFrame(LimitedRegion region, int xx, int yy, int zz) {
-        region.setType(xx, yy, zz, Material.END_PORTAL_FRAME);
-        // Cast to end frame
-        EndPortalFrame endFrame = (EndPortalFrame) region.getBlockData(xx, yy, zz);
-
-        // Add the odd eye of ender
-        endFrame.setEye(random.nextDouble() < 0.8);
-        if (zz == 1) {
-            // Face South
-            endFrame.setFacing(BlockFace.SOUTH);
-        } else if (zz == 5) {
-            // Face North
-            endFrame.setFacing(BlockFace.NORTH);
-        } else if (xx == 1) {
-            // Face East
-            endFrame.setFacing(BlockFace.EAST);
-        } else {
-            // Face West
-            endFrame.setFacing(BlockFace.WEST);
-        }
-        region.setBlockData(xx, yy, zz, endFrame);
-    }
 
     private void setSaplingType(LimitedRegion region, Location loc) {
         // Set sapling type if there is one specific to this biome
