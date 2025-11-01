@@ -78,7 +78,20 @@ public class SkyGridGen extends ChunkGenerator {
                 result.setBlock(x, y, z, Material.END_STONE);
                 result.setBlock(x, y + 1, z, nextBlock);
             }
-
+            case SUGAR_CANE -> {
+                result.setBlock(x, y, z, Material.SANDSTONE);
+                result.setBlock(x, y + 1, z, Material.SAND);
+                result.setBlock(x, y + 2, z, nextBlock);
+                result.setBlock(x+1, y + 1, z, Material.WATER);
+            }
+            case SHORT_GRASS, TALL_GRASS -> {
+                result.setBlock(x, y, z, Material.DIRT);
+                result.setBlock(x, y + 1, z, nextBlock);
+            }
+            case RED_MUSHROOM, BROWN_MUSHROOM -> {
+                result.setBlock(x, y, z, Material.PODZOL);
+                result.setBlock(x, y + 1, z, nextBlock);
+            }
             default -> {
                 result.setBlock(x, y, z, nextBlock);
                 return false;
