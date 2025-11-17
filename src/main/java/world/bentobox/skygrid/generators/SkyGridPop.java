@@ -1,12 +1,12 @@
 package world.bentobox.skygrid.generators;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.NavigableMap;
 import java.util.Random;
 import java.util.TreeMap;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -40,7 +40,7 @@ public class SkyGridPop extends BlockPopulator {
     private int worldTotal;
     private int netherTotal;
     private int endTotal;
-    private Map<UUID, Random> rand = new HashMap<>();
+    private Map<UUID, Random> rand = new ConcurrentHashMap<>();
     private Random random = new Random();
 
     private static final Material[] SAPLING_TYPE = {

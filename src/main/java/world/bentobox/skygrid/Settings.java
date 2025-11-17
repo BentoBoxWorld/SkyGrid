@@ -111,9 +111,6 @@ public class Settings implements WorldSettings {
     @ConfigEntry(path = "world.end.blocks")
     private Map<Material, Integer> endBlocks = new EnumMap<>(Material.class);
 
-    @ConfigComment("This option indicates if obsidian platform in the end should be generated")
-    @ConfigComment("when player enters the end world.")
-    @ConfigEntry(path = "world.end.create-obsidian-platform", since = "1.16")
     private boolean makeEndPortals = true;
 
     /* SkyGrid */
