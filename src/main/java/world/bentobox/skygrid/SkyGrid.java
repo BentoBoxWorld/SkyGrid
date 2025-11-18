@@ -16,6 +16,7 @@ import world.bentobox.bentobox.lists.Flags;
 import world.bentobox.skygrid.generators.SkyGridBiomeProvider;
 import world.bentobox.skygrid.generators.SkyGridGen;
 import world.bentobox.skygrid.generators.WorldStyles;
+import world.bentobox.skygrid.listeners.EndPortalListener;
 
 /**
  * Main SkyGrid class - provides skygrid
@@ -65,6 +66,8 @@ public class SkyGrid extends GameModeAddon {
     public void onEnable() {
         // Set default protection flags for world to allow everything
         Flags.values().stream().filter(f -> f.getType().equals(Type.PROTECTION)).forEach(f -> f.setDefaultSetting(getOverWorld(), true));
+        // Listen for end portals
+        this.registerListener(new EndPortalListener(this));
     }
 
     @Override
