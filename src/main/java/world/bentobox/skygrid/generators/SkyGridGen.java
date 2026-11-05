@@ -31,7 +31,6 @@ public class SkyGridGen extends ChunkGenerator {
 
     @Override
     public void generateNoise(WorldInfo worldInfo, Random r, int chunkX, int chunkZ, ChunkData result) {
-        Random rand = new Random(worldInfo.getSeed());
         // Cut off anything higher than island height
         result.setRegion(0, Math.min(addon.getSettings().getIslandHeight() + 1, worldInfo.getMaxHeight() - 1), 0, 16,
                 worldInfo.getMaxHeight(), 16,
@@ -43,14 +42,11 @@ public class SkyGridGen extends ChunkGenerator {
                     if ((Math.floorMod(x, 4) != 0) || (Math.floorMod(z, 4) != 0) || (Math.floorMod(y, 4) != 0)) {
                         result.setBlock(x, y, z, Material.AIR);
                     } else {
-                        Material m = result.getBlockData(x, y, z).getMaterial();
-                        if (m == Material.AIR || m == Material.WATER) {
-                            Material nextBlock = addon.getWorldStyles().get(worldInfo.getEnvironment()).getProb()
-                                    .getBlock(rand, y == worldInfo.getMinHeight(), true);
-                            // Check for plants, etc. below this y 
-                            checkPlants(nextBlock, x, y, z, result);
-                        }
-
+                        // Use the per-chunk random from the server so that each chunk is different
+                        Material nextBlock = addon.getWorldStyles().get(worldInfo.getEnvironment()).getProb()
+                                .getBlock(r, y == worldInfo.getMinHeight(), true);
+                        // Check for plants, etc. below this y
+                        checkPlants(nextBlock, x, y, z, result);
                     }
                 }
             }
@@ -115,27 +111,31 @@ public class SkyGridGen extends ChunkGenerator {
         return new Location(world, 0, addon.getSettings().getIslandHeight() + 2D, 0);
     }
 
+    /**
+     * Vanilla noise must be off. It runs before {@link #generateNoise} and would fill the grid with terrain.
+     * @return false
+     */
     @Override
     public boolean shouldGenerateNoise() {
-        return true;
+        return false;
     }
 
     /**
-     * Gets if the server should generate Vanilla surface.
-     * @return true if the server should generate Vanilla surface
+     * Vanilla surface must be off. It would turn grid blocks into grass and dirt.
+     * @return false
      */
     @Override
     public boolean shouldGenerateSurface() {
-        return true;
+        return false;
     }
 
     /**
-     * Gets if the server should generate Vanilla caves.
-     * @return true if the server should generate Vanilla caves
+     * Vanilla caves must be off. There is no terrain to carve and they would remove grid blocks.
+     * @return false
      */
     @Override
     public boolean shouldGenerateCaves() {
-        return true;
+        return false;
     }
 
     /**
