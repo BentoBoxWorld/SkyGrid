@@ -21,6 +21,11 @@ public class SkyGridGen extends ChunkGenerator {
     private final BlockPopulator populator;
 
     /**
+     * Location of a sugar cane's sandstone block, which needs a water basin next to it
+     */
+    private record CanePlot(int x, int y, int z) {}
+
+    /**
      * @param addon - addon
      */
     public SkyGridGen(SkyGrid addon) {
@@ -35,6 +40,7 @@ public class SkyGridGen extends ChunkGenerator {
         result.setRegion(0, Math.min(addon.getSettings().getIslandHeight() + 1, worldInfo.getMaxHeight() - 1), 0, 16,
                 worldInfo.getMaxHeight(), 16,
                 Material.AIR);
+        List<CanePlot> canePlots = new ArrayList<>();
         for (int x = 0; x < 16; x++) {
             for (int z = 0; z < 16; z++) {
                 for (int y = addon.getSettings().getIslandHeight(); y >= worldInfo.getMinHeight(); y--) {
@@ -46,15 +52,44 @@ public class SkyGridGen extends ChunkGenerator {
                         Material nextBlock = addon.getWorldStyles().get(worldInfo.getEnvironment()).getProb()
                                 .getBlock(r, y == worldInfo.getMinHeight(), true);
                         // Check for plants, etc. below this y
-                        checkPlants(nextBlock, x, y, z, result);
+                        // There is no room in this chunk for a water basin next to the corner column
+                        if (nextBlock == Material.SUGAR_CANE && x == 0 && z == 0) {
+                            nextBlock = Material.SANDSTONE;
+                        }
+                        checkPlants(nextBlock, x, y, z, result, canePlots);
                     }
                 }
             }
         }
+        // These must go in after the loop above, which clears everything that is not in a grid column
+        canePlots.forEach(plot -> placeWaterBasin(plot, result));
+    }
+
+    /**
+     * Places water next to the sand under a sugar cane and walls it in so that it cannot flow.
+     * The basin extends along x, or along z in the first row of a chunk because a wall
+     * would otherwise be outside the chunk.
+     * @param plot location of the sugar cane's sandstone block
+     * @param result chunk data
+     */
+    private void placeWaterBasin(CanePlot plot, ChunkData result) {
+        int dx = plot.z() == 0 ? 0 : 1;
+        int dz = 1 - dx;
+        int waterX = plot.x() + dx;
+        int waterY = plot.y() + 1;
+        int waterZ = plot.z() + dz;
+        result.setBlock(waterX, waterY, waterZ, Material.WATER);
+        // Floor
+        result.setBlock(waterX, plot.y(), waterZ, Material.SANDSTONE);
+        // Far wall, opposite the sand
+        result.setBlock(waterX + dx, waterY, waterZ + dz, Material.SANDSTONE);
+        // Side walls
+        result.setBlock(waterX + dz, waterY, waterZ + dx, Material.SANDSTONE);
+        result.setBlock(waterX - dz, waterY, waterZ - dx, Material.SANDSTONE);
     }
 
 
-    private boolean checkPlants(Material nextBlock, int x, int y, int z, ChunkData result) {
+    private boolean checkPlants(Material nextBlock, int x, int y, int z, ChunkData result, List<CanePlot> canePlots) {
         if (Tag.SAPLINGS.isTagged(nextBlock) || Tag.FLOWERS.isTagged(nextBlock)
                 || Tag.ITEMS_VILLAGER_PLANTABLE_SEEDS.isTagged(nextBlock)) {
             result.setBlock(x, y, z, Material.DIRT);
@@ -63,7 +98,7 @@ public class SkyGridGen extends ChunkGenerator {
             switch (nextBlock) {
             case CACTUS, DEAD_BUSH -> {
                 result.setBlock(x, y, z, Material.SANDSTONE);
-                result.setBlock(x, y, z, Material.SAND);
+                result.setBlock(x, y + 1, z, Material.SAND);
                 result.setBlock(x, y + 2, z, nextBlock);
             }
             case NETHER_WART -> {
@@ -78,7 +113,7 @@ public class SkyGridGen extends ChunkGenerator {
                 result.setBlock(x, y, z, Material.SANDSTONE);
                 result.setBlock(x, y + 1, z, Material.SAND);
                 result.setBlock(x, y + 2, z, nextBlock);
-                result.setBlock(x+1, y + 1, z, Material.WATER);
+                canePlots.add(new CanePlot(x, y, z));
             }
             case SHORT_GRASS, TALL_GRASS -> {
                 result.setBlock(x, y, z, Material.DIRT);
