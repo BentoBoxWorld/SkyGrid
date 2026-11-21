@@ -967,6 +967,7 @@ world:
     OFFLINE_GROWTH: true
     OFFLINE_REDSTONE: true
     PETS_STAY_AT_HOME: true
+    PISTON_PUSH: false
     PLACE_BLOCKS: true
     POTION_THROWING: true
     PRESSURE_PLATE: true
