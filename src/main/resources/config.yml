@@ -1102,7 +1102,15 @@ world:
     TNT_DAMAGE: true
   # These settings/flags are hidden from users
   # Ops can toggle hiding in-game using SHIFT-LEFT-CLICK on flags in settings
-  hidden-flags: []
+  hidden-flags:
+  - TNT_DAMAGE
+  - BLOCK_EXPLODE_DAMAGE
+  - FIRE_BURNING
+  - FIRE_IGNITE
+  - FIRE_SPREAD
+  - LEAF_DECAY
+  - ENDERMAN_TELEPORT
+  - SHULKER_TELEPORT
   # Visitor banned commands - Visitors to islands cannot use these commands in this world
   visitor-banned-commands: []
   # Falling banned commands - players cannot use these commands when falling
