@@ -773,6 +773,70 @@ world:
     YELLOW_STAINED_GLASS: 10
     YELLOW_TERRACOTTA: 10
     YELLOW_WOOL: 10
+  # Mobs that spawners in the over world can spawn.
+  # Format: EntityType : Probability (relative weight)
+  # Remove a mob, or set it to 0, to stop spawners of that type being made.
+  # If this list is empty, the built-in default list is used and written here.
+  # To have no spawners at all, remove SPAWNER from the blocks list.
+  # EntityType values can be found at https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
+  # Added since 2.3.0.
+  spawners:
+    ALLAY: 10
+    ARMADILLO: 10
+    AXOLOTL: 10
+    BEE: 10
+    BOGGED: 10
+    CAMEL: 10
+    CAT: 10
+    CAVE_SPIDER: 10
+    CHICKEN: 10
+    COD: 10
+    COW: 10
+    CREEPER: 10
+    DOLPHIN: 10
+    DONKEY: 10
+    DROWNED: 10
+    ELDER_GUARDIAN: 10
+    ENDERMAN: 10
+    FOX: 10
+    FROG: 10
+    GLOW_SQUID: 10
+    GOAT: 10
+    GUARDIAN: 10
+    HORSE: 10
+    HUSK: 10
+    ILLUSIONER: 10
+    IRON_GOLEM: 10
+    LLAMA: 10
+    MOOSHROOM: 10
+    MULE: 10
+    OCELOT: 10
+    PANDA: 10
+    PARROT: 10
+    PIG: 10
+    PILLAGER: 10
+    POLAR_BEAR: 10
+    PUFFERFISH: 10
+    RABBIT: 10
+    RAVAGER: 10
+    SALMON: 10
+    SHEEP: 10
+    SILVERFISH: 10
+    SKELETON: 10
+    SLIME: 10
+    SNIFFER: 10
+    SPIDER: 10
+    SQUID: 10
+    STRAY: 10
+    TURTLE: 10
+    VEX: 10
+    VILLAGER: 10
+    VINDICATOR: 10
+    WITCH: 10
+    WOLF: 10
+    ZOMBIE: 10
+    ZOMBIE_HORSE: 10
+    ZOMBIE_VILLAGER: 10
   nether:
     # Generate SkyGrid Nether - if this is false, the nether world will not be made
     generate: true
@@ -822,6 +886,22 @@ world:
       WARPED_PLANKS: 10
       WARPED_ROOTS: 10
       WARPED_WART_BLOCK: 10
+    # Mobs that spawners in the nether can spawn. Same format as world.spawners.
+    # Added since 2.3.0.
+    spawners:
+      BLAZE: 25
+      ENDERMAN: 25
+      GHAST: 75
+      HOGLIN: 125
+      MAGMA_CUBE: 25
+      PIGLIN: 125
+      PIGLIN_BRUTE: 50
+      SKELETON: 25
+      SKELETON_HORSE: 50
+      STRIDER: 50
+      WITHER_SKELETON: 25
+      ZOGLIN: 125
+      ZOMBIFIED_PIGLIN: 125
     # This option indicates if nether portals should be linked via dimensions.
     # Option will simulate vanilla portal mechanics that links portals together
     # or creates a new portal, if there is not a portal in that dimension.
@@ -842,6 +922,12 @@ world:
       PURPLE_STAINED_GLASS: 50
       PURPUR_BLOCK: 50
       SPAWNER: 10
+    # Mobs that spawners in the end can spawn. Same format as world.spawners.
+    # Added since 2.3.0.
+    spawners:
+      ENDERMAN: 45
+      ENDERMITE: 54
+      SHULKER: 1
     # This option indicates if obsidian platform in the end should be generated
     # when player enters the end world.
     # Added since 1.16.
@@ -862,7 +948,8 @@ world:
   # /!\ BentoBox currently does not support changing this value mid-game. If you do need to change it, do a full reset of your databases and worlds.
   start-z: 0
   # SkyGrid height
-  # This is the height of the top sky grid layer. 255 max.
+  # This is the height of the top sky grid layer. 252 max.
+  # Rounded to the nearest multiple of 4 so that area centres are on the grid.
   skygrid-height: 128
   # End Frame height
   # This is the height where end frames will generate.
@@ -967,6 +1054,7 @@ world:
     OFFLINE_GROWTH: true
     OFFLINE_REDSTONE: true
     PETS_STAY_AT_HOME: true
+    PISTON_PUSH: false
     PLACE_BLOCKS: true
     POTION_THROWING: true
     PRESSURE_PLATE: true
@@ -1102,7 +1190,15 @@ world:
     TNT_DAMAGE: true
   # These settings/flags are hidden from users
   # Ops can toggle hiding in-game using SHIFT-LEFT-CLICK on flags in settings
-  hidden-flags: []
+  hidden-flags:
+  - TNT_DAMAGE
+  - BLOCK_EXPLODE_DAMAGE
+  - FIRE_BURNING
+  - FIRE_IGNITE
+  - FIRE_SPREAD
+  - LEAF_DECAY
+  - ENDERMAN_TELEPORT
+  - SHULKER_TELEPORT
   # Visitor banned commands - Visitors to islands cannot use these commands in this world
   visitor-banned-commands: []
   # Falling banned commands - players cannot use these commands when falling

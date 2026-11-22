@@ -85,6 +85,16 @@ public class Settings implements WorldSettings {
     @ConfigEntry(path = "world.blocks")
     private Map<Material, Integer> blocks = new EnumMap<>(Material.class);
 
+    /* Spawners */
+    @ConfigComment("Mobs that spawners in the over world can spawn.")
+    @ConfigComment("Format: EntityType : Probability (relative weight)")
+    @ConfigComment("Remove a mob, or set it to 0, to stop spawners of that type being made.")
+    @ConfigComment("If this list is empty, the built-in default list is used and written here.")
+    @ConfigComment("To have no spawners at all, remove SPAWNER from the blocks list.")
+    @ConfigComment("EntityType values can be found at https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html")
+    @ConfigEntry(path = "world.spawners", since = "2.3.0")
+    private Map<EntityType, Integer> spawners = new EnumMap<>(EntityType.class);
+
     // Nether
     @ConfigComment("Generate SkyGrid Nether - if this is false, the nether world will not be made")
     @ConfigEntry(path = "world.nether.generate")
@@ -95,6 +105,10 @@ public class Settings implements WorldSettings {
     @ConfigComment("server badly if there are too many blocks.")
     @ConfigEntry(path = "world.nether.blocks")
     private Map<Material, Integer> netherBlocks = new EnumMap<>(Material.class);
+
+    @ConfigComment("Mobs that spawners in the nether can spawn. Same format as world.spawners.")
+    @ConfigEntry(path = "world.nether.spawners", since = "2.3.0")
+    private Map<EntityType, Integer> netherSpawners = new EnumMap<>(EntityType.class);
 
     @ConfigComment("This option indicates if nether portals should be linked via dimensions.")
     @ConfigComment("Option will simulate vanilla portal mechanics that links portals together")
@@ -110,6 +124,10 @@ public class Settings implements WorldSettings {
     @ConfigComment("The End blocks.")
     @ConfigEntry(path = "world.end.blocks")
     private Map<Material, Integer> endBlocks = new EnumMap<>(Material.class);
+
+    @ConfigComment("Mobs that spawners in the end can spawn. Same format as world.spawners.")
+    @ConfigEntry(path = "world.end.spawners", since = "2.3.0")
+    private Map<EntityType, Integer> endSpawners = new EnumMap<>(EntityType.class);
 
     private boolean makeEndPortals = true;
 
@@ -141,7 +159,8 @@ public class Settings implements WorldSettings {
     private int islandStartZ = 0;
 
     @ConfigComment("SkyGrid height")
-    @ConfigComment("This is the height of the top sky grid layer. 255 max.")
+    @ConfigComment("This is the height of the top sky grid layer. 252 max.")
+    @ConfigComment("Rounded to the nearest multiple of 4 so that area centres are on the grid.")
     @ConfigEntry(path = "world.skygrid-height")
     private int islandHeight = 128;
 
@@ -596,8 +615,7 @@ public class Settings implements WorldSettings {
      */
     @Override
     public int getIslandHeight() {
-        if (islandHeight > 255) islandHeight = 255;
-        else if (islandHeight < -64) islandHeight = -64;
+        islandHeight = gridHeight(islandHeight);
         return islandHeight;
     }
 
@@ -605,9 +623,60 @@ public class Settings implements WorldSettings {
      * @param islandHeight the islandHeight to set
      */
     public void setIslandHeight(int islandHeight) {
-        if (islandHeight > 255) islandHeight = 255;
-        else if (islandHeight < -64) islandHeight = -64;
-        this.islandHeight = islandHeight;
+        this.islandHeight = gridHeight(islandHeight);
+    }
+
+    /**
+     * Grid blocks are only placed where y is a multiple of 4, so the height is
+     * rounded to the nearest multiple of 4 and kept between -64 and 252.
+     * @param height requested height
+     * @return height that lies on the grid
+     */
+    static int gridHeight(int height) {
+        int rounded = Math.floorDiv(height + 2, 4) * 4;
+        return Math.clamp(rounded, -64, 252);
+    }
+
+    /**
+     * @return the over world spawner mobs and their relative probabilities
+     */
+    public Map<EntityType, Integer> getSpawners() {
+        return spawners;
+    }
+
+    /**
+     * @param spawners the over world spawner mobs to set
+     */
+    public void setSpawners(Map<EntityType, Integer> spawners) {
+        this.spawners = spawners;
+    }
+
+    /**
+     * @return the nether spawner mobs and their relative probabilities
+     */
+    public Map<EntityType, Integer> getNetherSpawners() {
+        return netherSpawners;
+    }
+
+    /**
+     * @param netherSpawners the nether spawner mobs to set
+     */
+    public void setNetherSpawners(Map<EntityType, Integer> netherSpawners) {
+        this.netherSpawners = netherSpawners;
+    }
+
+    /**
+     * @return the end spawner mobs and their relative probabilities
+     */
+    public Map<EntityType, Integer> getEndSpawners() {
+        return endSpawners;
+    }
+
+    /**
+     * @param endSpawners the end spawner mobs to set
+     */
+    public void setEndSpawners(Map<EntityType, Integer> endSpawners) {
+        this.endSpawners = endSpawners;
     }
 
     /**

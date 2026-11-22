@@ -24,6 +24,42 @@ permissions:
   skygrid.island.sethome:
     description: Let the player use the sethome command
     default: true
+  skygrid.island.deletehome:
+    description: Allow use of '/skygrid deletehome' command - delete a home location
+    default: true
+  skygrid.island.homes:
+    description: Allow use of '/skygrid homes' command - list your homes
+    default: true
+  skygrid.island.info:
+    description: Allow use of '/skygrid info' command - display info about your island or the player's island
+    default: true
+  skygrid.island.near:
+    description: Allow use of '/skygrid near' command - show the name of neighboring islands around you
+    default: true
+  skygrid.island.renamehome:
+    description: Allow use of '/skygrid renamehome' command - rename a home location
+    default: true
+  skygrid.island.team.accept:
+    description: Allow use of '/skygrid team accept' command - accept an invitation
+    default: true
+  skygrid.island.team.invite:
+    description: Allow use of '/skygrid team invite' command - invite a player to join your island
+    default: true
+  skygrid.island.team.kick:
+    description: Allow use of '/skygrid team kick' command - remove a member from your island
+    default: true
+  skygrid.island.team.leave:
+    description: Allow use of '/skygrid team leave' command - leave your island
+    default: true
+  skygrid.island.team.promote:
+    description: Allow use of '/skygrid team promote' and '/skygrid team demote' commands - move a player's rank on your island
+    default: true
+  skygrid.island.team.reject:
+    description: Allow use of '/skygrid team reject' command - reject an invitation
+    default: true
+  skygrid.island.team.setowner:
+    description: Allow use of '/skygrid team setowner' command - transfer your island ownership to a member
+    default: true
   skygrid.island.lock:
     description: Allows area locking
     default: false

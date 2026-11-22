@@ -194,8 +194,7 @@ public class SkyGridPop extends BlockPopulator {
     private void setSpawner(LimitedRegion region, Location loc, Environment environment) {
         CreatureSpawner spawner = (CreatureSpawner) region.getBlockState(loc);
         NavigableMap<Integer, EntityType> spawns = addon.getWorldStyles().get(environment).getSpawns();
-        int randKey = random.nextInt(spawns.lastKey());
-        EntityType type = spawns.ceilingEntry(randKey).getValue();
+        EntityType type = spawns.higherEntry(random.nextInt(spawns.lastKey())).getValue();
         spawner.setDelay(120);
         spawner.setSpawnedType(type);
         spawner.update(true, false);
