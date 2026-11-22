@@ -50,8 +50,10 @@ public class SkyGrid extends GameModeAddon {
             setState(State.DISABLED);
             return;
         }
-        saveWorldSettings();
+        // World styles fill in default spawner lists if they are missing, so make them before saving
         worldStyles = new WorldStyles(this);
+        checkGridAlignment();
+        saveWorldSettings();
 
         // Generator
         gen = new SkyGridGen(this);
@@ -60,6 +62,19 @@ public class SkyGrid extends GameModeAddon {
         playerCommand = new DefaultPlayerCommand(this) {};
         adminCommand = new DefaultAdminCommand(this) {};
 
+    }
+
+    /**
+     * Grid blocks are only placed every 4 blocks. If the area start or spacing is not a
+     * multiple of 4, area centres will not line up with the grid. These values cannot be
+     * changed on an existing world without moving every area, so only warn.
+     */
+    private void checkGridAlignment() {
+        if (settings.getIslandStartX() % 4 != 0 || settings.getIslandStartZ() % 4 != 0
+                || settings.getIslandDistance() % 4 != 0) {
+            logWarning("start-x, start-z and space-around-players should be multiples of 4, otherwise area centres "
+                    + "will not be on the grid. Only change these on a new world.");
+        }
     }
 
     @Override

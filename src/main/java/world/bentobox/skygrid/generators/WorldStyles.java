@@ -1,6 +1,5 @@
 package world.bentobox.skygrid.generators;
 
-import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -30,9 +29,12 @@ public class WorldStyles {
 
     public WorldStyles(SkyGrid addon) {
         this.addon = addon;
-        map.put(Environment.NORMAL, new WorldStyles(normalWorldProbabilities(), normalSpawns()));
-        map.put(Environment.NETHER, new WorldStyles(netherWorldProbabilities(), netherSpawns()));
-        map.put(Environment.THE_END, new WorldStyles(endWorldProbabilities(), endSpawns()));
+        map.put(Environment.NORMAL, new WorldStyles(normalWorldProbabilities(),
+                spawns(addon.getSettings().getSpawners(), defaultNormalSpawns(), "over world")));
+        map.put(Environment.NETHER, new WorldStyles(netherWorldProbabilities(),
+                spawns(addon.getSettings().getNetherSpawners(), defaultNetherSpawns(), "nether")));
+        map.put(Environment.THE_END, new WorldStyles(endWorldProbabilities(),
+                spawns(addon.getSettings().getEndSpawners(), defaultEndSpawns(), "end world")));
     }
 
     public WorldStyles(BlockProbability prob, NavigableMap<Integer, EntityType> spawns) {
@@ -118,112 +120,107 @@ public class WorldStyles {
     }
 
     /**
-     * What will come out of spawners
-     * @return map of overworld spawners
+     * Build the spawner table for an environment from config. If the config list is
+     * empty, the built-in defaults are put into the settings so they get saved to config.yml.
+     * @param configured spawner weights from config.yml
+     * @param defaults built-in default weights
+     * @param name name of the world for logging
+     * @return cumulative probability map for use with {@link NavigableMap#higherEntry}
      */
-    private TreeMap<Integer,EntityType> normalSpawns() {
-        TreeMap<Integer,EntityType> s = new TreeMap<>();
-        List<EntityType> types = new ArrayList<>();
-        //Arrays.stream(EntityType.values()).filter(EntityType::can)
-        types.add(EntityType.ALLAY);
-        types.add(EntityType.ARMADILLO);
-        types.add(EntityType.AXOLOTL);
-        types.add(EntityType.BEE);
-        types.add(EntityType.BOGGED);
-        types.add(EntityType.CAMEL);
-        types.add(EntityType.CAT);
-        types.add(EntityType.CAVE_SPIDER);
-        types.add(EntityType.CHICKEN);
-        types.add(EntityType.COD);
-        types.add(EntityType.COW);
-        types.add(EntityType.CREEPER);
-        types.add(EntityType.DOLPHIN);
-        types.add(EntityType.DONKEY);
-        types.add(EntityType.DROWNED);
-        types.add(EntityType.ELDER_GUARDIAN);
-        types.add(EntityType.ENDERMAN);
-        types.add(EntityType.FOX);
-        types.add(EntityType.FROG);
-        types.add(EntityType.GLOW_SQUID);
-        types.add(EntityType.GOAT);
-        types.add(EntityType.GUARDIAN);
-        types.add(EntityType.HORSE);
-        types.add(EntityType.HUSK);
-        types.add(EntityType.ILLUSIONER);
-        types.add(EntityType.IRON_GOLEM);
-        types.add(EntityType.LLAMA);
-        types.add(EntityType.MOOSHROOM);
-        types.add(EntityType.MULE);
-        types.add(EntityType.OCELOT);
-        types.add(EntityType.PANDA);
-        types.add(EntityType.PARROT);
-        types.add(EntityType.PIG);
-        types.add(EntityType.PILLAGER);
-        types.add(EntityType.POLAR_BEAR);
-        types.add(EntityType.PUFFERFISH);
-        types.add(EntityType.RABBIT);
-        types.add(EntityType.RAVAGER);
-        types.add(EntityType.SALMON);
-        types.add(EntityType.SHEEP);
-        types.add(EntityType.SILVERFISH);
-        types.add(EntityType.SKELETON);
-        types.add(EntityType.SLIME);
-        types.add(EntityType.SNIFFER);
-        types.add(EntityType.SPIDER);
-        types.add(EntityType.SQUID);
-        types.add(EntityType.STRAY);
-        types.add(EntityType.TURTLE);
-        types.add(EntityType.VEX);
-        types.add(EntityType.VILLAGER);
-        types.add(EntityType.VINDICATOR);
-        types.add(EntityType.WITCH);
-        types.add(EntityType.WOLF);
-        types.add(EntityType.ZOMBIE);
-        types.add(EntityType.ZOMBIE_HORSE);
-        types.add(EntityType.ZOMBIE_VILLAGER);
+    private TreeMap<Integer, EntityType> spawns(Map<EntityType, Integer> configured, Map<EntityType, Integer> defaults, String name) {
+        if (configured.isEmpty()) {
+            configured.putAll(defaults);
+        }
+        TreeMap<Integer, EntityType> s = toCumulative(configured, name);
+        if (s.isEmpty()) {
+            addon.logWarning("No valid spawner mobs for SkyGrid " + name + " - using defaults (fix/update config.yml)");
+            s = toCumulative(defaults, name);
+        }
+        addon.log(LOADED + s.size() + " spawner mob types for SkyGrid " + name);
+        return s;
+    }
 
-        int step = 10000 / types.size();
-        int i = step;
-        for (EntityType type: types) {
-            s.put(i, type);
-            i += step;
+    /**
+     * Turn relative weights into a cumulative map. Each key is the running total of
+     * weights, so picking {@code higherEntry(random.nextInt(lastKey()))} chooses each
+     * mob in proportion to its weight.
+     * @param weights mob weights
+     * @param name name of the world for logging
+     * @return cumulative map, empty if no usable entries
+     */
+    TreeMap<Integer, EntityType> toCumulative(Map<EntityType, Integer> weights, String name) {
+        TreeMap<Integer, EntityType> s = new TreeMap<>();
+        int total = 0;
+        for (Map.Entry<EntityType, Integer> en : weights.entrySet()) {
+            EntityType type = en.getKey();
+            Integer weight = en.getValue();
+            if (type == null || weight == null || weight <= 0) {
+                continue;
+            }
+            if (!type.isSpawnable() || !type.isAlive()) {
+                addon.logWarning(type + " in the SkyGrid " + name + " spawners list cannot be used in a spawner - skipping");
+                continue;
+            }
+            total += weight;
+            s.put(total, type);
         }
         return s;
     }
 
     /**
-     * What will come out of spawners in the nether
-     * @return map of nether spawners
+     * Default over world spawner mobs
+     * @return map of mob to weight
      */
-    private TreeMap<Integer,EntityType> netherSpawns() {
-        TreeMap<Integer,EntityType> s = new TreeMap<>();
-        // Keys should increment and cannot be the same!
-        s.put(25, EntityType.BLAZE);
-        s.put(50, EntityType.MAGMA_CUBE);
-        s.put(75, EntityType.SKELETON);
-        s.put(100, EntityType.WITHER_SKELETON);
-        s.put(150, EntityType.SKELETON_HORSE);
-        s.put(175, EntityType.ENDERMAN);
-        s.put(300, EntityType.ZOMBIFIED_PIGLIN);
-        s.put(350, EntityType.STRIDER);
-        s.put(475, EntityType.PIGLIN);
-        s.put(600, EntityType.ZOGLIN);
-        s.put(725, EntityType.HOGLIN);
-        s.put(800, EntityType.GHAST);
-        s.put(850, EntityType.PIGLIN_BRUTE);
-        return s;
+    public static Map<EntityType, Integer> defaultNormalSpawns() {
+        Map<EntityType, Integer> m = new EnumMap<>(EntityType.class);
+        List<EntityType> types = List.of(EntityType.ALLAY, EntityType.ARMADILLO, EntityType.AXOLOTL, EntityType.BEE,
+                EntityType.BOGGED, EntityType.CAMEL, EntityType.CAT, EntityType.CAVE_SPIDER, EntityType.CHICKEN,
+                EntityType.COD, EntityType.COW, EntityType.CREEPER, EntityType.DOLPHIN, EntityType.DONKEY,
+                EntityType.DROWNED, EntityType.ELDER_GUARDIAN, EntityType.ENDERMAN, EntityType.FOX, EntityType.FROG,
+                EntityType.GLOW_SQUID, EntityType.GOAT, EntityType.GUARDIAN, EntityType.HORSE, EntityType.HUSK,
+                EntityType.ILLUSIONER, EntityType.IRON_GOLEM, EntityType.LLAMA, EntityType.MOOSHROOM, EntityType.MULE,
+                EntityType.OCELOT, EntityType.PANDA, EntityType.PARROT, EntityType.PIG, EntityType.PILLAGER,
+                EntityType.POLAR_BEAR, EntityType.PUFFERFISH, EntityType.RABBIT, EntityType.RAVAGER, EntityType.SALMON,
+                EntityType.SHEEP, EntityType.SILVERFISH, EntityType.SKELETON, EntityType.SLIME, EntityType.SNIFFER,
+                EntityType.SPIDER, EntityType.SQUID, EntityType.STRAY, EntityType.TURTLE, EntityType.VEX,
+                EntityType.VILLAGER, EntityType.VINDICATOR, EntityType.WITCH, EntityType.WOLF, EntityType.ZOMBIE,
+                EntityType.ZOMBIE_HORSE, EntityType.ZOMBIE_VILLAGER);
+        types.forEach(t -> m.put(t, 10));
+        return m;
     }
 
     /**
-     * What will come out of spawners in the end
-     * @return map of end spawners
+     * Default nether spawner mobs. Weights give about the same odds as before they were configurable.
+     * @return map of mob to weight
      */
-    private TreeMap<Integer,EntityType> endSpawns() {
-        TreeMap<Integer,EntityType> s = new TreeMap<>();
-        s.put(100, EntityType.ENDERMAN);
-        s.put(55, EntityType.ENDERMITE);
-        s.put(1, EntityType.SHULKER);
-        return s;
+    public static Map<EntityType, Integer> defaultNetherSpawns() {
+        Map<EntityType, Integer> m = new EnumMap<>(EntityType.class);
+        m.put(EntityType.BLAZE, 25);
+        m.put(EntityType.MAGMA_CUBE, 25);
+        m.put(EntityType.SKELETON, 25);
+        m.put(EntityType.WITHER_SKELETON, 25);
+        m.put(EntityType.SKELETON_HORSE, 50);
+        m.put(EntityType.ENDERMAN, 25);
+        m.put(EntityType.ZOMBIFIED_PIGLIN, 125);
+        m.put(EntityType.STRIDER, 50);
+        m.put(EntityType.PIGLIN, 125);
+        m.put(EntityType.ZOGLIN, 125);
+        m.put(EntityType.HOGLIN, 125);
+        m.put(EntityType.GHAST, 75);
+        m.put(EntityType.PIGLIN_BRUTE, 50);
+        return m;
+    }
+
+    /**
+     * Default end spawner mobs. Weights give about the same odds as before they were configurable.
+     * @return map of mob to weight
+     */
+    public static Map<EntityType, Integer> defaultEndSpawns() {
+        Map<EntityType, Integer> m = new EnumMap<>(EntityType.class);
+        m.put(EntityType.SHULKER, 1);
+        m.put(EntityType.ENDERMITE, 54);
+        m.put(EntityType.ENDERMAN, 45);
+        return m;
     }
 
 }

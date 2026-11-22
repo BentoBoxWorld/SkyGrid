@@ -713,7 +713,42 @@ public class SettingsTest {
     @Test
     public void testSetIslandHeight() {
         s.setIslandHeight(12345);
-        assertEquals(255, s.getIslandHeight());
+        assertEquals(252, s.getIslandHeight());
+        s.setIslandHeight(-1000);
+        assertEquals(-64, s.getIslandHeight());
+    }
+
+    /**
+     * Heights are rounded to the nearest multiple of 4 so area centres sit on the grid.
+     */
+    @Test
+    public void testSetIslandHeightRoundsToGrid() {
+        s.setIslandHeight(129);
+        assertEquals(128, s.getIslandHeight());
+        s.setIslandHeight(130);
+        assertEquals(132, s.getIslandHeight());
+        s.setIslandHeight(131);
+        assertEquals(132, s.getIslandHeight());
+        s.setIslandHeight(-3);
+        assertEquals(-4, s.getIslandHeight());
+        s.setIslandHeight(255);
+        assertEquals(252, s.getIslandHeight());
+    }
+
+    /**
+     * Spawner lists start empty so the defaults can be filled in on load.
+     */
+    @Test
+    public void testSpawners() {
+        assertTrue(s.getSpawners().isEmpty());
+        assertTrue(s.getNetherSpawners().isEmpty());
+        assertTrue(s.getEndSpawners().isEmpty());
+        s.setSpawners(Map.of(EntityType.COW, 5));
+        s.setNetherSpawners(Map.of(EntityType.BLAZE, 5));
+        s.setEndSpawners(Map.of(EntityType.SHULKER, 5));
+        assertEquals(5, (int) s.getSpawners().get(EntityType.COW));
+        assertEquals(5, (int) s.getNetherSpawners().get(EntityType.BLAZE));
+        assertEquals(5, (int) s.getEndSpawners().get(EntityType.SHULKER));
     }
 
     /**
