@@ -1,4 +1,8 @@
 # SkyGrid
+
+<!-- BentoBox stats badges: https://download.bentobox.world/admin (Badges tab) -->
+[![Servers](https://download.bentobox.world/badge/SkyGrid/servers.svg)](https://download.bentobox.world/) [![Popularity](https://download.bentobox.world/badge/SkyGrid/rank.svg)](https://download.bentobox.world/) [![Downloads](https://download.bentobox.world/badge/SkyGrid/downloads.svg)](https://download.bentobox.world/) [![Minecraft](https://download.bentobox.world/badge/SkyGrid/mc.svg)](https://download.bentobox.world/)
+
 Welcome to the SkyGrid for Minecraft! This game introduces a unique and challenging gameplay experience where you find yourself navigating a grid of floating blocks high in the sky. Your goal is to survive, gather resources, and conquer the SkyGrid!
 
 This is a Game Mode Add-on that uses the BentoBox library plugin.
